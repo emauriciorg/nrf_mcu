@@ -1,6 +1,7 @@
 --cpu Cortex-M0
 ".\_build\main.o"
 ".\_build\micro_esb.o"
+".\_build\uesbapp.o"
 ".\_build\arm_startup_nrf51.o"
 ".\_build\system_nrf51.o"
 ".\_build\nrf_delay.o"

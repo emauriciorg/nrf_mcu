@@ -13,22 +13,26 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
+#include "nrf_delay.h"
 #include "nrf_gpio.h"
+
+
+#include "uesbAPP.h"
 #define LED_BLUE   10
 #define LED_GREEN  9
 
-static uesb_payload_t tx_payload, rx_payload;
+static uesb_payload_t tx_payload;
 
 int main(void)
 {
 
-	nrf_gpio_range_cfg_output(8, 15);
+	nrf_gpio_range_cfg_output(10, 15);
 
 	NRF_CLOCK->EVENTS_HFCLKSTARTED = 0;
 	NRF_CLOCK->TASKS_HFCLKSTART = 1;
 	while(NRF_CLOCK->EVENTS_HFCLKSTARTED == 0);
 
-	uesb_setup();
+	uesb_setup(&tx_payload);
 	
 	uint32_t counter_ms=100;
 	
@@ -41,7 +45,7 @@ int main(void)
 			nrf_gpio_pin_toggle(LED_BLUE);
 		}
 	
-		if(uesb_write_tx_payload(&tx_payload) == UESB_SUCCESS)
+		if(!uesb_write_tx_payload(&tx_payload))
 		{
 			tx_payload.data[1]++;
 		}

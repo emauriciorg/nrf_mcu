@@ -1,12 +1,13 @@
 #include "uesbAPP.h"
 
 #include "nrf.h"
-#include "micro_esb.h"
+
 #include "uesb_error_codes.h"
 #include "nrf_delay.h"
+#include "nrf_gpio.h"
 
-
-void uesb_event_handler()
+static uesb_payload_t  rx_payload;
+void uesb_event_handler(void)
 {
 	static uint32_t rf_interrupts;
 	static uint32_t tx_attempts;
@@ -59,13 +60,13 @@ void uesb_setup(uesb_payload_t *tx_payload){
 	uesb_set_address(UESB_ADDRESS_PIPE1, rx_addr_p1);
 	uesb_set_address(UESB_ADDRESS_PIPE2, &rx_addr_p2);
 
-	tx_payload.length  = 8;
-	tx_payload.pipe    = 0;
-	tx_payload.data[0] = 0x01;
-	tx_payload.data[1] = 0x00;
-	tx_payload.data[2] = 0x00;
-	tx_payload.data[3] = 0x00;
-	tx_payload.data[4] = 0x11;
+	tx_payload->length  = 8;
+	tx_payload->pipe    = 0;
+	tx_payload->data[0] = 0x01;
+	tx_payload->data[1] = 0x00;
+	tx_payload->data[2] = 0x00;
+	tx_payload->data[3] = 0x00;
+	tx_payload->data[4] = 0x11;
 
 
 }
