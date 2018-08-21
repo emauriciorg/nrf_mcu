@@ -95,3 +95,4 @@ void msg_dbg(const char * message,uint32_t length){
 		while(app_uart_put(message[i]) != NRF_SUCCESS);
 	}while(app_uart_put('\n') != NRF_SUCCESS);
 }
+

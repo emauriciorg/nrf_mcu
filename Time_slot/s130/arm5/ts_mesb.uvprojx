@@ -380,29 +380,39 @@
           <GroupName>Application</GroupName>
           <Files>
             <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\main.c</FilePath>
-            </File>
-            <File>
-              <FileName>timeslot.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\timeslot.c</FilePath>
-            </File>
-            <File>
-              <FileName>timeslot.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\timeslot.h</FilePath>
-            </File>
-            <File>
               <FileName>uart_app.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\app\source\uart_app.c</FilePath>
             </File>
             <File>
+              <FileName>bleAPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\bleAPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\main.c</FilePath>
+            </File>
+            <File>
+              <FileName>sys_event.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\sys_event.c</FilePath>
+            </File>
+            <File>
+              <FileName>timeslot.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\timeslot.c</FilePath>
+            </File>
+            <File>
               <FileName>uesb.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\uesb.c</FilePath>
+              <FilePath>.\app\uesb.c</FilePath>
+            </File>
+            <File>
+              <FileName>uesbAPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\uesbAPP.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -818,29 +828,39 @@
           <GroupName>Application</GroupName>
           <Files>
             <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\main.c</FilePath>
-            </File>
-            <File>
-              <FileName>timeslot.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\timeslot.c</FilePath>
-            </File>
-            <File>
-              <FileName>timeslot.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\timeslot.h</FilePath>
-            </File>
-            <File>
               <FileName>uart_app.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\app\source\uart_app.c</FilePath>
             </File>
             <File>
+              <FileName>bleAPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\bleAPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\main.c</FilePath>
+            </File>
+            <File>
+              <FileName>sys_event.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\sys_event.c</FilePath>
+            </File>
+            <File>
+              <FileName>timeslot.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\timeslot.c</FilePath>
+            </File>
+            <File>
               <FileName>uesb.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\uesb.c</FilePath>
+              <FilePath>.\app\uesb.c</FilePath>
+            </File>
+            <File>
+              <FileName>uesbAPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\uesbAPP.c</FilePath>
             </File>
           </Files>
         </Group>

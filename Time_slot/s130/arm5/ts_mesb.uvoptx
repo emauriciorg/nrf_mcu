@@ -154,7 +154,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\..\main.c</Filename>
+          <Filename>D:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\Time_slot\main.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\nrf51422_xxac_s130\../../main.c\429</Expression>
         </Bp>
@@ -170,7 +170,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\..\main.c</Filename>
+          <Filename>D:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\Time_slot\main.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\nrf51422_xxac_s130\../../main.c\419</Expression>
         </Bp>
@@ -186,7 +186,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\..\main.c</Filename>
+          <Filename>D:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\Time_slot\main.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -202,7 +202,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\..\main.c</Filename>
+          <Filename>D:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\Time_slot\main.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -365,7 +365,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\..\main.c</Filename>
+          <Filename>D:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\Time_slot\main.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -381,7 +381,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\..\main.c</Filename>
+          <Filename>D:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\Time_slot\main.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -397,7 +397,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\..\main.c</Filename>
+          <Filename>D:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\Time_slot\main.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -413,7 +413,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\..\main.c</Filename>
+          <Filename>D:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\Time_slot\main.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -471,8 +471,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\main.c</PathWithFileName>
-      <FilenameWithoutPath>main.c</FilenameWithoutPath>
+      <PathWithFileName>.\app\source\uart_app.c</PathWithFileName>
+      <FilenameWithoutPath>uart_app.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -483,20 +483,20 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\timeslot.c</PathWithFileName>
-      <FilenameWithoutPath>timeslot.c</FilenameWithoutPath>
+      <PathWithFileName>.\app\bleAPP.c</PathWithFileName>
+      <FilenameWithoutPath>bleAPP.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
     <File>
       <GroupNumber>1</GroupNumber>
       <FileNumber>3</FileNumber>
-      <FileType>5</FileType>
+      <FileType>1</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\timeslot.h</PathWithFileName>
-      <FilenameWithoutPath>timeslot.h</FilenameWithoutPath>
+      <PathWithFileName>.\app\main.c</PathWithFileName>
+      <FilenameWithoutPath>main.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -507,8 +507,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\app\source\uart_app.c</PathWithFileName>
-      <FilenameWithoutPath>uart_app.c</FilenameWithoutPath>
+      <PathWithFileName>.\app\sys_event.c</PathWithFileName>
+      <FilenameWithoutPath>sys_event.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -519,8 +519,32 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\uesb.c</PathWithFileName>
+      <PathWithFileName>.\app\timeslot.c</PathWithFileName>
+      <FilenameWithoutPath>timeslot.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>6</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\app\uesb.c</PathWithFileName>
       <FilenameWithoutPath>uesb.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>1</GroupNumber>
+      <FileNumber>7</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>.\app\uesbAPP.c</PathWithFileName>
+      <FilenameWithoutPath>uesbAPP.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -534,7 +558,7 @@
     <RteFlg>0</RteFlg>
     <File>
       <GroupNumber>2</GroupNumber>
-      <FileNumber>6</FileNumber>
+      <FileNumber>8</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -546,7 +570,7 @@
     </File>
     <File>
       <GroupNumber>2</GroupNumber>
-      <FileNumber>7</FileNumber>
+      <FileNumber>9</FileNumber>
       <FileType>5</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>

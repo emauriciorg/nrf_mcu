@@ -1,8 +1,0 @@
--c --cpu Cortex-M0 -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\..\..\..\..\components\drivers_nrf\hal -I ..\..\common --c99
--ID:\TITOMA\nrf_codes\FW\local\nordic\nrf51-micro-esb-master\nrf51-micro-esb-master\ptx\arm\RTE\_nrf51822_xxaC__256K_
--IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include
--IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include
--IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\delay
--IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\hal
--D__UVISION_VERSION="522" -D_RTE_ -DNRF51 -DNRF51 -DS130
--o .\_build\system_nrf51_1.o --omf_browse .\_build\system_nrf51_1.crf --depend .\_build\system_nrf51_1.d --feedback ".\_build\tiny_esb_ptx.fed" "RTE\Device\nRF51822_xxAA\system_nrf51.c"
