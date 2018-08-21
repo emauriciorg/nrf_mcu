@@ -390,16 +390,6 @@
               <FilePath>..\..\common\tinyRF.c</FilePath>
             </File>
             <File>
-              <FileName>tinyRF.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\common\tinyRF.h</FilePath>
-            </File>
-            <File>
-              <FileName>uesbAPP.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\common\uesbAPP.c</FilePath>
-            </File>
-            <File>
               <FileName>micro_esb.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\common\micro_esb.c</FilePath>
@@ -802,16 +792,6 @@
               <FileName>tinyRF.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\common\tinyRF.c</FilePath>
-            </File>
-            <File>
-              <FileName>tinyRF.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\common\tinyRF.h</FilePath>
-            </File>
-            <File>
-              <FileName>uesbAPP.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\common\uesbAPP.c</FilePath>
             </File>
             <File>
               <FileName>micro_esb.c</FileName>
@@ -1221,16 +1201,6 @@
               <FilePath>..\..\common\tinyRF.c</FilePath>
             </File>
             <File>
-              <FileName>tinyRF.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\common\tinyRF.h</FilePath>
-            </File>
-            <File>
-              <FileName>uesbAPP.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\common\uesbAPP.c</FilePath>
-            </File>
-            <File>
               <FileName>micro_esb.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\common\micro_esb.c</FilePath>
@@ -1633,16 +1603,6 @@
               <FileName>tinyRF.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\common\tinyRF.c</FilePath>
-            </File>
-            <File>
-              <FileName>tinyRF.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\common\tinyRF.h</FilePath>
-            </File>
-            <File>
-              <FileName>uesbAPP.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\common\uesbAPP.c</FilePath>
             </File>
             <File>
               <FileName>micro_esb.c</FileName>
@@ -2049,16 +2009,6 @@
               <FilePath>..\..\common\tinyRF.c</FilePath>
             </File>
             <File>
-              <FileName>tinyRF.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\common\tinyRF.h</FilePath>
-            </File>
-            <File>
-              <FileName>uesbAPP.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\common\uesbAPP.c</FilePath>
-            </File>
-            <File>
               <FileName>micro_esb.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\common\micro_esb.c</FilePath>
@@ -2461,16 +2411,6 @@
               <FileName>tinyRF.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\common\tinyRF.c</FilePath>
-            </File>
-            <File>
-              <FileName>tinyRF.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\..\common\tinyRF.h</FilePath>
-            </File>
-            <File>
-              <FileName>uesbAPP.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\common\uesbAPP.c</FilePath>
             </File>
             <File>
               <FileName>micro_esb.c</FileName>

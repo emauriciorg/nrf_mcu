@@ -310,16 +310,16 @@ ARM Macro Assembler    Page 5
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M0 --apcs=interw
 ork --depend=.\_build\arm_startup_nrf51.d -o.\_build\arm_startup_nrf51.o -ID:\T
-ITOMA\nrf_codes\FW\local\TIMESLOT\nrf51-micro-esb-master\ptx\arm\RTE\_nrf51822_
-xxac_130__256K_ -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include -IC:\Keil_v
-5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include -IC:\
-Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\delay -IC:\Keil_
-v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\hal -IC:\Keil_v5\ARM\
-PACK\NordicSemiconductor\nRF_SoftDevice_S130\2.0.0-7.alpha\headers -IC:\Keil_v5
-\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S130\2.0.0-7.alpha\headers\nrf51 -
--predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 522" --prede
-fine="_RTE_ SETA 1" --predefine="NRF51 SETA 1" --list=.\_build\arm_startup_nrf5
-1.lst RTE\Device\nRF51822_xxAC\arm_startup_nrf51.s
+ITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf51-micro-esb-master\ptx\arm\
+RTE\_nrf51822_xxac_130__256K_ -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Inclu
+de -IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device
+\Include -IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\de
+lay -IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\hal -IC
+:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S130\2.0.0-7.alpha\header
+s -IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S130\2.0.0-7.alpha\h
+eaders\nrf51 --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SET
+A 522" --predefine="_RTE_ SETA 1" --predefine="NRF51 SETA 1" --list=.\_build\ar
+m_startup_nrf51.lst RTE\Device\nRF51822_xxAC\arm_startup_nrf51.s
 
 
 

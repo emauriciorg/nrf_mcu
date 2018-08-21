@@ -310,15 +310,16 @@ ARM Macro Assembler    Page 5
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M0 --apcs=interw
 ork --depend=.\_build\arm_startup_nrf51.d -o.\_build\arm_startup_nrf51.o -ID:\T
-ITOMA\nrf_codes\FW\local\TIMESLOT\nrf51-micro-esb-master\prx\arm\RTE\Device\nRF
-51822_xxAC -ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\nrf51-micro-esb-master\prx\a
-rm\RTE\_nrf51822_xxac__256K__s130 -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\I
-nclude -IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\De
-vice\Include -IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alph
-a\delay -IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\hal
- --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 522" --pre
-define="_RTE_ SETA 1" --predefine="NRF51 SETA 1" --list=.\_build\arm_startup_nr
-f51.lst RTE\Device\nRF51822_xxAC\arm_startup_nrf51.s
+ITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf51-micro-esb-master\prx\arm\
+RTE\Device\nRF51822_xxAC -ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\
+nrf51-micro-esb-master\prx\arm\RTE\_nrf51822_xxac__256K__s130 -IC:\Keil_v5\ARM\
+PACK\ARM\CMSIS\5.2.0\CMSIS\Include -IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nR
+F_DeviceFamilyPack\8.17.0\Device\Include -IC:\Keil_v5\ARM\PACK\NordicSemiconduc
+tor\nRF_Drivers\4.0.0-2.alpha\delay -IC:\Keil_v5\ARM\PACK\NordicSemiconductor\n
+RF_Drivers\4.0.0-2.alpha\hal --predefine="__MICROLIB SETA 1" --predefine="__UVI
+SION_VERSION SETA 522" --predefine="_RTE_ SETA 1" --predefine="NRF51 SETA 1" --
+list=.\_build\arm_startup_nrf51.lst RTE\Device\nRF51822_xxAC\arm_startup_nrf51.
+s
 
 
 

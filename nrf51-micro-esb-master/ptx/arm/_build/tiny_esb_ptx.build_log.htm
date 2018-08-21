@@ -21,8 +21,8 @@ Target DLL:      Segger\JL2CM3.dll V2.99.23.0
 Dialog DLL:      TARMCM1.DLL V1.11.0.0
  
 <h2>Project:</h2>
-D:\TITOMA\nrf_codes\FW\local\TIMESLOT\nrf51-micro-esb-master\ptx\arm\micro_esb_ptx.uvprojx
-Project File Date:  08/18/2018
+D:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf51-micro-esb-master\ptx\arm\micro_esb_ptx.uvprojx
+Project File Date:  08/22/2018
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 4 (build 422)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
@@ -30,34 +30,56 @@ Build target 'nrf51822_xxac_130 (256K)'
 Clean started - Project: 'micro_esb_ptx'
    deleting intermediate output files for target 'nrf51822_xxac_130 (256K)'
 compiling main.c...
-compiling uesbAPP.c...
+..\main.c(31): warning:  #177-D: variable "tx_attempts"  was declared but never referenced
+      static uint32_t tx_attempts;
+..\main.c: 1 warning, 0 errors
 compiling tinyRF.c...
-..\..\common\tinyRF.c(240): error:  #20: identifier "uesb_payload_t" is undefined
-  static uesb_payload_t  rx_payload;
-..\..\common\tinyRF.c(247): warning:  #223-D: function "uesb_get_clear_interrupts" declared implicitly
-      uesb_get_clear_interrupts(&rf_interrupts);
-..\..\common\tinyRF.c(249): error:  #20: identifier "UESB_INT_TX_SUCCESS_MSK" is undefined
-      if(rf_interrupts & UESB_INT_TX_SUCCESS_MSK)
-..\..\common\tinyRF.c(253): error:  #20: identifier "UESB_INT_TX_FAILED_MSK" is undefined
-      if(rf_interrupts & UESB_INT_TX_FAILED_MSK)
-..\..\common\tinyRF.c(255): warning:  #223-D: function "uesb_flush_tx" declared implicitly
-          uesb_flush_tx();
-..\..\common\tinyRF.c(258): error:  #20: identifier "UESB_INT_RX_DR_MSK" is undefined
-      if(rf_interrupts & UESB_INT_RX_DR_MSK)
-..\..\common\tinyRF.c(260): warning:  #223-D: function "uesb_read_rx_payload" declared implicitly
-          uesb_read_rx_payload(&rx_payload);
-..\..\common\tinyRF.c(263): warning:  #223-D: function "uesb_get_tx_attempts" declared implicitly
-       uesb_get_tx_attempts(&tx_attempts);
-..\..\common\tinyRF.c(5): warning:  #177-D: variable "data_to_send"  was declared but never referenced
-  static  uint8_t                 data_to_send[32];
-..\..\common\tinyRF.c: 5 warnings, 4 errors
+..\..\common\tinyRF.c(379): warning:  #1-D: last line of file ends without a newline
+  }
+..\..\common\tinyRF.c(30): warning:  #550-D: variable "m_rx_fifo"  was set but never used
+  static uesb_payload_rx_fifo_t   m_rx_fifo;
+..\..\common\tinyRF.c(33): warning:  #177-D: variable "m_rx_payload_buffer"  was declared but never referenced
+  static  uint8_t                 m_rx_payload_buffer[UESB_CORE_MAX_PAYLOAD_LENGTH + 2];
+..\..\common\tinyRF.c(66): warning:  #177-D: function "on_radio_disabled_esb_dpl_tx"  was declared but never referenced
+  static void on_radio_disabled_esb_dpl_tx(void);
+..\..\common\tinyRF.c(67): warning:  #177-D: function "on_radio_disabled_esb_dpl_tx_wait_for_ack"  was declared but never referenced
+  static void on_radio_disabled_esb_dpl_tx_wait_for_ack(void);
+..\..\common\tinyRF.c(68): warning:  #177-D: function "on_radio_disabled_esb_dpl_rx"  was declared but never referenced
+  static void on_radio_disabled_esb_dpl_rx(void);
+..\..\common\tinyRF.c: 6 warnings, 0 errors
 assembling arm_startup_nrf51.s...
 compiling system_nrf51.c...
 compiling nrf_delay.c...
-".\_build\tiny_esb_ptx.axf" - 4 Error(s), 5 Warning(s).
+linking...
+Program Size: Code=2624 RO-data=264 RW-data=64 ZI-data=2856  
+".\_build\tiny_esb_ptx.axf" - 0 Error(s), 7 Warning(s).
 
 *** Performing Cross-Module-Optimization:
-*** Feedback file '.\_build\tiny_esb_ptx.fed' not found.
+compiling main.c...
+..\main.c(31): warning:  #177-D: variable "tx_attempts"  was declared but never referenced
+      static uint32_t tx_attempts;
+..\main.c: 1 warning, 0 errors
+compiling tinyRF.c...
+..\..\common\tinyRF.c(379): warning:  #1-D: last line of file ends without a newline
+  }
+..\..\common\tinyRF.c(30): warning:  #550-D: variable "m_rx_fifo"  was set but never used
+  static uesb_payload_rx_fifo_t   m_rx_fifo;
+..\..\common\tinyRF.c(33): warning:  #177-D: variable "m_rx_payload_buffer"  was declared but never referenced
+  static  uint8_t                 m_rx_payload_buffer[UESB_CORE_MAX_PAYLOAD_LENGTH + 2];
+..\..\common\tinyRF.c(66): warning:  #177-D: function "on_radio_disabled_esb_dpl_tx"  was declared but never referenced
+  static void on_radio_disabled_esb_dpl_tx(void);
+..\..\common\tinyRF.c(67): warning:  #177-D: function "on_radio_disabled_esb_dpl_tx_wait_for_ack"  was declared but never referenced
+  static void on_radio_disabled_esb_dpl_tx_wait_for_ack(void);
+..\..\common\tinyRF.c(68): warning:  #177-D: function "on_radio_disabled_esb_dpl_rx"  was declared but never referenced
+  static void on_radio_disabled_esb_dpl_rx(void);
+..\..\common\tinyRF.c: 6 warnings, 0 errors
+compiling system_nrf51.c...
+compiling nrf_delay.c...
+linking...
+Program Size: Code=2624 RO-data=264 RW-data=64 ZI-data=2856  
+FromELF: creating hex file...
+".\_build\tiny_esb_ptx.axf" - 0 Error(s), 7 Warning(s).
+*** Completed Cross-Module-Optimization after 2 iteration(s).
 
 <h2>Software Packages used:</h2>
 
@@ -75,10 +97,10 @@ Package Vendor: NordicSemiconductor
 
 Package Vendor: NordicSemiconductor
                 http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Drivers/NordicSemiconductor.nRF_Drivers.4.0.0-2.alpha.pack
-                NordicSemiconductor::nRF_Drivers:nrf_gpio:4.0.0-2.alpha
+                NordicSemiconductor::nRF_Drivers:nrf_delay:4.0.0-2.alpha
                 Drivers for Nordic Semiconductor nRF family.
-   * Component: nrf_gpio Version: 4.0.0-2.alpha
    * Component: nrf_delay Version: 4.0.0-2.alpha
+   * Component: nrf_gpio Version: 4.0.0-2.alpha
 
 Package Vendor: NordicSemiconductor
                 http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_SoftDevice_Common/NordicSemiconductor.nRF_SoftDevice_Common.2.0.0-2.alpha.pack
@@ -93,7 +115,7 @@ Package Vendor: NordicSemiconductor
    * Component: s130 Variant: Present_only Version: 2.0.0-7.alpha
 
 <h2>Collection of Component include folders:</h2>
-  D:\TITOMA\nrf_codes\FW\local\TIMESLOT\nrf51-micro-esb-master\ptx\arm\RTE\_nrf51822_xxac_130__256K_
+  D:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf51-micro-esb-master\ptx\arm\RTE\_nrf51822_xxac_130__256K_
   C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include
   C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include
   C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\delay
@@ -106,41 +128,40 @@ Package Vendor: NordicSemiconductor
    * Component: ARM::CMSIS:CORE:5.0.2
 
    * Component: NordicSemiconductor::Device:Startup:8.17.0
-      Include file:  Device\Include\system_nrf51.h
       Source file:   Device\Source\system_nrf51.c
       Source file:   Device\Source\arm\arm_startup_nrf51.s
-
-   * Component: NordicSemiconductor::nRF_Drivers:nrf_gpio:4.0.0-2.alpha
-      Include file:  hal\nrf_gpio.h
+      Include file:  Device\Include\system_nrf51.h
 
    * Component: NordicSemiconductor::nRF_Drivers:nrf_delay:4.0.0-2.alpha
       Source file:   delay\nrf_delay.c
       Include file:  delay\nrf_delay.h
 
+   * Component: NordicSemiconductor::nRF_Drivers:nrf_gpio:4.0.0-2.alpha
+      Include file:  hal\nrf_gpio.h
+
    * Component: NordicSemiconductor::nRF_SoftDevice:Internal:softdevice_present:2.0.0-2.alpha
 
    * Component: NordicSemiconductor::nRF_SoftDevice:s130:Present_only:2.0.0-7.alpha
-      Include file:  headers\ble.h
-      Include file:  headers\nrf_error_sdm.h
-      Include file:  headers\ble_types.h
-      Include file:  headers\ble_l2cap.h
-      Include file:  headers\nrf_sd_def.h
-      Include file:  headers\ble_gatts.h
-      Include file:  headers\ble_ranges.h
-      Include file:  headers\nrf_sdm.h
-      Include file:  headers\ble_gap.h
       Include file:  headers\ble_gatt.h
-      Include file:  headers\ble_err.h
-      Include file:  headers\softdevice_assert.h
-      Include file:  headers\nrf51\nrf_mbr.h
-      Include file:  headers\nrf_error.h
-      Include file:  headers\nrf_svc.h
-      Include file:  headers\nrf_error_soc.h
       Include file:  headers\ble_hci.h
+      Include file:  headers\ble_types.h
+      Include file:  headers\nrf_error_soc.h
       Include file:  headers\nrf_soc.h
+      Include file:  headers\ble_err.h
       Include file:  headers\ble_gattc.h
-Target not created.
-Build Time Elapsed:  00:00:01
+      Include file:  headers\ble.h
+      Include file:  headers\ble_l2cap.h
+      Include file:  headers\nrf_error_sdm.h
+      Include file:  headers\softdevice_assert.h
+      Include file:  headers\nrf_sdm.h
+      Include file:  headers\nrf_error.h
+      Include file:  headers\nrf_sd_def.h
+      Include file:  headers\ble_gap.h
+      Include file:  headers\ble_gatts.h
+      Include file:  headers\nrf_svc.h
+      Include file:  headers\ble_ranges.h
+      Include file:  headers\nrf51\nrf_mbr.h
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

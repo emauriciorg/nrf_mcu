@@ -20,53 +20,86 @@
 #include "nrf_gpio.h"
 #include "bbn_board.h"
 
-//#define UESB_APP
-#ifdef UESB_APP
-	#include "uesbAPP.h"
-	#include "micro_esb.h"
-	static uesb_payload_t tx_payload;
+#include "tinyRF.h"
+static uesb_payload_t tx_payload;
 
-#else	
-	#include "tinyRF.h"
-	tiny_payload_t  tx_payload;
-#endif
+uint16_t counter_ms=0;
 
+void uesb_event_handler()
+{
+    static uint32_t rf_interrupts;
+    static uint32_t tx_attempts;
+    
+    uesb_get_clear_interrupts(&rf_interrupts);
+    
+    if(rf_interrupts & UESB_INT_TX_SUCCESS_MSK)
+    {   
+    }
+    
+    if(rf_interrupts & UESB_INT_TX_FAILED_MSK)
+    {
+        uesb_flush_tx();
+    }
+    
+    if(rf_interrupts & UESB_INT_RX_DR_MSK)
+    {
+    
+    }
+    
+    
+}
 
 int main(void)
 {
+    uint8_t rx_addr_p0[] = {0x12, 0x34, 0x56, 0x78, 0x9A};
+    uint8_t rx_addr_p1[] = {0xBC, 0xDE, 0xF0, 0x12, 0x23};
+    uint8_t rx_addr_p2   = 0x66;
+    
+    nrf_gpio_range_cfg_output(8, 15);
+    
+    NRF_CLOCK->EVENTS_HFCLKSTARTED = 0;
+    NRF_CLOCK->TASKS_HFCLKSTART = 1;
+    while(NRF_CLOCK->EVENTS_HFCLKSTARTED == 0);
 
-	nrf_gpio_range_cfg_output(8, 15);
+    uesb_config_t uesb_config       = UESB_DEFAULT_CONFIG;
+    uesb_config.rf_channel          = 5;
+    uesb_config.crc                 = UESB_CRC_16BIT;
+    uesb_config.retransmit_count    = 6;
+    uesb_config.retransmit_delay    = 500;
+    uesb_config.dynamic_ack_enabled = 0;
+//    uesb_config.protocol            = UESB_PROTOCOL_ESB_DPL;
+    uesb_config.bitrate             = UESB_BITRATE_2MBPS;
+    uesb_config.event_handler       = uesb_event_handler;
+    
+    uesb_init(&uesb_config);
 
-	NRF_CLOCK->EVENTS_HFCLKSTARTED = 0;
-	NRF_CLOCK->TASKS_HFCLKSTART = 1;
-	while(NRF_CLOCK->EVENTS_HFCLKSTARTED == 0);
-	#ifdef UESB_APP
-		uesb_setup_tx(&tx_payload);
-	#else
-		tiny_init(&tx_payload);
+    uesb_set_address(UESB_ADDRESS_PIPE0, rx_addr_p0);
+    uesb_set_address(UESB_ADDRESS_PIPE1, rx_addr_p1);
+    uesb_set_address(UESB_ADDRESS_PIPE2, &rx_addr_p2);
 
-	#endif
-	uint32_t counter_ms=100;
-	
+    tx_payload.length  = 8;
+    tx_payload.pipe    = 0;
+    tx_payload.data[0] = 0x01;
+    tx_payload.data[1] = 0x00;
+    tx_payload.data[2] = 0x00;
+    tx_payload.data[3] = 0x00;
+    tx_payload.data[4] = 0x11;
+    
 	nrf_gpio_pin_set(8);
 	nrf_gpio_pin_set(10);
-
-	while (true)
-	{ 
-		if(counter_ms)counter_ms--;
-		if(!counter_ms){
+    while (true)
+    {   
+    	if(counter_ms)counter_ms--;
+	
+	if(!counter_ms){
 			counter_ms=100;
 			nrf_gpio_pin_toggle(LED_GREEN);
-		}
-		#ifdef UESB_APP
-			if (!uesb_write_tx_payload(&tx_payload))
-			tx_payload.data[1]++;
-		#else
-			tiny_tx_transaction(&tx_payload);
-		#endif
-		
-
-		nrf_delay_us(10000);
-
 	}
+
+        if(uesb_write_tx_payload(&tx_payload) == UESB_SUCCESS)
+        {
+            tx_payload.data[1]++;
+        }
+        nrf_delay_us(10000);
+    }
 }
