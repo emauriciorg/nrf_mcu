@@ -30,55 +30,39 @@ Build target 'nrf51822_xxac_130 (256K)'
 Clean started - Project: 'micro_esb_ptx'
    deleting intermediate output files for target 'nrf51822_xxac_130 (256K)'
 compiling main.c...
-..\main.c(31): warning:  #177-D: variable "tx_attempts"  was declared but never referenced
-      static uint32_t tx_attempts;
-..\main.c: 1 warning, 0 errors
 compiling tinyRF.c...
-..\..\common\tinyRF.c(379): warning:  #1-D: last line of file ends without a newline
-  }
-..\..\common\tinyRF.c(30): warning:  #550-D: variable "m_rx_fifo"  was set but never used
-  static uesb_payload_rx_fifo_t   m_rx_fifo;
-..\..\common\tinyRF.c(33): warning:  #177-D: variable "m_rx_payload_buffer"  was declared but never referenced
-  static  uint8_t                 m_rx_payload_buffer[UESB_CORE_MAX_PAYLOAD_LENGTH + 2];
-..\..\common\tinyRF.c(66): warning:  #177-D: function "on_radio_disabled_esb_dpl_tx"  was declared but never referenced
+..\..\common\tinyRF.c(29): warning:  #177-D: variable "m_rx_fifo_payload"  was declared but never referenced
+  static uesb_payload_t           m_rx_fifo_payload[UESB_CORE_RX_FIFO_SIZE];
+..\..\common\tinyRF.c(64): warning:  #177-D: function "on_radio_disabled_esb_dpl_tx"  was declared but never referenced
   static void on_radio_disabled_esb_dpl_tx(void);
-..\..\common\tinyRF.c(67): warning:  #177-D: function "on_radio_disabled_esb_dpl_tx_wait_for_ack"  was declared but never referenced
+..\..\common\tinyRF.c(65): warning:  #177-D: function "on_radio_disabled_esb_dpl_tx_wait_for_ack"  was declared but never referenced
   static void on_radio_disabled_esb_dpl_tx_wait_for_ack(void);
-..\..\common\tinyRF.c(68): warning:  #177-D: function "on_radio_disabled_esb_dpl_rx"  was declared but never referenced
-  static void on_radio_disabled_esb_dpl_rx(void);
-..\..\common\tinyRF.c: 6 warnings, 0 errors
+..\..\common\tinyRF.c: 3 warnings, 0 errors
+compiling simple_uart.c...
 assembling arm_startup_nrf51.s...
 compiling system_nrf51.c...
 compiling nrf_delay.c...
 linking...
-Program Size: Code=2624 RO-data=264 RW-data=64 ZI-data=2856  
-".\_build\tiny_esb_ptx.axf" - 0 Error(s), 7 Warning(s).
+Program Size: Code=2872 RO-data=264 RW-data=60 ZI-data=2780  
+".\_build\tiny_esb_ptx.axf" - 0 Error(s), 3 Warning(s).
 
 *** Performing Cross-Module-Optimization:
 compiling main.c...
-..\main.c(31): warning:  #177-D: variable "tx_attempts"  was declared but never referenced
-      static uint32_t tx_attempts;
-..\main.c: 1 warning, 0 errors
 compiling tinyRF.c...
-..\..\common\tinyRF.c(379): warning:  #1-D: last line of file ends without a newline
-  }
-..\..\common\tinyRF.c(30): warning:  #550-D: variable "m_rx_fifo"  was set but never used
-  static uesb_payload_rx_fifo_t   m_rx_fifo;
-..\..\common\tinyRF.c(33): warning:  #177-D: variable "m_rx_payload_buffer"  was declared but never referenced
-  static  uint8_t                 m_rx_payload_buffer[UESB_CORE_MAX_PAYLOAD_LENGTH + 2];
-..\..\common\tinyRF.c(66): warning:  #177-D: function "on_radio_disabled_esb_dpl_tx"  was declared but never referenced
+..\..\common\tinyRF.c(29): warning:  #177-D: variable "m_rx_fifo_payload"  was declared but never referenced
+  static uesb_payload_t           m_rx_fifo_payload[UESB_CORE_RX_FIFO_SIZE];
+..\..\common\tinyRF.c(64): warning:  #177-D: function "on_radio_disabled_esb_dpl_tx"  was declared but never referenced
   static void on_radio_disabled_esb_dpl_tx(void);
-..\..\common\tinyRF.c(67): warning:  #177-D: function "on_radio_disabled_esb_dpl_tx_wait_for_ack"  was declared but never referenced
+..\..\common\tinyRF.c(65): warning:  #177-D: function "on_radio_disabled_esb_dpl_tx_wait_for_ack"  was declared but never referenced
   static void on_radio_disabled_esb_dpl_tx_wait_for_ack(void);
-..\..\common\tinyRF.c(68): warning:  #177-D: function "on_radio_disabled_esb_dpl_rx"  was declared but never referenced
-  static void on_radio_disabled_esb_dpl_rx(void);
-..\..\common\tinyRF.c: 6 warnings, 0 errors
+..\..\common\tinyRF.c: 3 warnings, 0 errors
+compiling simple_uart.c...
 compiling system_nrf51.c...
 compiling nrf_delay.c...
 linking...
-Program Size: Code=2624 RO-data=264 RW-data=64 ZI-data=2856  
+Program Size: Code=2872 RO-data=264 RW-data=60 ZI-data=2780  
 FromELF: creating hex file...
-".\_build\tiny_esb_ptx.axf" - 0 Error(s), 7 Warning(s).
+".\_build\tiny_esb_ptx.axf" - 0 Error(s), 3 Warning(s).
 *** Completed Cross-Module-Optimization after 2 iteration(s).
 
 <h2>Software Packages used:</h2>
@@ -161,7 +145,7 @@ Package Vendor: NordicSemiconductor
       Include file:  headers\nrf_svc.h
       Include file:  headers\ble_ranges.h
       Include file:  headers\nrf51\nrf_mbr.h
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:04
 </pre>
 </body>
 </html>

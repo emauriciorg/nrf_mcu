@@ -193,6 +193,6 @@ uint32_t tinyrx_get_clear_interrupts(uint32_t *interrupts);
 uint32_t tinyrx_set_address(tinyrx_address_type_t address, const uint8_t *data_ptr);
 
 
-
+void tinyrx_setup_rx(void);
 int8_t get_rssi(void);
 #endif

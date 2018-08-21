@@ -19,7 +19,7 @@
 #include "nrf_delay.h"
 #include "nrf_gpio.h"
 #include "bbn_board.h"
-
+#include "simple_uart.h"
 #include "tinyRF.h"
 static uesb_payload_t tx_payload;
 
@@ -28,7 +28,7 @@ uint16_t counter_ms=0;
 void uesb_event_handler()
 {
     static uint32_t rf_interrupts;
-    static uint32_t tx_attempts;
+
     
     uesb_get_clear_interrupts(&rf_interrupts);
     
@@ -59,8 +59,15 @@ int main(void)
     
     NRF_CLOCK->EVENTS_HFCLKSTARTED = 0;
     NRF_CLOCK->TASKS_HFCLKSTART = 1;
+		
     while(NRF_CLOCK->EVENTS_HFCLKSTARTED == 0);
 
+		simple_uart_config(  RTS_PIN,
+                         RX_PIN, 
+                         CTS_PIN,
+                         TX_PIN, 
+                        false);
+		
     uesb_config_t uesb_config       = UESB_DEFAULT_CONFIG;
     uesb_config.rf_channel          = 5;
     uesb_config.crc                 = UESB_CRC_16BIT;
@@ -87,6 +94,7 @@ int main(void)
     
 	nrf_gpio_pin_set(8);
 	nrf_gpio_pin_set(10);
+	 simple_uart_putstring("nrf init\n");
     while (true)
     {   
     	if(counter_ms)counter_ms--;
@@ -101,5 +109,6 @@ int main(void)
             tx_payload.data[1]++;
         }
         nrf_delay_us(10000);
+			
     }
 }

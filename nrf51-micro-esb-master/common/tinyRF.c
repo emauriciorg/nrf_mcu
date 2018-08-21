@@ -27,10 +27,8 @@ static uesb_payload_tx_fifo_t   m_tx_fifo;
 
 // RX FIFO
 static uesb_payload_t           m_rx_fifo_payload[UESB_CORE_RX_FIFO_SIZE];
-static uesb_payload_rx_fifo_t   m_rx_fifo;
 
 static  uint8_t                 m_tx_payload_buffer[UESB_CORE_MAX_PAYLOAD_LENGTH + 2];
-static  uint8_t                 m_rx_payload_buffer[UESB_CORE_MAX_PAYLOAD_LENGTH + 2];
 
 // Run time variables
 static volatile uint32_t        m_interrupt_flags       = 0;
@@ -65,7 +63,7 @@ static void (*update_rf_payload_format)(uint32_t payload_length) = 0;
 static void on_radio_disabled_esb_dpl_tx_noack(void);
 static void on_radio_disabled_esb_dpl_tx(void);
 static void on_radio_disabled_esb_dpl_tx_wait_for_ack(void);
-static void on_radio_disabled_esb_dpl_rx(void);
+
 
 
 static void update_rf_payload_format_esb_dpl(uint32_t payload_length)
@@ -128,13 +126,6 @@ static void initialize_fifos()
 		m_tx_fifo.payload_ptr[i] = &m_tx_fifo_payload[i];
 	}
 
-	m_rx_fifo.entry_point = 0;
-	m_rx_fifo.exit_point  = 0;
-	m_rx_fifo.count       = 0;
-	for(int i = 0; i < UESB_CORE_RX_FIFO_SIZE; i++)
-	{
-		m_rx_fifo.payload_ptr[i] = &m_rx_fifo_payload[i];
-	}
 }
 
 static void tx_fifo_remove_last()
