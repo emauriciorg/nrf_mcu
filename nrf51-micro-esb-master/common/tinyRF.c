@@ -25,8 +25,6 @@ static uesb_config_t            m_config_local;
 static uesb_payload_t           m_tx_fifo_payload[UESB_CORE_TX_FIFO_SIZE];
 static uesb_payload_tx_fifo_t   m_tx_fifo;
 
-// RX FIFO
-static uesb_payload_t           m_rx_fifo_payload[UESB_CORE_RX_FIFO_SIZE];
 
 static  uint8_t                 m_tx_payload_buffer[UESB_CORE_MAX_PAYLOAD_LENGTH + 2];
 
@@ -61,10 +59,6 @@ static void (*update_rf_payload_format)(uint32_t payload_length) = 0;
 
 // The following functions are assigned to the function pointers above
 static void on_radio_disabled_esb_dpl_tx_noack(void);
-static void on_radio_disabled_esb_dpl_tx(void);
-static void on_radio_disabled_esb_dpl_tx_wait_for_ack(void);
-
-
 
 static void update_rf_payload_format_esb_dpl(uint32_t payload_length)
 {
@@ -270,13 +264,6 @@ uint32_t uesb_get_clear_interrupts(uint32_t *interrupts)
 	return UESB_SUCCESS;
 }
 
-uint32_t uesb_set_tx_power(uesb_tx_power_t tx_output_power)
-{
-	if ( m_config_local.tx_output_power == tx_output_power ) return UESB_SUCCESS;
-	m_config_local.tx_output_power = tx_output_power;
-	update_radio_parameters();
-	return UESB_SUCCESS;
-}
 
 
 

@@ -308,7 +308,7 @@ static void on_radio_disabled_esb_dpl_rx(void)
 	NRF_RADIO->EVENTS_DISABLED = 0;
 	NRF_RADIO->SHORTS = RADIO_SHORTS_COMMON | RADIO_SHORTS_DISABLED_TXEN_Msk;
 	NRF_RADIO->TASKS_RXEN = 1;
-	 
+	
 	rx_fifo_push_rfbuf(NRF_RADIO->RXMATCH);
 	m_interrupt_flags |= tinyrx_INT_RX_DR_MSK;
 	if(m_event_handler != 0) m_event_handler();

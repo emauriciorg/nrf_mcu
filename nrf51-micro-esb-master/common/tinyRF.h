@@ -24,13 +24,7 @@
 #define DEBUGPIN3   14
 #define DEBUGPIN4   15
 
-#ifdef  UESB_DEBUG
-#define DEBUG_PIN_SET(a)    (NRF_GPIO->OUTSET = (1 << (a)))
-#define DEBUG_PIN_CLR(a)    (NRF_GPIO->OUTCLR = (1 << (a)))
-#else
-#define DEBUG_PIN_SET(a)
-#define DEBUG_PIN_CLR(a)
-#endif
+
 
 // Hard coded parameters - change if necessary
 #define     UESB_CORE_MAX_PAYLOAD_LENGTH    32
@@ -71,16 +65,6 @@ typedef enum {
     UESB_CRC_OFF   = RADIO_CRCCNF_LEN_Disabled
 } uesb_crc_t;
 
-typedef enum {
-    UESB_TX_POWER_4DBM     = RADIO_TXPOWER_TXPOWER_Pos4dBm,
-    UESB_TX_POWER_0DBM     = RADIO_TXPOWER_TXPOWER_0dBm,
-    UESB_TX_POWER_NEG4DBM  = RADIO_TXPOWER_TXPOWER_Neg4dBm,
-    UESB_TX_POWER_NEG8DBM  = RADIO_TXPOWER_TXPOWER_Neg8dBm,
-    UESB_TX_POWER_NEG12DBM = RADIO_TXPOWER_TXPOWER_Neg12dBm,
-    UESB_TX_POWER_NEG16DBM = RADIO_TXPOWER_TXPOWER_Neg16dBm,
-    UESB_TX_POWER_NEG20DBM = RADIO_TXPOWER_TXPOWER_Neg20dBm,
-    UESB_TX_POWER_NEG30DBM = RADIO_TXPOWER_TXPOWER_Neg30dBm
-} uesb_tx_power_t;
 
 typedef enum {
     UESB_TXMODE_AUTO,        // Automatic TX mode - When the TX fifo is non-empty and the radio is idle packets will be sent automatically.
@@ -116,7 +100,7 @@ typedef struct
     uint8_t                 payload_length;
     uint8_t                 rf_addr_length;
 
-    uesb_tx_power_t         tx_output_power;
+    uint8_t       	    tx_output_power;
     uint8_t                 tx_address[5];
     uint8_t                 rx_address_p0[5];
     uint8_t                 rx_address_p1[5];
@@ -147,7 +131,7 @@ typedef struct
                              .rf_addr_length        = 5,                                \
                              .bitrate               = UESB_BITRATE_2MBPS,               \
                              .crc                   = UESB_CRC_16BIT,                   \
-                             .tx_output_power       = UESB_TX_POWER_0DBM,               \
+                             .tx_output_power       = RADIO_TXPOWER_TXPOWER_0dBm,               \
                              .rx_address_p0         = {0xE7, 0xE7, 0xE7, 0xE7, 0xE7},   \
                              .rx_address_p1         = {0xC2, 0xC2, 0xC2, 0xC2, 0xC2},   \
                              .rx_address_p2         = 0xC3,                             \
@@ -230,6 +214,6 @@ uint32_t uesb_set_address(uesb_address_type_t address, const uint8_t *data_ptr);
 
 uint32_t uesb_set_rf_channel(uint32_t channel);
 
-uint32_t uesb_set_tx_power(uesb_tx_power_t tx_output_power);
+uint32_t uesb_set_tx_power(uint8_t tx_output_power);
 
 #endif
