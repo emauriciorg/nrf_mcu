@@ -315,7 +315,8 @@ static void on_radio_disabled_esb_dpl_rx(void)
 	 
 }
 
-static tinyrx_payload_t  rx_payload;
+ tinyrx_payload_t  rx_payload;
+
 void tinyrx_event_handler_rx(void)
 {
 	static uint32_t rf_interrupts;

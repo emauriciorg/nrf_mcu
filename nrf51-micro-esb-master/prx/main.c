@@ -26,47 +26,57 @@
 extern uint8_t led_state;
 int main(void)
 {
-    
-    NRF_CLOCK->EVENTS_HFCLKSTARTED = 0;
-    NRF_CLOCK->TASKS_HFCLKSTART = 1;
-    while(NRF_CLOCK->EVENTS_HFCLKSTARTED == 0);
 
-    nrf_gpio_range_cfg_output(8, 31);
-    
-      tinyrx_setup_rx();
-    simple_uart_config(  RTS_PIN,
-                         RX_PIN, 
-                         CTS_PIN,
-                         TX_PIN, 
-                        false);
-      simple_uart_putstring("nrf init\n");
-	  nrf_gpio_pin_set(LED_BLUE);
-    
-		uint8_t rssi_buffer[10];
-    memset(rssi_buffer,0,sizeof(rssi_buffer));
+	NRF_CLOCK->EVENTS_HFCLKSTARTED = 0;
+	NRF_CLOCK->TASKS_HFCLKSTART = 1;
+	while(NRF_CLOCK->EVENTS_HFCLKSTARTED == 0);
 
-		while (true)
-    {   
+	nrf_gpio_range_cfg_output(8, 31);
 
-        if( led_state){
-        
-            led_state=0;
-            nrf_gpio_pin_toggle(LED_GREEN);
-            sprintf(rssi_buffer,"rssi -%d \n",get_rssi());
-            nrf_gpio_pin_set(LED_RED);
-            //printf( get_rssi());
-            simple_uart_putstring(rssi_buffer);  
+	tinyrx_setup_rx();
+	simple_uart_config(  RTS_PIN,
+		RX_PIN, 
+		CTS_PIN,
+		TX_PIN, 
+		false);
+	simple_uart_putstring("nrf init\n");
+	nrf_gpio_pin_set(LED_BLUE);
+
+	uint8_t rssi_buffer[10];
+	extern  tinyrx_payload_t  rx_payload;
+	memset(rssi_buffer,0,sizeof(rssi_buffer));
+	
+
+	
+	while (true)
+	{   
+
+		if( led_state){
+
+	
+			led_state=0;
+			nrf_gpio_pin_toggle(LED_GREEN);
+			sprintf(rssi_buffer,"rssi -%d \n",get_rssi());
+			nrf_gpio_pin_set(LED_RED);
+						//printf( get_rssi());
+			
+			simple_uart_putstring (rx_payload.data);
+			simple_uart_putstring("\n");
+			memset(rx_payload.data,0, sizeof(rx_payload.data));
+			
+			simple_uart_putstring(rssi_buffer); 
+
 //            simple_uart_putstring("nrf loop\n");  
 
-					nrf_delay_ms(1000);
-        }else{
-            nrf_delay_ms(1000);
-            nrf_gpio_pin_set(LED_GREEN);
-            nrf_gpio_pin_toggle(LED_RED);
-            nrf_delay_ms(1000);
-           simple_uart_putstring("Connection loss\n");  
-                    
-        }
+			nrf_delay_ms(1000);
+		}else{
+			nrf_delay_ms(1000);
+			nrf_gpio_pin_set(LED_GREEN);
+			nrf_gpio_pin_toggle(LED_RED);
+			nrf_delay_ms(1000);
+			simple_uart_putstring("Connection loss\n");  
 
-    }
+		}
+
+	}
 }

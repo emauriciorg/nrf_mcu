@@ -35,7 +35,7 @@ static volatile uint32_t        m_retransmits_remaining;
 static volatile uint32_t        m_last_tx_attempts;
 static volatile uint8_t         m_last_rx_packet_pid = UESB_PID_RESET_VALUE;
 static volatile uint32_t        m_last_rx_packet_crc = 0xFFFFFFFF;
-static volatile uint32_t        m_wait_for_ack_timeout_us;
+
 
 static uesb_payload_t           *current_payload;
 
@@ -92,7 +92,7 @@ static void update_radio_parameters()
 
 	// RF bitrate
 	NRF_RADIO->MODE      = m_config_local.bitrate           << RADIO_MODE_MODE_Pos;
-	m_wait_for_ack_timeout_us = RX_WAIT_FOR_ACK_TIMEOUT_US_2MBPS;
+	
 
 	// CRC configuration
 	NRF_RADIO->CRCCNF    = m_config_local.crc               << RADIO_CRCCNF_LEN_Pos;
@@ -158,15 +158,11 @@ uint32_t uesb_init(uesb_config_t *parameters)
 	m_last_rx_packet_crc = 0xFFFFFFFF;
 
 	update_radio_parameters();
-
-	initialize_fifos();
-
-	
+	initialize_fifos();	
 	ppi_init();
 
 	NVIC_SetPriority(RADIO_IRQn, m_config_local.radio_irq_priority & 0x03);
 
-	//m_uesb_initialized = true;
 
 	return UESB_SUCCESS;
 }
@@ -213,7 +209,7 @@ static uint32_t write_tx_payload(uesb_payload_t *payload, bool noack) // ~50us @
 	if(m_tx_fifo.count >= UESB_CORE_TX_FIFO_SIZE) return UESB_ERROR_TX_FIFO_FULL;
 
 	DISABLE_RF_IRQ;
-	payload->noack = 0;
+	
 	memcpy(m_tx_fifo.payload_ptr[m_tx_fifo.entry_point], payload, sizeof(uesb_payload_t));
 	
 
