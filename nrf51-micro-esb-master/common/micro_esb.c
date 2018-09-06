@@ -278,7 +278,7 @@ static void start_tx_transaction()
     NVIC_EnableIRQ(RADIO_IRQn);
 
     NRF_RADIO->EVENTS_ADDRESS = NRF_RADIO->EVENTS_PAYLOAD = NRF_RADIO->EVENTS_DISABLED = 0;
-  //  DEBUG_PIN_SET(DEBUGPIN4);
+  
     NRF_RADIO->TASKS_TXEN  = 1;
 }
 

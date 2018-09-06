@@ -24,6 +24,16 @@
 //static uesb_payload_t rx_payload;
 
 extern uint8_t led_state;
+
+
+void print_received_data(void){
+	uint8_t temp_buffer[tinyrx_CORE_MAX_PAYLOAD_LENGTH];
+	simple_uart_putstring("reading: ");
+	get_rx_payload(temp_buffer);
+	simple_uart_putstring( temp_buffer); 
+	simple_uart_put('\n');
+}
+
 int main(void)
 {
 
@@ -56,18 +66,18 @@ int main(void)
 	
 			led_state=0;
 			nrf_gpio_pin_toggle(LED_GREEN);
-			sprintf(rssi_buffer,"rssi -%d \n",get_rssi());
+			sprintf((char *)rssi_buffer,"rssi -%d \n",get_rssi());
 			nrf_gpio_pin_set(LED_RED);
 						//printf( get_rssi());
 			
-			simple_uart_putstring (rx_payload.data);
-			simple_uart_putstring("\n");
-			memset(rx_payload.data,0, sizeof(rx_payload.data));
+			//simple_uart_putstring (rx_payload.data);
+			//simple_uart_putstring("\n");
+			//memset(rx_payload.data,0, sizeof(rx_payload.data));
 			
 			simple_uart_putstring(rssi_buffer); 
 
 //            simple_uart_putstring("nrf loop\n");  
-
+			print_received_data();
 			nrf_delay_ms(1000);
 		}else{
 			nrf_delay_ms(1000);

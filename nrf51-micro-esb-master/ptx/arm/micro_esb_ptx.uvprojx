@@ -390,9 +390,9 @@
               <FilePath>..\..\common\tinyRF.c</FilePath>
             </File>
             <File>
-              <FileName>micro_esb.c</FileName>
+              <FileName>simple_uart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\micro_esb.c</FilePath>
+              <FilePath>..\..\common\simple_uart.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -794,9 +794,9 @@
               <FilePath>..\..\common\tinyRF.c</FilePath>
             </File>
             <File>
-              <FileName>micro_esb.c</FileName>
+              <FileName>simple_uart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\micro_esb.c</FilePath>
+              <FilePath>..\..\common\simple_uart.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1201,9 +1201,9 @@
               <FilePath>..\..\common\tinyRF.c</FilePath>
             </File>
             <File>
-              <FileName>micro_esb.c</FileName>
+              <FileName>simple_uart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\micro_esb.c</FilePath>
+              <FilePath>..\..\common\simple_uart.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1605,9 +1605,9 @@
               <FilePath>..\..\common\tinyRF.c</FilePath>
             </File>
             <File>
-              <FileName>micro_esb.c</FileName>
+              <FileName>simple_uart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\micro_esb.c</FilePath>
+              <FilePath>..\..\common\simple_uart.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2009,9 +2009,9 @@
               <FilePath>..\..\common\tinyRF.c</FilePath>
             </File>
             <File>
-              <FileName>micro_esb.c</FileName>
+              <FileName>simple_uart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\micro_esb.c</FilePath>
+              <FilePath>..\..\common\simple_uart.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2413,9 +2413,9 @@
               <FilePath>..\..\common\tinyRF.c</FilePath>
             </File>
             <File>
-              <FileName>micro_esb.c</FileName>
+              <FileName>simple_uart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\micro_esb.c</FilePath>
+              <FilePath>..\..\common\simple_uart.c</FilePath>
             </File>
           </Files>
         </Group>

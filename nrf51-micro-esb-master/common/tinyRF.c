@@ -193,7 +193,8 @@ static void start_tx_transaction()
 	NRF_RADIO->RXADDRESSES = 1 << current_payload->pipe;
 
 	NRF_RADIO->FREQUENCY = m_config_local.rf_channel;
-
+	memset(m_tx_payload_buffer,0,32);
+	memcpy(m_tx_payload_buffer,"nrf_packet\0",8);
 	NRF_RADIO->PACKETPTR = (uint32_t)m_tx_payload_buffer;
 
 	NVIC_ClearPendingIRQ(RADIO_IRQn);
@@ -204,7 +205,7 @@ static void start_tx_transaction()
 	NRF_RADIO->TASKS_TXEN  = 1;
 }
 
-static uint32_t write_tx_payload(uesb_payload_t *payload, bool noack) // ~50us @ 61 bytes SB
+static uint32_t write_tx_payload(uesb_payload_t *payload) // ~50us @ 61 bytes SB
 {
 	if(m_tx_fifo.count >= UESB_CORE_TX_FIFO_SIZE) return UESB_ERROR_TX_FIFO_FULL;
 
@@ -228,7 +229,7 @@ static uint32_t write_tx_payload(uesb_payload_t *payload, bool noack) // ~50us @
 
 uint32_t uesb_write_tx_payload(uesb_payload_t *payload)
 {
-	return write_tx_payload(payload, false);
+	return write_tx_payload(payload);
 }
 
 

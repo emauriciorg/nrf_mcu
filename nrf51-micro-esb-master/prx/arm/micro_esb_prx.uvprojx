@@ -13,16 +13,16 @@
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
-          <Device>nRF51822_xxAC</Device>
+          <Device>nRF51822_xxAA</Device>
           <Vendor>Nordic Semiconductor</Vendor>
           <PackID>NordicSemiconductor.nRF_DeviceFamilyPack.8.17.0</PackID>
           <PackURL>http://developer.nordicsemi.com/nRF5_SDK/pieces/nRF_DeviceFamilyPack/</PackURL>
-          <Cpu>IRAM(0x20000000,0x8000) IROM(0x00000000,0x40000) CPUTYPE("Cortex-M0") CLOCK(12000000) ELITTLE</Cpu>
+          <Cpu>IRAM(0x20000000,0x4000) IROM(0x00000000,0x40000) CPUTYPE("Cortex-M0") CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
-          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC4000 -FN1 -FF0nrf51xxx -FS00 -FL0200000 -FP0($$Device:nRF51822_xxAC$Flash\nrf51xxx.flm))</FlashDriverDll>
+          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC4000 -FN1 -FF0nrf51xxx -FS00 -FL0200000 -FP0($$Device:nRF51822_xxAA$Flash\nrf51xxx.flm))</FlashDriverDll>
           <DeviceId>0</DeviceId>
-          <RegisterFile>$$Device:nRF51822_xxAC$Device\Include\nrf.h</RegisterFile>
+          <RegisterFile>$$Device:nRF51822_xxAA$Device\Include\nrf.h</RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
           <Asm></Asm>
@@ -32,7 +32,7 @@
           <SLE66CMisc></SLE66CMisc>
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
-          <SFDFile>$$Device:nRF51822_xxAC$SVD\nrf51.svd</SFDFile>
+          <SFDFile>$$Device:nRF51822_xxAA$SVD\nrf51.svd</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
@@ -243,7 +243,7 @@
               <IRAM>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x8000</Size>
+                <Size>0x4000</Size>
               </IRAM>
               <IROM>
                 <Type>1</Type>
@@ -2484,6 +2484,7 @@
         <targetInfos>
           <targetInfo name="nrf51822_xxaa_s110 (256K)"/>
           <targetInfo name="nrf51822_xxaa_s120 (256K)"/>
+          <targetInfo name="nrf51822_xxac (256K)_s130"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="Device\Source\startup_config.h" version="8.17.0">
@@ -2493,6 +2494,7 @@
         <targetInfos>
           <targetInfo name="nrf51822_xxaa_s110 (256K)"/>
           <targetInfo name="nrf51822_xxaa_s120 (256K)"/>
+          <targetInfo name="nrf51822_xxac (256K)_s130"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="Device\Source\system_nrf51.c" version="8.17.0">
@@ -2502,6 +2504,7 @@
         <targetInfos>
           <targetInfo name="nrf51822_xxaa_s110 (256K)"/>
           <targetInfo name="nrf51822_xxaa_s120 (256K)"/>
+          <targetInfo name="nrf51822_xxac (256K)_s130"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" condition="ARM Compiler" name="Device\Source\arm\arm_startup_nrf51.s" version="8.17.0">
@@ -2535,28 +2538,40 @@
         </targetInfos>
       </file>
       <file attr="config" category="source" condition="ARM Compiler" name="Device\Source\arm\arm_startup_nrf51.s" version="8.17.0">
-        <instance index="0">RTE\Device\nRF51822_xxAC\arm_startup_nrf51.s</instance>
+        <instance index="0" removed="1">RTE\Device\nRF51822_xxAC\arm_startup_nrf51.s</instance>
         <component Cclass="Device" Cgroup="Startup" Cvendor="NordicSemiconductor" Cversion="8.17.0" condition="nRF51 Series and CMSIS"/>
         <package license="License\license.txt" name="nRF_DeviceFamilyPack" schemaVersion="1.3" url="http://developer.nordicsemi.com/nRF5_SDK/pieces/nRF_DeviceFamilyPack/" vendor="NordicSemiconductor" version="8.17.0"/>
-        <targetInfos>
-          <targetInfo name="nrf51822_xxac (256K)_s130"/>
-        </targetInfos>
+        <targetInfos/>
       </file>
       <file attr="config" category="header" name="Device\Source\startup_config.h" version="8.17.0">
-        <instance index="0">RTE\Device\nRF51822_xxAC\startup_config.h</instance>
+        <instance index="0" removed="1">RTE\Device\nRF51822_xxAC\startup_config.h</instance>
         <component Cclass="Device" Cgroup="StartupConfig" Cvendor="NordicSemiconductor" Cversion="8.17.0" condition="Startup"/>
         <package license="License\license.txt" name="nRF_DeviceFamilyPack" schemaVersion="1.3" url="http://developer.nordicsemi.com/nRF5_SDK/pieces/nRF_DeviceFamilyPack/" vendor="NordicSemiconductor" version="8.17.0"/>
-        <targetInfos>
-          <targetInfo name="nrf51822_xxac (256K)_s130"/>
-        </targetInfos>
+        <targetInfos/>
       </file>
       <file attr="config" category="source" name="Device\Source\system_nrf51.c" version="8.17.0">
-        <instance index="0">RTE\Device\nRF51822_xxAC\system_nrf51.c</instance>
+        <instance index="0" removed="1">RTE\Device\nRF51822_xxAC\system_nrf51.c</instance>
         <component Cclass="Device" Cgroup="Startup" Cvendor="NordicSemiconductor" Cversion="8.17.0" condition="nRF51 Series and CMSIS"/>
         <package license="License\license.txt" name="nRF_DeviceFamilyPack" schemaVersion="1.3" url="http://developer.nordicsemi.com/nRF5_SDK/pieces/nRF_DeviceFamilyPack/" vendor="NordicSemiconductor" version="8.17.0"/>
-        <targetInfos>
-          <targetInfo name="nrf51822_xxac (256K)_s130"/>
-        </targetInfos>
+        <targetInfos/>
+      </file>
+      <file attr="config" category="source" condition="ARM Compiler" name="Device\Source\arm\arm_startup_nrf52.s" version="8.17.0">
+        <instance index="0" removed="1">RTE\Device\nRF52832_xxAA\arm_startup_nrf52.s</instance>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="NordicSemiconductor" Cversion="8.17.0" condition="nRF52832 Device and CMSIS"/>
+        <package license="License\license.txt" name="nRF_DeviceFamilyPack" schemaVersion="1.3" url="http://developer.nordicsemi.com/nRF5_SDK/pieces/nRF_DeviceFamilyPack/" vendor="NordicSemiconductor" version="8.17.0"/>
+        <targetInfos/>
+      </file>
+      <file attr="config" category="header" name="Device\Source\startup_config.h" version="8.17.0">
+        <instance index="0" removed="1">RTE\Device\nRF52832_xxAA\startup_config.h</instance>
+        <component Cclass="Device" Cgroup="StartupConfig" Cvendor="NordicSemiconductor" Cversion="8.17.0" condition="Startup"/>
+        <package license="License\license.txt" name="nRF_DeviceFamilyPack" schemaVersion="1.3" url="http://developer.nordicsemi.com/nRF5_SDK/pieces/nRF_DeviceFamilyPack/" vendor="NordicSemiconductor" version="8.17.0"/>
+        <targetInfos/>
+      </file>
+      <file attr="config" category="source" name="Device\Source\system_nrf52.c" version="8.17.0">
+        <instance index="0" removed="1">RTE\Device\nRF52832_xxAA\system_nrf52.c</instance>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="NordicSemiconductor" Cversion="8.17.0" condition="nRF52832 Device and CMSIS"/>
+        <package license="License\license.txt" name="nRF_DeviceFamilyPack" schemaVersion="1.3" url="http://developer.nordicsemi.com/nRF5_SDK/pieces/nRF_DeviceFamilyPack/" vendor="NordicSemiconductor" version="8.17.0"/>
+        <targetInfos/>
       </file>
       <file attr="config" category="header" name="uart\app_uart.h" version="4.0.0-2.alpha">
         <instance index="0" removed="1">RTE\nRF_Drivers\nRF51822_xxAA\app_uart.h</instance>

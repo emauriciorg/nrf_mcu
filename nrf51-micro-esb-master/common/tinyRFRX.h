@@ -195,5 +195,7 @@ uint32_t tinyrx_set_address(tinyrx_address_type_t address, const uint8_t *data_p
 void get_rf_packet(tinyrx_payload_t *dst_buffer);
 
 void tinyrx_setup_rx(void);
+void get_rx_payload(uint8_t *out_buffer);
+
 int8_t get_rssi(void);
 #endif

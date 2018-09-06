@@ -49,6 +49,9 @@ void uesb_event_handler()
     
 }
 
+
+void blink_led(uint16_t *count_ms);
+
 int main(void)
 {
     uint8_t rx_addr_p0[] = {0x12, 0x34, 0x56, 0x78, 0x9A};
@@ -74,7 +77,6 @@ int main(void)
     uesb_config.retransmit_count    = 6;
     uesb_config.retransmit_delay    = 500;
     uesb_config.dynamic_ack_enabled = 0;
-//    uesb_config.protocol            = UESB_PROTOCOL_ESB_DPL;
     uesb_config.bitrate             = UESB_BITRATE_2MBPS;
     uesb_config.event_handler       = uesb_event_handler;
     
@@ -86,29 +88,46 @@ int main(void)
 
     tx_payload.length  = 8;
     tx_payload.pipe    = 0;
-    tx_payload.data[0] = 0x01;
+    tx_payload.data[0] = 'A';//0x01;
     tx_payload.data[1] = 0x00;
     tx_payload.data[2] = 0x00;
     tx_payload.data[3] = 0x00;
     tx_payload.data[4] = 0x11;
-    
+    memcpy((char *)tx_payload.data,"Pigeon\0\0",8);
+		
+		uint8_t cli_buffer[20];
+		
 	nrf_gpio_pin_set(8);
 	nrf_gpio_pin_set(10);
-	 simple_uart_putstring("nrf init\n");
+	simple_uart_putstring("nrf init\n");
+    uint8_t package_id=0;
     while (true)
     {   
-    	if(counter_ms)counter_ms--;
-	
-	if(!counter_ms){
-			counter_ms=100;
-			nrf_gpio_pin_toggle(LED_GREEN);
-	}
+    	blink_led(&counter_ms);
+			
 
         if(uesb_write_tx_payload(&tx_payload) == UESB_SUCCESS)
         {
-            tx_payload.data[1]++;
+         //   tx_payload.data[1]++;
+					memcpy((char *)cli_buffer,"Pigeon  \n\0\0",strlen("Pigeon  \n\0\0"));
+                    cli_buffer[7]=package_id+'0';
+                    if ((package_id++)>8)package_id=0;
+					simple_uart_putstring(cli_buffer);
         }
-        nrf_delay_us(10000);
+        nrf_delay_ms(1000);
 			
     }
+}
+
+void blink_led(uint16_t *count_ms){
+    
+            nrf_gpio_pin_toggle(LED_GREEN);
+return;
+    if(*count_ms)(*count_ms)--;
+       
+       if(!(*count_ms)){
+            *count_ms=100;
+            nrf_gpio_pin_toggle(LED_GREEN);
+    }
+
 }

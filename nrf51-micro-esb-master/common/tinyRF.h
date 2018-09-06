@@ -190,7 +190,6 @@ bool     uesb_is_idle(void);
 
 uint32_t uesb_write_tx_payload(uesb_payload_t *payload);
 
-uint32_t uesb_write_tx_payload_noack(uesb_payload_t *payload);
 
 uint32_t uesb_write_ack_payload(uesb_payload_t *payload);
 

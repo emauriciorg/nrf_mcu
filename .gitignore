@@ -57,3 +57,12 @@ dkms.conf
 *.fed
 *.axf
 *.TMP
+*.lst
+*.crf
+*.htm
+*.axf
+*.htm
+*.mauri
+*.txt
+*.crf
+*.lst

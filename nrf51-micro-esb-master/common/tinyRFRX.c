@@ -15,6 +15,7 @@
 #include "nrf_gpio.h"
 #include <string.h>
 
+ tinyrx_payload_t  rx_payload;
 
 static tinyrx_event_handler_t     m_event_handler;
 unsigned int led_state=0;
@@ -47,8 +48,13 @@ RADIO_SHORTS_ADDRESS_RSSISTART_Msk | RADIO_SHORTS_DISABLED_RSSISTOP_Msk )
 int8_t get_rssi(void){
 	return m_rx_fifo.payload_ptr[m_rx_fifo.entry_point]->rssi;
 }
+
+
+
 // These function pointers are changed dynamically, depending on protocol configuration and state
 static void (*on_radio_disabled)(void) = 0;
+
+
 static void (*update_rf_payload_format)(uint32_t payload_length) = 0;
 
 // The following functions are assigned to the function pointers above
@@ -63,14 +69,14 @@ static void update_rf_payload_format_esb_dpl(uint32_t payload_length)
 	(RADIO_PCNF1_ENDIAN_Big              << RADIO_PCNF1_ENDIAN_Pos)  |
 	((m_config_local.rf_addr_length - 1) << RADIO_PCNF1_BALEN_Pos)   |
 	(0                                   << RADIO_PCNF1_STATLEN_Pos) |
-	(tinyrx_CORE_MAX_PAYLOAD_LENGTH        << RADIO_PCNF1_MAXLEN_Pos);
+	(tinyrx_CORE_MAX_PAYLOAD_LENGTH      << RADIO_PCNF1_MAXLEN_Pos);
 }
 
 // Function that swaps the bits within each byte in a uint32. Used to convert from nRF24L type addressing to nRF51 type addressing
 static uint32_t bytewise_bit_swap(uint32_t inp)
 {
-	inp = (inp & 0xF0F0F0F0) >> 4 | (inp & 0x0F0F0F0F) << 4;
-	inp = (inp & 0xCCCCCCCC) >> 2 | (inp & 0x33333333) << 2;
+	inp = (inp & 0xF0F0F0F0)  >> 4 | (inp & 0x0F0F0F0F) << 4;
+	inp = (inp & 0xCCCCCCCC)  >> 2 | (inp & 0x33333333) << 2;
 	return (inp & 0xAAAAAAAA) >> 1 | (inp & 0x55555555) << 1;
 }
 
@@ -85,8 +91,8 @@ static void update_radio_parameters()
 
 // CRC configuration
 	NRF_RADIO->CRCCNF    = m_config_local.crc               << RADIO_CRCCNF_LEN_Pos;
-	NRF_RADIO->CRCINIT = 0xFFFFUL;      // Initial value
-	NRF_RADIO->CRCPOLY = 0x11021UL;     // CRC poly: x^16+x^12^x^5+1
+	NRF_RADIO->CRCINIT   = 0xFFFFUL;      // Initial value
+	NRF_RADIO->CRCPOLY   = 0x11021UL;     // CRC poly: x^16+x^12^x^5+1
 
 // Packet format
 	update_rf_payload_format(m_config_local.payload_length);
@@ -128,6 +134,10 @@ static bool rx_fifo_push_rfbuf(uint8_t pipe)
 	return false;
 }
 
+
+void get_rx_payload(uint8_t *out_buffer){
+	memcpy(rx_payload.data,out_buffer,tinyrx_CORE_MAX_PAYLOAD_LENGTH);
+}
 
 static void ppi_init()
 {
@@ -315,7 +325,6 @@ static void on_radio_disabled_esb_dpl_rx(void)
 	 
 }
 
- tinyrx_payload_t  rx_payload;
 
 void tinyrx_event_handler_rx(void)
 {
