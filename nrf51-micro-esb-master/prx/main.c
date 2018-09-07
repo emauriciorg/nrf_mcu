@@ -13,7 +13,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include "nrf.h"
-#include "tinyRFRX.h"
+#include "RX_CAFE.h"
 #include "nrf_delay.h"
 #include "nrf_gpio.h"
 #include "bbn_board.h"
@@ -27,10 +27,14 @@ extern uint8_t led_state;
 
 
 void print_received_data(void){
-	uint8_t temp_buffer[tinyrx_CORE_MAX_PAYLOAD_LENGTH];
-	simple_uart_putstring("reading: ");
+	uint8_t temp_buffer[tinyrx_CORE_MAX_PAYLOAD_LENGTH+5];
+	uint8_t temp_buffer2[tinyrx_CORE_MAX_PAYLOAD_LENGTH+20];
+	
+	//memset(temp_buffer,0,tinyrx_CORE_MAX_PAYLOAD_LENGTH+5);
 	get_rx_payload(temp_buffer);
-	simple_uart_putstring( temp_buffer); 
+	sprintf(temp_buffer2,"Received [%s]\n",temp_buffer );
+	
+	simple_uart_putstring( temp_buffer2); 
 	simple_uart_put('\n');
 }
 
@@ -57,7 +61,7 @@ int main(void)
 	memset(rssi_buffer,0,sizeof(rssi_buffer));
 	
 
-	
+	uint8_t connection_status=0;
 	while (true)
 	{   
 
@@ -66,9 +70,9 @@ int main(void)
 	
 			led_state=0;
 			nrf_gpio_pin_toggle(LED_GREEN);
-			sprintf((char *)rssi_buffer,"rssi -%d \n",get_rssi());
+			sprintf((char *)rssi_buffer,"\nrssi -%d \n",get_rssi());
 			nrf_gpio_pin_set(LED_RED);
-						//printf( get_rssi());
+			//printf( get_rssi());
 			
 			//simple_uart_putstring (rx_payload.data);
 			//simple_uart_putstring("\n");
@@ -78,13 +82,17 @@ int main(void)
 
 //            simple_uart_putstring("nrf loop\n");  
 			print_received_data();
-			nrf_delay_ms(1000);
+			//nrf_delay_ms(1000);
+			connection_status=1;
 		}else{
-			nrf_delay_ms(1000);
+			//nrf_delay_ms(1000);
 			nrf_gpio_pin_set(LED_GREEN);
-			nrf_gpio_pin_toggle(LED_RED);
-			nrf_delay_ms(1000);
-			simple_uart_putstring("Connection loss\n");  
+			//nrf_gpio_pin_toggle(LED_RED);
+			//nrf_delay_ms(1000);
+			if(connection_status){
+				connection_status=0;
+				simple_uart_putstring("Connection loss\n");  
+			}
 
 		}
 

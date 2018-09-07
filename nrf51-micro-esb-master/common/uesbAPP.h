@@ -4,7 +4,7 @@
 //#define UESB_ORIGINAL
 
 #include "micro_esb.h"
-#include "tinyRFRX.h"
+#include "RX_CAFE.h"
 #include "tinyRF.h"
 
 void uesb_event_handler(void);

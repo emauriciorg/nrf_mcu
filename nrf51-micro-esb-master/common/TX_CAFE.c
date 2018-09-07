@@ -10,11 +10,11 @@
  *
  */
 
-#include "tinyRF.h"
+#include "TX_CAFE.h"
 #include "uesb_error_codes.h"
 #include "nrf_gpio.h"
 #include <string.h>
-
+#include <stdio.h>
 
 static uesb_event_handler_t     m_event_handler;
 
@@ -53,7 +53,7 @@ static uesb_payload_t           *current_payload;
 													  RADIO_SHORTS_ADDRESS_RSSISTART_Msk | RADIO_SHORTS_DISABLED_RSSISTOP_Msk )
 
 // These function pointers are changed dynamically, depending on protocol configuration and state
-static void (*on_radio_disabled)(void) = 0;
+
 static void (*on_radio_end)(void) = 0;
 static void (*update_rf_payload_format)(uint32_t payload_length) = 0;
 
@@ -62,11 +62,8 @@ static void on_radio_disabled_esb_dpl_tx_noack(void);
 
 static void update_rf_payload_format_esb_dpl(uint32_t payload_length)
 {
-#if(UESB_CORE_MAX_PAYLOAD_LENGTH <= 32)
 	NRF_RADIO->PCNF0 = (0 << RADIO_PCNF0_S0LEN_Pos) | (6 << RADIO_PCNF0_LFLEN_Pos) | (3 << RADIO_PCNF0_S1LEN_Pos);
-#else
-	NRF_RADIO->PCNF0 = (0 << RADIO_PCNF0_S0LEN_Pos) | (8 << RADIO_PCNF0_LFLEN_Pos) | (3 << RADIO_PCNF0_S1LEN_Pos);
-#endif
+
 	NRF_RADIO->PCNF1 = (RADIO_PCNF1_WHITEEN_Disabled        << RADIO_PCNF1_WHITEEN_Pos) |
 					   (RADIO_PCNF1_ENDIAN_Big              << RADIO_PCNF1_ENDIAN_Pos)  |
 					   ((m_config_local.rf_addr_length - 1) << RADIO_PCNF1_BALEN_Pos)   |
@@ -112,8 +109,8 @@ static void update_radio_parameters()
 
 static void initialize_fifos()
 {
-	m_tx_fifo.entry_point = 0;
-	m_tx_fifo.exit_point  = 0;
+//	m_tx_fifo.entry_point = 0;
+	//m_tx_fifo.exit_point  = 0;
 	m_tx_fifo.count       = 0;
 	for(int i = 0; i < UESB_CORE_TX_FIFO_SIZE; i++)
 	{
@@ -128,8 +125,8 @@ static void tx_fifo_remove_last()
 	{
 		DISABLE_RF_IRQ;
 		m_tx_fifo.count--;
-		m_tx_fifo.exit_point++;
-		if(m_tx_fifo.exit_point >= UESB_CORE_TX_FIFO_SIZE) m_tx_fifo.exit_point = 0;
+		//m_tx_fifo.exit_point++;
+		//if(m_tx_fifo.exit_point >= UESB_CORE_TX_FIFO_SIZE) m_tx_fifo.exit_point = 0;
 		ENABLE_RF_IRQ;
 	}
 }
@@ -175,27 +172,38 @@ uint32_t uesb_disable(void)
 
 static void start_tx_transaction()
 {
+	static int packet_counter=0;
+	static int ifg_change_addr=0x01;
 	// Prepare the payload
-	current_payload = m_tx_fifo.payload_ptr[m_tx_fifo.exit_point];
-	m_pid = (m_pid + 1) % 4;
-	//ack = current_payload->noack == 0 || m_config_local.dynamic_ack_enabled == 0;
-
-	m_tx_payload_buffer[0] = current_payload->length;
-	m_tx_payload_buffer[1] = 0x01;//m_pid << 1 | ((ack == 0 && m_config_local.dynamic_ack_enabled) ? 0x00 : 0x01);
-	memcpy(&m_tx_payload_buffer[2], current_payload->data, current_payload->length);
+//	
+	current_payload = m_tx_fifo.payload_ptr[0];
+//	current_payload = m_tx_fifo.payload_ptr[m_tx_fifo.exit_point];
 
 	NRF_RADIO->SHORTS   = RADIO_SHORTS_COMMON;
 	NRF_RADIO->INTENSET = RADIO_INTENSET_DISABLED_Msk;
-	on_radio_disabled   = on_radio_disabled_esb_dpl_tx_noack;
+	//on_radio_disabled   = on_radio_disabled_esb_dpl_tx_noack;
 	
 
-	NRF_RADIO->TXADDRESS = current_payload->pipe;
-	NRF_RADIO->RXADDRESSES = 1 << current_payload->pipe;
+	 
+	 if (ifg_change_addr==4)
+	 	ifg_change_addr=1;
+	else	 
+	 	ifg_change_addr++;
+	 
+	NRF_RADIO->TXADDRESS = ifg_change_addr;
+
+	
+//	NRF_RADIO->TXADDRESS = 1;//current_payload->pipe;
+
+	NRF_RADIO->RXADDRESSES = 1 << 0;//current_payload->pipe;
 
 	NRF_RADIO->FREQUENCY = m_config_local.rf_channel;
-	memset(m_tx_payload_buffer,0,32);
-	memcpy(m_tx_payload_buffer,"nrf_packet\0",8);
-	NRF_RADIO->PACKETPTR = (uint32_t)m_tx_payload_buffer;
+	uint16_t len;
+	len=sprintf((char *)&m_tx_payload_buffer[2],"nrf_%0d, %02d ",ifg_change_addr,packet_counter++);
+	memset(&m_tx_payload_buffer[len+2],'O',32-(len+3));
+	m_tx_payload_buffer[0]=32;
+	m_tx_payload_buffer[1]=1;
+	NRF_RADIO->PACKETPTR = (uint32_t)&m_tx_payload_buffer[0];
 
 	NVIC_ClearPendingIRQ(RADIO_IRQn);
 	NVIC_EnableIRQ(RADIO_IRQn);
@@ -211,11 +219,10 @@ static uint32_t write_tx_payload(uesb_payload_t *payload) // ~50us @ 61 bytes SB
 
 	DISABLE_RF_IRQ;
 	
-	memcpy(m_tx_fifo.payload_ptr[m_tx_fifo.entry_point], payload, sizeof(uesb_payload_t));
+	memcpy(m_tx_fifo.payload_ptr[0], payload, sizeof(uesb_payload_t));
 	
 
-	m_tx_fifo.entry_point++;
-	if(m_tx_fifo.entry_point >= UESB_CORE_TX_FIFO_SIZE) m_tx_fifo.entry_point = 0;
+//	if(m_tx_fifo.entry_point >= UESB_CORE_TX_FIFO_SIZE) m_tx_fifo.entry_point = 0;
 	
 	m_tx_fifo.count++;
 	
@@ -245,7 +252,8 @@ uint32_t uesb_flush_tx(void)
 {
 	DISABLE_RF_IRQ;
 	m_tx_fifo.count = 0;
-	m_tx_fifo.entry_point = m_tx_fifo.exit_point = 0;
+	//m_tx_fifo.entry_point = 0;
+	//m_tx_fifo.exit_point = 0;
 	ENABLE_RF_IRQ;
 	return UESB_SUCCESS;
 }
@@ -345,9 +353,9 @@ void RADIO_IRQHandler()
 
 	  
 		// Call the correct on_radio_disable function, depending on the current protocol state
-		if(on_radio_disabled)
+		if(on_radio_disabled_esb_dpl_tx_noack)
 		{
-			on_radio_disabled();
+			on_radio_disabled_esb_dpl_tx_noack();
 		}
 	}
 

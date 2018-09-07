@@ -30,31 +30,45 @@ Build target 'nrf51822_xxac_130 (256K)'
 Clean started - Project: 'micro_esb_ptx'
    deleting intermediate output files for target 'nrf51822_xxac_130 (256K)'
 compiling main.c...
-..\main.c(126): warning:  #111-D: statement is unreachable
+..\main.c(132): warning:  #111-D: statement is unreachable
       if(*count_ms)(*count_ms)--;
 ..\main.c: 1 warning, 0 errors
-compiling tinyRF.c...
 compiling simple_uart.c...
+compiling TX_CAFE.c...
+..\..\common\TX_CAFE.c(356): warning:  #236-D: controlling expression is constant
+                if(on_radio_disabled_esb_dpl_tx_noack)
+..\..\common\TX_CAFE.c(33): warning:  #550-D: variable "m_pid"  was set but never used
+  static uint32_t                 m_pid                   = 0;
+..\..\common\TX_CAFE.c(40): warning:  #550-D: variable "current_payload"  was set but never used
+  static uesb_payload_t           *current_payload;
+..\..\common\TX_CAFE.c: 3 warnings, 0 errors
 assembling arm_startup_nrf51.s...
 compiling system_nrf51.c...
 compiling nrf_delay.c...
 linking...
-Program Size: Code=2992 RO-data=264 RW-data=56 ZI-data=2496  
-".\_build\tiny_esb_ptx.axf" - 0 Error(s), 1 Warning(s).
+Program Size: Code=3852 RO-data=264 RW-data=60 ZI-data=2492  
+".\_build\tiny_esb_ptx.axf" - 0 Error(s), 4 Warning(s).
 
 *** Performing Cross-Module-Optimization:
 compiling main.c...
-..\main.c(126): warning:  #111-D: statement is unreachable
+..\main.c(132): warning:  #111-D: statement is unreachable
       if(*count_ms)(*count_ms)--;
 ..\main.c: 1 warning, 0 errors
-compiling tinyRF.c...
 compiling simple_uart.c...
+compiling TX_CAFE.c...
+..\..\common\TX_CAFE.c(356): warning:  #236-D: controlling expression is constant
+                if(on_radio_disabled_esb_dpl_tx_noack)
+..\..\common\TX_CAFE.c(33): warning:  #550-D: variable "m_pid"  was set but never used
+  static uint32_t                 m_pid                   = 0;
+..\..\common\TX_CAFE.c(40): warning:  #550-D: variable "current_payload"  was set but never used
+  static uesb_payload_t           *current_payload;
+..\..\common\TX_CAFE.c: 3 warnings, 0 errors
 compiling system_nrf51.c...
 compiling nrf_delay.c...
 linking...
-Program Size: Code=2992 RO-data=264 RW-data=56 ZI-data=2496  
+Program Size: Code=3852 RO-data=264 RW-data=60 ZI-data=2492  
 FromELF: creating hex file...
-".\_build\tiny_esb_ptx.axf" - 0 Error(s), 1 Warning(s).
+".\_build\tiny_esb_ptx.axf" - 0 Error(s), 4 Warning(s).
 *** Completed Cross-Module-Optimization after 2 iteration(s).
 
 <h2>Software Packages used:</h2>
@@ -109,8 +123,8 @@ Package Vendor: NordicSemiconductor
       Include file:  Device\Include\system_nrf51.h
 
    * Component: NordicSemiconductor::nRF_Drivers:nrf_delay:4.0.0-2.alpha
-      Source file:   delay\nrf_delay.c
       Include file:  delay\nrf_delay.h
+      Source file:   delay\nrf_delay.c
 
    * Component: NordicSemiconductor::nRF_Drivers:nrf_gpio:4.0.0-2.alpha
       Include file:  hal\nrf_gpio.h
@@ -118,26 +132,26 @@ Package Vendor: NordicSemiconductor
    * Component: NordicSemiconductor::nRF_SoftDevice:Internal:softdevice_present:2.0.0-2.alpha
 
    * Component: NordicSemiconductor::nRF_SoftDevice:s130:Present_only:2.0.0-7.alpha
-      Include file:  headers\ble.h
-      Include file:  headers\ble_gatt.h
       Include file:  headers\ble_hci.h
-      Include file:  headers\ble_l2cap.h
-      Include file:  headers\nrf_error_sdm.h
-      Include file:  headers\nrf_sdm.h
-      Include file:  headers\ble_gap.h
-      Include file:  headers\nrf51\nrf_mbr.h
-      Include file:  headers\nrf_svc.h
       Include file:  headers\ble_types.h
-      Include file:  headers\ble_gatts.h
-      Include file:  headers\nrf_sd_def.h
+      Include file:  headers\ble_err.h
+      Include file:  headers\ble_l2cap.h
+      Include file:  headers\nrf_error.h
+      Include file:  headers\nrf_soc.h
+      Include file:  headers\ble_gap.h
+      Include file:  headers\ble.h
       Include file:  headers\ble_gattc.h
-      Include file:  headers\softdevice_assert.h
+      Include file:  headers\ble_gatt.h
       Include file:  headers\ble_ranges.h
       Include file:  headers\nrf_error_soc.h
-      Include file:  headers\ble_err.h
-      Include file:  headers\nrf_soc.h
-      Include file:  headers\nrf_error.h
-Build Time Elapsed:  00:00:03
+      Include file:  headers\nrf_svc.h
+      Include file:  headers\ble_gatts.h
+      Include file:  headers\nrf_error_sdm.h
+      Include file:  headers\softdevice_assert.h
+      Include file:  headers\nrf_sd_def.h
+      Include file:  headers\nrf_sdm.h
+      Include file:  headers\nrf51\nrf_mbr.h
+Build Time Elapsed:  00:00:04
 </pre>
 </body>
 </html>

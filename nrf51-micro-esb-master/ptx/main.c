@@ -20,7 +20,7 @@
 #include "nrf_gpio.h"
 #include "bbn_board.h"
 #include "simple_uart.h"
-#include "tinyRF.h"
+#include "TX_CAFE.h"
 static uesb_payload_t tx_payload;
 
 uint16_t counter_ms=0;
@@ -54,10 +54,14 @@ void blink_led(uint16_t *count_ms);
 
 int main(void)
 {
-    uint8_t rx_addr_p0[] = {0x12, 0x34, 0x56, 0x78, 0x9A};
-    uint8_t rx_addr_p1[] = {0xBC, 0xDE, 0xF0, 0x12, 0x23};
-    uint8_t rx_addr_p2   = 0x66;
+  #define LSB_ADDRR 0X12
+    uint8_t rx_addr_p0[] = {LSB_ADDRR, 0x34, 0x56, 0x78, 0x23};
     
+    uint8_t rx_addr_p1[] = {LSB_ADDRR, 0x34, 0x56, 0x78, 0X9A}; 
+
+    uint8_t rx_addr_p2   = 0xAA;
+    uint8_t rx_addr_p3   = 0xF4;
+
     nrf_gpio_range_cfg_output(8, 15);
     
     NRF_CLOCK->EVENTS_HFCLKSTARTED = 0;
@@ -85,6 +89,7 @@ int main(void)
     uesb_set_address(UESB_ADDRESS_PIPE0, rx_addr_p0);
     uesb_set_address(UESB_ADDRESS_PIPE1, rx_addr_p1);
     uesb_set_address(UESB_ADDRESS_PIPE2, &rx_addr_p2);
+    uesb_set_address(UESB_ADDRESS_PIPE3, &rx_addr_p3);
 
     tx_payload.length  = 8;
     tx_payload.pipe    = 0;
@@ -93,14 +98,15 @@ int main(void)
     tx_payload.data[2] = 0x00;
     tx_payload.data[3] = 0x00;
     tx_payload.data[4] = 0x11;
-    memcpy((char *)tx_payload.data,"Pigeon\0\0",8);
-		
-		uint8_t cli_buffer[20];
+    
+    memcpy((char *)tx_payload.data,"Pigeon  \n\0",10);
 		
 	nrf_gpio_pin_set(8);
 	nrf_gpio_pin_set(10);
-	simple_uart_putstring("nrf init\n");
+	
+    simple_uart_putstring("nrf init\n");
     uint8_t package_id=0;
+    
     while (true)
     {   
     	blink_led(&counter_ms);
@@ -109,12 +115,12 @@ int main(void)
         if(uesb_write_tx_payload(&tx_payload) == UESB_SUCCESS)
         {
          //   tx_payload.data[1]++;
-					memcpy((char *)cli_buffer,"Pigeon  \n\0\0",strlen("Pigeon  \n\0\0"));
-                    cli_buffer[7]=package_id+'0';
+				//	memcpy((char *)cli_buffer,tx_payload.data,strlen(tx_payload.data));
+                    tx_payload.data[7]=package_id+'0';
                     if ((package_id++)>8)package_id=0;
-					simple_uart_putstring(cli_buffer);
+					simple_uart_putstring(tx_payload.data);
         }
-        nrf_delay_ms(1000);
+        nrf_delay_ms(100);
 			
     }
 }

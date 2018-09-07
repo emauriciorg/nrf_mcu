@@ -22,11 +22,15 @@ Dialog DLL:      TARMCM1.DLL V1.11.0.0
  
 <h2>Project:</h2>
 D:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf51-micro-esb-master\prx\arm\micro_esb_prx.uvprojx
-Project File Date:  08/28/2018
+Project File Date:  09/08/2018
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 4 (build 422)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'nrf51822_xxac (256K)_s130'
+compiling RX_CAFE.c...
+linking...
+Program Size: Code=3296 RO-data=264 RW-data=32 ZI-data=2160  
+FromELF: creating hex file...
 ".\_build\tiny_esb_ptx.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
@@ -39,10 +43,10 @@ Package Vendor: ARM
 
 Package Vendor: NordicSemiconductor
                 http://developer.nordicsemi.com/nRF5_SDK/pieces/nRF_DeviceFamilyPack/NordicSemiconductor.nRF_DeviceFamilyPack.8.17.0.pack
-                NordicSemiconductor::Device:StartupConfig:8.17.0
+                NordicSemiconductor::Device:Startup:8.17.0
                 Nordic Semiconductor nRF ARM devices Device Family Pack.
-   * Component: StartupConfig Version: 8.17.0
    * Component: Startup Version: 8.17.0
+   * Component: StartupConfig Version: 8.17.0
 
 Package Vendor: NordicSemiconductor
                 http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Drivers/NordicSemiconductor.nRF_Drivers.4.0.0-2.alpha.pack
@@ -63,20 +67,20 @@ Package Vendor: NordicSemiconductor
 
    * Component: ARM::CMSIS:CORE:5.0.2
 
-   * Component: NordicSemiconductor::Device:StartupConfig:8.17.0
-      Include file:  Device\Source\startup_config.h
-
    * Component: NordicSemiconductor::Device:Startup:8.17.0
-      Source file:   Device\Source\system_nrf51.c
       Source file:   Device\Source\arm\arm_startup_nrf51.s
       Include file:  Device\Include\system_nrf51.h
+      Source file:   Device\Source\system_nrf51.c
+
+   * Component: NordicSemiconductor::Device:StartupConfig:8.17.0
+      Include file:  Device\Source\startup_config.h
 
    * Component: NordicSemiconductor::nRF_Drivers:nrf_gpio:4.0.0-2.alpha
       Include file:  hal\nrf_gpio.h
 
    * Component: NordicSemiconductor::nRF_Drivers:nrf_delay:4.0.0-2.alpha
-      Source file:   delay\nrf_delay.c
       Include file:  delay\nrf_delay.h
+      Source file:   delay\nrf_delay.c
 Build Time Elapsed:  00:00:00
 </pre>
 </body>

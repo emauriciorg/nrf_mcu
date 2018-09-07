@@ -385,9 +385,9 @@
               <FilePath>..\main.c</FilePath>
             </File>
             <File>
-              <FileName>tinyRFRX.c</FileName>
+              <FileName>RX_CAFE.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\tinyRFRX.c</FilePath>
+              <FilePath>..\..\common\RX_CAFE.c</FilePath>
             </File>
             <File>
               <FileName>simple_uart.c</FileName>
@@ -786,9 +786,9 @@
               <FilePath>..\main.c</FilePath>
             </File>
             <File>
-              <FileName>tinyRFRX.c</FileName>
+              <FileName>RX_CAFE.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\tinyRFRX.c</FilePath>
+              <FilePath>..\..\common\RX_CAFE.c</FilePath>
             </File>
             <File>
               <FileName>simple_uart.c</FileName>
@@ -1187,9 +1187,9 @@
               <FilePath>..\main.c</FilePath>
             </File>
             <File>
-              <FileName>tinyRFRX.c</FileName>
+              <FileName>RX_CAFE.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\tinyRFRX.c</FilePath>
+              <FilePath>..\..\common\RX_CAFE.c</FilePath>
             </File>
             <File>
               <FileName>simple_uart.c</FileName>
@@ -1588,9 +1588,9 @@
               <FilePath>..\main.c</FilePath>
             </File>
             <File>
-              <FileName>tinyRFRX.c</FileName>
+              <FileName>RX_CAFE.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\tinyRFRX.c</FilePath>
+              <FilePath>..\..\common\RX_CAFE.c</FilePath>
             </File>
             <File>
               <FileName>simple_uart.c</FileName>
@@ -1989,9 +1989,9 @@
               <FilePath>..\main.c</FilePath>
             </File>
             <File>
-              <FileName>tinyRFRX.c</FileName>
+              <FileName>RX_CAFE.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\tinyRFRX.c</FilePath>
+              <FilePath>..\..\common\RX_CAFE.c</FilePath>
             </File>
             <File>
               <FileName>simple_uart.c</FileName>
@@ -2390,9 +2390,9 @@
               <FilePath>..\main.c</FilePath>
             </File>
             <File>
-              <FileName>tinyRFRX.c</FileName>
+              <FileName>RX_CAFE.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\tinyRFRX.c</FilePath>
+              <FilePath>..\..\common\RX_CAFE.c</FilePath>
             </File>
             <File>
               <FileName>simple_uart.c</FileName>

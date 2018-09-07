@@ -10,7 +10,7 @@
 *
 */
 
-#include "tinyRFRX.h"
+#include "RX_CAFE.h"
 #include "uesb_error_codes.h"
 #include "nrf_gpio.h"
 #include <string.h>
@@ -23,8 +23,6 @@ unsigned int led_state=0;
 static tinyrx_config_t            m_config_local;
 
 // RX FIFO
-static tinyrx_payload_t           m_rx_fifo_payload[tinyrx_CORE_RX_FIFO_SIZE];
-static tinyrx_payload_rx_fifo_t   m_rx_fifo;
 static  uint8_t                 m_rx_payload_buffer[tinyrx_CORE_MAX_PAYLOAD_LENGTH + 2];
 
 // Run time variables
@@ -44,15 +42,14 @@ static volatile uint32_t        m_last_rx_packet_crc = 0xFFFFFFFF;
 #define                         RADIO_SHORTS_COMMON ( RADIO_SHORTS_READY_START_Msk | RADIO_SHORTS_END_DISABLE_Msk | \
 RADIO_SHORTS_ADDRESS_RSSISTART_Msk | RADIO_SHORTS_DISABLED_RSSISTOP_Msk )
 
-
+int8_t g_rssi=0;
+uint16_t package_counter=0;
 int8_t get_rssi(void){
-	return m_rx_fifo.payload_ptr[m_rx_fifo.entry_point]->rssi;
+	return g_rssi;
 }
 
 
 
-// These function pointers are changed dynamically, depending on protocol configuration and state
-static void (*on_radio_disabled)(void) = 0;
 
 
 static void (*update_rf_payload_format)(uint32_t payload_length) = 0;
@@ -101,34 +98,25 @@ static void update_radio_parameters()
 	NRF_RADIO->PREFIX1 = bytewise_bit_swap(m_config_local.rx_address_p7 << 24 | m_config_local.rx_address_p6 << 16 | m_config_local.rx_address_p5 << 8 | m_config_local.rx_address_p4);
 	NRF_RADIO->BASE0   = bytewise_bit_swap(m_config_local.rx_address_p0[1] << 24 | m_config_local.rx_address_p0[2] << 16 | m_config_local.rx_address_p0[3] << 8 | m_config_local.rx_address_p0[4]);
 	NRF_RADIO->BASE1   = bytewise_bit_swap(m_config_local.rx_address_p1[1] << 24 | m_config_local.rx_address_p1[2] << 16 | m_config_local.rx_address_p1[3] << 8 | m_config_local.rx_address_p1[4]);
-}
+	// NRF_RADIO->PREFIX0 = bytewise_bit_swap(m_config_local.rx_address_p3 << 24 | m_config_local.rx_address_p2 << 16 | m_config_local.rx_address_p1[0] << 8 | m_config_local.rx_address_p0[0]);
+	// NRF_RADIO->PREFIX1 = bytewise_bit_swap(m_config_local.rx_address_p7 << 24 | m_config_local.rx_address_p6 << 16 | m_config_local.rx_address_p5 << 8 | m_config_local.rx_address_p4);
+	// NRF_RADIO->BASE0   = bytewise_bit_swap(m_config_local.rx_address_p0[1] << 24 | m_config_local.rx_address_p0[2] << 16 | m_config_local.rx_address_p0[3] << 8 | m_config_local.rx_address_p0[4]);
+	// NRF_RADIO->BASE1   = bytewise_bit_swap(m_config_local.rx_address_p1[1] << 24 | m_config_local.rx_address_p1[2] << 16 | m_config_local.rx_address_p1[3] << 8 | m_config_local.rx_address_p1[4]);
 
-static void initialize_fifos()
-{
-	m_rx_fifo.entry_point = 0;
-	m_rx_fifo.exit_point  = 0;
-	m_rx_fifo.count       = 0;
-	for(int i = 0; i < tinyrx_CORE_RX_FIFO_SIZE; i++)
-	{
-		m_rx_fifo.payload_ptr[i] = &m_rx_fifo_payload[i];
-	}
 }
 
 
+
+
+/*CUSTOM PROTOCOL HANDLING*/
 static bool rx_fifo_push_rfbuf(uint8_t pipe)
 {
-	if(m_rx_fifo.count < tinyrx_CORE_RX_FIFO_SIZE)
+	if(package_counter < tinyrx_CORE_RX_FIFO_SIZE)
 	{
-		if(m_rx_payload_buffer[0] > tinyrx_CORE_MAX_PAYLOAD_LENGTH) return false;
-		
-		m_rx_fifo.payload_ptr[m_rx_fifo.entry_point]->length = m_rx_payload_buffer[0];
-		
-		memcpy(m_rx_fifo.payload_ptr[m_rx_fifo.entry_point]->data, &m_rx_payload_buffer[2], m_rx_fifo.payload_ptr[m_rx_fifo.entry_point]->length);
 
-		m_rx_fifo.payload_ptr[m_rx_fifo.entry_point]->pipe = pipe;
-		m_rx_fifo.payload_ptr[m_rx_fifo.entry_point]->rssi = NRF_RADIO->RSSISAMPLE;
-		if(++m_rx_fifo.entry_point >= tinyrx_CORE_RX_FIFO_SIZE) m_rx_fifo.entry_point = 0;
-		m_rx_fifo.count++;
+	
+		g_rssi=NRF_RADIO->RSSISAMPLE;
+		package_counter++;
 		return true;
 	}
 	return false;
@@ -136,7 +124,9 @@ static bool rx_fifo_push_rfbuf(uint8_t pipe)
 
 
 void get_rx_payload(uint8_t *out_buffer){
-	memcpy(rx_payload.data,out_buffer,tinyrx_CORE_MAX_PAYLOAD_LENGTH);
+//	memcpy(rx_payload.data,out_buffer,tinyrx_CORE_MAX_PAYLOAD_LENGTH);
+	memcpy(out_buffer,m_rx_payload_buffer,tinyrx_CORE_MAX_PAYLOAD_LENGTH);
+
 }
 
 static void ppi_init()
@@ -161,8 +151,6 @@ uint32_t tinyrx_init(tinyrx_config_t *parameters)
 
 	update_radio_parameters();
 
-	initialize_fifos();
-
 	ppi_init();
 
 	NVIC_SetPriority(RADIO_IRQn, m_config_local.radio_irq_priority & 0x03);
@@ -178,22 +166,12 @@ uint32_t tinyrx_disable(void)
 }
 
 
-
+//CUSTOM PROTOCOL ASSIGNATION
 uint32_t tinyrx_read_rx_payload(tinyrx_payload_t *payload)
 {
-	if(m_rx_fifo.count == 0) return UESB_ERROR_RX_FIFO_EMPTY;
 
 	DISABLE_RF_IRQ;
-	
-	payload->length = m_rx_fifo.payload_ptr[m_rx_fifo.exit_point]->length;
-	payload->pipe   = m_rx_fifo.payload_ptr[m_rx_fifo.exit_point]->pipe;
-	payload->rssi   = m_rx_fifo.payload_ptr[m_rx_fifo.exit_point]->rssi;
-	
-	memcpy(payload->data, m_rx_fifo.payload_ptr[m_rx_fifo.exit_point]->data, payload->length);
-	
-	if(++m_rx_fifo.exit_point >= tinyrx_CORE_RX_FIFO_SIZE) m_rx_fifo.exit_point = 0;
-	m_rx_fifo.count--;
-	
+	package_counter--;	
 	ENABLE_RF_IRQ;
 
 	return UESB_SUCCESS;
@@ -204,12 +182,11 @@ uint32_t tinyrx_start_rx(void)
 
 	NRF_RADIO->INTENCLR = 0xFFFFFFFF;
 	NRF_RADIO->EVENTS_DISABLED = 0;
-	on_radio_disabled = on_radio_disabled_esb_dpl_rx;
 	NRF_RADIO->SHORTS      = RADIO_SHORTS_COMMON | RADIO_SHORTS_DISABLED_TXEN_Msk;
 	NRF_RADIO->INTENSET    = RADIO_INTENSET_DISABLED_Msk;
 
 
-	NRF_RADIO->RXADDRESSES = m_config_local.rx_pipes_enabled;
+	NRF_RADIO->RXADDRESSES =0X10; //0X3F
 
 	NRF_RADIO->FREQUENCY = m_config_local.rf_channel;
 
@@ -220,16 +197,6 @@ uint32_t tinyrx_start_rx(void)
 
 	NRF_RADIO->EVENTS_ADDRESS = NRF_RADIO->EVENTS_PAYLOAD = NRF_RADIO->EVENTS_DISABLED = 0;
 	NRF_RADIO->TASKS_RXEN  = 1;
-	return UESB_SUCCESS;
-}
-
-
-uint32_t tinyrx_flush_rx(void)
-{
-	DISABLE_RF_IRQ;
-	m_rx_fifo.count = 0;
-	m_rx_fifo.entry_point = m_rx_fifo.exit_point = 0;
-	ENABLE_RF_IRQ;
 	return UESB_SUCCESS;
 }
 
@@ -254,6 +221,8 @@ uint32_t tinyrx_set_address(tinyrx_address_type_t address, const uint8_t *data_p
 		break;
 		case tinyrx_ADDRESS_PIPE2:
 		m_config_local.rx_address_p2 = *data_ptr;
+		//memcpy(m_config_local.rx_address_p2, data_ptr, m_config_local.rf_addr_length);
+
 		break;
 		case tinyrx_ADDRESS_PIPE3:
 		m_config_local.rx_address_p3 = *data_ptr;
@@ -294,21 +263,21 @@ void RADIO_IRQHandler()
 
 	if(NRF_RADIO->EVENTS_END && (NRF_RADIO->INTENSET & RADIO_INTENSET_END_Msk)){
 		NRF_RADIO->EVENTS_END = 0;
+//		on_radio_disabled_esb_dpl_rx();
 	}
 
 	if(NRF_RADIO->EVENTS_DISABLED && (NRF_RADIO->INTENSET & RADIO_INTENSET_DISABLED_Msk)){
 		NRF_RADIO->EVENTS_DISABLED = 0;
-		// Call the correct on_radio_disable function, depending on the current protocol state
-		if(on_radio_disabled){
-			on_radio_disabled();
-		}
+			//ADD OPTION FOR BOTH TX AND RX
+			on_radio_disabled_esb_dpl_rx();
+	
 	}
 }
 
 
 static void on_radio_disabled_esb_dpl_rx(void)
 {
-
+//	if (!NRF_RADIO->CRCSTATUS) return;
 	NRF_RADIO->SHORTS = RADIO_SHORTS_COMMON;
 	update_rf_payload_format(m_config_local.payload_length);
 	NRF_RADIO->PACKETPTR = (uint32_t)m_rx_payload_buffer;
@@ -352,10 +321,15 @@ void tinyrx_event_handler_rx(void)
 
 void tinyrx_setup_rx(void){
 
+#define LSB_ADDRR 0xF1
+    uint8_t rx_addr_p0[] = {LSB_ADDRR, 0x34, 0x56, 0x78, 0X23};
+    
+    uint8_t rx_addr_p1[] = {LSB_ADDRR, 0x34, 0x56, 0x78, 0X9A};
 
-	uint8_t rx_addr_p0[] = {0x12, 0x34, 0x56, 0x78, 0x9A};
-	uint8_t rx_addr_p1[] = {0xBA, 0xDE, 0xF0, 0x12, 0x2C};
-	uint8_t rx_addr_p2   = 0x66;
+ 
+ 	uint8_t rx_addr_p2   = 0xF1;
+  	uint8_t rx_addr_p3   = 0xA3;
+  	uint8_t rx_addr_p4   = 0xF4;
 	
 	tinyrx_config_t tinyrx_config       = tinyrx_DEFAULT_CONFIG;
 	tinyrx_config.rf_channel          = 5;
@@ -371,7 +345,9 @@ void tinyrx_setup_rx(void){
 	tinyrx_set_address(tinyrx_ADDRESS_PIPE0, rx_addr_p0);
 	tinyrx_set_address(tinyrx_ADDRESS_PIPE1, rx_addr_p1);
 	tinyrx_set_address(tinyrx_ADDRESS_PIPE2, &rx_addr_p2);
-  
+	tinyrx_set_address(tinyrx_ADDRESS_PIPE3, &rx_addr_p3);
+	tinyrx_set_address(tinyrx_ADDRESS_PIPE4, &rx_addr_p4);
+        
 	tinyrx_start_rx();
 }
 
