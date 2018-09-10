@@ -385,14 +385,14 @@
               <FilePath>..\main.c</FilePath>
             </File>
             <File>
-              <FileName>tinyRF.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\common\tinyRF.c</FilePath>
-            </File>
-            <File>
               <FileName>simple_uart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\common\simple_uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>TX_CAFE.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\common\TX_CAFE.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -789,14 +789,14 @@
               <FilePath>..\main.c</FilePath>
             </File>
             <File>
-              <FileName>tinyRF.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\common\tinyRF.c</FilePath>
-            </File>
-            <File>
               <FileName>simple_uart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\common\simple_uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>TX_CAFE.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\common\TX_CAFE.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1196,14 +1196,14 @@
               <FilePath>..\main.c</FilePath>
             </File>
             <File>
-              <FileName>tinyRF.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\common\tinyRF.c</FilePath>
-            </File>
-            <File>
               <FileName>simple_uart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\common\simple_uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>TX_CAFE.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\common\TX_CAFE.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1600,14 +1600,14 @@
               <FilePath>..\main.c</FilePath>
             </File>
             <File>
-              <FileName>tinyRF.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\common\tinyRF.c</FilePath>
-            </File>
-            <File>
               <FileName>simple_uart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\common\simple_uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>TX_CAFE.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\common\TX_CAFE.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2004,14 +2004,14 @@
               <FilePath>..\main.c</FilePath>
             </File>
             <File>
-              <FileName>tinyRF.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\common\tinyRF.c</FilePath>
-            </File>
-            <File>
               <FileName>simple_uart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\common\simple_uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>TX_CAFE.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\common\TX_CAFE.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2408,14 +2408,14 @@
               <FilePath>..\main.c</FilePath>
             </File>
             <File>
-              <FileName>tinyRF.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\common\tinyRF.c</FilePath>
-            </File>
-            <File>
               <FileName>simple_uart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\common\simple_uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>TX_CAFE.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\common\TX_CAFE.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -54,14 +54,19 @@ void blink_led(uint16_t *count_ms);
 
 int main(void)
 {
-  #define LSB_ADDRR 0X12
-    uint8_t rx_addr_p0[] = {LSB_ADDRR, 0x34, 0x56, 0x78, 0x23};
+
+
+    nrf_st_address user_radio_addr;
+    const char pipe_addr[8]         = {0x60, 0xF4, 0xAA, 0x12, 0x0E,0x0F,0x10,0x11};
+    const char base_addr0[6]={ 0x34, 0x56, 0x78, 0x23};
+    const char base_addr1[6]={ 0x34, 0x56, 0x78, 0x9A};
+    memcpy (user_radio_addr.logic_pipe,pipe_addr,8);
+    memcpy( user_radio_addr.base_addr0 , base_addr0, 5);
+    memcpy( user_radio_addr.base_addr1 , base_addr1 , 5);
     
-    uint8_t rx_addr_p1[] = {LSB_ADDRR, 0x34, 0x56, 0x78, 0X9A}; 
+    update_nrf_radio_address(user_radio_addr);
 
-    uint8_t rx_addr_p2   = 0xAA;
-    uint8_t rx_addr_p3   = 0xF4;
-
+    
     nrf_gpio_range_cfg_output(8, 15);
     
     NRF_CLOCK->EVENTS_HFCLKSTARTED = 0;
@@ -86,10 +91,10 @@ int main(void)
     
     uesb_init(&uesb_config);
 
-    uesb_set_address(UESB_ADDRESS_PIPE0, rx_addr_p0);
-    uesb_set_address(UESB_ADDRESS_PIPE1, rx_addr_p1);
-    uesb_set_address(UESB_ADDRESS_PIPE2, &rx_addr_p2);
-    uesb_set_address(UESB_ADDRESS_PIPE3, &rx_addr_p3);
+    // uesb_set_address(UESB_ADDRESS_PIPE0, base_addr_0);
+    // uesb_set_address(UESB_ADDRESS_PIPE1, base_addr_1);
+    // uesb_set_address(UESB_ADDRESS_PIPE2, &pipe_addre[2]);
+    // uesb_set_address(UESB_ADDRESS_PIPE3, &pipe_addre[3]);
 
     tx_payload.length  = 8;
     tx_payload.pipe    = 0;
@@ -101,8 +106,8 @@ int main(void)
     
     memcpy((char *)tx_payload.data,"Pigeon  \n\0",10);
 		
-	nrf_gpio_pin_set(8);
-	nrf_gpio_pin_set(10);
+	nrf_gpio_pin_set(LED_RED);
+	nrf_gpio_pin_set(LED_GREEN);
 	
     simple_uart_putstring("nrf init\n");
     uint8_t package_id=0;
@@ -127,13 +132,14 @@ int main(void)
 
 void blink_led(uint16_t *count_ms){
     
-            nrf_gpio_pin_toggle(LED_GREEN);
+            nrf_gpio_pin_toggle(LED_BLUE);
 return;
-    if(*count_ms)(*count_ms)--;
+/*   
+	if(*count_ms)(*count_ms)--;
        
        if(!(*count_ms)){
             *count_ms=100;
-            nrf_gpio_pin_toggle(LED_GREEN);
+            nrf_gpio_pin_toggle(LED_BLUE);
     }
-
+*/
 }

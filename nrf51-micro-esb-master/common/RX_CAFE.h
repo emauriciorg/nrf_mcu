@@ -10,8 +10,8 @@
  *
  */
 
-#ifndef __TINYRX_ESB_H
-#define __TINYRX_ESB_H
+#ifndef __cafe_ESB_H
+#define __cafe_ESB_H
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -22,123 +22,131 @@
 #include "nrf_delay.h"
 #include "nrf_gpio.h"
 
+#define S1
 
+#ifdef S1
+	#define SLAVE_addr 0xF4 
+#endif
+
+#ifdef S2
+	#define SLAVE_addr 0xAA
+#endif
+#ifdef S3
+	#define SLAVE_addr 0x12
+#endif
 // Hard coded parameters - change if necessary
-#define     tinyrx_CORE_MAX_PAYLOAD_LENGTH    32
-#define     tinyrx_CORE_TX_FIFO_SIZE          8
-#define     tinyrx_CORE_RX_FIFO_SIZE          8
+#define     CAFE_CORE_MAX_PAYLOAD_LENGTH    32
+#define     cafe_CORE_TX_FIFO_SIZE          8
+#define     cafe_CORE_RX_FIFO_SIZE          8
 
-#define     tinyrx_SYS_TIMER                  NRF_TIMER2
-#define     tinyrx_SYS_TIMER_IRQ_Handler      TIMER2_IRQHandler
+#define     cafe_SYS_TIMER                  NRF_TIMER2
+#define     cafe_SYS_TIMER_IRQ_Handler      TIMER2_IRQHandler
 
-#define     tinyrx_PPI_TIMER_START            4
-#define     tinyrx_PPI_TIMER_STOP             5
-#define     tinyrx_PPI_RX_TIMEOUT             6
-#define     tinyrx_PPI_TX_START               7
+#define     cafe_PPI_TIMER_START            4
+#define     cafe_PPI_TIMER_STOP             5
+#define     cafe_PPI_RX_TIMEOUT             6
+#define     cafe_PPI_TX_START               7
 
 // Interrupt flags
-#define     tinyrx_INT_TX_SUCCESS_MSK         0x01
-#define     tinyrx_INT_TX_FAILED_MSK          0x02
-#define     tinyrx_INT_RX_DR_MSK              0x04
+#define     cafe_INT_TX_SUCCESS_MSK         0x01
+#define     cafe_INT_TX_FAILED_MSK          0x02
+#define     cafe_INT_RX_DR_MSK              0x04
 
-#define     tinyrx_PID_RESET_VALUE            0xFF
+#define     cafe_PID_RESET_VALUE            0xFF
+
+
+typedef struct  {
+                 uint8_t   base_addr0_tx[5];
+                 uint8_t   base_addr0 [5]  ;
+                 uint8_t   base_addr1 [5]  ;
+                 uint8_t   logic_pipe [8]  ;
+}nrf_st_address;
+
+typedef enum {
+    I_AM_TRANSMITTER,          // Primary transmitter
+    I_AM_RECIEVER           // Primary receiver
+} cafe_mode;
+
 
 
 
 typedef enum {
-    tinyrx_MODE_PTX,          // Primary transmitter
-    tinyrx_MODE_PRX           // Primary receiver
-} tinyrx_mode_t;
+    cafe_2MBPS   = RADIO_MODE_MODE_Nrf_2Mbit,
+    cafe_1MBPS   = RADIO_MODE_MODE_Nrf_1Mbit,
+    cafe_250KBPS = RADIO_MODE_MODE_Nrf_250Kbit
+} cafe_bitrate_t;
 
 typedef enum {
-    tinyrx_BITRATE_2MBPS = RADIO_MODE_MODE_Nrf_2Mbit,
-    tinyrx_BITRATE_1MBPS = RADIO_MODE_MODE_Nrf_1Mbit,
-    tinyrx_BITRATE_250KBPS = RADIO_MODE_MODE_Nrf_250Kbit
-} tinyrx_bitrate_t;
+    cafe_CRC_16BIT = RADIO_CRCCNF_LEN_Two,
+    cafe_CRC_8BIT  = RADIO_CRCCNF_LEN_One,
+    cafe_CRC_OFF   = RADIO_CRCCNF_LEN_Disabled
+} cafe_crc_t;
 
 typedef enum {
-    tinyrx_CRC_16BIT = RADIO_CRCCNF_LEN_Two,
-    tinyrx_CRC_8BIT  = RADIO_CRCCNF_LEN_One,
-    tinyrx_CRC_OFF   = RADIO_CRCCNF_LEN_Disabled
-} tinyrx_crc_t;
+    cafe_TX_POWER_4DBM     = RADIO_TXPOWER_TXPOWER_Pos4dBm,
+    cafe_TX_POWER_0DBM     = RADIO_TXPOWER_TXPOWER_0dBm,
+    cafe_TX_POWER_NEG4DBM  = RADIO_TXPOWER_TXPOWER_Neg4dBm,
+    cafe_TX_POWER_NEG8DBM  = RADIO_TXPOWER_TXPOWER_Neg8dBm,
+    cafe_TX_POWER_NEG12DBM = RADIO_TXPOWER_TXPOWER_Neg12dBm,
+    cafe_TX_POWER_NEG16DBM = RADIO_TXPOWER_TXPOWER_Neg16dBm,
+    cafe_TX_POWER_NEG20DBM = RADIO_TXPOWER_TXPOWER_Neg20dBm,
+    cafe_TX_POWER_NEG30DBM = RADIO_TXPOWER_TXPOWER_Neg30dBm
+} cafe_tx_power_t;
 
 typedef enum {
-    tinyrx_TX_POWER_4DBM     = RADIO_TXPOWER_TXPOWER_Pos4dBm,
-    tinyrx_TX_POWER_0DBM     = RADIO_TXPOWER_TXPOWER_0dBm,
-    tinyrx_TX_POWER_NEG4DBM  = RADIO_TXPOWER_TXPOWER_Neg4dBm,
-    tinyrx_TX_POWER_NEG8DBM  = RADIO_TXPOWER_TXPOWER_Neg8dBm,
-    tinyrx_TX_POWER_NEG12DBM = RADIO_TXPOWER_TXPOWER_Neg12dBm,
-    tinyrx_TX_POWER_NEG16DBM = RADIO_TXPOWER_TXPOWER_Neg16dBm,
-    tinyrx_TX_POWER_NEG20DBM = RADIO_TXPOWER_TXPOWER_Neg20dBm,
-    tinyrx_TX_POWER_NEG30DBM = RADIO_TXPOWER_TXPOWER_Neg30dBm
-} tinyrx_tx_power_t;
+    cafe_TXMODE_AUTO,        // Automatic TX mode - When the TX fifo is non-empty and the radio is idle packets will be sent automatically.
+    cafe_TXMODE_MANUAL,      // Manual TX mode - Packets will not be sent until cafe_start_tx() is called. Can be used to ensure consistent packet timing.
+    cafe_TXMODE_MANUAL_START // Manual start TX mode - Packets will not be sent until cafe_start_tx() is called, but transmission will continue automatically until the TX FIFO is empty.
+} cafe_tx_mode_t;
 
-typedef enum {
-    tinyrx_TXMODE_AUTO,        // Automatic TX mode - When the TX fifo is non-empty and the radio is idle packets will be sent automatically.
-    tinyrx_TXMODE_MANUAL,      // Manual TX mode - Packets will not be sent until tinyrx_start_tx() is called. Can be used to ensure consistent packet timing.
-    tinyrx_TXMODE_MANUAL_START // Manual start TX mode - Packets will not be sent until tinyrx_start_tx() is called, but transmission will continue automatically until the TX FIFO is empty.
-} tinyrx_tx_mode_t;
-
-typedef void (*tinyrx_event_handler_t)(void);
+typedef void (*cafe_event_handler_t)(void);
 
 // Main UESB configuration struct, contains all radio parameters
 typedef struct
 {
    
-    tinyrx_mode_t             mode;
-    tinyrx_event_handler_t    event_handler;
+    cafe_mode             mode;
+    cafe_event_handler_t    event_handler;
 
     // General RF parameters
-    tinyrx_bitrate_t          bitrate;
-    tinyrx_crc_t              crc;
+    cafe_bitrate_t          bitrate;
+    cafe_crc_t              crc;
     uint8_t                 rf_channel;
     uint8_t                 payload_length;
     uint8_t                 rf_addr_length;
 
-    tinyrx_tx_power_t         tx_output_power;
-    uint8_t                 tx_address[5];
-    uint8_t                 rx_address_p0[5];
-    uint8_t                 rx_address_p1[5];
-    uint8_t                 rx_address_p2;
-    uint8_t                 rx_address_p3;
-    uint8_t                 rx_address_p4;
-    uint8_t                 rx_address_p5;
-    uint8_t                 rx_address_p6;
-    uint8_t                 rx_address_p7;
+    cafe_tx_power_t         tx_output_power;
+    nrf_st_address          radio_addresses;
+    // uint8_t                 tx_address[5];
+    // uint8_t                 base_addr0[5];
+    // uint8_t                 base_addr1[5];
+    // uint8_t                 rx_address_p2;
+    // uint8_t                 rx_address_p3;
+    // uint8_t                 rx_address_p4;
+    // uint8_t                 rx_address_p5;
+    // uint8_t                 rx_address_p6;
+    // uint8_t                 rx_address_p7;
     uint8_t                 rx_pipes_enabled;
 
     // ESB specific features
 
     // Control settings
-    tinyrx_tx_mode_t          tx_mode;
+    cafe_tx_mode_t          tx_mode;
 
     uint8_t                 radio_irq_priority;
-}tinyrx_config_t;
+}cafe_config_t;
 
 // Default radio parameters, roughly equal to nRF24L default parameters (except CRC which is set to 16-bit, and protocol set to DPL)
-#define tinyrx_DEFAULT_CONFIG {.mode                  = tinyrx_MODE_PTX,                    \
+#define cafe_DEFAULT_CONFIG {.mode                  = I_AM_TRANSMITTER,                    \
                              .event_handler         = 0,                                \
                              .rf_channel            = 2,                                \
-                             .payload_length        = tinyrx_CORE_MAX_PAYLOAD_LENGTH,     \
+                             .payload_length        = CAFE_CORE_MAX_PAYLOAD_LENGTH,     \
                              .rf_addr_length        = 5,                                \
-                             .bitrate               = tinyrx_BITRATE_2MBPS,               \
-                             .crc                   = tinyrx_CRC_16BIT,                   \
-                             .tx_output_power       = tinyrx_TX_POWER_0DBM,               \
-                             .rx_address_p0         = {0xE7, 0xE7, 0xE7, 0xE7, 0xE7},   \
-                             .rx_address_p1         = {0xC2, 0xC2, 0xC2, 0xC2, 0xC2},   \
-                             .rx_address_p2         = 0xC3,                             \
-                             .rx_address_p3         = 0xC4,                             \
-                             .rx_address_p4         = 0xC5,                             \
-                             .rx_address_p5         = 0xC6,                             \
-                             .rx_address_p6         = 0xC7,                             \
-                             .rx_address_p7         = 0xC8,                             \
-                             .rx_pipes_enabled      = 0x3F,                             \
-                             .tx_mode               = tinyrx_TXMODE_AUTO,                 \
+                             .bitrate               = cafe_2MBPS,               \
+                             .crc                   = cafe_CRC_16BIT,                   \
+                             .tx_output_power       = cafe_TX_POWER_0DBM,               \
+                             .tx_mode               = cafe_TXMODE_AUTO,                 \
                              .radio_irq_priority    = 1}
-
-
-typedef enum {tinyrx_ADDRESS_PIPE0, tinyrx_ADDRESS_PIPE1, tinyrx_ADDRESS_PIPE2, tinyrx_ADDRESS_PIPE3, tinyrx_ADDRESS_PIPE4, tinyrx_ADDRESS_PIPE5, tinyrx_ADDRESS_PIPE6, tinyrx_ADDRESS_PIPE7} tinyrx_address_type_t;
-
 
 typedef struct
 {
@@ -146,56 +154,60 @@ typedef struct
     uint8_t pipe;
     int8_t  rssi;
     uint8_t noack;
-    uint8_t data[tinyrx_CORE_MAX_PAYLOAD_LENGTH];
-}tinyrx_payload_t;
+    uint8_t data[CAFE_CORE_MAX_PAYLOAD_LENGTH];
+}cafe_payload_t;
 
 typedef struct
 {
-    tinyrx_payload_t *payload_ptr[tinyrx_CORE_TX_FIFO_SIZE];
+    cafe_payload_t *payload_ptr[cafe_CORE_TX_FIFO_SIZE];
     uint32_t        entry_point;
     uint32_t        exit_point;
     uint32_t        count;
-}tinyrx_payload_tx_fifo_t;
+}cafe_payload_tx_fifo_t;
 
 typedef struct
 {
-    tinyrx_payload_t *payload_ptr[tinyrx_CORE_RX_FIFO_SIZE];
+    cafe_payload_t *payload_ptr[cafe_CORE_RX_FIFO_SIZE];
     uint32_t        entry_point;
     uint32_t        exit_point;
     uint32_t        count;
-}tinyrx_payload_rx_fifo_t;
+}cafe_payload_rx_fifo_t;
 
-uint32_t tinyrx_init(tinyrx_config_t *parameters);
+uint32_t cafe_init(cafe_config_t *parameters);
 
 
-bool     tinyrx_is_idle(void);
+bool     cafe_is_idle(void);
 
-uint32_t tinyrx_write_tx_payload(tinyrx_payload_t *payload);
+uint32_t cafe_write_tx_payload(cafe_payload_t *payload);
 
-uint32_t tinyrx_write_ack_payload(tinyrx_payload_t *payload);
+uint32_t cafe_write_ack_payload(cafe_payload_t *payload);
 
-uint32_t tinyrx_read_rx_payload(tinyrx_payload_t *payload);
+uint32_t cafe_read_rx_payload(cafe_payload_t *payload);
 
-uint32_t tinyrx_start_tx(void);
+uint32_t cafe_start_tx(void);
 
-uint32_t tinyrx_start_rx(void);
+uint32_t cafe_start_rx(void);
 
-uint32_t tinyrx_stop_rx(void);
+uint32_t cafe_stop_rx(void);
 
-uint32_t tinyrx_get_tx_attempts(uint32_t *attempts);
+uint32_t cafe_get_tx_attempts(uint32_t *attempts);
 
-uint32_t tinyrx_flush_tx(void);
+uint32_t cafe_flush_tx(void);
 
-uint32_t tinyrx_flush_rx(void);
+uint32_t cafe_flush_rx(void);
 
-uint32_t tinyrx_get_clear_interrupts(uint32_t *interrupts);
+uint32_t cafe_get_clear_interrupts(uint32_t *interrupts);
 
-uint32_t tinyrx_set_address(tinyrx_address_type_t address, const uint8_t *data_ptr);
+uint32_t cafe_set_address(nrf_st_address address, const uint8_t *data_ptr);
 
-void get_rf_packet(tinyrx_payload_t *dst_buffer);
+void get_rf_packet(cafe_payload_t *dst_buffer);
 
-void tinyrx_setup_rx(void);
+void cafe_setup_rx(void);
 void get_rx_payload(uint8_t *out_buffer);
 
 int8_t get_rssi(void);
+
+
+void update_nrf_radio_address(nrf_st_address radio_addr);
+
 #endif

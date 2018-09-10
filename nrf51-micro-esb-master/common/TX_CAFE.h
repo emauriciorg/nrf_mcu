@@ -47,6 +47,12 @@
 #define     UESB_PID_RESET_VALUE            0xFF
 
 // Configuration parameter definitions
+typedef struct  {
+                               uint8_t   base_addr0_tx[5];
+                               uint8_t   base_addr0[5];
+                               uint8_t   base_addr1[5];
+                               uint8_t   logic_pipe[8];
+}nrf_st_address;
 
 typedef enum {
     UESB_MODE_PTX,          // Primary transmitter
@@ -216,5 +222,6 @@ uint32_t uesb_set_rf_channel(uint32_t channel);
 uint32_t uesb_set_tx_power(uint8_t tx_output_power);
 
 
+void update_nrf_radio_address(nrf_st_address radio_addr);
 
 #endif

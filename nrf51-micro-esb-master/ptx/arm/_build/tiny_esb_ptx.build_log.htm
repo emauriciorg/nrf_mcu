@@ -22,7 +22,7 @@ Dialog DLL:      TARMCM1.DLL V1.11.0.0
  
 <h2>Project:</h2>
 D:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf51-micro-esb-master\ptx\arm\micro_esb_ptx.uvprojx
-Project File Date:  08/22/2018
+Project File Date:  09/11/2018
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 4 (build 422)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
@@ -30,45 +30,25 @@ Build target 'nrf51822_xxac_130 (256K)'
 Clean started - Project: 'micro_esb_ptx'
    deleting intermediate output files for target 'nrf51822_xxac_130 (256K)'
 compiling main.c...
-..\main.c(132): warning:  #111-D: statement is unreachable
-      if(*count_ms)(*count_ms)--;
-..\main.c: 1 warning, 0 errors
 compiling simple_uart.c...
 compiling TX_CAFE.c...
-..\..\common\TX_CAFE.c(356): warning:  #236-D: controlling expression is constant
-                if(on_radio_disabled_esb_dpl_tx_noack)
-..\..\common\TX_CAFE.c(33): warning:  #550-D: variable "m_pid"  was set but never used
-  static uint32_t                 m_pid                   = 0;
-..\..\common\TX_CAFE.c(40): warning:  #550-D: variable "current_payload"  was set but never used
-  static uesb_payload_t           *current_payload;
-..\..\common\TX_CAFE.c: 3 warnings, 0 errors
 assembling arm_startup_nrf51.s...
 compiling system_nrf51.c...
 compiling nrf_delay.c...
 linking...
-Program Size: Code=3852 RO-data=264 RW-data=60 ZI-data=2492  
-".\_build\tiny_esb_ptx.axf" - 0 Error(s), 4 Warning(s).
+Program Size: Code=3680 RO-data=280 RW-data=36 ZI-data=2492  
+".\_build\tiny_esb_ptx.axf" - 0 Error(s), 0 Warning(s).
 
 *** Performing Cross-Module-Optimization:
 compiling main.c...
-..\main.c(132): warning:  #111-D: statement is unreachable
-      if(*count_ms)(*count_ms)--;
-..\main.c: 1 warning, 0 errors
 compiling simple_uart.c...
 compiling TX_CAFE.c...
-..\..\common\TX_CAFE.c(356): warning:  #236-D: controlling expression is constant
-                if(on_radio_disabled_esb_dpl_tx_noack)
-..\..\common\TX_CAFE.c(33): warning:  #550-D: variable "m_pid"  was set but never used
-  static uint32_t                 m_pid                   = 0;
-..\..\common\TX_CAFE.c(40): warning:  #550-D: variable "current_payload"  was set but never used
-  static uesb_payload_t           *current_payload;
-..\..\common\TX_CAFE.c: 3 warnings, 0 errors
 compiling system_nrf51.c...
 compiling nrf_delay.c...
 linking...
-Program Size: Code=3852 RO-data=264 RW-data=60 ZI-data=2492  
+Program Size: Code=3680 RO-data=280 RW-data=36 ZI-data=2492  
 FromELF: creating hex file...
-".\_build\tiny_esb_ptx.axf" - 0 Error(s), 4 Warning(s).
+".\_build\tiny_esb_ptx.axf" - 0 Error(s), 0 Warning(s).
 *** Completed Cross-Module-Optimization after 2 iteration(s).
 
 <h2>Software Packages used:</h2>
@@ -151,7 +131,7 @@ Package Vendor: NordicSemiconductor
       Include file:  headers\nrf_sd_def.h
       Include file:  headers\nrf_sdm.h
       Include file:  headers\nrf51\nrf_mbr.h
-Build Time Elapsed:  00:00:04
+Build Time Elapsed:  00:00:05
 </pre>
 </body>
 </html>

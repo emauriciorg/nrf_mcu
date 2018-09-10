@@ -27,12 +27,12 @@ extern uint8_t led_state;
 
 
 void print_received_data(void){
-	uint8_t temp_buffer[tinyrx_CORE_MAX_PAYLOAD_LENGTH+5];
-	uint8_t temp_buffer2[tinyrx_CORE_MAX_PAYLOAD_LENGTH+20];
+	uint8_t temp_buffer[CAFE_CORE_MAX_PAYLOAD_LENGTH+5];
+	uint8_t temp_buffer2[CAFE_CORE_MAX_PAYLOAD_LENGTH+20];
 	
-	//memset(temp_buffer,0,tinyrx_CORE_MAX_PAYLOAD_LENGTH+5);
+	//memset(temp_buffer,0,CAFE_CORE_MAX_PAYLOAD_LENGTH+5);
 	get_rx_payload(temp_buffer);
-	sprintf(temp_buffer2,"Received [%s]\n",temp_buffer );
+	sprintf((char *)temp_buffer2,"Received [%s]\n",temp_buffer );
 	
 	simple_uart_putstring( temp_buffer2); 
 	simple_uart_put('\n');
@@ -47,7 +47,7 @@ int main(void)
 
 	nrf_gpio_range_cfg_output(8, 31);
 
-	tinyrx_setup_rx();
+	cafe_setup_rx();
 	simple_uart_config(  RTS_PIN,
 		RX_PIN, 
 		CTS_PIN,
@@ -57,7 +57,7 @@ int main(void)
 	nrf_gpio_pin_set(LED_BLUE);
 
 	uint8_t rssi_buffer[10];
-	extern  tinyrx_payload_t  rx_payload;
+	extern  cafe_payload_t  rx_payload;
 	memset(rssi_buffer,0,sizeof(rssi_buffer));
 	
 

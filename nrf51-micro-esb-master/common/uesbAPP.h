@@ -11,6 +11,6 @@ void uesb_event_handler(void);
 void uesb_setup_tx(uesb_payload_t *tx_payload);
 
 void uesb_setup_rx(void);
-void tinyrx_setup_rx(void);
+void cafe_setup_rx(void);
 #endif
 

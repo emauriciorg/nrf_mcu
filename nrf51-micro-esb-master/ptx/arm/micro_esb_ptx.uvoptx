@@ -884,8 +884,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\common\tinyRF.c</PathWithFileName>
-      <FilenameWithoutPath>tinyRF.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\common\simple_uart.c</PathWithFileName>
+      <FilenameWithoutPath>simple_uart.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -896,8 +896,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\common\simple_uart.c</PathWithFileName>
-      <FilenameWithoutPath>simple_uart.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\common\TX_CAFE.c</PathWithFileName>
+      <FilenameWithoutPath>TX_CAFE.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
