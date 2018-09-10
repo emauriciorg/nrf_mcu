@@ -117,18 +117,8 @@ typedef struct
 
     cafe_tx_power_t         tx_output_power;
     nrf_st_address          radio_addresses;
-    // uint8_t                 tx_address[5];
-    // uint8_t                 base_addr0[5];
-    // uint8_t                 base_addr1[5];
-    // uint8_t                 rx_address_p2;
-    // uint8_t                 rx_address_p3;
-    // uint8_t                 rx_address_p4;
-    // uint8_t                 rx_address_p5;
-    // uint8_t                 rx_address_p6;
-    // uint8_t                 rx_address_p7;
-    uint8_t                 rx_pipes_enabled;
 
-    // ESB specific features
+    uint8_t                 rx_pipes_enabled;
 
     // Control settings
     cafe_tx_mode_t          tx_mode;
@@ -160,16 +150,12 @@ typedef struct
 typedef struct
 {
     cafe_payload_t *payload_ptr[cafe_CORE_TX_FIFO_SIZE];
-    uint32_t        entry_point;
-    uint32_t        exit_point;
     uint32_t        count;
 }cafe_payload_tx_fifo_t;
 
 typedef struct
 {
     cafe_payload_t *payload_ptr[cafe_CORE_RX_FIFO_SIZE];
-    uint32_t        entry_point;
-    uint32_t        exit_point;
     uint32_t        count;
 }cafe_payload_rx_fifo_t;
 
