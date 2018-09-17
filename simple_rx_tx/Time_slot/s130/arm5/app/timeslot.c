@@ -6,7 +6,7 @@
 #include "nrf_gpio.h"
 #include "app_util.h"
 #include "softdevice_handler.h"
-#include "boards.h"
+//#include "boards.h"
 #include "bbn_board.h"
 
 
@@ -156,7 +156,7 @@ nrf_radio_signal_callback_return_param_t * radio_callback(uint8_t signal_type)
 		NRF_TIMER0->INTENSET = TIMER_INTENSET_COMPARE0_Msk;
 		NRF_TIMER0->CC[0] = m_slot_length - 1000;
 		NVIC_EnableIRQ(TIMER0_IRQn);   
-		//nrf_gpio_pin_toggle(LED_GREEN); //Toggle LED4
+		
 
 		NVIC_SetPendingIRQ(TIMESLOT_BEGIN_IRQn);
 	break;
@@ -212,3 +212,5 @@ uint32_t timeslot_sd_init(void)
     	NVIC_EnableIRQ(TIMESLOT_BEGIN_IRQn);
 	return NRF_SUCCESS;
 }
+
+

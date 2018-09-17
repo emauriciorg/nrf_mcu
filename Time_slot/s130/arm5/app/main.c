@@ -169,7 +169,7 @@ void bsp_event_handler(bsp_event_t event)
 	switch (event){
 		
 	case BSP_EVENT_SLEEP:
-					sleep_mode_enter();
+					//sleep_mode_enter();
 	break;
 	case BSP_EVENT_DISCONNECT:
 					err_code = sd_ble_gap_disconnect(m_conn_handle, BLE_HCI_REMOTE_USER_TERMINATED_CONNECTION);
@@ -283,7 +283,7 @@ int main(void)
 	advertising_init();
 	services_init();
 	conn_params_init();
-	timeslot_sd_init();
+	//timeslot_sd_init();
 	
     	//Start execution.
 	application_timers_start();
@@ -307,7 +307,7 @@ int main(void)
 
 void app_error_handler(uint32_t error_code, uint32_t line_num, const uint8_t * p_file_name)
 {
-	msg_dbg("PErro code is", 10);
+	msg_dbg("Error code is", 10);
 	//printf("Error code is %x \n", error_code );
 	while(1);
 }

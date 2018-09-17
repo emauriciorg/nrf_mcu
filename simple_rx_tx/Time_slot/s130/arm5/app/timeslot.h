@@ -6,7 +6,7 @@
 #include "app_error.h"
 #include "nrf_gpio.h"
 #include "softdevice_handler.h"
-#include "boards.h"
+//#include "boards.h"
 
 /**@brief Radio event handler
 */

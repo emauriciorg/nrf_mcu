@@ -10,7 +10,7 @@
 #include "nrf_gpio.h"
 #include "bbn_board.h"
 #define IS_SRVC_CHANGED_CHARACT_PRESENT  1                                          /**< Include or not the service_changed characteristic. if not enabled, the server's database cannot be changed for the lifetime of the device*/
-#define DEVICE_NAME                      "Nordic_TS"                               /**< Name of device. Will be included in the advertising data. */
+#define DEVICE_NAME                      "Master_V1"                               /**< Name of device. Will be included in the advertising data. */
 #define MANUFACTURER_NAME                "NordicSemiconductor"                      /**< Manufacturer. Will be passed to Device Information Service. */
 #define APP_ADV_INTERVAL                 300                                        /**< The advertising interval (in units of 0.625 ms. This value corresponds to 25 ms). */
 #define APP_ADV_TIMEOUT_IN_SECONDS       180                                        /**< The advertising timeout in units of seconds. */
@@ -38,7 +38,7 @@ static ble_uuid_t m_adv_uuids[] = {{BLE_UUID_DEVICE_INFORMATION_SERVICE, BLE_UUI
 
 	SOFTDEVICE_HANDLER_INIT(NRF_CLOCK_LFCLKSRC_XTAL_20_PPM, NULL);
 //	SOFTDEVICE_HANDLER_INIT(clock_lf_cfg, NULL);
-//		nrf_gpio_pin_set(LED_GREEN);
+		nrf_gpio_pin_set(LED_GREEN);
 #if defined(S110) || defined(S130) || defined(S132)
 
     // Enable BLE stack.

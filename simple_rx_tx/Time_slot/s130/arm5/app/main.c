@@ -34,22 +34,22 @@
 
 #include "ble_advertising.h"
 #include "device_manager.h"
-#include "boards.h"
+//#include "boards.h"
 
 
 
-#include "app_trace.h"
+//#include "app_trace.h"
 
 #include "app_timer.h"
 
 
-#include "bsp.h"
-#include "bsp_btn_ble.h"
+//#include "bsp.h"
+//#include "bsp_btn_ble.h"
 
 #include "timeslot.h"
-#include "uart_app.h"
+//#include "uart_app.h"
 #include "nrf_delay.h"
-
+#include "simple_uart.h"
 
 #include "bleAPP.h"
 #include "sys_event.h"
@@ -64,17 +64,9 @@
 #define MAX_CONN_PARAMS_UPDATE_COUNT     3                                          /**< Number of attempts before giving up the connection parameter negotiation. */
 
 
-#define SEC_PARAM_BOND                   1                                          /**< Perform bonding. */
-#define SEC_PARAM_MITM                   0                                          /**< Man In The Middle protection not required. */
-#define SEC_PARAM_IO_CAPABILITIES        BLE_GAP_IO_CAPS_NONE                       /**< No I/O capabilities. */
-#define SEC_PARAM_OOB                    0                                          /**< Out Of Band data not available. */
-#define SEC_PARAM_MIN_KEY_SIZE           7                                          /**< Minimum encryption key size. */
-#define SEC_PARAM_MAX_KEY_SIZE           16                                         /**< Maximum encryption key size. */
-
 #define DEAD_BEEF                        0xDEADBEEF                                 /**< Value used as error code on stack dump, can be used to identify stack location on stack unwind. */
 
 
-static dm_application_instance_t        m_app_handle;                               /**< Application identifier allocated by device manager */
 
 void sys_evt_dispatch(uint32_t sys_evt)
 {
@@ -143,8 +135,9 @@ static void sleep_mode_enter(void)
 {
 
     // Prepare wakeup buttons.
-	uint32_t err_code = bsp_btn_ble_sleep_mode_prepare();
-	APP_ERROR_CHECK(err_code);
+	 uint32_t err_code;
+//	= bsp_btn_ble_sleep_mode_prepare();
+	// APP_ERROR_CHECK(err_code);
 
     // Go to system-off mode (this function will not return; wakeup will cause a reset).
 	err_code = sd_power_system_off();
@@ -156,6 +149,32 @@ static void sleep_mode_enter(void)
 
 
 extern uint16_t                          m_conn_handle;   /**< Handle of the current connection. */
+
+typedef enum
+{
+    BSP_EVENT_NOTHING = 0,                  /**< Assign this event to an action to prevent the action from generating an event (disable the action). */
+    BSP_EVENT_DEFAULT,                      /**< Assign this event to an action to assign the default event to the action. */
+    BSP_EVENT_CLEAR_BONDING_DATA,           /**< Persistent bonding data should be erased. */
+    BSP_EVENT_CLEAR_ALERT,                  /**< An alert should be cleared. */
+    BSP_EVENT_DISCONNECT,                   /**< A link should be disconnected. */
+    BSP_EVENT_ADVERTISING_START,            /**< The device should start advertising. */
+    BSP_EVENT_ADVERTISING_STOP,             /**< The device should stop advertising. */
+    BSP_EVENT_WHITELIST_OFF,                /**< The device should remove its advertising whitelist. */
+    BSP_EVENT_BOND,                         /**< The device should bond to the currently connected peer. */
+    BSP_EVENT_RESET,                        /**< The device should reset. */
+    BSP_EVENT_SLEEP,                        /**< The device should enter sleep mode. */
+    BSP_EVENT_WAKEUP,                       /**< The device should wake up from sleep mode. */
+    BSP_EVENT_DFU,                          /**< The device should enter DFU mode. */
+    BSP_EVENT_KEY_0,                        /**< Default event of the push action of BSP_BUTTON_0 (only if this button is present). */
+    BSP_EVENT_KEY_1,                        /**< Default event of the push action of BSP_BUTTON_1 (only if this button is present). */
+    BSP_EVENT_KEY_2,                        /**< Default event of the push action of BSP_BUTTON_2 (only if this button is present). */
+    BSP_EVENT_KEY_3,                        /**< Default event of the push action of BSP_BUTTON_3 (only if this button is present). */
+    BSP_EVENT_KEY_4,                        /**< Default event of the push action of BSP_BUTTON_4 (only if this button is present). */
+    BSP_EVENT_KEY_5,                        /**< Default event of the push action of BSP_BUTTON_5 (only if this button is present). */
+    BSP_EVENT_KEY_6,                        /**< Default event of the push action of BSP_BUTTON_6 (only if this button is present). */
+    BSP_EVENT_KEY_7,                        /**< Default event of the push action of BSP_BUTTON_7 (only if this button is present). */
+    BSP_EVENT_KEY_LAST = BSP_EVENT_KEY_7,
+} bsp_event_t;
 
 
 
@@ -191,64 +210,11 @@ void bsp_event_handler(bsp_event_t event)
 }
 
 
-/**@brief Function for handling the Device Manager events.
- *
- * @param[in] p_evt  Data associated to the device manager event.
- */
-static uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
-	dm_event_t const  * p_event,
-	ret_code_t        event_result)
-{
-	APP_ERROR_CHECK(event_result);
-
-#ifdef BLE_DFU_APP_SUPPORT
-	if (p_event->event_id == DM_EVT_LINK_SECURED)
-	{
-		app_context_load(p_handle);
-	}
-#endif // BLE_DFU_APP_SUPPORT
-
-	return NRF_SUCCESS;
-}
-
-
-/**@brief Function for the Device Manager initialization.
- *
- * @param[in] erase_bonds  Indicates whether bonding information should be cleared from
- *                         persistent storage during initialization of the Device Manager.
- */
-static void device_manager_init(bool erase_bonds)
-{
-	uint32_t               err_code;
-	dm_init_param_t        init_param = {.clear_persistent_data = erase_bonds};
-	dm_application_param_t register_param;
-
-    // Initialize persistent storage module.
-	err_code = pstorage_init();
-	APP_ERROR_CHECK(err_code);
-
-	err_code = dm_init(&init_param);
-	APP_ERROR_CHECK(err_code);
-
-	memset(&register_param.sec_param, 0, sizeof(ble_gap_sec_params_t));
-
-	register_param.sec_param.bond         = SEC_PARAM_BOND;
-	register_param.sec_param.mitm         = SEC_PARAM_MITM;
-	register_param.sec_param.io_caps      = SEC_PARAM_IO_CAPABILITIES;
-	register_param.sec_param.oob          = SEC_PARAM_OOB;
-	register_param.sec_param.min_key_size = SEC_PARAM_MIN_KEY_SIZE;
-	register_param.sec_param.max_key_size = SEC_PARAM_MAX_KEY_SIZE;
-	register_param.evt_handler            = device_manager_evt_handler;
-	register_param.service_type           = DM_PROTOCOL_CNTXT_GATT_SRVR_ID;
-
-	err_code = dm_register(&m_app_handle, &register_param);
-	APP_ERROR_CHECK(err_code);
-}
 
 
 
 
-void msg_dbg(const char * message,uint32_t length);
+
 /*static void power_manage(void)
 {
 	uint32_t err_code = sd_app_evt_wait();
@@ -265,17 +231,25 @@ int main(void)
 
    	//Enter main loop.
   	nrf_gpio_range_cfg_output(8, 10);
-	
+	nrf_gpio_pin_clear(LED_RED);
+	nrf_gpio_pin_set(LED_BLUE);
+	nrf_gpio_pin_set(LED_GREEN);
 
     	//Initialize.
 	timers_init();
-	uart_init();
 
-	msg_dbg("Start!\n",strlen("Start!\n") );
+
+	simple_uart_config(  RTS_PIN,
+                         RX_PIN, 
+                         CTS_PIN,
+                         TX_PIN, 
+                        false);
+
+	 simple_uart_putstring("nrf init\n");
 
 	
-
 	ble_stack_init();
+	
 	device_manager_init(erase_bonds);
 	
 	
@@ -283,6 +257,7 @@ int main(void)
 	advertising_init();
 	services_init();
 	conn_params_init();
+	
 	timeslot_sd_init();
 	
     	//Start execution.
@@ -292,14 +267,10 @@ int main(void)
 	APP_ERROR_CHECK(err_code);
 	
 	
-	nrf_gpio_pin_clear(LED_RED);
-	nrf_gpio_pin_set(LED_BLUE);
-	nrf_gpio_pin_set(LED_GREEN);
 	for (;;)
 	{		
 		nrf_delay_ms(1000);
-		msg_dbg("blink!\n",strlen("blink!\n") );
-
+		//nrf_gpio_pin_toggle(LED_GREEN); //Toggle LED4
 	}
 }
 
@@ -307,7 +278,7 @@ int main(void)
 
 void app_error_handler(uint32_t error_code, uint32_t line_num, const uint8_t * p_file_name)
 {
-	msg_dbg("PErro code is", 10);
-	//printf("Error code is %x \n", error_code );
+	
+	printf("Error code is %x \n", error_code );
 	while(1);
 }

@@ -10,7 +10,7 @@
 #include "nrf_gpio.h"
 #include "bbn_board.h"
 #define IS_SRVC_CHANGED_CHARACT_PRESENT  1                                          /**< Include or not the service_changed characteristic. if not enabled, the server's database cannot be changed for the lifetime of the device*/
-#define DEVICE_NAME                      "Nordic_TS"                               /**< Name of device. Will be included in the advertising data. */
+#define DEVICE_NAME                      "Nordic_T1"                               /**< Name of device. Will be included in the advertising data. */
 #define MANUFACTURER_NAME                "NordicSemiconductor"                      /**< Manufacturer. Will be passed to Device Information Service. */
 #define APP_ADV_INTERVAL                 300                                        /**< The advertising interval (in units of 0.625 ms. This value corresponds to 25 ms). */
 #define APP_ADV_TIMEOUT_IN_SECONDS       180                                        /**< The advertising timeout in units of seconds. */
@@ -23,6 +23,7 @@
  uint16_t                          m_conn_handle = BLE_CONN_HANDLE_INVALID;   /**< Handle of the current connection. */
 
 static ble_uuid_t m_adv_uuids[] = {{BLE_UUID_DEVICE_INFORMATION_SERVICE, BLE_UUID_TYPE_BLE}}; /**< Universally unique service identifiers. */
+static dm_application_instance_t        m_app_handle;                               /**< Application identifier allocated by device manager */
 
 
 /**@brief Function for initializing the BLE stack.
@@ -94,7 +95,7 @@ static ble_uuid_t m_adv_uuids[] = {{BLE_UUID_DEVICE_INFORMATION_SERVICE, BLE_UUI
  */
  void on_ble_evt(ble_evt_t * p_ble_evt)
 {
-	uint32_t err_code;
+	//uint32_t err_code;
 
 	switch (p_ble_evt->header.evt_id)
 	{
@@ -330,6 +331,61 @@ static void on_yys_evt(ble_yy_service_t     * p_yy_service,
 	options.ble_adv_fast_timeout  = APP_ADV_TIMEOUT_IN_SECONDS;
 
 	err_code = ble_advertising_init(&advdata, NULL, &options, on_adv_evt, NULL);
-	printf("error Code is %x\n", err_code);
 	APP_ERROR_CHECK(err_code);
 }
+
+/**@brief Function for handling the Device Manager events.
+ *
+ * @param[in] p_evt  Data associated to the device manager event.
+ */
+ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
+	dm_event_t const  * p_event,
+	ret_code_t        event_result)
+{
+	APP_ERROR_CHECK(event_result);
+
+#ifdef BLE_DFU_APP_SUPPORT
+	if (p_event->event_id == DM_EVT_LINK_SECURED)
+	{
+		app_context_load(p_handle);
+	}
+#endif // BLE_DFU_APP_SUPPORT
+
+	return NRF_SUCCESS;
+}
+
+/**@brief Function for the Device Manager initialization.
+ *
+ * @param[in] erase_bonds  Indicates whether bonding information should be cleared from
+ *                         persistent storage during initialization of the Device Manager.
+ */
+void device_manager_init(bool erase_bonds)
+{
+	uint32_t               err_code;
+	dm_init_param_t        init_param = {.clear_persistent_data = erase_bonds};
+	dm_application_param_t register_param;
+
+    // Initialize persistent storage module.
+	err_code = pstorage_init();
+	APP_ERROR_CHECK(err_code);
+
+	err_code = dm_init(&init_param);
+	APP_ERROR_CHECK(err_code);
+
+	memset(&register_param.sec_param, 0, sizeof(ble_gap_sec_params_t));
+
+	register_param.sec_param.bond         = SEC_PARAM_BOND;
+	register_param.sec_param.mitm         = SEC_PARAM_MITM;
+	register_param.sec_param.io_caps      = SEC_PARAM_IO_CAPABILITIES;
+	register_param.sec_param.oob          = SEC_PARAM_OOB;
+	register_param.sec_param.min_key_size = SEC_PARAM_MIN_KEY_SIZE;
+	register_param.sec_param.max_key_size = SEC_PARAM_MAX_KEY_SIZE;
+	register_param.evt_handler            = device_manager_evt_handler;
+	register_param.service_type           = DM_PROTOCOL_CNTXT_GATT_SRVR_ID;
+
+	err_code = dm_register(&m_app_handle, &register_param);
+	APP_ERROR_CHECK(err_code);
+}
+
+
+
