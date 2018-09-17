@@ -3,7 +3,7 @@
  * Auto generated Run-Time-Environment Component Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'micro_esb_ptx' 
+ * Project: 'time_slot' 
  * Target:  'nrf51822_xxaa (256K)' 
  */
 

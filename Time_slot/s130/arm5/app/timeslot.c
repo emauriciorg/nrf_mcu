@@ -32,12 +32,13 @@ void TIMESLOT_END_IRQHandler(void)
 
 
 }
+
 #define TIME_TO_BLINK 10
 uint32_t blink_counter=TIME_TO_BLINK;
 void TIMESLOT_BEGIN_IRQHandler(void)
 {
 
-	nrf_gpio_pin_toggle(LED_RED); //Toggle LED4
+	nrf_gpio_pin_toggle(LED_BLUE); //Toggle LED4
 }
 
 /**Constants for timeslot API
@@ -53,11 +54,7 @@ uint32_t request_next_event_earliest(void)
 {
 	m_slot_length                                  = 15000;
 	m_timeslot_request.request_type                = NRF_RADIO_REQ_TYPE_EARLIEST;
-#ifdef S132
-	m_timeslot_request.params.earliest.hfclk       = NRF_RADIO_HFCLK_CFG_XTAL_GUARANTEED;
-#else
 	m_timeslot_request.params.earliest.hfclk       = NRF_RADIO_HFCLK_CFG_DEFAULT;
-#endif
 	m_timeslot_request.params.earliest.priority    = NRF_RADIO_PRIORITY_NORMAL;
 	m_timeslot_request.params.earliest.length_us   = m_slot_length;
 	m_timeslot_request.params.earliest.timeout_us  = 1000000;
@@ -71,11 +68,7 @@ void configure_next_event_earliest(void)
 {
 	m_slot_length                                  = 15000;
 	m_timeslot_request.request_type                = NRF_RADIO_REQ_TYPE_EARLIEST;  
-#ifdef S132
-	m_timeslot_request.params.earliest.hfclk       = NRF_RADIO_HFCLK_CFG_XTAL_GUARANTEED;
-#else
 	m_timeslot_request.params.earliest.hfclk       = NRF_RADIO_HFCLK_CFG_DEFAULT;
-#endif  
 	m_timeslot_request.params.earliest.priority    = NRF_RADIO_PRIORITY_NORMAL;
 	m_timeslot_request.params.earliest.length_us   = m_slot_length;
 	m_timeslot_request.params.earliest.timeout_us  = 1000000;
@@ -88,12 +81,7 @@ void configure_next_event_normal(void)
 {
 	m_slot_length                                 = 15000;
 	m_timeslot_request.request_type               = NRF_RADIO_REQ_TYPE_NORMAL;
-#ifdef S132
-	m_timeslot_request.params.normal.hfclk        = NRF_RADIO_HFCLK_CFG_XTAL_GUARANTEED;
-#else
 	m_timeslot_request.params.normal.hfclk        = NRF_RADIO_HFCLK_CFG_DEFAULT;
-
-#endif
 	m_timeslot_request.params.normal.priority     = NRF_RADIO_PRIORITY_HIGH;
 
 	m_timeslot_request.params.normal.distance_us  = 100000;
@@ -156,7 +144,7 @@ nrf_radio_signal_callback_return_param_t * radio_callback(uint8_t signal_type)
 {
 	switch(signal_type)
 	{
-		case NRF_RADIO_CALLBACK_SIGNAL_TYPE_START:
+	case NRF_RADIO_CALLBACK_SIGNAL_TYPE_START:
 //Start of the timeslot - set up timer interrupt
 		signal_callback_return_param.params.request.p_next = NULL;
 		signal_callback_return_param.callback_action = NRF_RADIO_SIGNAL_CALLBACK_ACTION_NONE;
@@ -168,31 +156,31 @@ nrf_radio_signal_callback_return_param_t * radio_callback(uint8_t signal_type)
 		//nrf_gpio_pin_toggle(LED_GREEN); //Toggle LED4
 
 		NVIC_SetPendingIRQ(TIMESLOT_BEGIN_IRQn);
-		break;
+	break;
 
-		case NRF_RADIO_CALLBACK_SIGNAL_TYPE_RADIO:
+	case NRF_RADIO_CALLBACK_SIGNAL_TYPE_RADIO:
 		signal_callback_return_param.params.request.p_next = NULL;
 		signal_callback_return_param.callback_action = NRF_RADIO_SIGNAL_CALLBACK_ACTION_NONE;
-		break;
+	break;
 
-		case NRF_RADIO_CALLBACK_SIGNAL_TYPE_TIMER0:
+	case NRF_RADIO_CALLBACK_SIGNAL_TYPE_TIMER0:
 //Timer interrupt - do graceful shutdown - schedule next timeslot
 		configure_next_event_normal();
 		signal_callback_return_param.params.request.p_next = &m_timeslot_request;
 		signal_callback_return_param.callback_action = NRF_RADIO_SIGNAL_CALLBACK_ACTION_REQUEST_AND_END;
-		break;
-		case NRF_RADIO_CALLBACK_SIGNAL_TYPE_EXTEND_SUCCEEDED:
+	break;
+	case NRF_RADIO_CALLBACK_SIGNAL_TYPE_EXTEND_SUCCEEDED:
 //No implementation needed
-		break;
-		case NRF_RADIO_CALLBACK_SIGNAL_TYPE_EXTEND_FAILED:
+	break;
+	case NRF_RADIO_CALLBACK_SIGNAL_TYPE_EXTEND_FAILED:
 //Try scheduling a new timeslot
 		configure_next_event_earliest();
 		signal_callback_return_param.params.request.p_next = &m_timeslot_request;
 		signal_callback_return_param.callback_action = NRF_RADIO_SIGNAL_CALLBACK_ACTION_REQUEST_AND_END;
-		break;
-		default:
+	break;
+	default:
 //No implementation needed
-		break;
+	break;
 	}
 	return (&signal_callback_return_param);
 }

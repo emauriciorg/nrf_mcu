@@ -156,28 +156,23 @@ uint32_t uesb_init(uesb_config_t *parameters)
 	NVIC_SetPriority(RADIO_IRQn, m_config_local.radio_irq_priority & 0x03);
 
 
-	return UESB_SUCCESS;
+	return true;
 }
 
 uint32_t uesb_disable(void)
 {
 	NRF_PPI->CHENCLR = (1 << UESB_PPI_TIMER_START) | (1 << UESB_PPI_TIMER_STOP) | (1 << UESB_PPI_RX_TIMEOUT) | (1 << UESB_PPI_TX_START);
-	return UESB_SUCCESS;
+	return true;
 }
 
 static void start_tx_transaction()
 {
 	static int packet_counter=0;
 	static int ifg_change_addr=0x01;
-	// Prepare the payload
-//	
-//	current_payload = m_tx_fifo.payload_ptr[m_tx_fifo.exit_point];
 
 	NRF_RADIO->SHORTS   = RADIO_SHORTS_COMMON;
 	NRF_RADIO->INTENSET = RADIO_INTENSET_DISABLED_Msk;
-	//on_radio_disabled   = on_radio_disabled_esb_dpl_tx_noack;
 	
-
 	 
 	 if (ifg_change_addr==4)
 	 	ifg_change_addr=1;
@@ -185,9 +180,6 @@ static void start_tx_transaction()
 	 	ifg_change_addr++;
 	 
 	NRF_RADIO->TXADDRESS = ifg_change_addr;
-
-	
-//	NRF_RADIO->TXADDRESS = 1;//current_payload->pipe;
 
 	NRF_RADIO->RXADDRESSES = 1 << 0;//current_payload->pipe;
 
@@ -214,18 +206,14 @@ static uint32_t write_tx_payload(uesb_payload_t *payload) // ~50us @ 61 bytes SB
 	DISABLE_RF_IRQ;
 	
 	memcpy(m_tx_fifo.payload_ptr[0], payload, sizeof(uesb_payload_t));
-	
-
-//	if (m_tx_fifo.entry_point >= UESB_CORE_TX_FIFO_SIZE) m_tx_fifo.entry_point = 0;
-	
+		
 	m_tx_fifo.count++;
 	
 	ENABLE_RF_IRQ;
-
 	
 	start_tx_transaction();
 	
-	return UESB_SUCCESS;
+	return true;
 }
 
 uint32_t uesb_write_tx_payload(uesb_payload_t *payload)
@@ -238,7 +226,7 @@ uint32_t uesb_start_tx()
 {
 	if (m_tx_fifo.count == 0) return UESB_ERROR_TX_FIFO_EMPTY;
 	start_tx_transaction();
-	return UESB_SUCCESS;
+	return true;
 }
 
 
@@ -249,7 +237,7 @@ uint32_t uesb_flush_tx(void)
 	//m_tx_fifo.entry_point = 0;
 	//m_tx_fifo.exit_point = 0;
 	ENABLE_RF_IRQ;
-	return UESB_SUCCESS;
+	return true;
 }
 
 
@@ -260,7 +248,7 @@ uint32_t uesb_get_clear_interrupts(uint32_t *interrupts)
 	*interrupts = m_interrupt_flags;
 	m_interrupt_flags = 0;
 	ENABLE_RF_IRQ;
-	return UESB_SUCCESS;
+	return true;
 }
 
 
