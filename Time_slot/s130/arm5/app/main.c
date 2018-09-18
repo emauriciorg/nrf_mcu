@@ -46,37 +46,31 @@
 
 static dm_application_instance_t        m_app_handle;                               /**< Application identifier allocated by device manager */
 
+extern uint8_t counter_sec;
+extern uint8_t radion_sent;
+extern uint16_t                          m_conn_handle;   /**< Handle of the current connection. */
+
 void sys_evt_dispatch(uint32_t sys_evt)
 {
-
 	pstorage_sys_event_handler(sys_evt);
 	ble_advertising_on_sys_evt(sys_evt);
 	nrf_evt_signal_handler(sys_evt);
 }
 
-void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name)
-{
+void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name){
 	app_error_handler(DEAD_BEEF, line_num, p_file_name);
 }
 
-static void timers_init(void)
-{
-
-    // Initialize timer module.
+static void timers_init(void){
 	APP_TIMER_INIT(APP_TIMER_PRESCALER, APP_TIMER_OP_QUEUE_SIZE, false);
-
 }
 
 
  
-static void conn_params_error_handler(uint32_t nrf_error)
-{
+static void conn_params_error_handler(uint32_t nrf_error){
 	APP_ERROR_HANDLER(nrf_error);
 }
 
-
-/**@brief Function for initializing the Connection Parameters module.
- */
 static void conn_params_init(void)
 {
 	uint32_t               err_code;
@@ -99,7 +93,6 @@ static void conn_params_init(void)
 
 
 
-extern uint16_t                          m_conn_handle;   /**< Handle of the current connection. */
 
 static uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 	dm_event_t const  * p_event,
@@ -108,8 +101,7 @@ static uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 	APP_ERROR_CHECK(event_result);
 
 #ifdef BLE_DFU_APP_SUPPORT
-	if (p_event->event_id == DM_EVT_LINK_SECURED)
-	{
+	if (p_event->event_id == DM_EVT_LINK_SECURED){
 		app_context_load(p_handle);
 	}
 #endif // BLE_DFU_APP_SUPPORT
@@ -118,18 +110,13 @@ static uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 }
 
 
-/**@brief Function for the Device Manager initialization.
- *
- * @param[in] erase_bonds  Indicates whether bonding information should be cleared from
- *                         persistent storage during initialization of the Device Manager.
- */
 static void device_manager_init(bool erase_bonds)
 {
 	uint32_t               err_code;
+
 	dm_init_param_t        init_param = {.clear_persistent_data = erase_bonds};
 	dm_application_param_t register_param;
 
-    // Initialize persistent storage module.
 	err_code = pstorage_init();
 	APP_ERROR_CHECK(err_code);
 
@@ -153,41 +140,23 @@ static void device_manager_init(bool erase_bonds)
 
 
 
-
-
-/*static void power_manage(void)
-{
-	uint32_t err_code = sd_app_evt_wait();
-	APP_ERROR_CHECK(err_code);
-}*/
-
-extern uint8_t counter_sec;
-extern uint8_t radion_sent;
-/**@brief Function for application main entry.
- */
 int main(void)
 {
 	uint32_t err_code;
 	bool erase_bonds;
 
-   	//Enter main loop.
-  	nrf_gpio_range_cfg_output(8, 10);
-	
+  	nrf_gpio_range_cfg_output(8, 10);	
+	nrf_gpio_pin_set(LED_BLUE|LED_GREEN|LED_RED);
 
-    	//Initialize.
+	
 	timers_init();
 	uart_init();
 
 	msg_dbg("Start!\n",strlen("Start!\n") );
-
-	
-
 	ble_stack_init();
 	device_manager_init(erase_bonds);
 
-
-	// /self_TX_CAFE_configuration();
- 	radion_sent=1;
+ 	radion_sent=1;//flag to enable TS messages
 
 
 	gap_params_init();
@@ -195,21 +164,16 @@ int main(void)
 	services_init();
 	conn_params_init();
 	timeslot_sd_init();
-	
-    	//Start execution.
-	
+		
 	err_code = ble_advertising_start(BLE_ADV_MODE_FAST);
 	APP_ERROR_CHECK(err_code);
 	
 	
-	nrf_gpio_pin_clear(LED_RED);
-	nrf_gpio_pin_set(LED_BLUE);
-	nrf_gpio_pin_set(LED_GREEN);
-	
 	uint8_t buff_counter[30];
 	uint8_t len_t, main_tick=0;
+
 	for (;;)
-	{		
+	{	
 		nrf_delay_ms(1000);
 		len_t=sprintf((char *)buff_counter,"Count :[%d],[%d]\n", counter_sec, main_tick++);
 		msg_dbg((char *)buff_counter,len_t );
@@ -222,6 +186,5 @@ int main(void)
 void app_error_handler(uint32_t error_code, uint32_t line_num, const uint8_t * p_file_name)
 {
 	msg_dbg("Error code is", 10);
-	//printf("Error code is %x \n", error_code );
 	while(1);
 }

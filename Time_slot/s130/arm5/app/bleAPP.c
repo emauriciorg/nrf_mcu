@@ -1,15 +1,19 @@
 #include "bleAPP.h"
+
 #include "sys_event.h"
+
 #include "ble_conn_params.h"
 #include "ble_hci.h"
 #include "ble_srv_common.h"
 #include "ble_advdata.h"
 #include "ble.h"
+
 #include "device_manager.h"
 
 #include "nrf_gpio.h"
 #include "bbn_board.h"
 #include <stdio.h>
+
 #define IS_SRVC_CHANGED_CHARACT_PRESENT  1                                          /**< Include or not the service_changed characteristic. if not enabled, the server's database cannot be changed for the lifetime of the device*/
 #define DEVICE_NAME                      "Master_V1"                               /**< Name of device. Will be included in the advertising data. */
 #define MANUFACTURER_NAME                "NordicSemiconductor"                      /**< Manufacturer. Will be passed to Device Information Service. */
@@ -26,22 +30,13 @@
 static ble_uuid_t m_adv_uuids[] = {{BLE_UUID_DEVICE_INFORMATION_SERVICE, BLE_UUID_TYPE_BLE}}; /**< Universally unique service identifiers. */
 
 
-/**@brief Function for initializing the BLE stack.
- *
- * @details Initializes the SoftDevice and the BLE event interrupt.
- */
  void ble_stack_init(void)
-{
+ {
 	uint32_t err_code;
 
-    // Initialize the SoftDevice handler module.
-
-
 	SOFTDEVICE_HANDLER_INIT(NRF_CLOCK_LFCLKSRC_XTAL_20_PPM, NULL);
-//	SOFTDEVICE_HANDLER_INIT(clock_lf_cfg, NULL);
-		nrf_gpio_pin_set(LED_GREEN);
-#if defined(S110) || defined(S130) || defined(S132)
 
+#if defined(S110) || defined(S130) || defined(S132)
     // Enable BLE stack.
 	ble_enable_params_t ble_enable_params;
 	memset(&ble_enable_params, 0, sizeof(ble_enable_params));
@@ -49,12 +44,10 @@ static ble_uuid_t m_adv_uuids[] = {{BLE_UUID_DEVICE_INFORMATION_SERVICE, BLE_UUI
 #if (defined(S130) || defined(S132))
 	ble_enable_params.gatts_enable_params.attr_tab_size   = BLE_GATTS_ATTR_TAB_SIZE_DEFAULT;
 #endif
-	//nrf_gpio_pin_set(LED_GREEN);
 	
 	ble_enable_params.gatts_enable_params.service_changed = IS_SRVC_CHANGED_CHARACT_PRESENT;
 	err_code = sd_ble_enable(&ble_enable_params);	
-	APP_ERROR_CHECK(err_code);
-	
+	APP_ERROR_CHECK(err_code);	
 #endif
 
     // Register with the SoftDevice handler module for BLE events.
@@ -78,13 +71,10 @@ static ble_uuid_t m_adv_uuids[] = {{BLE_UUID_DEVICE_INFORMATION_SERVICE, BLE_UUI
 {
 	dm_ble_evt_handler(p_ble_evt);
 	ble_conn_params_on_ble_evt(p_ble_evt);
-	//bsp_btn_ble_on_ble_evt(p_ble_evt);
+	
 	on_ble_evt(p_ble_evt);
 	ble_advertising_on_ble_evt(p_ble_evt);
-    /*YOUR_JOB add calls to _on_ble_evt functions from each service your application is using
-    ble_xxs_on_ble_evt(&m_xxs, p_ble_evt);
-    ble_yys_on_ble_evt(&m_yys, p_ble_evt);
-    */
+
 }
 
 
