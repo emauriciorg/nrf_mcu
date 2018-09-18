@@ -9,6 +9,7 @@
 
 #include "nrf_gpio.h"
 #include "bbn_board.h"
+#include <stdio.h>
 #define IS_SRVC_CHANGED_CHARACT_PRESENT  1                                          /**< Include or not the service_changed characteristic. if not enabled, the server's database cannot be changed for the lifetime of the device*/
 #define DEVICE_NAME                      "Master_V1"                               /**< Name of device. Will be included in the advertising data. */
 #define MANUFACTURER_NAME                "NordicSemiconductor"                      /**< Manufacturer. Will be passed to Device Information Service. */
@@ -94,13 +95,10 @@ static ble_uuid_t m_adv_uuids[] = {{BLE_UUID_DEVICE_INFORMATION_SERVICE, BLE_UUI
  */
  void on_ble_evt(ble_evt_t * p_ble_evt)
 {
-	uint32_t err_code;
 
 	switch (p_ble_evt->header.evt_id)
 	{
 		case BLE_GAP_EVT_CONNECTED:
-//		err_code = bsp_indication_set(BSP_INDICATE_CONNECTED);
-	//	APP_ERROR_CHECK(err_code);
 		nrf_gpio_pin_set(LED_RED);
 		nrf_gpio_pin_clear(LED_GREEN);
 		m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
@@ -181,13 +179,11 @@ void conn_params_error_handler(uint32_t nrf_error)
  */
 void on_adv_evt(ble_adv_evt_t ble_adv_evt)
 {
-	uint32_t err_code;
 
 	switch (ble_adv_evt)
 	{
 		case BLE_ADV_EVT_FAST:
-	//	err_code = bsp_indication_set(BSP_INDICATE_ADVERTISING);
-		//APP_ERROR_CHECK(err_code);
+
 		break;
 		case BLE_ADV_EVT_IDLE:
 		//sleep_mode_enter();

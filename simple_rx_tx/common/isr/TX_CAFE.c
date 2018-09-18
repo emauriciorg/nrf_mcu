@@ -16,7 +16,6 @@
 #include <string.h>
 #include <stdio.h>
 
-unsigned char ready_to_send=0;
 static uesb_event_handler_t     m_event_handler;
 
 // RF parameters
@@ -152,9 +151,9 @@ uint32_t uesb_init(uesb_config_t *parameters)
 
 	update_radio_parameters();
 	initialize_fifos();	
-//	ppi_init();
+	ppi_init();
 
-//	NVIC_SetPriority(RADIO_IRQn, m_config_local.radio_irq_priority & 0x03);
+	NVIC_SetPriority(RADIO_IRQn, m_config_local.radio_irq_priority & 0x03);
 
 
 	return true;
@@ -166,13 +165,13 @@ uint32_t uesb_disable(void)
 	return true;
 }
 
- void start_tx_transaction()
+static void start_tx_transaction()
 {
 	static int packet_counter=0;
 	static int ifg_change_addr=0x01;
+
 	NRF_RADIO->SHORTS   = RADIO_SHORTS_COMMON;
-//	NRF_RADIO->INTENSET = RADIO_INTENSET_DISABLED_Msk;
-	NRF_RADIO->INTENSET = RADIO_INTENSET_END_Msk;
+	NRF_RADIO->INTENSET = RADIO_INTENSET_DISABLED_Msk;
 	
 	 
 	 if (ifg_change_addr==4)
@@ -198,7 +197,6 @@ uint32_t uesb_disable(void)
 	NRF_RADIO->EVENTS_ADDRESS = NRF_RADIO->EVENTS_PAYLOAD = NRF_RADIO->EVENTS_DISABLED = 0;
 	
 	NRF_RADIO->TASKS_TXEN  = 1;
-	
 }
 
 static uint32_t write_tx_payload(uesb_payload_t *payload) // ~50us @ 61 bytes SB
@@ -286,7 +284,7 @@ void RADIO_IRQHandler()
 	if (NRF_RADIO->EVENTS_END && (NRF_RADIO->INTENSET & RADIO_INTENSET_END_Msk))
 	{
 		NRF_RADIO->EVENTS_END = 0;
-		ready_to_send=1;
+
 
 
 		// Call the correct on_radio_end function, depending on the current protocol state
@@ -302,8 +300,7 @@ void RADIO_IRQHandler()
 		// Call the correct on_radio_disable function, depending on the current protocol state
 		//if (on_radio_disabled_esb_dpl_tx_noack)
 		//{
-		
-			//on_radio_disabled_esb_dpl_tx_noack();
+			on_radio_disabled_esb_dpl_tx_noack();
 		//}
 	}
 

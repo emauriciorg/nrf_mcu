@@ -405,14 +405,9 @@
               <FilePath>.\app\timeslot.c</FilePath>
             </File>
             <File>
-              <FileName>uesb.c</FileName>
+              <FileName>TX_CAFE.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\app\uesb.c</FilePath>
-            </File>
-            <File>
-              <FileName>uesbAPP.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\app\uesbAPP.c</FilePath>
+              <FilePath>.\app\TX_CAFE.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -853,14 +848,9 @@
               <FilePath>.\app\timeslot.c</FilePath>
             </File>
             <File>
-              <FileName>uesb.c</FileName>
+              <FileName>TX_CAFE.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\app\uesb.c</FilePath>
-            </File>
-            <File>
-              <FileName>uesbAPP.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\app\uesbAPP.c</FilePath>
+              <FilePath>.\app\TX_CAFE.c</FilePath>
             </File>
           </Files>
         </Group>

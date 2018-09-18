@@ -221,8 +221,7 @@ uint32_t uesb_set_rf_channel(uint32_t channel);
 
 uint32_t uesb_set_tx_power(uint8_t tx_output_power);
 
- void start_tx_transaction();
 
 void update_nrf_radio_address(nrf_st_address radio_addr);
-
+void on_radio_disabled_esb_dpl_tx_noack();
 #endif

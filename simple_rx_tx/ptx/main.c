@@ -53,6 +53,8 @@ void uesb_event_handler()
 void blink_led(uint16_t *count_ms);
 
 extern uint8_t   sw_radio_flag;
+extern unsigned char ready_to_send;
+
 int main(void)
 {
 
@@ -107,14 +109,18 @@ int main(void)
     simple_uart_putstring("nrf init\n");
     
     uint8_t package_id=0;
-    uesb_write_tx_payload(&tx_payload);
+    ready_to_send=1;
+    //uesb_write_tx_payload(&tx_payload);
     while (true)
     {   
     	blink_led(&counter_ms);
-			
-	           
-                check_radio_flags(); //sending by polling            
-        //nrf_delay_ms(100);
+			if(ready_to_send){
+	          start_tx_transaction();
+              // uesb_write_tx_payload(&tx_payload);
+            ready_to_send=0;
+            }
+           //     check_radio_flags(); //sending by polling            
+        nrf_delay_ms(100);
 			
     }
 }

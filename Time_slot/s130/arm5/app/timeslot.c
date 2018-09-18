@@ -8,8 +8,9 @@
 #include "softdevice_handler.h"
 #include "boards.h"
 #include "bbn_board.h"
-
-
+#include "TX_CAFE.h"
+#include "uart_app.h"
+#include <stdio.h>
 #define APP_ROUTINE_IRQ  
 
 #define TIMESLOT_BEGIN_IRQn         LPCOMP_IRQn             /**< Re-used LPCOMP interrupt for processing the beginning of timeslot. */
@@ -24,8 +25,10 @@
 #define UESB_RX_HANDLE_IRQHandler   WDT_IRQHandler          /**< The IRQ handler of WDT interrupt */
 #define UESB_RX_HANDLE_IRQPriority  3                       /**< Interrupt priority of @ref UESB_RX_HANDLE_IRQn. */
 
-
-
+uint8_t radio_counter=0;
+uint8_t temp_buff[32];
+uint8_t radio_len=0;
+uint8_t counter_sec=0;
 void TIMESLOT_END_IRQHandler(void)
 {
 
@@ -35,10 +38,20 @@ void TIMESLOT_END_IRQHandler(void)
 
 #define TIME_TO_BLINK 10
 uint32_t blink_counter=TIME_TO_BLINK;
+extern uint8_t radion_sent;
+
 void TIMESLOT_BEGIN_IRQHandler(void)
 {
 
+	
+
 	nrf_gpio_pin_toggle(LED_BLUE); //Toggle LED4
+	self_TX_CAFE_configuration();	
+		if( radion_sent){
+			start_tx_transaction();
+			radion_sent=0;
+ 			counter_sec++;
+		}
 }
 
 /**Constants for timeslot API
@@ -118,7 +131,7 @@ void nrf_evt_signal_handler(uint32_t evt_id)
 }
 
 void trigger_time_slot_timer(){
-#ifdef 0
+#if 0
 	NRF_TIMER0->TASKS_STOP          = 1;
 	NRF_TIMER0->TASKS_CLEAR         = 1;
 	NRF_TIMER0->MODE                = (TIMER_MODE_MODE_Timer << TIMER_MODE_MODE_Pos);
@@ -140,6 +153,7 @@ void trigger_time_slot_timer(){
 
 /**@brief Timeslot event handler
 */
+
 nrf_radio_signal_callback_return_param_t * radio_callback(uint8_t signal_type)
 {
 	switch(signal_type)
@@ -154,13 +168,17 @@ nrf_radio_signal_callback_return_param_t * radio_callback(uint8_t signal_type)
 		NRF_TIMER0->CC[0] = m_slot_length - 1000;
 		NVIC_EnableIRQ(TIMER0_IRQn);   
 		//nrf_gpio_pin_toggle(LED_GREEN); //Toggle LED4
-
+  NRF_RADIO->POWER                = (RADIO_POWER_POWER_Enabled << RADIO_POWER_POWER_Pos);
 		NVIC_SetPendingIRQ(TIMESLOT_BEGIN_IRQn);
 	break;
 
 	case NRF_RADIO_CALLBACK_SIGNAL_TYPE_RADIO:
+		//radio_len=sprintf((char *)temp_buff,"Radio [%d]",radio_counter++);
+		//msg_dbg((char *)temp_buff,radio_len);
+	       
 		signal_callback_return_param.params.request.p_next = NULL;
 		signal_callback_return_param.callback_action = NRF_RADIO_SIGNAL_CALLBACK_ACTION_NONE;
+		 RADIO_IRQHandler();
 	break;
 
 	case NRF_RADIO_CALLBACK_SIGNAL_TYPE_TIMER0:
