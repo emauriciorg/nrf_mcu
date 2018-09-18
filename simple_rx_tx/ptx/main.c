@@ -38,7 +38,7 @@ void uesb_event_handler()
     
     if(rf_interrupts & UESB_INT_TX_FAILED_MSK)
     {
-        uesb_flush_tx();
+//        uesb_flush_tx();
     }
     
     if(rf_interrupts & UESB_INT_RX_DR_MSK)
@@ -52,6 +52,7 @@ void uesb_event_handler()
 
 void blink_led(uint16_t *count_ms);
 
+extern uint8_t   sw_radio_flag;
 int main(void)
 {
 
@@ -106,19 +107,14 @@ int main(void)
     simple_uart_putstring("nrf init\n");
     
     uint8_t package_id=0;
-    
+    uesb_write_tx_payload(&tx_payload);
     while (true)
     {   
     	blink_led(&counter_ms);
 			
-
-        if(uesb_write_tx_payload(&tx_payload))
-        {
-                    tx_payload.data[7]=package_id+'0';
-                    if ((package_id++)>8)package_id=0;
-					simple_uart_putstring(tx_payload.data);
-        }
-        nrf_delay_ms(100);
+	           
+                check_radio_flags(); //sending by polling            
+        //nrf_delay_ms(100);
 			
     }
 }

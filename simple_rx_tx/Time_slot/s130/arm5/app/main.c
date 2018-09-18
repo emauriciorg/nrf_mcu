@@ -257,6 +257,7 @@ int main(void)
 	advertising_init();
 	services_init();
 	conn_params_init();
+	single_cafe_radio_configuration();
 	
 	timeslot_sd_init();
 	

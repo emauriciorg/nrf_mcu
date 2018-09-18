@@ -6,9 +6,9 @@
 #include "nrf_gpio.h"
 #include "app_util.h"
 #include "softdevice_handler.h"
-//#include "boards.h"
-#include "bbn_board.h"
 
+#include "bbn_board.h"
+#include "TX_CAFE.h"
 
 #define APP_ROUTINE_IRQ  
 
@@ -29,17 +29,18 @@
 void TIMESLOT_END_IRQHandler(void)
 {
 
-
-
 }
 
-#define TIME_TO_BLINK 10
-uint32_t blink_counter=TIME_TO_BLINK;
+
 void TIMESLOT_BEGIN_IRQHandler(void)
 {
 
 	nrf_gpio_pin_toggle(LED_BLUE); //Toggle LED4
-/* PUT SIMPLE TRANSMISSION HERE*/
+	//simple_uart_putstring("Time slot Starts\n");
+	cafe_radio_configuration();
+	
+	check_for_radio_flags();
+	/* PUT SIMPLE TRANSMISSION HERE*/
 
 
 }
@@ -147,30 +148,29 @@ nrf_radio_signal_callback_return_param_t * radio_callback(uint8_t signal_type)
 {
 	switch(signal_type)
 	{
-	case NRF_RADIO_CALLBACK_SIGNAL_TYPE_START:
-//Start of the timeslot - set up timer interrupt
+	case    NRF_RADIO_CALLBACK_SIGNAL_TYPE_START:
+		//Start of the timeslot - set up timer interrupt
 		signal_callback_return_param.params.request.p_next = NULL;
-		signal_callback_return_param.callback_action = NRF_RADIO_SIGNAL_CALLBACK_ACTION_NONE;
+		signal_callback_return_param.callback_action       = NRF_RADIO_SIGNAL_CALLBACK_ACTION_NONE;
 
-		//trigger_time_slot_timer();
-		NRF_TIMER0->INTENSET = TIMER_INTENSET_COMPARE0_Msk;
-		NRF_TIMER0->CC[0] = m_slot_length - 1000;
-		NVIC_EnableIRQ(TIMER0_IRQn);   
+		trigger_time_slot_timer();
+	
 		
-
+		NVIC_EnableIRQ(TIMER0_IRQn);   
 		NVIC_SetPendingIRQ(TIMESLOT_BEGIN_IRQn);
 	break;
 
-	case NRF_RADIO_CALLBACK_SIGNAL_TYPE_RADIO:
+	case    NRF_RADIO_CALLBACK_SIGNAL_TYPE_RADIO:
+		simple_uart_putstring("nrf_ radio callback");
 		signal_callback_return_param.params.request.p_next = NULL;
-		signal_callback_return_param.callback_action = NRF_RADIO_SIGNAL_CALLBACK_ACTION_NONE;
+		signal_callback_return_param.callback_action       = NRF_RADIO_SIGNAL_CALLBACK_ACTION_NONE;
 	break;
 
 	case NRF_RADIO_CALLBACK_SIGNAL_TYPE_TIMER0:
 //Timer interrupt - do graceful shutdown - schedule next timeslot
 		configure_next_event_normal();
-		signal_callback_return_param.params.request.p_next = &m_timeslot_request;
-		signal_callback_return_param.callback_action = NRF_RADIO_SIGNAL_CALLBACK_ACTION_REQUEST_AND_END;
+		signal_callback_return_param.params.request.p_next  = &m_timeslot_request;
+		signal_callback_return_param.callback_action        = NRF_RADIO_SIGNAL_CALLBACK_ACTION_REQUEST_AND_END;
 	break;
 	case NRF_RADIO_CALLBACK_SIGNAL_TYPE_EXTEND_SUCCEEDED:
 //No implementation needed
@@ -179,8 +179,9 @@ nrf_radio_signal_callback_return_param_t * radio_callback(uint8_t signal_type)
 //Try scheduling a new timeslot
 		configure_next_event_earliest();
 		signal_callback_return_param.params.request.p_next = &m_timeslot_request;
-		signal_callback_return_param.callback_action = NRF_RADIO_SIGNAL_CALLBACK_ACTION_REQUEST_AND_END;
+		signal_callback_return_param.callback_action       = NRF_RADIO_SIGNAL_CALLBACK_ACTION_REQUEST_AND_END;
 	break;
+
 	default:
 //No implementation needed
 	break;
@@ -195,16 +196,14 @@ uint32_t timeslot_sd_init(void)
 {
 	uint32_t err_code;
 
-	err_code = sd_radio_session_open(radio_callback);
-	if (err_code != NRF_SUCCESS)
-	{
+	err_code      = sd_radio_session_open(radio_callback);
+	if (err_code != NRF_SUCCESS){
 		return err_code;
 	}
 
-	err_code = request_next_event_earliest();
-	if (err_code != NRF_SUCCESS)
-	{
-		(void)sd_radio_session_close();
+	err_code      = request_next_event_earliest();
+	if (err_code != NRF_SUCCESS){
+		(void) sd_radio_session_close();
 		return err_code;
 	}
 	NVIC_ClearPendingIRQ(TIMESLOT_BEGIN_IRQn);

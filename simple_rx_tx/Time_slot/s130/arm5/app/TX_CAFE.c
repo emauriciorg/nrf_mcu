@@ -16,6 +16,10 @@
 #include <string.h>
 #include <stdio.h>
 
+static uesb_payload_t tx_payload;
+
+
+
 static uesb_event_handler_t     m_event_handler;
 
 // RF parameters
@@ -50,7 +54,7 @@ static volatile uint32_t        m_last_rx_packet_crc = 0xFFFFFFFF;
 static void (*update_rf_payload_format)(uint32_t payload_length) = 0;
 
 // The following functions are assigned to the function pointers above
-//static void on_radio_disabled_esb_dpl_tx_noack(void);
+static void on_radio_disabled_esb_dpl_tx_noack(void);
 
 static void update_rf_payload_format_esb_dpl(uint32_t payload_length)
 {
@@ -67,8 +71,8 @@ static void update_rf_payload_format_esb_dpl(uint32_t payload_length)
 // Function that swaps the bits within each byte in a uint32. Used to convert from nRF24L type addressing to nRF51 type addressing
 static uint32_t bytewise_bit_swap(uint32_t inp)
 {
-	inp = (inp & 0xF0F0F0F0) >> 4 | (inp & 0x0F0F0F0F) << 4;
-	inp = (inp & 0xCCCCCCCC) >> 2 | (inp & 0x33333333) << 2;
+	inp = (inp & 0xF0F0F0F0)  >> 4 | (inp & 0x0F0F0F0F) << 4;
+	inp = (inp & 0xCCCCCCCC)  >> 2 | (inp & 0x33333333) << 2;
 	return (inp & 0xAAAAAAAA) >> 1 | (inp & 0x55555555) << 1;
 }
 
@@ -84,8 +88,8 @@ static void update_radio_parameters()
 	
 	// CRC configuration
 	NRF_RADIO->CRCCNF    = m_config_local.crc               << RADIO_CRCCNF_LEN_Pos;
-	NRF_RADIO->CRCINIT = 0xFFFFUL;      // Initial value
-	NRF_RADIO->CRCPOLY = 0x11021UL;     // CRC poly: x^16+x^12^x^5+1
+	NRF_RADIO->CRCINIT   = 0xFFFFUL;      // Initial value
+	NRF_RADIO->CRCPOLY   = 0x11021UL;     // CRC poly: x^16+x^12^x^5+1
 	
 
 	// Packet format
@@ -105,8 +109,7 @@ void update_nrf_radio_address(nrf_st_address radio_addr){
 static void initialize_fifos()
 {
 	m_tx_fifo.count       = 0;
-	for(int i = 0; i < UESB_CORE_TX_FIFO_SIZE; i++)
-	{
+	for(int i = 0; i < UESB_CORE_TX_FIFO_SIZE; i++){
 		m_tx_fifo.payload_ptr[i] = &m_tx_fifo_payload[i];
 	}
 
@@ -115,23 +118,23 @@ static void initialize_fifos()
 static void tx_fifo_remove_last()
 {
 	if (m_tx_fifo.count > 0){
-		DISABLE_RF_IRQ;
+	//	DISABLE_RF_IRQ;
 		m_tx_fifo.count--;
-		//ENABLE_RF_IRQ;
+	//	ENABLE_RF_IRQ;
 	}
 }
 
 
 static void ppi_init()
 {
-	NRF_PPI->CH[UESB_PPI_TIMER_START].EEP  =  (uint32_t)&NRF_RADIO->EVENTS_READY;
-//	NRF_PPI->CH[UESB_PPI_TIMER_START].TEP  =  (uint32_t)&UESB_SYS_TIMER->TASKS_START;
-	NRF_PPI->CH[UESB_PPI_TIMER_STOP].EEP   =  (uint32_t)&NRF_RADIO->EVENTS_ADDRESS;
-//	NRF_PPI->CH[UESB_PPI_TIMER_STOP].TEP   =  (uint32_t)&UESB_SYS_TIMER->TASKS_STOP;
-//	NRF_PPI->CH[UESB_PPI_RX_TIMEOUT].EEP   =  (uint32_t)&UESB_SYS_TIMER->EVENTS_COMPARE[0];
-//	NRF_PPI->CH[UESB_PPI_RX_TIMEOUT].TEP   =  (uint32_t)&NRF_RADIO->TASKS_DISABLE;
-//	NRF_PPI->CH[UESB_PPI_TX_START].EEP     =  (uint32_t)&UESB_SYS_TIMER->EVENTS_COMPARE[1];
-	NRF_PPI->CH[UESB_PPI_TX_START].TEP     =  (uint32_t)&NRF_RADIO->TASKS_TXEN;
+	NRF_PPI->CH[  UESB_PPI_TIMER_START ].EEP   =  (uint32_t)&NRF_RADIO->EVENTS_READY;
+	NRF_PPI->CH[  UESB_PPI_TIMER_START ].TEP   =  (uint32_t)&UESB_SYS_TIMER->TASKS_START;
+	NRF_PPI->CH[  UESB_PPI_TIMER_STOP  ].EEP   =  (uint32_t)&NRF_RADIO->EVENTS_ADDRESS;
+	NRF_PPI->CH[  UESB_PPI_TIMER_STOP  ].TEP   =  (uint32_t)&UESB_SYS_TIMER->TASKS_STOP;
+	NRF_PPI->CH[  UESB_PPI_RX_TIMEOUT  ].EEP   =  (uint32_t)&UESB_SYS_TIMER->EVENTS_COMPARE[0];
+	NRF_PPI->CH[  UESB_PPI_RX_TIMEOUT  ].TEP   =  (uint32_t)&NRF_RADIO->TASKS_DISABLE;
+	NRF_PPI->CH[  UESB_PPI_TX_START    ].EEP   =  (uint32_t)&UESB_SYS_TIMER->EVENTS_COMPARE[1];
+	NRF_PPI->CH[  UESB_PPI_TX_START    ].TEP   =  (uint32_t)&NRF_RADIO->TASKS_TXEN;
 }
 
 uint32_t uesb_init(uesb_config_t *parameters)
@@ -157,39 +160,38 @@ uint32_t uesb_disable(void)
 	NRF_PPI->CHENCLR = (1 << UESB_PPI_TIMER_START) | (1 << UESB_PPI_TIMER_STOP) | (1 << UESB_PPI_RX_TIMEOUT) | (1 << UESB_PPI_TX_START);
 	return true;
 }
-
+ int packet_counter  =0;
 static void start_tx_transaction()
 {
-	static int packet_counter=0;
-	static int ifg_change_addr=0x01;
+	
+	static int ifg_change_addr =0x01;
 
 	NRF_RADIO->SHORTS   = RADIO_SHORTS_COMMON;
 	NRF_RADIO->INTENSET = RADIO_INTENSET_DISABLED_Msk;
 	
 	 
-	 if (ifg_change_addr==4)
+	if (ifg_change_addr==4)
 	 	ifg_change_addr=1;
 	else	 
 	 	ifg_change_addr++;
 	 
-	NRF_RADIO->TXADDRESS = ifg_change_addr;
+	NRF_RADIO->TXADDRESS   = ifg_change_addr;
 
 	NRF_RADIO->RXADDRESSES = 1 << 0;//current_payload->pipe;
 
-	NRF_RADIO->FREQUENCY = m_config_local.rf_channel;
+	NRF_RADIO->FREQUENCY   = m_config_local.rf_channel;
 	uint16_t len;
+
 	len=sprintf((char *)&m_tx_payload_buffer[2],"nrf_%0d, %02d ",ifg_change_addr,packet_counter++);
 	memset(&m_tx_payload_buffer[len+2],'O',32-(len+3));
+	m_tx_payload_buffer[0]  = 32;
+	m_tx_payload_buffer[1]  =  1;
+	simple_uart_putstring (m_tx_payload_buffer);
+	simple_uart_putstring("\n");
+	NRF_RADIO->PACKETPTR    =  (uint32_t)&m_tx_payload_buffer[0];
 
-        simple_uart_putstring("sent\n");
-    
-	m_tx_payload_buffer[0]=32;
-	m_tx_payload_buffer[1]=1;
-
-	NRF_RADIO->PACKETPTR = (uint32_t)&m_tx_payload_buffer[0];
-
-	//NVIC_ClearPendingIRQ(RADIO_IRQn);
-	//NVIC_EnableIRQ(RADIO_IRQn);
+//	NVIC_ClearPendingIRQ(RADIO_IRQn);
+//	NVIC_EnableIRQ(RADIO_IRQn);
 
 	NRF_RADIO->EVENTS_ADDRESS = NRF_RADIO->EVENTS_PAYLOAD = NRF_RADIO->EVENTS_DISABLED = 0;
 	
@@ -198,15 +200,15 @@ static void start_tx_transaction()
 
 static uint32_t write_tx_payload(uesb_payload_t *payload) // ~50us @ 61 bytes SB
 {
-//	if (m_tx_fifo.count >= UESB_CORE_TX_FIFO_SIZE) return UESB_ERROR_TX_FIFO_FULL;
+	if (m_tx_fifo.count >= UESB_CORE_TX_FIFO_SIZE) return UESB_ERROR_TX_FIFO_FULL;
 
-//	DISABLE_RF_IRQ;
+	//DISABLE_RF_IRQ;
 	
 	memcpy(m_tx_fifo.payload_ptr[0], payload, sizeof(uesb_payload_t));
 		
 	m_tx_fifo.count++;
 	
-//	ENABLE_RF_IRQ;
+	//ENABLE_RF_IRQ;
 	
 	start_tx_transaction();
 	
@@ -219,13 +221,19 @@ uint32_t uesb_write_tx_payload(uesb_payload_t *payload)
 }
 
 
+uint32_t uesb_start_tx()
+{
+	if (m_tx_fifo.count == 0) return UESB_ERROR_TX_FIFO_EMPTY;
+	start_tx_transaction();
+	return true;
+}
 
 
 uint32_t uesb_flush_tx(void)
 {
-	//DISABLE_RF_IRQ;
+	DISABLE_RF_IRQ;
 	m_tx_fifo.count = 0;
-	//ENABLE_RF_IRQ;
+	ENABLE_RF_IRQ;
 	return true;
 }
 
@@ -233,8 +241,8 @@ uint32_t uesb_flush_tx(void)
 
 uint32_t uesb_get_clear_interrupts(uint32_t *interrupts)
 {
-	//DISABLE_RF_IRQ;
-	*interrupts = m_interrupt_flags;
+//	DISABLE_RF_IRQ;
+	*interrupts       = m_interrupt_flags;
 	m_interrupt_flags = 0;
 //	ENABLE_RF_IRQ;
 	return true;
@@ -244,71 +252,124 @@ uint32_t uesb_get_clear_interrupts(uint32_t *interrupts)
 
 
 
-void on_radio_disabled_esb_dpl_tx_noack()
+static void on_radio_disabled_esb_dpl_tx_noack()
 {
-	m_interrupt_flags |= UESB_INT_TX_SUCCESS_MSK;	
+	m_interrupt_flags |= UESB_INT_TX_SUCCESS_MSK;
+//	tx_fifo_remove_last();
+
 	if (m_event_handler != 0) m_event_handler();
 	start_tx_transaction();
+}
+
+
+
+void check_for_radio_flags()
+{
+	if (NRF_RADIO->EVENTS_READY && (NRF_RADIO->INTENSET & RADIO_INTENSET_READY_Msk))
+	{
+		NRF_RADIO->EVENTS_READY = 0;
+
+	}
+
+	if (NRF_RADIO->EVENTS_END && (NRF_RADIO->INTENSET & RADIO_INTENSET_END_Msk))
+	{
+		NRF_RADIO->EVENTS_END = 0;
+
+
+
+		// Call the correct on_radio_end function, depending on the current protocol state
+		//	on_radio_end();
+		
+	}
+
+	if (NRF_RADIO->EVENTS_DISABLED && (NRF_RADIO->INTENSET & RADIO_INTENSET_DISABLED_Msk))
+	{
+		NRF_RADIO->EVENTS_DISABLED = 0;
+
+	  
+		// Call the correct on_radio_disable function, depending on the current protocol state
+		//if (on_radio_disabled_esb_dpl_tx_noack)
+		//{
+			on_radio_disabled_esb_dpl_tx_noack();
+		//}
+	}
+
+}
+
+
+
+void uesb_event_handler()
+{
+    static uint32_t rf_interrupts;
+
+    
+    uesb_get_clear_interrupts(&rf_interrupts);
+    
+    if(rf_interrupts & UESB_INT_TX_SUCCESS_MSK)
+    {   
+    }
+    
+    if(rf_interrupts & UESB_INT_TX_FAILED_MSK)
+    {
+      //  uesb_flush_tx();
+    }
+    
+    if(rf_interrupts & UESB_INT_RX_DR_MSK)
+    {
+    
+    }
+    
+    
+}
+
+  nrf_st_address user_radio_addr;
+ uesb_config_t uesb_config       = UESB_DEFAULT_CONFIG;
+void cafe_radio_configuration(void){
+
+  
+   
+    uesb_init(&uesb_config);
+    update_nrf_radio_address(user_radio_addr);
+
+    tx_payload.length  = 8;
+    tx_payload.pipe    = 0;
+    tx_payload.data[0] = 'A';//0x01;
+    tx_payload.data[1] = 0x00;
+    tx_payload.data[2] = 0x00;
+    tx_payload.data[3] = 0x00;
+    tx_payload.data[4] = 0x11;
+    
+    memcpy((char *)tx_payload.data,"Pigeon  \n\0",10);
+		
 	
-}
-
-
-uint8_t	 sw_radio_flag=0;
-#ifdef radio_ts_enables
-void RADIO_IRQHandler()
-{
-	if (NRF_RADIO->EVENTS_READY && (NRF_RADIO->INTENSET & RADIO_INTENSET_READY_Msk))
-	{
-		NRF_RADIO->EVENTS_READY = 0;
-
-	}
-
-	if (NRF_RADIO->EVENTS_END && (NRF_RADIO->INTENSET & RADIO_INTENSET_END_Msk))
-	{
-		NRF_RADIO->EVENTS_END = 0;
-
-
-
-		// Call the correct on_radio_end function, depending on the current protocol state
-		//	on_radio_end();
-		
-	}
-
-	if (NRF_RADIO->EVENTS_DISABLED && (NRF_RADIO->INTENSET & RADIO_INTENSET_DISABLED_Msk))
-	{
-		NRF_RADIO->EVENTS_DISABLED = 0;
-	  
-			on_radio_disabled_esb_dpl_tx_noack();
-	}
+    
+    uint8_t package_id=0;
+    
+      uesb_write_tx_payload(&tx_payload);
+			
+    
 
 }
-#endif
 
-void check_radio_flags()
-{
-	if (NRF_RADIO->EVENTS_READY && (NRF_RADIO->INTENSET & RADIO_INTENSET_READY_Msk))
-	{
-		NRF_RADIO->EVENTS_READY = 0;
+void single_cafe_radio_configuration(void){
 
-	}
+    const char pipe_addr[8]         = {0x60, 0xF4, 0xAA, 0x12, 0x0E,0x0F,0x10,0x11};
+    const char base_addr0[6]        ={ 0x34, 0x56, 0x78, 0x23};
+    const char base_addr1[6]        ={ 0x34, 0x56, 0x78, 0x9A};
 
-	if (NRF_RADIO->EVENTS_END && (NRF_RADIO->INTENSET & RADIO_INTENSET_END_Msk))
-	{
-		NRF_RADIO->EVENTS_END = 0;
+    memcpy (user_radio_addr.logic_pipe , pipe_addr  , 8);
+    memcpy( user_radio_addr.base_addr0 , base_addr0 , 5);
+    memcpy( user_radio_addr.base_addr1 , base_addr1 , 5);
+    	
+   
+    uesb_config.rf_channel          = 5;
+    uesb_config.crc                 = UESB_CRC_16BIT;
+    uesb_config.retransmit_count    = 6;
+    uesb_config.retransmit_delay    = 500;
+    uesb_config.dynamic_ack_enabled = 0;
+    uesb_config.bitrate             = UESB_BITRATE_2MBPS;
+    uesb_config.event_handler       = uesb_event_handler;
+    
 
-
-
-		// Call the correct on_radio_end function, depending on the current protocol state
-		//	on_radio_end();
-		
-	}
-
-	if (NRF_RADIO->EVENTS_DISABLED && (NRF_RADIO->INTENSET & RADIO_INTENSET_DISABLED_Msk))
-	{
-		NRF_RADIO->EVENTS_DISABLED = 0;
-		sw_radio_flag=1;
-	  
-			on_radio_disabled_esb_dpl_tx_noack();
-	}
 
 }
