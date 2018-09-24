@@ -26,7 +26,7 @@
 
 
 // Hard coded parameters - change if necessary
-#define     CAFE_CORE_MAX_PAYLOAD_LENGTH    8//32
+#define     CAFE_CORE_MAX_PAYLOAD_LENGTH    32
 #define     cafe_CORE_RX_FIFO_SIZE          8
 
 #define     cafe_SYS_TIMER                  NRF_TIMER2

@@ -54,27 +54,26 @@ int main(void)
 	simple_uart_putstring("nrf init\n");
 	nrf_gpio_pin_set(LED_BLUE);
 
-	uint8_t rssi_buffer[10];
+	uint8_t rssi_buffer[40];
 	extern  cafe_payload_t  rx_payload;
 	memset(rssi_buffer,0,sizeof(rssi_buffer));
 	
 
 	uint8_t connection_status=0;
-	
+	extern uint8_t recieved_counter;	
 	while (true)
 	{   
 
 		if( led_state){
 
 	
-			led_state=0;
 			connection_status=1;
-			
-
-			sprintf((char *)rssi_buffer,"\nrssi -%d \n",get_rssi());
-			simple_uart_putstring(rssi_buffer); 
+		
+			sprintf((char *)rssi_buffer,"\nrssi -%d %d state: %d , recieved_counter %d\n",get_rssi(),led_state, NRF_RADIO->STATE, recieved_counter);
+			simple_uart_putstring(rssi_buffer);;
 			print_received_data();
-			
+			led_state=0;
+	
 			nrf_gpio_pin_toggle(LED_GREEN);
 			nrf_gpio_pin_set(LED_RED);
 			
@@ -84,9 +83,11 @@ int main(void)
 				connection_status=0;
 				simple_uart_putstring("Connection loss\n");  
 			}
-
+			sprintf((char *)rssi_buffer,"\nrssi -%d %d state: %d\n",get_rssi(),led_state, NRF_RADIO->STATE);
+			simple_uart_putstring(rssi_buffer);;
+			
 		}
-		nrf_delay_ms(50);
+		nrf_delay_ms(500);
 
 	}
 }
