@@ -108,7 +108,6 @@ int main(void)
 	
     simple_uart_putstring("nrf init\n");
     
-    uint8_t package_id=0;
     ready_to_send=1;
     //cafe_write_tx_payload(&tx_payload);
     while (true)

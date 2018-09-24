@@ -17,7 +17,6 @@
 #include <stdio.h>
 
 unsigned char ready_to_send=0;
-static cafe_event_handler_t     m_event_handler;
 
 // RF parameters
 static cafe_config_t            m_config_local;
@@ -51,7 +50,6 @@ static volatile uint32_t        m_last_rx_packet_crc = 0xFFFFFFFF;
 static void (*update_rf_payload_format)(uint32_t payload_length) = 0;
 
 // The following functions are assigned to the function pointers above
-static void on_radio_disabled_esb_dpl_tx_noack(void);
 
 static void update_rf_payload_format_esb_dpl(uint32_t payload_length)
 {
@@ -120,14 +118,6 @@ static void initialize_fifos()
 
 }
 
-static void tx_fifo_remove_last()
-{
-	if (m_tx_fifo.count > 0){
-		DISABLE_RF_IRQ;
-		m_tx_fifo.count--;
-		ENABLE_RF_IRQ;
-	}
-}
 
 
 static void ppi_init()
@@ -144,7 +134,6 @@ static void ppi_init()
 
 uint32_t cafe_init(cafe_config_t *parameters)
 {
-	m_event_handler = parameters->event_handler;
 	memcpy(&m_config_local, parameters, sizeof(cafe_config_t));
 
 	m_interrupt_flags    = 0;
@@ -152,7 +141,7 @@ uint32_t cafe_init(cafe_config_t *parameters)
 
 	update_radio_parameters();
 	initialize_fifos();	
-//	ppi_init();
+	ppi_init();
 
 //	NVIC_SetPriority(RADIO_IRQn, m_config_local.radio_irq_priority & 0x03);
 
@@ -166,7 +155,7 @@ uint32_t cafe_disable(void)
 	return true;
 }
 
- void start_tx_transaction()
+ void start_tx_transaction(void)
 {
 	static int packet_counter=0;
 	static int ifg_change_addr=0x01;

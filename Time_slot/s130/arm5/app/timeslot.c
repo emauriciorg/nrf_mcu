@@ -45,7 +45,7 @@ void TIMESLOT_BEGIN_IRQHandler(void)
 
 	
 
-	nrf_gpio_pin_toggle(LED_BLUE); //Toggle LED4
+//	nrf_gpio_pin_toggle(LED_BLUE); //Toggle LED4
 	self_TX_CAFE_configuration();	
 		if( radion_sent){
 			start_tx_transaction();

@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\_build\nrf51422_xxac_s130.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\_build\nrf51422_xxac_s130.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Sat Sep 22 05:28:09 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Tue Sep 25 00:27:20 2018
 <BR><P>
 <H3>Maximum Stack Usage =        424 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -379,7 +379,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> arm_startup_nrf51.o(RESET)
 </UL>
-<P><STRONG><a name="[18]"></a>LPCOMP_IRQHandler</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, timeslot.o(i.LPCOMP_IRQHandler))
+<P><STRONG><a name="[18]"></a>LPCOMP_IRQHandler</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, timeslot.o(i.LPCOMP_IRQHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136<LI>Call Chain = LPCOMP_IRQHandler &rArr; self_TX_CAFE_configuration &rArr; update_nrf_radio_address
 </UL>
 <BR>[Calls]<UL><LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;start_tx_transaction
@@ -755,7 +755,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[1b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SWI2_IRQHandler
 </UL>
 
-<P><STRONG><a name="[1f]"></a>main</STRONG> (Thumb, 218 bytes, Stack size 64 bytes, main.o(i.main))
+<P><STRONG><a name="[1f]"></a>main</STRONG> (Thumb, 226 bytes, Stack size 64 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 424<LI>Call Chain = main &rArr; advertising_init &rArr; ble_advertising_init &rArr; ble_advdata_set &rArr; adv_data_encode &rArr; uuid_list_encode &rArr; uuid_list_sized_encode
 </UL>
 <BR>[Calls]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;timeslot_sd_init

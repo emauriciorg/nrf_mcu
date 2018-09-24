@@ -7,7 +7,6 @@
 #include "nrf.h"
 #include "nrf51.h"
 #include "nrf51_bitfields.h"
-#include "uesb_error_codes.h"
 #include "nrf_delay.h"
 #include "nrf_gpio.h"
 

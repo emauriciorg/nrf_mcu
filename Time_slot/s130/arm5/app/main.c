@@ -146,8 +146,8 @@ int main(void)
 	bool erase_bonds;
 
   	nrf_gpio_range_cfg_output(8, 10);	
-	nrf_gpio_pin_set(LED_BLUE|LED_GREEN|LED_RED);
-
+nrf_gpio_pin_set(LED_BLUE);
+	nrf_gpio_pin_set(LED_GREEN);
 	
 	timers_init();
 	uart_init();
