@@ -130,10 +130,11 @@ static void ppi_init()
 	NRF_PPI->CH[cafe_PPI_TIMER_START].TEP = (uint32_t) &cafe_SYS_TIMER->TASKS_START;
 	NRF_PPI->CH[cafe_PPI_TIMER_STOP].EEP  = (uint32_t) &NRF_RADIO->EVENTS_ADDRESS;
 	NRF_PPI->CH[cafe_PPI_TIMER_STOP].TEP  = (uint32_t) &cafe_SYS_TIMER->TASKS_STOP;
-	NRF_PPI->CH[cafe_PPI_RX_TIMEOUT].EEP  = (uint32_t) &cafe_SYS_TIMER->EVENTS_COMPARE[0];
-	NRF_PPI->CH[cafe_PPI_RX_TIMEOUT].TEP  = (uint32_t) &NRF_RADIO->TASKS_DISABLE;
-	NRF_PPI->CH[cafe_PPI_TX_START].EEP    = (uint32_t) &cafe_SYS_TIMER->EVENTS_COMPARE[1];
-	NRF_PPI->CH[cafe_PPI_TX_START].TEP    = (uint32_t) &NRF_RADIO->TASKS_TXEN;
+//	NRF_PPI->CH[cafe_PPI_RX_TIMEOUT].EEP  = (uint32_t) &cafe_SYS_TIMER->EVENTS_COMPARE[0];
+//	NRF_PPI->CH[cafe_PPI_RX_TIMEOUT].TEP  = (uint32_t) &NRF_RADIO->TASKS_DISABLE;
+
+//	NRF_PPI->CH[cafe_PPI_TX_START].EEP    = (uint32_t) &cafe_SYS_TIMER->EVENTS_COMPARE[1];
+//	NRF_PPI->CH[cafe_PPI_TX_START].TEP    = (uint32_t) &NRF_RADIO->TASKS_TXEN;
 }
 
 uint32_t cafe_init(cafe_config_t *parameters)
@@ -151,13 +152,13 @@ uint32_t cafe_init(cafe_config_t *parameters)
 
 	return true;
 }
-
+/*
 uint32_t cafe_disable(void)
 {
 	NRF_PPI->CHENCLR = (1 << cafe_PPI_TIMER_START) | (1 << cafe_PPI_TIMER_STOP) | (1 << cafe_PPI_RX_TIMEOUT) | (1 << cafe_PPI_TX_START);
 	return true;
 }
-
+*/
 
 //CUSTOM PROTOCOL ASSIGNATION : cpy recieved data to user structure
 	
@@ -172,8 +173,11 @@ uint32_t cafe_start_rx(void)
 {
 	NRF_RADIO->INTENCLR        = 0xFFFFFFFF;
 	NRF_RADIO->EVENTS_DISABLED = 0;
+	NRF_RADIO->EVENTS_END = 0;
+	
 	NRF_RADIO->SHORTS          = RADIO_SHORTS_COMMON | RADIO_SHORTS_DISABLED_TXEN_Msk;
-	NRF_RADIO->INTENSET        = RADIO_INTENSET_DISABLED_Msk;
+	NRF_RADIO->INTENSET        = RADIO_INTENSET_END_Msk;
+//NRF_RADIO->INTENSET        = RADIO_INTENSET_DISABLED_Msk;
 
 	NRF_RADIO->RXADDRESSES     =  0X02; //<--set to dynamic or protocol based address
 	NRF_RADIO->FREQUENCY       =  m_config_local.rf_channel;
@@ -215,12 +219,15 @@ void RADIO_IRQHandler()
 
 	if (NRF_RADIO->EVENTS_END && (NRF_RADIO->INTENSET & RADIO_INTENSET_END_Msk)){
 		NRF_RADIO->EVENTS_END = 0;
+		on_radio_disabled();
+
 	}
+
 
 	if (NRF_RADIO->EVENTS_DISABLED && (NRF_RADIO->INTENSET & RADIO_INTENSET_DISABLED_Msk)){
 		NRF_RADIO->EVENTS_DISABLED = 0;
 		//ADD OPTION FOR BOTH TX AND RX
-		on_radio_disabled();
+//		on_radio_disabled();
 	}
 }
 
@@ -234,11 +241,14 @@ static void on_radio_disabled(void)
 	
 	NRF_RADIO->PACKETPTR             = (uint32_t) m_rx_payload_buffer;
 	NRF_RADIO->EVENTS_DISABLED       = 0;
-	NRF_RADIO->TASKS_DISABLE         = 1;
+//	NRF_RADIO->TASKS_DISABLE         = 1;
+//	NRF_RADIO->TASKS_END         = 1;
 
-	while(NRF_RADIO->EVENTS_DISABLED == 0);
-	
-	NRF_RADIO->EVENTS_DISABLED       = 0;
+//	while(NRF_RADIO->EVENTS_DISABLED == 0);
+	while(NRF_RADIO->EVENTS_END == 0);
+
+	NRF_RADIO->EVENTS_END = 0	;
+//	NRF_RADIO->EVENTS_DISABLED       = 0;
 	NRF_RADIO->SHORTS                = RADIO_SHORTS_COMMON | RADIO_SHORTS_DISABLED_TXEN_Msk;
 	NRF_RADIO->TASKS_RXEN            = 1;
 	
@@ -255,7 +265,7 @@ void cafe_event_handler_rx(void)
 	
 	cafe_get_clear_interrupts(&rf_interrupts);
 	
-
+/*
 	if (rf_interrupts & cafe_INT_TX_SUCCESS_MSK)
 	{   
 	}
@@ -263,7 +273,7 @@ void cafe_event_handler_rx(void)
 	if (rf_interrupts & cafe_INT_TX_FAILED_MSK)
 	{
 	}
-	
+	*/
 	if (rf_interrupts & cafe_INT_RX_DR_MSK)
 	{
 		cafe_read_rx_payload(&rx_payload);

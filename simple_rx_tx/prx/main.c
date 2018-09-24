@@ -26,14 +26,12 @@
 extern uint8_t led_state;
 
 
-void print_received_data(void){
+void print_received_data(void)
+{
 	uint8_t temp_buffer[CAFE_CORE_MAX_PAYLOAD_LENGTH+5];
 	uint8_t temp_buffer2[CAFE_CORE_MAX_PAYLOAD_LENGTH+20];
-	
-	//memset(temp_buffer,0,CAFE_CORE_MAX_PAYLOAD_LENGTH+5);
 	get_rx_payload(temp_buffer);
 	sprintf((char *)temp_buffer2,"Received [%s]\n",temp_buffer );
-	
 	simple_uart_putstring( temp_buffer2); 
 	simple_uart_put('\n');
 }
@@ -62,6 +60,7 @@ int main(void)
 	
 
 	uint8_t connection_status=0;
+	
 	while (true)
 	{   
 
@@ -69,32 +68,25 @@ int main(void)
 
 	
 			led_state=0;
-			nrf_gpio_pin_toggle(LED_GREEN);
-			sprintf((char *)rssi_buffer,"\nrssi -%d \n",get_rssi());
-			nrf_gpio_pin_set(LED_RED);
-			//printf( get_rssi());
-			
-			//simple_uart_putstring (rx_payload.data);
-			//simple_uart_putstring("\n");
-			//memset(rx_payload.data,0, sizeof(rx_payload.data));
-			
-			simple_uart_putstring(rssi_buffer); 
-
-//            simple_uart_putstring("nrf loop\n");  
-			print_received_data();
-			//nrf_delay_ms(1000);
 			connection_status=1;
+			
+
+			sprintf((char *)rssi_buffer,"\nrssi -%d \n",get_rssi());
+			simple_uart_putstring(rssi_buffer); 
+			print_received_data();
+			
+			nrf_gpio_pin_toggle(LED_GREEN);
+			nrf_gpio_pin_set(LED_RED);
+			
 		}else{
-			//nrf_delay_ms(1000);
 			nrf_gpio_pin_set(LED_GREEN);
-			//nrf_gpio_pin_toggle(LED_RED);
-			//nrf_delay_ms(1000);
 			if(connection_status){
 				connection_status=0;
 				simple_uart_putstring("Connection loss\n");  
 			}
 
 		}
+		nrf_delay_ms(50);
 
 	}
 }

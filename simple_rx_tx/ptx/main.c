@@ -15,33 +15,33 @@
 #include <string.h>
 #include "nrf.h"
 
-#include "uesb_error_codes.h"
+//#include "cafe_error_codes.h"
 #include "nrf_delay.h"
 #include "nrf_gpio.h"
 #include "bbn_board.h"
 #include "simple_uart.h"
 #include "TX_CAFE.h"
-static uesb_payload_t tx_payload;
+static cafe_payload_t tx_payload;
 
 uint16_t counter_ms=0;
 
-void uesb_event_handler()
+void cafe_event_handler()
 {
     static uint32_t rf_interrupts;
 
     
-    uesb_get_clear_interrupts(&rf_interrupts);
+    cafe_get_clear_interrupts(&rf_interrupts);
     
-    if(rf_interrupts & UESB_INT_TX_SUCCESS_MSK)
+    if(rf_interrupts & cafe_INT_TX_SUCCESS_MSK)
     {   
     }
     
-    if(rf_interrupts & UESB_INT_TX_FAILED_MSK)
+    if(rf_interrupts & cafe_INT_TX_FAILED_MSK)
     {
-//        uesb_flush_tx();
+//        cafe_flush_tx();
     }
     
-    if(rf_interrupts & UESB_INT_RX_DR_MSK)
+    if(rf_interrupts & cafe_INT_RX_DR_MSK)
     {
     
     }
@@ -83,16 +83,16 @@ int main(void)
                          TX_PIN, 
                         false);
 		
-    uesb_config_t uesb_config       = UESB_DEFAULT_CONFIG;
-    uesb_config.rf_channel          = 5;
-    uesb_config.crc                 = UESB_CRC_16BIT;
-    uesb_config.retransmit_count    = 6;
-    uesb_config.retransmit_delay    = 500;
-    uesb_config.dynamic_ack_enabled = 0;
-    uesb_config.bitrate             = UESB_BITRATE_2MBPS;
-    uesb_config.event_handler       = uesb_event_handler;
+    cafe_config_t cafe_config       = cafe_DEFAULT_CONFIG;
+    cafe_config.rf_channel          = 5;
+    cafe_config.crc                 = cafe_CRC_16BIT;
+    cafe_config.retransmit_count    = 6;
+    cafe_config.retransmit_delay    = 500;
+    cafe_config.dynamic_ack_enabled = 0;
+    cafe_config.bitrate             = cafe_BITRATE_2MBPS;
+    cafe_config.event_handler       = cafe_event_handler;
     
-    uesb_init(&uesb_config);
+    cafe_init(&cafe_config);
     update_nrf_radio_address(user_radio_addr);
 
     tx_payload.length  = 8;
@@ -110,13 +110,13 @@ int main(void)
     
     uint8_t package_id=0;
     ready_to_send=1;
-    //uesb_write_tx_payload(&tx_payload);
+    //cafe_write_tx_payload(&tx_payload);
     while (true)
     {   
     	blink_led(&counter_ms);
 			if(ready_to_send){
 	          start_tx_transaction();
-              // uesb_write_tx_payload(&tx_payload);
+              // cafe_write_tx_payload(&tx_payload);
             ready_to_send=0;
             }
            //     check_radio_flags(); //sending by polling            
