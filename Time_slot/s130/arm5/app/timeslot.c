@@ -38,20 +38,22 @@ void TIMESLOT_END_IRQHandler(void)
 
 #define TIME_TO_BLINK 10
 uint32_t blink_counter=TIME_TO_BLINK;
-extern uint8_t radion_sent;
+extern uint8_t radio_sent;
 
 void TIMESLOT_BEGIN_IRQHandler(void)
 {
 
 	
-
+#define TX_MODE
+#ifdef TX_MODE
 //	nrf_gpio_pin_toggle(LED_BLUE); //Toggle LED4
-	self_TX_CAFE_configuration();	
-		if( radion_sent){
+	self_TX_CAFE_configuration(1);	
+	if ( radio_sent){
 			start_tx_transaction();
-			radion_sent=0;
+			radio_sent=0;
  			counter_sec++;
-		}
+	}
+	#endif
 }
 
 /**Constants for timeslot API
@@ -206,6 +208,8 @@ nrf_radio_signal_callback_return_param_t * radio_callback(uint8_t signal_type)
 
 /**@brief Function for initializing the timeslot API.
 */
+
+
 uint32_t timeslot_sd_init(void)
 {
 	uint32_t err_code;

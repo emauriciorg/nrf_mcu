@@ -42,8 +42,6 @@ static volatile uint32_t        m_last_rx_packet_crc = 0xFFFFFFFF;
 #define                         DISABLE_RF_IRQ      NVIC_DisableIRQ(RADIO_IRQn)
 #define                         ENABLE_RF_IRQ       NVIC_EnableIRQ(RADIO_IRQn)
 
-#define                         RADIO_SHORTS_COMMON ( RADIO_SHORTS_READY_START_Msk | RADIO_SHORTS_END_DISABLE_Msk | \
-													  RADIO_SHORTS_ADDRESS_RSSISTART_Msk | RADIO_SHORTS_DISABLED_RSSISTOP_Msk )
 
 // These function pointers are changed dynamically, depending on protocol configuration and state
 

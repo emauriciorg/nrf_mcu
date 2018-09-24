@@ -1,14 +1,3 @@
-/* Copyright (c) 2014 Nordic Semiconductor. All Rights Reserved.
- *
- * The information contained herein is property of Nordic Semiconductor ASA.
- * Terms and conditions of usage are described in detail in NORDIC
- * SEMICONDUCTOR STANDARD SOFTWARE LICENSE AGREEMENT.
- *
- * Licensees are granted free, non-transferable use of the information. NO
- * WARRANTY of ANY KIND is provided. This heading must NOT be removed from
- * the file.
- *
- */
 
 #include <stdint.h>
 #include <string.h>
@@ -47,7 +36,7 @@
 static dm_application_instance_t        m_app_handle;                               /**< Application identifier allocated by device manager */
 
 extern uint8_t counter_sec;
-extern uint8_t radion_sent;
+extern uint8_t radio_sent;
 extern uint16_t                          m_conn_handle;   /**< Handle of the current connection. */
 
 void sys_evt_dispatch(uint32_t sys_evt)
@@ -146,7 +135,7 @@ int main(void)
 	bool erase_bonds;
 
   	nrf_gpio_range_cfg_output(8, 10);	
-nrf_gpio_pin_set(LED_BLUE);
+	nrf_gpio_pin_set(LED_BLUE);
 	nrf_gpio_pin_set(LED_GREEN);
 	
 	timers_init();
@@ -156,7 +145,7 @@ nrf_gpio_pin_set(LED_BLUE);
 	ble_stack_init();
 	device_manager_init(erase_bonds);
 
- 	radion_sent=1;//flag to enable TS messages
+ 	radio_sent=1;//flag to enable TS messages
 
 
 	gap_params_init();
@@ -169,7 +158,7 @@ nrf_gpio_pin_set(LED_BLUE);
 	APP_ERROR_CHECK(err_code);
 	
 	
-	uint8_t buff_counter[30];
+	uint8_t buff_counter[70];
 	uint8_t len_t, main_tick=0;
 
 	for (;;)

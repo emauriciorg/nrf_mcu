@@ -286,16 +286,7 @@ void cafe_setup_rx(void){
     memcpy( user_radio_addr.base_addr1 , base_addr1 , 5);
     
     update_nrf_radio_address(user_radio_addr);
-
-
-
 	cafe_config_t cafe_config       = cafe_DEFAULT_CONFIG;
-	cafe_config.rf_channel          = 5;
-	cafe_config.crc                 = cafe_CRC_16BIT;
-	cafe_config.payload_length      = 8;
-	cafe_config.bitrate             = cafe_2MBPS;
-	cafe_config.mode                = I_AM_TRANSMITTER;
-	cafe_config.event_handler       = cafe_event_handler_rx;
 
  	cafe_init( &cafe_config );
 	cafe_start_rx();

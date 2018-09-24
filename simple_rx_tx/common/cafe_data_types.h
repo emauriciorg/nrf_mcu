@@ -1,4 +1,4 @@
-#ifndef _CAFE_DATATYPE_H_
+ #ifndef _CAFE_DATATYPE_H_
 #define _CAFE_DATATYPE_H_
 
 
@@ -27,6 +27,7 @@
 // Hard coded parameters - change if necessary
 #define     CAFE_CORE_MAX_PAYLOAD_LENGTH    32
 #define     cafe_CORE_RX_FIFO_SIZE          8
+#define     cafe_CORE_TX_FIFO_SIZE          8
 
 #define     cafe_SYS_TIMER                  NRF_TIMER2
 #define     cafe_SYS_TIMER_IRQ_Handler      TIMER2_IRQHandler
@@ -39,6 +40,25 @@
 #define     cafe_INT_RX_DR_MSK              0x04
 
 
+// Hard coded parameters - change if necessary
+#define     UESB_CORE_MAX_PAYLOAD_LENGTH    32
+#define     UESB_CORE_TX_FIFO_SIZE          8
+#define     UESB_CORE_RX_FIFO_SIZE          8
+
+#define     UESB_SYS_TIMER                  NRF_TIMER2
+#define     UESB_SYS_TIMER_IRQ_Handler      TIMER2_IRQHandler
+
+#define     UESB_PPI_TIMER_START            4
+#define     UESB_PPI_TIMER_STOP             5
+#define     UESB_PPI_RX_TIMEOUT             6
+#define     UESB_PPI_TX_START               7
+
+// Interrupt flags
+#define     UESB_INT_TX_SUCCESS_MSK         0x01
+#define     UESB_INT_TX_FAILED_MSK          0x02
+#define     UESB_INT_RX_DR_MSK              0x04
+
+#define     UESB_PID_RESET_VALUE            0xFF
 
 
 typedef struct  {
@@ -47,6 +67,7 @@ typedef struct  {
                  uint8_t   base_addr1 [5]  ;
                  uint8_t   logic_pipe [8]  ;
 }nrf_st_address;
+
 
 typedef enum {
     I_AM_TRANSMITTER,          // Primary transmitter
@@ -112,7 +133,7 @@ typedef struct
     uint8_t                 radio_irq_priority;
 }cafe_config_t;
 
-#define cafe_DEFAULT_CONFIG {.mode                  = I_AM_RECIEVER,                    \
+#define cafe_DEFAULT_CONFIG_RX {.mode                  = I_AM_RECIEVER,                    \
                              .event_handler         = cafe_event_handler_rx,                                \
                              .rf_channel            = 5,                                \
                              .payload_length        = CAFE_CORE_MAX_PAYLOAD_LENGTH,     \
@@ -124,7 +145,19 @@ typedef struct
                              .radio_irq_priority    = 1}
 
 
+// Default radio parameters, roughly equal to nRF24L default parameters (except CRC which is set to 16-bit, and protocol set to DPL)
+#define cafe_DEFAULT_CONFIG_TX {.mode                  = I_AM_TRANSMITTER,                    \
+                             .event_handler         = uesb_event_handler,                                \
+                             .rf_channel            = 5,                                \
+                             .payload_length        = CAFE_CORE_MAX_PAYLOAD_LENGTH,     \
+                             .rf_addr_length        = 5,                                \
+                             .bitrate               = cafe_2MBPS,               \
+                             .crc                   = cafe_CRC_16BIT,                   \
+                             .tx_output_power       = cafe_TX_POWER_0DBM,               \
+                             .tx_mode               = cafe_TXMODE_AUTO,                 \
+                             .radio_irq_priority    = 1}
 	
+
 
 
 typedef struct
@@ -137,11 +170,23 @@ typedef struct
 }cafe_payload_t;
 
 
-
 typedef struct
 {
     cafe_payload_t *payload_ptr[cafe_CORE_RX_FIFO_SIZE];
     uint32_t        count;
 }cafe_payload_rx_fifo_t;
+
+typedef struct
+{
+    cafe_payload_t *payload_ptr[cafe_CORE_TX_FIFO_SIZE];
+    uint32_t        entry_point;
+    uint32_t        exit_point;
+    uint32_t        count;
+}cafe_payload_tx_fifo_t;
+
+
+
+
+
 
 #endif

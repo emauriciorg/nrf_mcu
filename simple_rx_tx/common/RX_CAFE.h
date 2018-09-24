@@ -32,11 +32,6 @@ void update_nrf_radio_address(nrf_st_address radio_addr);
 
 
 
-
-
-
-
-
 /*Emition related functions*/
 
 uint32_t cafe_start_tx(void);
