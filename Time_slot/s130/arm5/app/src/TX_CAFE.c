@@ -1,4 +1,4 @@
-#include "TX_CAFE.h"
+#include "../inc/TX_CAFE.h"
 #include "nrf_gpio.h"
 #include <string.h>
 #include <stdio.h>

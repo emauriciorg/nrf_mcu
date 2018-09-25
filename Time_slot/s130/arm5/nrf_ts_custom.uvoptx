@@ -471,8 +471,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\app\bleAPP.c</PathWithFileName>
-      <FilenameWithoutPath>bleAPP.c</FilenameWithoutPath>
+      <PathWithFileName>.\app\src\uart_app.c</PathWithFileName>
+      <FilenameWithoutPath>uart_app.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -483,8 +483,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\app\main.c</PathWithFileName>
-      <FilenameWithoutPath>main.c</FilenameWithoutPath>
+      <PathWithFileName>.\app\src\TX_CAFE.c</PathWithFileName>
+      <FilenameWithoutPath>TX_CAFE.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -495,8 +495,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\app\sys_event.c</PathWithFileName>
-      <FilenameWithoutPath>sys_event.c</FilenameWithoutPath>
+      <PathWithFileName>.\app\src\timeslot.c</PathWithFileName>
+      <FilenameWithoutPath>timeslot.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -507,8 +507,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\app\timeslot.c</PathWithFileName>
-      <FilenameWithoutPath>timeslot.c</FilenameWithoutPath>
+      <PathWithFileName>.\app\src\sys_event.c</PathWithFileName>
+      <FilenameWithoutPath>sys_event.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -519,8 +519,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\app\TX_CAFE.c</PathWithFileName>
-      <FilenameWithoutPath>TX_CAFE.c</FilenameWithoutPath>
+      <PathWithFileName>.\app\src\micro_cli.c</PathWithFileName>
+      <FilenameWithoutPath>micro_cli.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -531,8 +531,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\app\source\uart_app.c</PathWithFileName>
-      <FilenameWithoutPath>uart_app.c</FilenameWithoutPath>
+      <PathWithFileName>.\app\src\main.c</PathWithFileName>
+      <FilenameWithoutPath>main.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -543,8 +543,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\app\source\micro_cli.c</PathWithFileName>
-      <FilenameWithoutPath>micro_cli.c</FilenameWithoutPath>
+      <PathWithFileName>.\app\src\bleAPP.c</PathWithFileName>
+      <FilenameWithoutPath>bleAPP.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

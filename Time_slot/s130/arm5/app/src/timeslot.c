@@ -6,10 +6,10 @@
 #include "nrf_gpio.h"
 #include "app_util.h"
 #include "softdevice_handler.h"
-#include "boards.h"
-#include "bbn_board.h"
-#include "TX_CAFE.h"
-#include "uart_app.h"
+
+#include "../inc/bbn_board.h"
+#include "../inc/TX_CAFE.h"
+#include "../inc/uart_app.h"
 #include <stdio.h>
 #define APP_ROUTINE_IRQ  
 

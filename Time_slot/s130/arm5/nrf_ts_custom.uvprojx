@@ -380,39 +380,39 @@
           <GroupName>Application</GroupName>
           <Files>
             <File>
-              <FileName>bleAPP.c</FileName>
+              <FileName>uart_app.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\app\bleAPP.c</FilePath>
-            </File>
-            <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\app\main.c</FilePath>
-            </File>
-            <File>
-              <FileName>sys_event.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\app\sys_event.c</FilePath>
-            </File>
-            <File>
-              <FileName>timeslot.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\app\timeslot.c</FilePath>
+              <FilePath>.\app\src\uart_app.c</FilePath>
             </File>
             <File>
               <FileName>TX_CAFE.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\app\TX_CAFE.c</FilePath>
+              <FilePath>.\app\src\TX_CAFE.c</FilePath>
             </File>
             <File>
-              <FileName>uart_app.c</FileName>
+              <FileName>timeslot.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\app\source\uart_app.c</FilePath>
+              <FilePath>.\app\src\timeslot.c</FilePath>
+            </File>
+            <File>
+              <FileName>sys_event.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\src\sys_event.c</FilePath>
             </File>
             <File>
               <FileName>micro_cli.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\app\source\micro_cli.c</FilePath>
+              <FilePath>.\app\src\micro_cli.c</FilePath>
+            </File>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\src\main.c</FilePath>
+            </File>
+            <File>
+              <FileName>bleAPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\src\bleAPP.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -828,39 +828,39 @@
           <GroupName>Application</GroupName>
           <Files>
             <File>
-              <FileName>bleAPP.c</FileName>
+              <FileName>uart_app.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\app\bleAPP.c</FilePath>
-            </File>
-            <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\app\main.c</FilePath>
-            </File>
-            <File>
-              <FileName>sys_event.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\app\sys_event.c</FilePath>
-            </File>
-            <File>
-              <FileName>timeslot.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\app\timeslot.c</FilePath>
+              <FilePath>.\app\src\uart_app.c</FilePath>
             </File>
             <File>
               <FileName>TX_CAFE.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\app\TX_CAFE.c</FilePath>
+              <FilePath>.\app\src\TX_CAFE.c</FilePath>
             </File>
             <File>
-              <FileName>uart_app.c</FileName>
+              <FileName>timeslot.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\app\source\uart_app.c</FilePath>
+              <FilePath>.\app\src\timeslot.c</FilePath>
+            </File>
+            <File>
+              <FileName>sys_event.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\src\sys_event.c</FilePath>
             </File>
             <File>
               <FileName>micro_cli.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\app\source\micro_cli.c</FilePath>
+              <FilePath>.\app\src\micro_cli.c</FilePath>
+            </File>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\src\main.c</FilePath>
+            </File>
+            <File>
+              <FileName>bleAPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\src\bleAPP.c</FilePath>
             </File>
           </Files>
         </Group>

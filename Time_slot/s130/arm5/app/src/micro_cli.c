@@ -1,11 +1,11 @@
 #include <string.h>
 #include <stdio.h>
-#include "micro_cli.h"
+#include "../inc/micro_cli.h"
 #include "app_uart.h"
-#include "common_structs.h"
-#include "command_list.h"
+#include "../inc/common_structs.h"
+#include "../inc/command_list.h"
 #include "nrf_gpio.h"
-#include "../bbn_board.h"
+#include "../inc/bbn_board.h"
 /* 
 	implementation of a cli like parser 
 	mainly used for debuggin purposes, to tranfers data a simple

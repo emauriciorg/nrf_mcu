@@ -1,6 +1,6 @@
-#include "bleAPP.h"
+#include "../inc/bleAPP.h"
 
-#include "sys_event.h"
+#include "../inc/sys_event.h"
 
 #include "ble_conn_params.h"
 #include "ble_hci.h"
@@ -11,7 +11,7 @@
 #include "device_manager.h"
 
 #include "nrf_gpio.h"
-#include "bbn_board.h"
+#include "../inc/bbn_board.h"
 #include <stdio.h>
 
 #define IS_SRVC_CHANGED_CHARACT_PRESENT  1                                          /**< Include or not the service_changed characteristic. if not enabled, the server's database cannot be changed for the lifetime of the device*/

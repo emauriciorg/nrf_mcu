@@ -7,14 +7,14 @@
 #include "ble_advertising.h"
 #include "device_manager.h"
 #include "app_timer.h"
-#include "timeslot.h"
-#include "uart_app.h"
+#include "../inc/timeslot.h"
+#include "../inc/uart_app.h"
 #include "nrf_delay.h"
-#include "bleAPP.h"
-#include "sys_event.h"
-#include "bbn_board.h"
-#include "TX_CAFE.h"
-#include "source/micro_cli.h"
+#include "../inc/bleAPP.h"
+#include "../inc/sys_event.h"
+#include "../inc/bbn_board.h"
+#include "../inc/TX_CAFE.h"
+#include "../inc/micro_cli.h"
 
 #define APP_TIMER_PRESCALER              0                                          /**< Value of the RTC1 PRESCALER register. */
 #define APP_TIMER_OP_QUEUE_SIZE          4                                          /**< Size of timer operation queues. */

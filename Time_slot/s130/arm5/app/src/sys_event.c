@@ -1,5 +1,5 @@
 
-#include "sys_event.h"
+#include "../inc/sys_event.h"
 
 /**@brief Function for dispatching a system event to interested modules.
  *

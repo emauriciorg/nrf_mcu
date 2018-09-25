@@ -19,7 +19,7 @@
 #include "nrf51.h"
 #include "nrf51_bitfields.h"
 
-#include "../../../../simple_rx_tx/common/cafe_data_types.h"
+#include "../../../../../simple_rx_tx/common/cafe_data_types.h"
 
 
 void get_rx_payload(uint8_t *out_buffer);

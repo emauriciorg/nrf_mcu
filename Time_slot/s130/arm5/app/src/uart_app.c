@@ -4,10 +4,10 @@
 
 #include "nrf6310.h"/* depends on board, use mainly to address the macros for the pins */
 
-#include "uart_app.h"
-#include "micro_cli.h"
+#include "../inc/uart_app.h"
+#include "../inc/micro_cli.h"
 #include "app_uart.h"
-#include "common_structs.h"
+#include "../inc/common_structs.h"
 
 extern void uart_event_handle(app_uart_evt_t * p_event);
 
