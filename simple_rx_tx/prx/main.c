@@ -69,7 +69,7 @@ int main(void)
 	
 			connection_status=1;
 		
-			sprintf((char *)rssi_buffer,"\nrssi -%d %d state: %d , recieved_counter %d\n",get_rssi(),led_state, NRF_RADIO->STATE, recieved_counter);
+			sprintf((char *)rssi_buffer,"Parameters[rssi -%d] [ state: %d]\n",get_rssi(), NRF_RADIO->STATE);
 			simple_uart_putstring(rssi_buffer);;
 			print_received_data();
 			led_state=0;
@@ -83,8 +83,6 @@ int main(void)
 				connection_status=0;
 				simple_uart_putstring("Connection loss\n");  
 			}
-			sprintf((char *)rssi_buffer,"\nrssi -%d %d state: %d\n",get_rssi(),led_state, NRF_RADIO->STATE);
-			simple_uart_putstring(rssi_buffer);;
 			
 		}
 		nrf_delay_ms(500);

@@ -28,31 +28,24 @@
 						    | RADIO_SHORTS_ADDRESS_RSSISTART_Msk \
 						    | RADIO_SHORTS_DISABLED_RSSISTOP_Msk )
 
+int8_t g_rssi  		  =0; //PUT INTO AN STRUCTURE
+uint8_t        radio_sent =0;
+unsigned int   led_state  =0;
 
-uint8_t radio_sent=0;
-extern uint8_t counter_sec;
-unsigned int led_state=0;
-
-cafe_payload_t  rx_payload;
-
+cafe_payload_t  		rx_payload;
 static cafe_event_handler_t     m_event_handler;
-
-// RF parameters
 static cafe_config_t            m_config_local;
-
 static cafe_payload_t           m_tx_fifo_payload[UESB_CORE_TX_FIFO_SIZE];
 static cafe_payload_tx_fifo_t   m_tx_fifo;
-// RX FIFO
 static  uint8_t                 m_rx_payload_buffer[CAFE_CORE_MAX_PAYLOAD_LENGTH + 2];
-
-// Run time variables
+static  uint8_t                 m_tx_payload_buffer[CAFE_CORE_MAX_PAYLOAD_LENGTH + 2];
 static volatile uint32_t        m_interrupt_flags       = 0;
 
 
-static  uint8_t                 m_tx_payload_buffer[CAFE_CORE_MAX_PAYLOAD_LENGTH + 2];
 
+// These function pointers are changed dynamically, depending on protocol configuration and state
 
-int8_t g_rssi  = 0; //PUT INTO AN STRUCTURE
+static void (*update_rf_payload_format)(uint32_t payload_length) = 0;
 
 uint32_t cafe_read_rx_payload(cafe_payload_t *payload);
 
@@ -64,6 +57,8 @@ uint32_t cafe_get_clear_interrupts(uint32_t *interrupts)
 	ENABLE_RF_IRQ;
 	return true;
 }
+
+
 
 
 void cafe_event_handler_rx(void)
@@ -90,9 +85,6 @@ void cafe_event_handler_rx(void)
 }
 
 
-// These function pointers are changed dynamically, depending on protocol configuration and state
-
-static void (*update_rf_payload_format)(uint32_t payload_length) = 0;
 
 
 // Function that swaps the bits within each byte in a uint32. Used to convert from nRF24L type addressing to nRF51 type addressing
@@ -105,15 +97,6 @@ static uint32_t bytewise_bit_swap(uint32_t inp)
 
 
 
-static void initialize_fifos()
-{
-
-	for(int i = 0; i < UESB_CORE_TX_FIFO_SIZE; i++)
-	{
-		m_tx_fifo.payload_ptr[i] = &m_tx_fifo_payload[i];
-	}
-
-}
 
 /*CUSTOM PROTOCOL HANDLING*/
 static bool rx_fifo_push_rfbuf(uint8_t pipe)
@@ -140,6 +123,7 @@ uint8_t recieved_counter=0;
 	NRF_RADIO->SHORTS                = RADIO_SHORTS_COMMON | RADIO_SHORTS_DISABLED_TXEN_Msk;
 	NRF_RADIO->TASKS_RXEN            = 1;
 	
+	recieved_counter++;
 	rx_fifo_push_rfbuf( NRF_RADIO->RXMATCH );
 	m_interrupt_flags   |= cafe_INT_RX_DR_MSK;
 	if (m_event_handler != 0) m_event_handler();
@@ -198,7 +182,7 @@ uint32_t cafe_init(cafe_config_t *parameters)
 
 	m_interrupt_flags    = 0;
 	update_radio_parameters();
-	initialize_fifos();	
+	//initialize_fifos();	
 	ppi_init();	
 	NVIC_SetPriority( RADIO_IRQn,  m_config_local.radio_irq_priority & 0x03);
 
@@ -217,19 +201,17 @@ uint32_t uesb_disable(void)
 	static int ifg_change_addr=0x01;
 
 	NRF_RADIO->SHORTS   = RADIO_SHORTS_COMMON;
-	//NRF_RADIO->INTENSET = RADIO_INTENSET_DISABLED_Msk;
 	NRF_RADIO->INTENSET = RADIO_INTENSET_END_Msk;
 	 
-	 if (ifg_change_addr==4)
+	if (ifg_change_addr==4)
 	 	ifg_change_addr=1;
 	else	 
 	 	ifg_change_addr++;
 	 
-	NRF_RADIO->TXADDRESS = ifg_change_addr;
-
+	NRF_RADIO->TXADDRESS   = ifg_change_addr;
 	NRF_RADIO->RXADDRESSES = 1 << 0;//current_payload->pipe;
-
-	NRF_RADIO->FREQUENCY = m_config_local.rf_channel;
+	NRF_RADIO->FREQUENCY   = m_config_local.rf_channel;
+	
 	uint16_t len;
 	len=sprintf((char *)&m_tx_payload_buffer[2],"nrf_%0d, %02d ",ifg_change_addr,packet_counter++);
 	memset(&m_tx_payload_buffer[len+2],'O',32-(len+3));
@@ -248,16 +230,10 @@ uint32_t uesb_disable(void)
 
 static uint32_t write_tx_payload(cafe_payload_t *payload) // ~50us @ 61 bytes SB
 {
-	
-	DISABLE_RF_IRQ;
-	
+	DISABLE_RF_IRQ;	
 	memcpy(m_tx_fifo.payload_ptr[0], payload, sizeof(cafe_payload_t));
-		
-	
 	ENABLE_RF_IRQ;
-	
 	start_tx_transaction();
-	
 	return true;
 }
 
@@ -267,56 +243,31 @@ uint32_t uesb_write_tx_payload(cafe_payload_t *payload)
 }
 
 
-
-
 uint32_t uesb_flush_tx(void)
 {
 	DISABLE_RF_IRQ;
 	m_tx_fifo.count = 0;
-	//m_tx_fifo.entry_point = 0;
-	//m_tx_fifo.exit_point = 0;
 	ENABLE_RF_IRQ;
 	return true;
 }
-
-
-
-uint32_t uesb_get_clear_interrupts(uint32_t *interrupts)
-{
-	DISABLE_RF_IRQ;
-	*interrupts = m_interrupt_flags;
-	m_interrupt_flags = 0;
-	ENABLE_RF_IRQ;
-	return true;
-}
-
-
 
 
 
 
 void uesb_event_handler()
 {
-    static uint32_t rf_interrupts;
-
+    static uint32_t rf_interrupts;    
+    cafe_get_clear_interrupts(&rf_interrupts);
     
-    uesb_get_clear_interrupts(&rf_interrupts);
-    
-    if(rf_interrupts & UESB_INT_TX_SUCCESS_MSK)
-    {   
+    if(rf_interrupts & UESB_INT_TX_SUCCESS_MSK){   
     }
     
-    if(rf_interrupts & UESB_INT_TX_FAILED_MSK)
-    {
-//        uesb_flush_tx();
+    if(rf_interrupts & UESB_INT_TX_FAILED_MSK){
     }
     
-    if(rf_interrupts & UESB_INT_RX_DR_MSK)
-    {
+    if(rf_interrupts & UESB_INT_RX_DR_MSK){
     
     }
-    
-    
 }
 
 uint32_t cafe_start_rx(void)
@@ -356,8 +307,15 @@ void self_TX_CAFE_configuration(uint8_t transeciever_mode){
 	if (transeciever_mode){
 
 		cafe_config_t cafe_config       = cafe_DEFAULT_CONFIG_TX;
+		cafe_config.event_handler         = uesb_event_handler;
 	    	cafe_init(&cafe_config);
 	    	update_nrf_radio_address(user_radio_addr);
+	
+	    		if ( radio_sent){
+		//		start_tx_transaction();
+			radio_sent=0;
+		}
+
 	}else{
 		/*USER DEFINED ADDR*/
    		cafe_config_t cafe_config       = cafe_DEFAULT_CONFIG_RX;
@@ -377,10 +335,6 @@ int8_t get_rssi(void){
 	return g_rssi;
 }
 
-
-
-
-
 void update_nrf_radio_address(nrf_st_address radio_addr){
 	
 	NRF_RADIO->PREFIX0 = bytewise_bit_swap(   radio_addr.logic_pipe[3]  <<  24  |   radio_addr.logic_pipe[2]  <<  16 |   radio_addr.logic_pipe[1]  << 8   |  radio_addr.logic_pipe[0]);
@@ -388,9 +342,6 @@ void update_nrf_radio_address(nrf_st_address radio_addr){
 	NRF_RADIO->BASE0   = bytewise_bit_swap(   radio_addr.base_addr0[0] << 24 |  radio_addr.base_addr0[1] << 16  |  radio_addr.base_addr0[2] << 8 | radio_addr.base_addr0[3]);
 	NRF_RADIO->BASE1   = bytewise_bit_swap(   radio_addr.base_addr1[0] << 24 |  radio_addr.base_addr1[1] << 16  |  radio_addr.base_addr1[2] << 8 | radio_addr.base_addr1[3]);
 }
-
-
-
 
 void get_rx_payload(uint8_t *out_buffer){
 	memcpy(  out_buffer,   m_rx_payload_buffer,  CAFE_CORE_MAX_PAYLOAD_LENGTH);
@@ -401,7 +352,10 @@ void get_rx_payload(uint8_t *out_buffer){
 #if 0
 uint32_t cafe_disable(void)
 {
-	NRF_PPI->CHENCLR = (1 << cafe_PPI_TIMER_START) | (1 << cafe_PPI_TIMER_STOP) | (1 << cafe_PPI_RX_TIMEOUT) | (1 << cafe_PPI_TX_START);
+	NRF_PPI->CHENCLR = (1 << cafe_PPI_TIMER_START) 
+			 | (1 << cafe_PPI_TIMER_STOP) 
+			 | (1 << cafe_PPI_RX_TIMEOUT) 
+			 | (1 << cafe_PPI_TX_START);
 	return true;
 }
 #endif
@@ -430,14 +384,12 @@ uint32_t cafe_set_rf_channel(uint32_t channel)
 
 void RADIO_IRQHandler()
 {
-	if (NRF_RADIO->EVENTS_READY && (NRF_RADIO->INTENSET & RADIO_INTENSET_READY_Msk))
-	{
+	if (NRF_RADIO->EVENTS_READY && (NRF_RADIO->INTENSET & RADIO_INTENSET_READY_Msk)){
 		NRF_RADIO->EVENTS_READY = 0;
 
 	}
 
-	if (NRF_RADIO->EVENTS_END && (NRF_RADIO->INTENSET & RADIO_INTENSET_END_Msk))
-	{
+	if (NRF_RADIO->EVENTS_END && (NRF_RADIO->INTENSET & RADIO_INTENSET_END_Msk)){
 		NRF_RADIO->EVENTS_END = 0;
 		radio_sent=1;
 		// Call the correct on_radio_end function, depending on the current protocol state
@@ -445,23 +397,20 @@ void RADIO_IRQHandler()
 		
 	}
 
-	if (NRF_RADIO->EVENTS_DISABLED && (NRF_RADIO->INTENSET & RADIO_INTENSET_DISABLED_Msk))
-	{
+	if (NRF_RADIO->EVENTS_DISABLED && (NRF_RADIO->INTENSET & RADIO_INTENSET_DISABLED_Msk)){
 		NRF_RADIO->EVENTS_DISABLED = 0; 
-#ifdef RX_MODE
-		m_interrupt_flags |= 0X01;
-	
-		if (m_event_handler != 0) m_event_handler();
-		start_tx_transaction();
-#else
-		on_radio_disabled();
-#endif
+
+		if (m_config_local.mode==I_AM_TRANSMITTER){
+			m_interrupt_flags |= 0X01;
+			if (m_event_handler != 0) m_event_handler();
+			start_tx_transaction();
+		}
+		else{
+			on_radio_disabled();
+			nrf_gpio_pin_toggle(10);
+		}
 	}
 
-	if (NRF_RADIO->EVENTS_DISABLED && (NRF_RADIO->INTENSET & RADIO_INTENSET_DISABLED_Msk)){
-		NRF_RADIO->EVENTS_DISABLED = 0;
-		//ADD OPTION FOR BOTH TX AND RX
-	}
 
 }
 

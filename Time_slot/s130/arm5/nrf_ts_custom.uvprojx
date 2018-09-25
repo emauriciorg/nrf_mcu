@@ -380,11 +380,6 @@
           <GroupName>Application</GroupName>
           <Files>
             <File>
-              <FileName>uart_app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\app\source\uart_app.c</FilePath>
-            </File>
-            <File>
               <FileName>bleAPP.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\app\bleAPP.c</FilePath>
@@ -408,6 +403,16 @@
               <FileName>TX_CAFE.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\app\TX_CAFE.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\source\uart_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>micro_cli.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\source\micro_cli.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -823,11 +828,6 @@
           <GroupName>Application</GroupName>
           <Files>
             <File>
-              <FileName>uart_app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\app\source\uart_app.c</FilePath>
-            </File>
-            <File>
               <FileName>bleAPP.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\app\bleAPP.c</FilePath>
@@ -851,6 +851,16 @@
               <FileName>TX_CAFE.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\app\TX_CAFE.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\source\uart_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>micro_cli.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\source\micro_cli.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1538,7 +1548,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
         </targetInfos>
       </component>
-      <component Cclass="nRF_Drivers" Cgroup="app_uart" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_uart_default">
+      <component Cclass="nRF_Drivers" Cgroup="app_uart" Cvariant="Fifo" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_uart_Fifo">
         <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="3.1.0"/>
         <targetInfos>
           <targetInfo name="nrf51822_xxac_s130" versionMatchMode="fixed"/>
@@ -1692,6 +1702,12 @@
         <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="4.0.0-2.alpha"/>
         <targetInfos>
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
+        </targetInfos>
+      </component>
+      <component Cclass="nRF_Libraries" Cgroup="app_fifo" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_fifo">
+        <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="3.1.0"/>
+        <targetInfos>
+          <targetInfo name="nrf51822_xxac_s130"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Libraries" Cgroup="app_timer" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_timer_default">
@@ -2022,19 +2038,26 @@
       </file>
       <file attr="config" category="source" name="uart\app_uart.c" version="3.1.0">
         <instance index="0">RTE\nRF_Drivers\nRF51822_xxAC\app_uart.c</instance>
-        <component Cclass="nRF_Drivers" Cgroup="app_uart" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_uart_default"/>
+        <component Cclass="nRF_Drivers" Cgroup="app_uart" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="4.0.0-2.alpha" condition="app_uart_default"/>
+        <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="4.0.0-2.alpha"/>
+        <targetInfos>
+          <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
+        </targetInfos>
+      </file>
+      <file attr="config" category="header" name="uart\app_uart.h" version="3.1.0">
+        <instance index="0">RTE\nRF_Drivers\nRF51822_xxAC\app_uart.h</instance>
+        <component Cclass="nRF_Drivers" Cgroup="app_uart" Cvariant="Fifo" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_uart_Fifo"/>
         <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="3.1.0"/>
         <targetInfos>
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
         </targetInfos>
       </file>
-      <file attr="config" category="header" name="uart\app_uart.h" version="3.1.0">
-        <instance index="0">RTE\nRF_Drivers\nRF51822_xxAC\app_uart.h</instance>
-        <component Cclass="nRF_Drivers" Cgroup="app_uart" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_uart_default"/>
+      <file attr="config" category="source" name="uart\app_uart_fifo.c" version="0.0.0">
+        <instance index="0">RTE\nRF_Drivers\nRF51822_xxAC\app_uart_fifo.c</instance>
+        <component Cclass="nRF_Drivers" Cgroup="app_uart" Cvariant="Fifo" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_uart_Fifo"/>
         <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="3.1.0"/>
         <targetInfos>
-          <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
         </targetInfos>
       </file>
@@ -2205,6 +2228,22 @@
         <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="3.1.0"/>
         <targetInfos>
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
+          <targetInfo name="nrf51822_xxac_s130"/>
+        </targetInfos>
+      </file>
+      <file attr="config" category="source" name="fifo\app_fifo.c" version="0.0.0">
+        <instance index="0">RTE\nRF_Libraries\nRF51822_xxAC\app_fifo.c</instance>
+        <component Cclass="nRF_Libraries" Cgroup="app_fifo" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_fifo"/>
+        <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="3.1.0"/>
+        <targetInfos>
+          <targetInfo name="nrf51822_xxac_s130"/>
+        </targetInfos>
+      </file>
+      <file attr="config" category="header" name="fifo\app_fifo.h" version="0.0.0">
+        <instance index="0">RTE\nRF_Libraries\nRF51822_xxAC\app_fifo.h</instance>
+        <component Cclass="nRF_Libraries" Cgroup="app_fifo" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_fifo"/>
+        <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="3.1.0"/>
+        <targetInfos>
           <targetInfo name="nrf51822_xxac_s130"/>
         </targetInfos>
       </file>

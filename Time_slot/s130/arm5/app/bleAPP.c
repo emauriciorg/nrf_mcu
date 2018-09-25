@@ -58,16 +58,8 @@ static ble_uuid_t m_adv_uuids[] = {{BLE_UUID_DEVICE_INFORMATION_SERVICE, BLE_UUI
     // Register with the SoftDevice handler module for BLE events.
 	err_code = softdevice_sys_evt_handler_set(sys_evt_dispatch);
 	APP_ERROR_CHECK(err_code);
-	
+}	
 
-}
-/**@brief Function for dispatching a BLE stack event to all modules with a BLE stack event handler.
- *
- * @details This function is called from the BLE Stack event interrupt handler after a BLE stack
- *          event has been received.
- *
- * @param[in] p_ble_evt  Bluetooth stack event.
- */
  void ble_evt_dispatch(ble_evt_t * p_ble_evt)
 {
 	dm_ble_evt_handler(p_ble_evt);
@@ -91,12 +83,12 @@ static ble_uuid_t m_adv_uuids[] = {{BLE_UUID_DEVICE_INFORMATION_SERVICE, BLE_UUI
 	{
 		case BLE_GAP_EVT_CONNECTED:
 		nrf_gpio_pin_set(LED_RED);
-		nrf_gpio_pin_clear(LED_GREEN);
+		nrf_gpio_pin_clear(LED_BLUE);
 		m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
 		break;
 
 		case BLE_GAP_EVT_DISCONNECTED:
-		nrf_gpio_pin_set(LED_GREEN);
+		nrf_gpio_pin_set(LED_BLUE);
 		nrf_gpio_pin_clear(LED_RED);
 
 		m_conn_handle = BLE_CONN_HANDLE_INVALID;
@@ -107,56 +99,6 @@ static ble_uuid_t m_adv_uuids[] = {{BLE_UUID_DEVICE_INFORMATION_SERVICE, BLE_UUI
 		break;
 	}
 }
-#if 0
-void on_ble_evt(ble_evt_t * p_ble_evt)
-{
-	uint32_t                         err_code;
-	switch (p_ble_evt->header.evt_id){
-
-	case BLE_GAP_EVT_CONNECTED:
-		//printf("ble connecting\n");
-
-		err_code = bsp_indication_set(BSP_INDICATE_CONNECTED);
-		APP_ERROR_CHECK(err_code);
-		m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
-		rssi_indicator= sd_ble_gap_rssi_start(p_ble_evt->evt.gap_evt.conn_handle,1,4);
-		printf("ble connected\n");
-		ble_connection_state=1;
-
-	break;
-	case BLE_GAP_EVT_DISCONNECTED:
-		err_code = bsp_indication_set(BSP_INDICATE_IDLE);
-		APP_ERROR_CHECK(err_code);
-		m_conn_handle = BLE_CONN_HANDLE_INVALID;
-		printf("ble disconnected\n");
-		ble_connection_state=0;
-
-	break;
-	case BLE_GAP_EVT_SEC_PARAMS_REQUEST:
-	    // Pairing not supported
-		printf("params request\n");
-
-		err_code = sd_ble_gap_sec_params_reply(m_conn_handle, BLE_GAP_SEC_STATUS_PAIRING_NOT_SUPP, NULL, NULL);
-
-//	    err_code = sd_ble_gap_sec_params_reply(m_conn_handle, BLE_GAP_SEC_STATUS_PAIRING_NOT_SUPP, NULL, NULL);
-		APP_ERROR_CHECK(err_code);
-	break;
-	case BLE_GATTS_EVT_SYS_ATTR_MISSING:
-		printf("sys attr missing\n");
-	    // No system attributes have been stored.
-		err_code = sd_ble_gatts_sys_attr_set(m_conn_handle, NULL, 0, 0);
-		APP_ERROR_CHECK(err_code);
-	break;
-	case BLE_GAP_EVT_ADV_REPORT:
-
-		printf("scaned \n");//,p_ble_evt->evt.gap_evt.params.adv_report.data);	
-	break;
-	default:
-	    // No implementation needed.
-	break;
-	}
-}
-#endif
 void conn_params_error_handler(uint32_t nrf_error)
 {
 	APP_ERROR_HANDLER(nrf_error);
@@ -216,33 +158,6 @@ void gap_params_init(void)
 	APP_ERROR_CHECK(err_code);
 }
 
-
-/**@brief Function for handling the YYY Service events. 
- * YOUR_JOB implement a service handler function depending on the event the service you are using can generate
- *
- * @details This function will be called for all YY Service events which are passed to
- *          the application.
- *
- * @param[in]   p_yy_service   YY Service structure.
- * @param[in]   p_evt          Event received from the YY Service.
- *
- *
-static void on_yys_evt(ble_yy_service_t     * p_yy_service, 
-		       ble_yy_service_evt_t * p_evt)
-{
-    switch (p_evt->evt_type)
-    {
-	case BLE_YY_NAME_EVT_WRITE:
-	    APPL_LOG("[APPL]: charact written with value %s. \r\n", p_evt->params.char_xx.value.p_str);
-	    break;
-	
-	default:
-	    // No implementation needed.
-	    break;
-    }
-}*/
-
-
 /**@brief Function for initializing services that will be used by the application.
  */
  void services_init(void)
@@ -273,16 +188,6 @@ static void on_yys_evt(ble_yy_service_t     * p_yy_service,
 }
 
 
-/**@brief Function for handling the Connection Parameters Module.
- *
- * @details This function will be called for all events in the Connection Parameters Module which
- *          are passed to the application.
- *          @note All this function does is to disconnect. This could have been done by simply
- *                setting the disconnect_on_fail config parameter, but instead we use the event
- *                handler mechanism to demonstrate its use.
- *
- * @param[in] p_evt  Event received from the Connection Parameters Module.
- */
  void on_conn_params_evt(ble_conn_params_evt_t * p_evt)
 {
 	uint32_t err_code;
@@ -317,6 +222,5 @@ static void on_yys_evt(ble_yy_service_t     * p_yy_service,
 	options.ble_adv_fast_timeout  = APP_ADV_TIMEOUT_IN_SECONDS;
 
 	err_code = ble_advertising_init(&advdata, NULL, &options, on_adv_evt, NULL);
-	printf("error Code is %x\n", err_code);
 	APP_ERROR_CHECK(err_code);
 }

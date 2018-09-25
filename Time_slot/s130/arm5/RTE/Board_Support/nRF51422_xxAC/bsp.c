@@ -497,7 +497,7 @@ uint32_t bsp_indication_text_set(bsp_indication_t indicate, char const * p_text)
     uint32_t err_code = bsp_indication_set(indicate);
 
 #ifdef BSP_UART_SUPPORT
-    printf("%s", p_text);
+//    printf("%s", p_text);
 #endif // BSP_UART_SUPPORT
 
     return err_code;

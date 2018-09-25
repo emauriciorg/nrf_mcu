@@ -3,7 +3,7 @@
  * Auto generated Run-Time-Environment Component Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'ts_mesb' 
+ * Project: 'nrf_ts_custom' 
  * Target:  'nrf51422_xxac_s130' 
  */
 

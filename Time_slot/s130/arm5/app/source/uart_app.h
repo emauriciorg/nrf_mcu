@@ -1,8 +1,13 @@
 #ifndef  UART_APP_
 #define UART_APP_
-#include "app_uart.h"
-extern void uart_event_handle(app_uart_evt_t * p_event);
+
+#include <stdint.h>
+#include  "common_structs.h"
 extern void uart_init(void);
 
-void msg_dbg(const char * message,uint32_t length);
+
+//#define NRF_DEBUG_LOG(__ARGS_)
+void uart_msg_dbg(const char * message,uint32_t length);
+void uart_set_structe(st_uart_string *external_uart_stream);
+void uart_check_stream(void);
 #endif

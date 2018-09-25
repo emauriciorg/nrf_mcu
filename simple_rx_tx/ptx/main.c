@@ -83,13 +83,7 @@ int main(void)
                          TX_PIN, 
                         false);
 		
-    cafe_config_t cafe_config       = cafe_DEFAULT_CONFIG;
-    cafe_config.rf_channel          = 5;
-    cafe_config.crc                 = cafe_CRC_16BIT;
-    cafe_config.retransmit_count    = 6;
-    cafe_config.retransmit_delay    = 500;
-    cafe_config.dynamic_ack_enabled = 0;
-    cafe_config.bitrate             = cafe_BITRATE_2MBPS;
+    cafe_config_t cafe_config       = cafe_DEFAULT_CONFIG_TX;
     cafe_config.event_handler       = cafe_event_handler;
     
     cafe_init(&cafe_config);

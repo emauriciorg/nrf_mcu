@@ -15,7 +15,7 @@
 #include "nrf_gpio.h"
 #include <string.h>
 #include <stdio.h>
-
+#include "cafe_data_types.h"
 unsigned char ready_to_send=0;
 
 // RF parameters
@@ -175,8 +175,8 @@ uint32_t cafe_disable(void)
 
 	NRF_RADIO->FREQUENCY = m_config_local.rf_channel;
 	uint16_t len;
-	len=sprintf((char *)&m_tx_payload_buffer[2],"nrf_%0d, %02d ",ifg_change_addr,packet_counter++);
-	memset(&m_tx_payload_buffer[len+2],'O',32-(len+3));
+	len=sprintf((char *)&m_tx_payload_buffer[2],"[addr:%x][%s][pckg:%02d]",SLAVE_addr,SLAVE_name,packet_counter++);
+	memset(&m_tx_payload_buffer[len+2],' ',32-(len+3));
 	m_tx_payload_buffer[0]=32;
 	m_tx_payload_buffer[1]=1;
 	NRF_RADIO->PACKETPTR = (uint32_t)&m_tx_payload_buffer[0];

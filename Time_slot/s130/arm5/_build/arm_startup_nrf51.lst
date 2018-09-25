@@ -353,18 +353,19 @@ v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\3.1.0\hal -IC:\Keil_v5\ARM\PACK\Nor
 dicSemiconductor\nRF_Drivers\3.1.0\pstorage -IC:\Keil_v5\ARM\PACK\NordicSemicon
 ductor\nRF_Drivers\3.1.0\uart -IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Exa
 mples\10.0.0\bsp -IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\3.1.0\
-button -IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\3.1.0\timer -IC:
-\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\3.1.0\trace -IC:\Keil_v5\AR
-M\PACK\NordicSemiconductor\nRF_Libraries\3.1.0\uart -IC:\Keil_v5\ARM\PACK\Nordi
-cSemiconductor\nRF_Libraries\3.1.0\util -IC:\Keil_v5\ARM\PACK\NordicSemiconduct
-or\nRF_SoftDevice_Common\1.1.5\softdevice_handler -IC:\Keil_v5\ARM\PACK\NordicS
-emiconductor\nRF_SoftDevice_S130\1.0.2\headers -IC:\Keil_v5\ARM\CMSIS\Include -
--predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 522" --prede
-fine="_RTE_ SETA 1" --predefine="NRF51 SETA 1" --predefine="BLE_STACK_SUPPORT_R
-EQD SETA 1" --predefine="S130 SETA 1" --predefine="BOARD_PCA10028 SETA 1" --pre
-define="SOFTDEVICE_PRESENT SETA 1" --predefine="NRF51 SETA 1" --predefine="SWI_
-DISABLE0 SETA 1" --list=.\_build\arm_startup_nrf51.lst RTE\Device\nRF51822_xxAC
-\arm_startup_nrf51.s
+button -IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\3.1.0\fifo -IC:\
+Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\3.1.0\timer -IC:\Keil_v5\ARM
+\PACK\NordicSemiconductor\nRF_Libraries\3.1.0\trace -IC:\Keil_v5\ARM\PACK\Nordi
+cSemiconductor\nRF_Libraries\3.1.0\uart -IC:\Keil_v5\ARM\PACK\NordicSemiconduct
+or\nRF_Libraries\3.1.0\util -IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftD
+evice_Common\1.1.5\softdevice_handler -IC:\Keil_v5\ARM\PACK\NordicSemiconductor
+\nRF_SoftDevice_S130\1.0.2\headers -IC:\Keil_v5\ARM\CMSIS\Include --predefine="
+__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 522" --predefine="_RTE_ 
+SETA 1" --predefine="NRF51 SETA 1" --predefine="BLE_STACK_SUPPORT_REQD SETA 1" 
+--predefine="S130 SETA 1" --predefine="BOARD_PCA10028 SETA 1" --predefine="SOFT
+DEVICE_PRESENT SETA 1" --predefine="NRF51 SETA 1" --predefine="SWI_DISABLE0 SET
+A 1" --list=.\_build\arm_startup_nrf51.lst RTE\Device\nRF51822_xxAC\arm_startup
+_nrf51.s
 
 
 

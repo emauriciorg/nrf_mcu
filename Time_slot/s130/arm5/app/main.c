@@ -13,7 +13,8 @@
 #include "bleAPP.h"
 #include "sys_event.h"
 #include "bbn_board.h"
-
+#include "TX_CAFE.h"
+#include "source/micro_cli.h"
 
 #define APP_TIMER_PRESCALER              0                                          /**< Value of the RTC1 PRESCALER register. */
 #define APP_TIMER_OP_QUEUE_SIZE          4                                          /**< Size of timer operation queues. */
@@ -35,7 +36,6 @@
 
 static dm_application_instance_t        m_app_handle;                               /**< Application identifier allocated by device manager */
 
-extern uint8_t counter_sec;
 extern uint8_t radio_sent;
 extern uint16_t                          m_conn_handle;   /**< Handle of the current connection. */
 
@@ -127,46 +127,72 @@ static void device_manager_init(bool erase_bonds)
 	APP_ERROR_CHECK(err_code);
 }
 
+extern uint8_t led_state;
+
+void print_received_data(void)
+{
+	uint8_t len_t;
+	uint8_t temp_buffer[32+10];
+	uint8_t temp_buffer2[32+30];
+	get_rx_payload(temp_buffer);
+	len_t=sprintf((char *)temp_buffer2,"Received [%s]\n",temp_buffer );
+	
+	uart_msg_dbg((char *)temp_buffer2,len_t );
+	
+}
 
 
 int main(void)
 {
 	uint32_t err_code;
 	bool erase_bonds;
+	st_uart_string uart_stream;
 
   	nrf_gpio_range_cfg_output(8, 10);	
 	nrf_gpio_pin_set(LED_BLUE);
 	nrf_gpio_pin_set(LED_GREEN);
 	
-	timers_init();
+	uart_set_structe (&uart_stream);
 	uart_init();
+	uart_msg_dbg("Start!\n",strlen("Start!\n") );
 
-	msg_dbg("Start!\n",strlen("Start!\n") );
+	timers_init();
+
 	ble_stack_init();
+
 	device_manager_init(erase_bonds);
 
  	radio_sent=1;//flag to enable TS messages
 
 
 	gap_params_init();
+
 	advertising_init();
+
 	services_init();
+
 	conn_params_init();
-	timeslot_sd_init();
+	//timeslot_sd_init();
 		
 	err_code = ble_advertising_start(BLE_ADV_MODE_FAST);
 	APP_ERROR_CHECK(err_code);
 	
-	
-	uint8_t buff_counter[70];
-	uint8_t len_t, main_tick=0;
 
+	
 	for (;;)
 	{	
-		nrf_delay_ms(1000);
-		len_t=sprintf((char *)buff_counter,"Count :[%d],[%d]\n", counter_sec, main_tick++);
-		msg_dbg((char *)buff_counter,len_t );
 		
+	        cli_parse_command(&uart_stream);
+		
+		if( led_state){
+			led_state= 0;
+		//	nrf_gpio_pin_toggle(LED_GREEN);
+			
+			print_received_data();
+		}else{
+		//	nrf_gpio_pin_toggle(LED_RED);
+		}
+
 	}
 }
 
@@ -174,6 +200,6 @@ int main(void)
 
 void app_error_handler(uint32_t error_code, uint32_t line_num, const uint8_t * p_file_name)
 {
-	msg_dbg("Error code is", 10);
+	uart_msg_dbg("Error code is", 10);
 	while(1);
 }

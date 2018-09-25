@@ -7,20 +7,23 @@
 #include "nrf.h"
 #include "nrf51.h"
 #include "nrf51_bitfields.h"
-#include "nrf_delay.h"
+
 #include "nrf_gpio.h"
 
-#define S2
+#define S3
 
 #ifdef S1
 	#define SLAVE_addr 0xF4 
+	#define SLAVE_name "S1"
 #endif
 
 #ifdef S2
 	#define SLAVE_addr 0xAA
+	#define SLAVE_name "S2"
 #endif
 #ifdef S3
 	#define SLAVE_addr 0x12
+	#define SLAVE_name "S3"
 #endif
 
 
@@ -147,7 +150,7 @@ typedef struct
 
 // Default radio parameters, roughly equal to nRF24L default parameters (except CRC which is set to 16-bit, and protocol set to DPL)
 #define cafe_DEFAULT_CONFIG_TX {.mode                  = I_AM_TRANSMITTER,                    \
-                             .event_handler         = uesb_event_handler,                                \
+                             .event_handler         = 0,                                \
                              .rf_channel            = 5,                                \
                              .payload_length        = CAFE_CORE_MAX_PAYLOAD_LENGTH,     \
                              .rf_addr_length        = 5,                                \

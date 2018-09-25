@@ -1,68 +1,68 @@
 
 
-#include "uart_app.h"
+#include <string.h>
 
 #include "nrf6310.h"/* depends on board, use mainly to address the macros for the pins */
-#include <string.h>
-/**@brief   Function for handling app_uart events.
- *
- * @details This function will receive a single character from the app_uart module and append it to 
- *          a string. The string will be be sent over BLE when the last character received was a 
- *          'new line' i.e '\n' (hex 0x0D) or if the string has reached a length of 
- *          @ref NUS_MAX_DATA_LENGTH.
- */
-/**@snippet [Handling the data received over UART] */
+
+#include "uart_app.h"
+#include "micro_cli.h"
+#include "app_uart.h"
+#include "common_structs.h"
+
+extern void uart_event_handle(app_uart_evt_t * p_event);
+
 
 #define UART_TX_BUF_SIZE                256                                         /**< UART TX buffer size. */
 #define UART_RX_BUF_SIZE                256                                         /**< UART RX buffer size. */
 
+st_uart_string *local_uart_stream;
+
+void uart_set_structe(st_uart_string *external_uart_stream){
+	local_uart_stream= external_uart_stream;
+
+}
+
 void uart_event_handle(app_uart_evt_t * p_event)
 {
-#define BLE_NUS_MAX_DATA_LEN 20
-	static uint8_t data_array[BLE_NUS_MAX_DATA_LEN];
-    static uint8_t index = 0;
-    uint32_t       err_code;
-
-    switch (p_event->evt_type)
-    {
+	
+	switch (p_event->evt_type){
+	
 	case APP_UART_DATA_READY:
-	 //   UNUSED_VARIABLE(app_uart_get(&data_array[index]));
-	    index++;
-
-	    if ((data_array[index - 1] == '\n') || (index >= (BLE_NUS_MAX_DATA_LEN)))
-	    {
-	//	err_code = ble_nus_string_send(&m_nus, data_array, index);
-		index=0;
-		//printf("%s\n",data_array);
-		memset(data_array,0,sizeof(data_array));
-		if (err_code != NRF_ERROR_INVALID_STATE)
-		{
-		 //   APP_ERROR_CHECK(err_code);
-		}
-		
-		index = 0;
-	    }
-	    break;
+		app_uart_get(&local_uart_stream->stream[ (local_uart_stream->index)++ ]);
+		uart_check_stream();
+	break;
 
 	case APP_UART_COMMUNICATION_ERROR:
-	    APP_ERROR_HANDLER(p_event->data.error_communication);
-	    break;
-
+		APP_ERROR_HANDLER(p_event->data.error_communication);
+    	break;
 	case APP_UART_FIFO_ERROR:
-	    APP_ERROR_HANDLER(p_event->data.error_code);
-	    break;
+		APP_ERROR_HANDLER(p_event->data.error_code);
+	break;
 
 	default:
 	    break;
     }
 }
 
-/**@snippet [Handling the data received over UART] */
+void uart_check_stream(void){
+
+	char *pch= (char *)memchr(local_uart_stream->stream,'\n',strlen(local_uart_stream->stream));
+	
+
+	if(pch){
+   	      
+		local_uart_stream->pending_parse =true;
+		local_uart_stream->index       =0; 	
+	}else{
+		local_uart_stream->pending_parse =false;
+	}
 
 
-/**@brief  Function for initializing the UART module.
- */
-/**@snippet [UART Initialization] */
+	if( local_uart_stream->index > UART_STRING_MAX_SIZE)
+		local_uart_stream->index       =0; 
+	
+}
+
 void uart_init(void)
 {
     uint32_t                     err_code;
@@ -87,9 +87,7 @@ void uart_init(void)
 }
 
 
-void msg_dbg(const char * message,uint32_t length){
-
-
+void uart_msg_dbg(const char * message,uint32_t length){
 	for (uint32_t i = 0; i < length; i++)
 	{
 		while(app_uart_put(message[i]) != NRF_SUCCESS);

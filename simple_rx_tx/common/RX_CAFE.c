@@ -286,7 +286,7 @@ void cafe_setup_rx(void){
     memcpy( user_radio_addr.base_addr1 , base_addr1 , 5);
     
     update_nrf_radio_address(user_radio_addr);
-	cafe_config_t cafe_config       = cafe_DEFAULT_CONFIG;
+	cafe_config_t cafe_config       = cafe_DEFAULT_CONFIG_RX;
 
  	cafe_init( &cafe_config );
 	cafe_start_rx();
