@@ -1,4 +1,4 @@
-PROJECT_NAME := nrf51_uesb_ptx
+PROJECT_NAME := nrf51_cafe_ptx
 
 export OUTPUT_FILENAME
 #MAKEFILE_NAME := $(CURDIR)/$(word $(words $(MAKEFILE_LIST)),$(MAKEFILE_LIST))
@@ -115,7 +115,7 @@ vpath %.s $(ASM_PATHS)
 OBJECTS = $(C_OBJECTS) $(ASM_OBJECTS)
 
 nrf51422_xxac: OUTPUT_FILENAME := nrf51422_xxac
-nrf51422_xxac: LINKER_SCRIPT=uesb_ptx_nrf51.ld
+nrf51422_xxac: LINKER_SCRIPT=cafe_ptx_nrf51.ld
 nrf51422_xxac: $(BUILD_DIRECTORIES) $(OBJECTS)
 	@echo Linking target: $(OUTPUT_FILENAME).out
 	$(NO_ECHO)$(CC) $(LDFLAGS) $(OBJECTS) $(LIBS) -o $(OUTPUT_BINARY_DIRECTORY)/$(OUTPUT_FILENAME).out
