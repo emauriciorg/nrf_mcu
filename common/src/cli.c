@@ -7,7 +7,7 @@
 #include "nrf_gpio.h"
 #include "../inc/bbn_board.h"
 #include "../inc/aes_app.h"
-
+#include "../inc/ble_app.h"
 /* 
 	implementation of a cli like parser 
 	mainly used for debuggin purposes, to tranfers data a simple
@@ -184,6 +184,11 @@ unsigned char cli_parse(char *string){
 			
 			for(index=0;index<28;index++)printf("\n\n");
 			break;
+	case cmd_ble:   printf("Sending to ble..'");
+			ble_send (string, strlen(string));
+
+			
+			break; 	
 
 	default:	
 			CLI_OUT("unknow command\n");

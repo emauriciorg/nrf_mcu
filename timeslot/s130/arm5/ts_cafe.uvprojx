@@ -395,11 +395,6 @@
               <FilePath>.\app\src\main.c</FilePath>
             </File>
             <File>
-              <FileName>ble_app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\app\src\ble_app.c</FilePath>
-            </File>
-            <File>
               <FileName>aes_app.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\common\src\aes_app.c</FilePath>
@@ -418,6 +413,16 @@
               <FileName>uart_app.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\common\src\uart_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>custom_ble_services.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\common\src\custom_ble_services.c</FilePath>
+            </File>
+            <File>
+              <FileName>ble_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\common\src\ble_app.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -848,11 +853,6 @@
               <FilePath>.\app\src\main.c</FilePath>
             </File>
             <File>
-              <FileName>ble_app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\app\src\ble_app.c</FilePath>
-            </File>
-            <File>
               <FileName>aes_app.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\common\src\aes_app.c</FilePath>
@@ -871,6 +871,16 @@
               <FileName>uart_app.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\common\src\uart_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>custom_ble_services.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\common\src\custom_ble_services.c</FilePath>
+            </File>
+            <File>
+              <FileName>ble_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\common\src\ble_app.c</FilePath>
             </File>
           </Files>
         </Group>

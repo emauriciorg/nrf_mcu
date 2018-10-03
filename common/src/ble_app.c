@@ -14,8 +14,11 @@
 #include "../inc/bbn_board.h"
 #include <stdio.h>
 
+#include "custom_ble_services.h"
+
+
 #define IS_SRVC_CHANGED_CHARACT_PRESENT  1                                          /**< Include or not the service_changed characteristic. if not enabled, the server's database cannot be changed for the lifetime of the device*/
-#define DEVICE_NAME                      "Master_V1"                               /**< Name of device. Will be included in the advertising data. */
+#define DEVICE_NAME                      "BLE_TS_CS4"                               /**< Name of device. Will be included in the advertising data. */
 #define MANUFACTURER_NAME                "NordicSemiconductor"                      /**< Manufacturer. Will be passed to Device Information Service. */
 #define APP_ADV_INTERVAL                 300                                        /**< The advertising interval (in units of 0.625 ms. This value corresponds to 25 ms). */
 #define APP_ADV_TIMEOUT_IN_SECONDS       180                                        /**< The advertising timeout in units of seconds. */
@@ -29,6 +32,9 @@
 
 static ble_uuid_t m_adv_uuids[] = {{BLE_UUID_DEVICE_INFORMATION_SERVICE, BLE_UUID_TYPE_BLE}}; /**< Universally unique service identifiers. */
 //static ble_uuid_t m_adv_uuids[] = {{BLE_UUID_DEVICE_INFORMATION_SERVICE, BLE_UUID_TYPE_BLE, BLE_UUID_NUS_SERVICE}}; /**< Universally unique service identifiers. */
+
+
+ble_cs_t m_custom_service;
 
 uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 	dm_event_t const  * p_event,
@@ -63,11 +69,13 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 	APP_ERROR_CHECK(err_code);
 }	
 
- void ble_evt_dispatch(ble_evt_t * p_ble_evt)
+ void ble_evt_dispatch( ble_evt_t * p_ble_evt)
 {
 	dm_ble_evt_handler(p_ble_evt);
 	ble_conn_params_on_ble_evt(p_ble_evt);
-	
+
+	ble_cs_on_ble_evt(&m_custom_service, p_ble_evt);
+
 	on_ble_evt(p_ble_evt);
 	ble_advertising_on_ble_evt(p_ble_evt);
 
@@ -142,14 +150,16 @@ void gap_params_init(void)
 
 	BLE_GAP_CONN_SEC_MODE_SET_OPEN(&sec_mode);
 
-	err_code = sd_ble_gap_device_name_set(&sec_mode,
-		(const uint8_t *)DEVICE_NAME,
-		strlen(DEVICE_NAME));
+	err_code = sd_ble_gap_device_name_set(
+		    &sec_mode
+		   ,(const uint8_t *) DEVICE_NAME
+		   ,strlen(DEVICE_NAME));
+	
 	APP_ERROR_CHECK(err_code);
 
-    /* YOUR_JOB: Use an appearance value matching the application's use case.
-    err_code = sd_ble_gap_appearance_set(BLE_APPEARANCE_);
-    APP_ERROR_CHECK(err_code); */
+	err_code = sd_ble_gap_appearance_set( 	BLE_APPEARANCE_GENERIC_CLOCK   );
+	APP_ERROR_CHECK(err_code); 
+
 
 	memset(&gap_conn_params, 0, sizeof(gap_conn_params));
 
@@ -157,7 +167,10 @@ void gap_params_init(void)
 	gap_conn_params.max_conn_interval = MAX_CONN_INTERVAL;
 	gap_conn_params.slave_latency     = SLAVE_LATENCY;
 	gap_conn_params.conn_sup_timeout  = CONN_SUP_TIMEOUT;
-
+	printf("max_conn_interval %x\n",MAX_CONN_INTERVAL);
+	printf("min_conn_interval %x\n",MIN_CONN_INTERVAL);
+	printf("min_conn_interval %x\n",SLAVE_LATENCY);
+	printf("min_conn_interval %x\n",CONN_SUP_TIMEOUT);
 	err_code = sd_ble_gap_ppcp_set(&gap_conn_params);
 	APP_ERROR_CHECK(err_code);
 		
@@ -165,31 +178,13 @@ void gap_params_init(void)
   
 /**@brief Function for initializing services that will be used by the application.
  */
- void services_init(void)
+
+
+
+
+void services_init(void)
 {
-    /* YOUR_JOB: Add code to initialize the services used by the application.
-    uint32_t                           err_code;
-    ble_xxs_init_t                     xxs_init;
-    ble_yys_init_t                     yys_init;
-
-    // Initialize XXX Service.
-    memset(&xxs_init, 0, sizeof(xxs_init));
-
-    xxs_init.evt_handler                = NULL;
-    xxs_init.is_xxx_notify_supported    = true;
-    xxs_init.ble_xx_initial_value.level = 100; 
-    
-    err_code = ble_bas_init(&m_xxs, &xxs_init);
-    APP_ERROR_CHECK(err_code);
-
-    // Initialize YYY Service.
-    memset(&yys_init, 0, sizeof(yys_init));
-    yys_init.evt_handler                  = on_yys_evt;
-    yys_init.ble_yy_initial_value.counter = 0;
-
-    err_code = ble_yy_service_init(&yys_init, &yy_init);
-    APP_ERROR_CHECK(err_code);
-    */
+	custom_service_init (&m_custom_service);
 }
 
 
@@ -220,7 +215,7 @@ void gap_params_init(void)
 
 static dm_application_instance_t        m_app_handle;                               /**< Application identifier allocated by device manager */
 
-/**@brief Function for initializing the Advertising functionality.
+/**@brief GAP setting and init.
  */
 
  void advertising_init(void)
@@ -228,7 +223,7 @@ static dm_application_instance_t        m_app_handle;                           
 	uint32_t      err_code;
 	ble_advdata_t advdata;
 
-    // Build advertising data struct to pass into @ref ble_advertising_init.
+        
 	memset(&advdata, 0, sizeof(advdata));
 
 	advdata.name_type               = BLE_ADVDATA_FULL_NAME;
@@ -311,4 +306,11 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 
 	err_code = dm_register(&m_app_handle, &register_param);
 	APP_ERROR_CHECK(err_code);
+}
+
+
+
+void ble_send(uint8_t *p_string, uint8_t length){
+
+	ble_nus_string_send(&m_custom_service, p_string, length);
 }

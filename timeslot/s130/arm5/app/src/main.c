@@ -27,6 +27,7 @@ extern uint16_t                          m_conn_handle;   /**< Handle of the cur
 void sys_evt_dispatch(uint32_t sys_evt)
 {
 	pstorage_sys_event_handler(sys_evt);
+	
 	ble_advertising_on_sys_evt(sys_evt);
 	nrf_evt_signal_handler(sys_evt);
 }
@@ -82,12 +83,13 @@ int main(void)
  	radio_sent=1;//flag to enable TS messages
 
 
-	gap_params_init();
-
-	advertising_init();
-
+	gap_params_init(); //gap connection paramaters (timeouts)
 	services_init();
+	advertising_init();
+	
 
+	
+	
 	conn_params_init();
 #ifdef TS_ENABLED
 	timeslot_sd_init();
