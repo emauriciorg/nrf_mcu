@@ -44,24 +44,24 @@
 
 
 // Hard coded parameters - change if necessary
-#define     UESB_CORE_MAX_PAYLOAD_LENGTH    32
-#define     UESB_CORE_TX_FIFO_SIZE          8
-#define     UESB_CORE_RX_FIFO_SIZE          8
+#define     CAFE_CORE_MAX_PAYLOAD_LENGTH    32
+#define     CAFE_CORE_TX_FIFO_SIZE          8
+#define     CAFE_CORE_RX_FIFO_SIZE          8
 
-#define     UESB_SYS_TIMER                  NRF_TIMER2
-#define     UESB_SYS_TIMER_IRQ_Handler      TIMER2_IRQHandler
+#define     CAFE_SYS_TIMER                  NRF_TIMER2
+#define     CAFE_SYS_TIMER_IRQ_Handler      TIMER2_IRQHandler
 
-#define     UESB_PPI_TIMER_START            4
-#define     UESB_PPI_TIMER_STOP             5
-#define     UESB_PPI_RX_TIMEOUT             6
-#define     UESB_PPI_TX_START               7
+#define     CAFE_PPI_TIMER_START            4
+#define     CAFE_PPI_TIMER_STOP             5
+#define     CAFE_PPI_RX_TIMEOUT             6
+#define     CAFE_PPI_TX_START               7
 
 // Interrupt flags
-#define     UESB_INT_TX_SUCCESS_MSK         0x01
-#define     UESB_INT_TX_FAILED_MSK          0x02
-#define     UESB_INT_RX_DR_MSK              0x04
+#define     CAFE_INT_TX_SUCCESS_MSK         0x01
+#define     CAFE_INT_TX_FAILED_MSK          0x02
+#define     CAFE_INT_RX_DR_MSK              0x04
 
-#define     UESB_PID_RESET_VALUE            0xFF
+#define     CAFE_PID_RESET_VALUE            0xFF
 
 
 typedef struct  {
@@ -111,7 +111,7 @@ typedef enum {
 
 typedef void (*cafe_event_handler_t)(void);
 
-// Main UESB configuration struct, contains all radio parameters
+// Main CAFE configuration struct, contains all radio parameters
 typedef struct
 {
    

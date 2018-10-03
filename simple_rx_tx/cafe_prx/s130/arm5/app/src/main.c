@@ -30,11 +30,12 @@ static uint8_t  uncripted_data[40];
 void print_received_data(void)
 {
 	uint8_t temp_buffer[CAFE_CORE_MAX_PAYLOAD_LENGTH+5];
-	uint8_t temp_buffer2[CAFE_CORE_MAX_PAYLOAD_LENGTH+20];
 	get_rx_payload(temp_buffer);
 	
 	
 #ifdef SHOW_AES_PACKET
+	uint8_t temp_buffer2[CAFE_CORE_MAX_PAYLOAD_LENGTH+20];
+	
 	simple_uart_put('[');
 
 	for (int i=0;i <32; i++){

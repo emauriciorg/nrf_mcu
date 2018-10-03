@@ -11,22 +11,22 @@
  */
 
 #include "TX_CAFE.h"
-#include "uesb_error_codes.h"
+#include "cafe_error_codes.h"
 #include "nrf_gpio.h"
 #include <string.h>
 #include <stdio.h>
 
-static uesb_event_handler_t     m_event_handler;
+static cafe_event_handler_t     m_event_handler;
 
 // RF parameters
-static uesb_config_t            m_config_local;
+static cafe_config_t            m_config_local;
 
 // TX FIFO
-static uesb_payload_t           m_tx_fifo_payload[UESB_CORE_TX_FIFO_SIZE];
-static uesb_payload_tx_fifo_t   m_tx_fifo;
+static cafe_payload_t           m_tx_fifo_payload[CAFE_CORE_TX_FIFO_SIZE];
+static cafe_payload_tx_fifo_t   m_tx_fifo;
 
 
-static  uint8_t                 m_tx_payload_buffer[UESB_CORE_MAX_PAYLOAD_LENGTH + 2];
+static  uint8_t                 m_tx_payload_buffer[CAFE_CORE_MAX_PAYLOAD_LENGTH + 2];
 
 // Run time variables
 static volatile uint32_t        m_interrupt_flags       = 0;
@@ -58,7 +58,7 @@ static void update_rf_payload_format_esb_dpl(uint32_t payload_length)
 					   (RADIO_PCNF1_ENDIAN_Big              << RADIO_PCNF1_ENDIAN_Pos)  |
 					   ((m_config_local.rf_addr_length - 1) << RADIO_PCNF1_BALEN_Pos)   |
 					   (0                                   << RADIO_PCNF1_STATLEN_Pos) |
-					   (UESB_CORE_MAX_PAYLOAD_LENGTH        << RADIO_PCNF1_MAXLEN_Pos);
+					   (CAFE_CORE_MAX_PAYLOAD_LENGTH        << RADIO_PCNF1_MAXLEN_Pos);
 }
 
 
@@ -103,7 +103,7 @@ void update_nrf_radio_address(nrf_st_address radio_addr){
 static void initialize_fifos()
 {
 	m_tx_fifo.count       = 0;
-	for(int i = 0; i < UESB_CORE_TX_FIFO_SIZE; i++)
+	for(int i = 0; i < CAFE_CORE_TX_FIFO_SIZE; i++)
 	{
 		m_tx_fifo.payload_ptr[i] = &m_tx_fifo_payload[i];
 	}
@@ -122,20 +122,20 @@ static void tx_fifo_remove_last()
 
 static void ppi_init()
 {
-	NRF_PPI->CH[UESB_PPI_TIMER_START].EEP  =  (uint32_t)&NRF_RADIO->EVENTS_READY;
-//	NRF_PPI->CH[UESB_PPI_TIMER_START].TEP  =  (uint32_t)&UESB_SYS_TIMER->TASKS_START;
-	NRF_PPI->CH[UESB_PPI_TIMER_STOP].EEP   =  (uint32_t)&NRF_RADIO->EVENTS_ADDRESS;
-//	NRF_PPI->CH[UESB_PPI_TIMER_STOP].TEP   =  (uint32_t)&UESB_SYS_TIMER->TASKS_STOP;
-//	NRF_PPI->CH[UESB_PPI_RX_TIMEOUT].EEP   =  (uint32_t)&UESB_SYS_TIMER->EVENTS_COMPARE[0];
-//	NRF_PPI->CH[UESB_PPI_RX_TIMEOUT].TEP   =  (uint32_t)&NRF_RADIO->TASKS_DISABLE;
-//	NRF_PPI->CH[UESB_PPI_TX_START].EEP     =  (uint32_t)&UESB_SYS_TIMER->EVENTS_COMPARE[1];
-	NRF_PPI->CH[UESB_PPI_TX_START].TEP     =  (uint32_t)&NRF_RADIO->TASKS_TXEN;
+	NRF_PPI->CH[CAFE_PPI_TIMER_START].EEP  =  (uint32_t)&NRF_RADIO->EVENTS_READY;
+//	NRF_PPI->CH[CAFE_PPI_TIMER_START].TEP  =  (uint32_t)&CAFE_SYS_TIMER->TASKS_START;
+	NRF_PPI->CH[CAFE_PPI_TIMER_STOP].EEP   =  (uint32_t)&NRF_RADIO->EVENTS_ADDRESS;
+//	NRF_PPI->CH[CAFE_PPI_TIMER_STOP].TEP   =  (uint32_t)&CAFE_SYS_TIMER->TASKS_STOP;
+//	NRF_PPI->CH[CAFE_PPI_RX_TIMEOUT].EEP   =  (uint32_t)&CAFE_SYS_TIMER->EVENTS_COMPARE[0];
+//	NRF_PPI->CH[CAFE_PPI_RX_TIMEOUT].TEP   =  (uint32_t)&NRF_RADIO->TASKS_DISABLE;
+//	NRF_PPI->CH[CAFE_PPI_TX_START].EEP     =  (uint32_t)&CAFE_SYS_TIMER->EVENTS_COMPARE[1];
+	NRF_PPI->CH[CAFE_PPI_TX_START].TEP     =  (uint32_t)&NRF_RADIO->TASKS_TXEN;
 }
 
-uint32_t uesb_init(uesb_config_t *parameters)
+uint32_t cafe_init(cafe_config_t *parameters)
 {
 	m_event_handler = parameters->event_handler;
-	memcpy(&m_config_local, parameters, sizeof(uesb_config_t));
+	memcpy(&m_config_local, parameters, sizeof(cafe_config_t));
 
 	m_interrupt_flags    = 0;
 	m_last_rx_packet_crc = 0xFFFFFFFF;
@@ -150,9 +150,9 @@ uint32_t uesb_init(uesb_config_t *parameters)
 	return true;
 }
 
-uint32_t uesb_disable(void)
+uint32_t cafe_disable(void)
 {
-	NRF_PPI->CHENCLR = (1 << UESB_PPI_TIMER_START) | (1 << UESB_PPI_TIMER_STOP) | (1 << UESB_PPI_RX_TIMEOUT) | (1 << UESB_PPI_TX_START);
+	NRF_PPI->CHENCLR = (1 << CAFE_PPI_TIMER_START) | (1 << CAFE_PPI_TIMER_STOP) | (1 << CAFE_PPI_RX_TIMEOUT) | (1 << CAFE_PPI_TX_START);
 	return true;
 }
 
@@ -194,13 +194,13 @@ static void start_tx_transaction()
 	NRF_RADIO->TASKS_TXEN  = 1;
 }
 
-static uint32_t write_tx_payload(uesb_payload_t *payload) // ~50us @ 61 bytes SB
+static uint32_t write_tx_payload(cafe_payload_t *payload) // ~50us @ 61 bytes SB
 {
-//	if (m_tx_fifo.count >= UESB_CORE_TX_FIFO_SIZE) return UESB_ERROR_TX_FIFO_FULL;
+//	if (m_tx_fifo.count >= CAFE_CORE_TX_FIFO_SIZE) return CAFE_ERROR_TX_FIFO_FULL;
 
 //	DISABLE_RF_IRQ;
 	
-	memcpy(m_tx_fifo.payload_ptr[0], payload, sizeof(uesb_payload_t));
+	memcpy(m_tx_fifo.payload_ptr[0], payload, sizeof(cafe_payload_t));
 		
 	m_tx_fifo.count++;
 	
@@ -211,7 +211,7 @@ static uint32_t write_tx_payload(uesb_payload_t *payload) // ~50us @ 61 bytes SB
 	return true;
 }
 
-uint32_t uesb_write_tx_payload(uesb_payload_t *payload)
+uint32_t cafe_write_tx_payload(cafe_payload_t *payload)
 {
 	return write_tx_payload(payload);
 }
@@ -219,7 +219,7 @@ uint32_t uesb_write_tx_payload(uesb_payload_t *payload)
 
 
 
-uint32_t uesb_flush_tx(void)
+uint32_t cafe_flush_tx(void)
 {
 	//DISABLE_RF_IRQ;
 	m_tx_fifo.count = 0;
@@ -229,7 +229,7 @@ uint32_t uesb_flush_tx(void)
 
 
 
-uint32_t uesb_get_clear_interrupts(uint32_t *interrupts)
+uint32_t cafe_get_clear_interrupts(uint32_t *interrupts)
 {
 	//DISABLE_RF_IRQ;
 	*interrupts = m_interrupt_flags;
@@ -244,7 +244,7 @@ uint32_t uesb_get_clear_interrupts(uint32_t *interrupts)
 
 void on_radio_disabled_esb_dpl_tx_noack()
 {
-	m_interrupt_flags |= UESB_INT_TX_SUCCESS_MSK;	
+	m_interrupt_flags |= CAFE_INT_TX_SUCCESS_MSK;	
 	if (m_event_handler != 0) m_event_handler();
 	start_tx_transaction();
 	

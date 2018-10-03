@@ -198,9 +198,9 @@ uint32_t cafe_init(cafe_config_t *parameters)
 
 
 
-uint32_t uesb_disable(void)
+uint32_t cafe_disable(void)
 {
-	NRF_PPI->CHENCLR = (1 << UESB_PPI_TIMER_START) | (1 << UESB_PPI_TIMER_STOP) | (1 << UESB_PPI_RX_TIMEOUT) | (1 << UESB_PPI_TX_START);
+	NRF_PPI->CHENCLR = (1 << CAFE_PPI_TIMER_START) | (1 << CAFE_PPI_TIMER_STOP) | (1 << CAFE_PPI_RX_TIMEOUT) | (1 << CAFE_PPI_TX_START);
 	return true;
 }
 
@@ -263,7 +263,7 @@ void start_tx_transaction(void)
 
 
 
-uint32_t uesb_flush_tx(void)
+uint32_t cafe_flush_tx(void)
 {
 	DISABLE_RF_IRQ;
 	m_tx_fifo.count = 0;
@@ -274,18 +274,18 @@ uint32_t uesb_flush_tx(void)
 
 
 
-void uesb_event_handler()
+void cafe_event_handler()
 {
     static uint32_t rf_interrupts;    
     cafe_get_clear_interrupts(&rf_interrupts);
     
-    if(rf_interrupts & UESB_INT_TX_SUCCESS_MSK){   
+    if(rf_interrupts & CAFE_INT_TX_SUCCESS_MSK){   
     }
     
-    if(rf_interrupts & UESB_INT_TX_FAILED_MSK){
+    if(rf_interrupts & CAFE_INT_TX_FAILED_MSK){
     }
     
-    if(rf_interrupts & UESB_INT_RX_DR_MSK){
+    if(rf_interrupts & CAFE_INT_RX_DR_MSK){
     
     }
 }
@@ -329,7 +329,7 @@ void self_cafe_configuration(uint8_t transeciever_mode){
 	if (transeciever_mode){
 
 		cafe_config_t cafe_config  = cafe_DEFAULT_CONFIG_TX;
-		cafe_config.event_handler  = uesb_event_handler;
+		cafe_config.event_handler  = cafe_event_handler;
 	    	cafe_init(&cafe_config);
 	    	update_nrf_radio_address(user_radio_addr);
 	

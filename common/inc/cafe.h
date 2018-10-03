@@ -10,8 +10,8 @@
  *
  */
 
-#ifndef __MICRO_ESB_H
-#define __MICRO_ESB_H
+#ifndef __MICRO_CAFE_H
+#define __MICRO_CAFE_H
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -24,27 +24,27 @@
 
 void get_rx_payload(uint8_t *out_buffer);
 
-uint32_t uesb_disable(void);
+uint32_t cafe_disable(void);
 
-bool     uesb_is_idle(void);
+bool     cafe_is_idle(void);
 
-uint32_t uesb_write_tx_payload(cafe_payload_t *payload);
-
-
+uint32_t cafe_write_tx_payload(cafe_payload_t *payload);
 
 
-uint32_t uesb_start_tx(void);
 
 
-uint32_t uesb_get_tx_attempts(uint32_t *attempts);
+uint32_t cafe_start_tx(void);
 
 
-uint32_t uesb_get_clear_interrupts(uint32_t *interrupts);
+uint32_t cafe_get_tx_attempts(uint32_t *attempts);
 
 
-uint32_t uesb_set_rf_channel(uint32_t channel);
+uint32_t cafe_get_clear_interrupts(uint32_t *interrupts);
 
-uint32_t uesb_set_tx_power(uint8_t tx_output_power);
+
+uint32_t cafe_set_rf_channel(uint32_t channel);
+
+uint32_t cafe_set_tx_power(uint8_t tx_output_power);
 
 
 void update_nrf_radio_address(nrf_st_address radio_addr);

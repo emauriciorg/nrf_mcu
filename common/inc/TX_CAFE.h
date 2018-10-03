@@ -10,8 +10,8 @@
  *
  */
 
-#ifndef __MICRO_ESB_H
-#define __MICRO_ESB_H
+#ifndef __MICRO_CAFE_H
+#define __MICRO_CAFE_H
 
 #include <stdbool.h>
 #include <stdint.h>
