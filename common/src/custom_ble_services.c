@@ -38,6 +38,7 @@ length=sprintf((char *)nus_buffer_rx,"%d",rssi_indicator);
     }    while(app_uart_put('\n') != NRF_SUCCESS);
 */
 	uint8_t data[40];
+    memset(data,0,40);
 	memcpy(data,p_data, length);
 	printf("Recieve [%s] \n", data);
 }

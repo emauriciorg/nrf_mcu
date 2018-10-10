@@ -1,3 +1,9 @@
+/** 
+******************************************************************************
+* \file    command_list.h
+* \brief   command list for CLI.
+******************************************************************************
+*/
 #ifndef COMMAND_LIST
 #define COMMAND_LIST
 
@@ -23,7 +29,8 @@
 #define cmd_cip     0x285
 #define cmd_dcip     0x34
 
-#define cmd_sub_random_key  0x89//random key generation
+//random key generation 
+#define cmd_sub_random_key  0x89
 
 
 #define cmd_ble	     0x269

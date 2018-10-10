@@ -1,4 +1,9 @@
-
+/** 
+******************************************************************************
+* \file    main.c
+* \brief    Entry point file.
+******************************************************************************
+*/
 #include <stdint.h>
 #include <string.h>
 #include "nordic_common.h"
@@ -17,8 +22,11 @@
 #include "cafe.h"
 #include "cli.h"
 
+#include "nrf_drv_timer.h"
 #define DEAD_BEEF                        0xDEADBEEF                                 /**< Value used as error code on stack dump, can be used to identify stack location on stack unwind. */
 #define SOFT_DEVICE_ENABLED
+
+
 
 
 extern uint8_t radio_sent;
@@ -27,10 +35,10 @@ extern uint16_t                          m_conn_handle;   /**< Handle of the cur
 void sys_evt_dispatch(uint32_t sys_evt)
 {
 	pstorage_sys_event_handler(sys_evt);
-	
 	ble_advertising_on_sys_evt(sys_evt);
 	nrf_evt_signal_handler(sys_evt);
 }
+
 
 void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name){
 	app_error_handler(DEAD_BEEF, line_num, p_file_name);
@@ -44,8 +52,7 @@ static void timers_init(void){
 
 
 extern uint8_t led_state;
-
-
+unsigned char sample_text;
 
 void print_received_data(void)
 {
@@ -87,8 +94,9 @@ int main(void)
 	services_init();
 	advertising_init();
 	
-
+//setup_timer();
 	
+ //nrf_drv_timer_t TIMER_1_APP = NRF_DRV_TIMER_INSTANCE(2);
 	
 	conn_params_init();
 #ifdef TS_ENABLED
@@ -98,7 +106,8 @@ int main(void)
 	APP_ERROR_CHECK(err_code);
 
 #endif
-	
+	uint16_t counter_ble=0;
+	uint8_t temp_buff[20];
 	for (;;)
 	{	
 				
@@ -112,6 +121,12 @@ int main(void)
 		//	nrf_gpio_pin_toggle(LED_RED);
 		}
 
+		if(sample_text){
+			sample_text=0;
+			sprintf(temp_buff, "Report %d", counter_ble++);
+			ble_send (temp_buff, strlen(temp_buff));
+		}
+
 	}
 }
 
@@ -119,6 +134,6 @@ int main(void)
 
 void app_error_handler(uint32_t error_code, uint32_t line_num, const uint8_t * p_file_name)
 {
-	uart_msg_dbg("Error code is", 10);
+	uart_msg_dbg("Error at line %d ", line_num);
 	while(1);
 }

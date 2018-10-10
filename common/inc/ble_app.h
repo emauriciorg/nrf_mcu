@@ -28,8 +28,6 @@ void on_adv_evt(ble_adv_evt_t  ble_adv_evt);
 
 void gap_params_init(void);
 
-
-
 void device_manager_init(bool erase_bonds);
 
 void conn_params_init(void);

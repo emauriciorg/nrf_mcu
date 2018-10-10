@@ -83,7 +83,6 @@ typedef void (*cafe_event_handler_t)(void);
                              .rx_address_p5         = 0xC6,                             \
                              .rx_address_p6         = 0xC7,                             \
                              .rx_address_p7         = 0xC8,                             \
-                             .rx_pipes_enabled      = 0x3F,                             \
                              .dynamic_payload_length_enabled = 1,                       \
                              .dynamic_ack_enabled   = 0,                                \
                              .retransmit_delay      = 250,                              \

@@ -1,3 +1,9 @@
+/** 
+******************************************************************************
+* \file    aes_app.c
+* \brief   Encription routines .
+******************************************************************************
+*/
 #include "../inc/aes_app.h"
 
 #include <string.h>
@@ -54,12 +60,13 @@ static st_ccm_data  ccm_data;
 void aes_ccm_rng_fill_buffer(uint8_t *buf, uint32_t bufsize)
 {
     NRF_RNG->CONFIG = RNG_CONFIG_DERCEN_Enabled << RNG_CONFIG_DERCEN_Pos;
-    while (bufsize--)
-    {
+    while (bufsize--){
+
         NRF_RNG->EVENTS_VALRDY = 0;
         NRF_RNG->TASKS_START   = 1;
         while (NRF_RNG->EVENTS_VALRDY == 0);
         *buf++ = NRF_RNG->VALUE;
+    
     }
 }
 
@@ -103,6 +110,7 @@ uint8_t aes_decrypt_data(uint8_t *src_data, uint8_t  length, uint8_t *out_data){
 	}
 	
 	AES_OUT("\nAES KEY:\n[");
+
 #ifdef DEBUG_CLI_AES
 	for (i=0;i<CCM_SCRATCH_ARE_SIZE;i++)  AES_OUT("%d ", aes_key_holder[i]);	
 	AES_OUT("]\n");	
@@ -113,10 +121,12 @@ uint8_t aes_decrypt_data(uint8_t *src_data, uint8_t  length, uint8_t *out_data){
 	
 	while (NRF_CCM->EVENTS_ENDCRYPT == 0);
 
+
 	if(NRF_CCM->EVENTS_ERROR){
 		AES_OUT("\nCCM->EVENT ERROR\n");
 		return false;
 	}
+
 
 	if(NRF_CCM->MICSTATUS == (CCM_MICSTATUS_MICSTATUS_CheckFailed << CCM_MICSTATUS_MICSTATUS_Pos)){
 		AES_OUT("\nCCM->MICSTATUS  ERROR\n");
@@ -127,12 +137,14 @@ uint8_t aes_decrypt_data(uint8_t *src_data, uint8_t  length, uint8_t *out_data){
 	
 #ifdef DEBUG_CLI_AES
 	
-	for (i=0;i<out_data[CCM_IN_LENGTH_INDEX];i++)  AES_OUT("%d ", out_data[CCM_IN_PAYLOAD_INDEX+i]);
-     
+	for (i=0;i<out_data[CCM_IN_LENGTH_INDEX];i++){
+		AES_OUT("%d ", out_data[CCM_IN_PAYLOAD_INDEX+i]);
+     	}
      	AES_OUT("\n");
 	
-	for (i=0;i<out_data[CCM_IN_LENGTH_INDEX];i++) AES_OUT("%c", out_data [CCM_IN_PAYLOAD_INDEX+i]);
-
+	for (i=0;i<out_data[CCM_IN_LENGTH_INDEX];i++) {
+		AES_OUT("%c", out_data [CCM_IN_PAYLOAD_INDEX+i]);
+	}
 #endif
 	
 	return true;
@@ -198,8 +210,10 @@ uint8_t aes_encrypt_data( uint8_t *input_data, uint8_t packet_length, uint8_t *o
 	}
 
 	AES_OUT("\nAES KEY:\n[");
-	for (i=0;i<CCM_SCRATCH_ARE_SIZE;i++)
-                     AES_OUT("%d ", aes_key_holder[i]);	
+	
+	for (i=0;i<CCM_SCRATCH_ARE_SIZE;i++){
+                AES_OUT("%d ", aes_key_holder[i]);	
+	}
 	AES_OUT("]\n");	
 	
  		

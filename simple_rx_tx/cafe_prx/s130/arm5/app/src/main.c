@@ -13,7 +13,9 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include "nrf.h"
+
 #include "RX_CAFE.h"
+
 #include "nrf_delay.h"
 #include "nrf_gpio.h"
 #include "bbn_board.h"
@@ -21,6 +23,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "aes_app.h"
+
 
 //static uesb_payload_t rx_payload;
 

@@ -27,6 +27,7 @@
 #endif
 
 
+
 // Hard coded parameters - change if necessary
 #define     CAFE_CORE_MAX_PAYLOAD_LENGTH    32
 #define     cafe_CORE_RX_FIFO_SIZE          8
@@ -128,7 +129,6 @@ typedef struct
     cafe_tx_power_t         tx_output_power;
     nrf_st_address          radio_addresses;
 
-    uint8_t                 rx_pipes_enabled;
 
     // Control settings
     cafe_tx_mode_t          tx_mode;

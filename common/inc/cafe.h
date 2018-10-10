@@ -32,7 +32,6 @@ uint32_t cafe_write_tx_payload(cafe_payload_t *payload);
 
 
 
-
 uint32_t cafe_start_tx(void);
 
 
