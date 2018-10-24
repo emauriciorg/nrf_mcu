@@ -10,7 +10,9 @@
 #include "../inc/bbn_board.h"
 #include "../inc/cafe.h"
 #include "../inc/uart_app.h"
+#include "../inc/timeslot.h"
 #include <stdio.h>
+
 #define APP_ROUTINE_IRQ  
 
 #define TIMESLOT_BEGIN_IRQn         LPCOMP_IRQn             /**< Re-used LPCOMP interrupt for processing the beginning of timeslot. */
@@ -29,6 +31,7 @@ uint8_t radio_counter=0;
 uint8_t temp_buff[32];
 uint8_t radio_len=0;
 
+//#define TS_ENABLED
 void TIMESLOT_END_IRQHandler(void)
 {
 
@@ -37,13 +40,13 @@ void TIMESLOT_END_IRQHandler(void)
 
 #define TIME_TO_BLINK 10
 uint32_t blink_counter=TIME_TO_BLINK;
-extern uint8_t radio_sent;
+
 
 void TIMESLOT_BEGIN_IRQHandler(void)
 {
 
 	nrf_gpio_pin_toggle(LED_BLUE);			
-	self_cafe_configuration(1);	
+	cafe_self_configuration(I_AM_TRANSMITTER);	
 }
 
 /**Constants for timeslot API
@@ -55,6 +58,7 @@ static nrf_radio_signal_callback_return_param_t signal_callback_return_param;
 
 /**@brief Request next timeslot event in earliest configuration
 */
+
 uint32_t request_next_event_earliest(void)
 {
 	m_slot_length                                  = 15000;
@@ -193,6 +197,7 @@ nrf_radio_signal_callback_return_param_t * radio_callback(uint8_t signal_type)
 
 uint32_t timeslot_sd_init(void)
 {
+#ifdef TS_ENABLED
 	uint32_t err_code;
 
 	err_code = sd_radio_session_open(radio_callback);
@@ -210,5 +215,7 @@ uint32_t timeslot_sd_init(void)
 	NVIC_ClearPendingIRQ(TIMESLOT_BEGIN_IRQn);
 	NVIC_SetPriority(TIMESLOT_BEGIN_IRQn, 1);
     	NVIC_EnableIRQ(TIMESLOT_BEGIN_IRQn);
+#endif
 	return NRF_SUCCESS;
+
 }

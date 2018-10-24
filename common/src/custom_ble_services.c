@@ -1,4 +1,5 @@
 #include "../inc/custom_ble_services.h"
+#include "../inc/cafe.h"
 
 #include <stdint.h>
 #include <string.h>
@@ -6,7 +7,7 @@
 #include "ble_srv_common.h"
 #include "app_error.h"
 #include "ble_types.h"
-#define DEBUG_BLE_SERVICE
+//#define DEBUG_BLE_SERVICE
 #ifdef DEBUG_BLE_SERVICE
 #define BLE_OUT(...)  printf(__VA_ARGS__)
 #else
@@ -41,6 +42,10 @@ length=sprintf((char *)nus_buffer_rx,"%d",rssi_indicator);
     memset(data,0,40);
 	memcpy(data,p_data, length);
 	printf("Recieve [%s] \n", data);
+ 
+//    printf("slave [%d] string [%s] len[%d] \n", command_id[0],argv, strlen(argv));
+    cafe_load_payload((unsigned char)(data[0]-'0'),(char *) &data[2], strlen((const char*	)(data+2)) );
+
 }
 
 

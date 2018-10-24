@@ -9,10 +9,10 @@
 #include "boards.h"
 
 #define TS_ENABLED
+
 /**@brief Radio event handler
 */
 void RADIO_timeslot_IRQHandler(void);
-
 
 /**@brief Request next timeslot event in earliest configuration
  */

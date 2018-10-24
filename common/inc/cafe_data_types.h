@@ -148,7 +148,7 @@ typedef struct
                              .radio_irq_priority    = 1}
 
 
-// Default radio parameters, roughly equal to nRF24L default parameters (except CRC which is set to 16-bit, and protocol set to DPL)
+// see to nRF24L default parameters 
 #define cafe_DEFAULT_CONFIG_TX {.mode                  = I_AM_TRANSMITTER,                    \
                              .event_handler         = 0,                                \
                              .rf_channel            = 5,                                \
@@ -169,6 +169,9 @@ typedef struct
     uint8_t pipe;
     int8_t  rssi;
     uint8_t noack;
+    uint8_t pending;
+    uint8_t slave_id;
+    uint8_t *pdata[5];
     uint8_t data[CAFE_CORE_MAX_PAYLOAD_LENGTH];
 }cafe_payload_t;
 

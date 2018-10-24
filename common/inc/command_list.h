@@ -35,6 +35,8 @@
 
 #define cmd_ble	     0x269
 
+#define cmd_rgb      0x266
+
 #define cmd_help     0x45   
 #define cmd_clear    0x237
 #endif

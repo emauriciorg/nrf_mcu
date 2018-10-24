@@ -7,13 +7,15 @@
 
 const nrf_drv_timer_t TIMER_1_APP = NRF_DRV_TIMER_INSTANCE(1);
  static uint16_t i;
+ static uint16_t *tick_counter;
 
 
 void timer_event_handler(nrf_timer_event_t event_type, void* p_context)
 {   
-	
-	if(i>500){
-		printf("%x\n", i);
+	if (*tick_counter)(*tick_counter)--;	
+
+	if (i>500){
+		//printf("%x\n", i);
 		i=0;
 //		sample_text=1;	
 	}
@@ -21,12 +23,13 @@ void timer_event_handler(nrf_timer_event_t event_type, void* p_context)
 	i++;
 }
 
-
-void timer1_app_setup(void){
+void timer1_app_setup(uint16_t *external_counter_holder){
 
 	uint32_t time_ms = TIMER_INTERVAL;
 	uint32_t time_ticks;
 	uint32_t err_code;
+
+	tick_counter= external_counter_holder;
 
 	err_code = nrf_drv_timer_init(  &TIMER_1_APP,NULL, timer_event_handler);
 	

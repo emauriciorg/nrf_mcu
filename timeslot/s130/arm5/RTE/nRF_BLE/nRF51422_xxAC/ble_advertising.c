@@ -91,7 +91,7 @@ uint32_t ble_advertising_init(ble_advdata_t const                 * p_advdata,
 {
     uint32_t err_code;
 
-    if((p_advdata == NULL) || p_config == NULL)
+    if ((p_advdata == NULL) || p_config == NULL)
     {
         return NRF_ERROR_NULL;
     }
@@ -115,7 +115,7 @@ uint32_t ble_advertising_init(ble_advdata_t const                 * p_advdata,
     m_advdata.flags                = p_advdata->flags;
     m_advdata.short_name_len       = p_advdata->short_name_len;
    /* 
-    if(p_advdata->uuids_complete != NULL)
+    if (p_advdata->uuids_complete != NULL)
     {
         m_advdata.uuids_complete = p_advdata->uuids_complete;
     }
@@ -124,7 +124,7 @@ uint32_t ble_advertising_init(ble_advdata_t const                 * p_advdata,
     m_advdata.uuids_more_available = p_advdata->uuids_more_available;
     m_advdata.uuids_solicited      = p_advdata->uuids_solicited;
     
-    if(p_advdata->p_manuf_specific_data != NULL)
+    if (p_advdata->p_manuf_specific_data != NULL)
     {
         m_advdata.p_manuf_specific_data   = &m_manuf_specific_data;
         m_manuf_specific_data.data.p_data = m_manuf_data_array;
@@ -138,7 +138,7 @@ uint32_t ble_advertising_init(ble_advdata_t const                 * p_advdata,
         }
     }
     
-    if(p_advdata->p_service_data_array != NULL)
+    if (p_advdata->p_service_data_array != NULL)
     {
         m_service_data.data.p_data                   = m_service_data_array;
         m_advdata.p_service_data_array               = &m_service_data;
@@ -155,14 +155,14 @@ uint32_t ble_advertising_init(ble_advdata_t const                 * p_advdata,
     }
 
 
-    if(p_advdata->p_slave_conn_int != NULL)
+    if (p_advdata->p_slave_conn_int != NULL)
     {
         m_advdata.p_slave_conn_int                    = &m_slave_conn_int;
         m_advdata.p_slave_conn_int->max_conn_interval = p_advdata->p_slave_conn_int->max_conn_interval;
         m_advdata.p_slave_conn_int->min_conn_interval = p_advdata->p_slave_conn_int->min_conn_interval;
     }
     
-    if(p_advdata->p_tx_power_level != NULL)
+    if (p_advdata->p_tx_power_level != NULL)
     {
         m_advdata.p_tx_power_level     = &m_tx_power_level;
         m_advdata.p_tx_power_level     = p_advdata->p_tx_power_level;
@@ -294,7 +294,7 @@ uint32_t ble_advertising_start(ble_adv_mode_t advertising_mode)
                 adv_params.p_whitelist = &m_whitelist;
                 m_advdata.flags        = BLE_GAP_ADV_FLAG_BR_EDR_NOT_SUPPORTED;
                 err_code               = ble_advdata_set(&m_advdata, NULL);
-                if(err_code != NRF_SUCCESS)
+                if (err_code != NRF_SUCCESS)
                 {
                     return err_code;
                 }
@@ -321,7 +321,7 @@ uint32_t ble_advertising_start(ble_adv_mode_t advertising_mode)
                 adv_params.p_whitelist = &m_whitelist;
                 m_advdata.flags        = BLE_GAP_ADV_FLAG_BR_EDR_NOT_SUPPORTED;
                 err_code               = ble_advdata_set(&m_advdata, NULL);
-                if(err_code != NRF_SUCCESS)
+                if (err_code != NRF_SUCCESS)
                 {
                     return err_code;
                 }
@@ -342,7 +342,7 @@ uint32_t ble_advertising_start(ble_adv_mode_t advertising_mode)
     if (m_adv_mode_current != BLE_ADV_MODE_IDLE)
     {
         err_code = sd_ble_gap_adv_start(&adv_params);
-        if(err_code != NRF_SUCCESS)
+        if (err_code != NRF_SUCCESS)
         {
             return err_code;
         }
@@ -480,7 +480,7 @@ void ble_advertising_on_sys_evt(uint32_t sys_evt)
 
 uint32_t ble_advertising_peer_addr_reply(ble_gap_addr_t * p_peer_address)
 {
-    if(m_peer_addr_reply_expected == false)
+    if (m_peer_addr_reply_expected == false)
     {
         return NRF_ERROR_INVALID_STATE;
     }
@@ -501,7 +501,7 @@ uint32_t ble_advertising_whitelist_reply(ble_gap_whitelist_t * p_whitelist)
 {
     uint32_t i;
 
-    if(m_whitelist_reply_expected == false)
+    if (m_whitelist_reply_expected == false)
     {
         return NRF_ERROR_INVALID_STATE;
     }
@@ -528,13 +528,13 @@ uint32_t ble_advertising_restart_without_whitelist(void)
 {
     uint32_t err_code;
 
-    if(     m_adv_modes_config.ble_adv_whitelist_enabled == BLE_ADV_WHITELIST_ENABLED
+    if (     m_adv_modes_config.ble_adv_whitelist_enabled == BLE_ADV_WHITELIST_ENABLED
         && !m_whitelist_temporarily_disabled)
     {
         if (m_adv_mode_current != BLE_ADV_MODE_IDLE)
         {
             err_code = sd_ble_gap_adv_stop();
-            if(err_code != NRF_SUCCESS)
+            if (err_code != NRF_SUCCESS)
             {
                 return err_code;
             }

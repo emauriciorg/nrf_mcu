@@ -33,10 +33,10 @@ void uart_event_handle(app_uart_evt_t * p_event)
 	break;
 
 	case APP_UART_COMMUNICATION_ERROR:
-		APP_ERROR_HANDLER(p_event->data.error_communication);
+		//APP_ERROR_HANDLER(p_event->data.error_communication);
     	break;
 	case APP_UART_FIFO_ERROR:
-		APP_ERROR_HANDLER(p_event->data.error_code);
+		//APP_ERROR_HANDLER(p_event->data.error_code);
 	break;
 
 	default:
@@ -46,11 +46,12 @@ void uart_event_handle(app_uart_evt_t * p_event)
 
 void uart_check_stream(void){
 
-	char *pch= (char *)memchr(local_uart_stream->stream,'\n',strlen(local_uart_stream->stream));
+	char len=strlen(local_uart_stream->stream);
+	char *pch= (char *)memchr(local_uart_stream->stream,'\n',len);
 	
 
-	if(pch){
-   	      
+	if (pch){
+   	     	 local_uart_stream->stream[len-1]=0;
 		local_uart_stream->pending_parse =true;
 		local_uart_stream->index       =0; 	
 	}else{
@@ -58,7 +59,7 @@ void uart_check_stream(void){
 	}
 
 
-	if( local_uart_stream->index > UART_STRING_MAX_SIZE)
+	if ( local_uart_stream->index > UART_STRING_MAX_SIZE)
 		local_uart_stream->index       =0; 
 	
 }

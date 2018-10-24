@@ -10,5 +10,6 @@
 #define UART_TX
 #define UART_RX
 
+void board_leds_init(void);
 
 #endif

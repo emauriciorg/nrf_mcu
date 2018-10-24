@@ -1,3 +1,9 @@
+/** 
+******************************************************************************
+* \file    cli.c
+* \brief    Entry point file.
+******************************************************************************
+*/
 #include <string.h>
 #include <stdio.h>
 #include "../inc/cli.h"
@@ -8,11 +14,14 @@
 #include "../inc/bbn_board.h"
 #include "../inc/aes_app.h"
 #include "../inc/ble_app.h"
+#include "../inc/cafe.h"
+
 /* 
 	implementation of a cli like parser 
 	mainly used for debuggin purposes, to tranfers data a simple
 	raw string can be applied
 */
+
 #define DEBUG_CLI_AES
 #ifdef DEBUG_CLI_AES
 	#define CLI_OUT(...)  printf(__VA_ARGS__)
@@ -25,32 +34,10 @@
 #define MAX_COMMAND_SIZE 20//
 
 // to do get hash number of each argv
-//to decide: hash of the whole string or single argv
+//to decide: hash of the whole string or single argv, find a better hash algorithm 
 
 
 
-unsigned char get_command_indexes(char *index){
-return 0;
-}
-
-
-
-unsigned char cli_gen_params_argc(){
-	return 0;
-}
-
-/*unsigned char cli_get_params_argv(unsigned int *command_id, char *string){
-	#define ARGC_P 10 //extract param counter dinamically
-	for(int i=0; i<ARGC_P){
-		
-		command_id[1]=cli_get_command_id(string,&index,PRIME_NUMBER_SUB);
-		string+=index;
-	}
- 		
-	return 0;
-}
-
-*/
 unsigned int cli_get_hash (char *string, unsigned int prime_number){
 	char  len=strlen(string);
 	char  i;
@@ -59,8 +46,8 @@ unsigned int cli_get_hash (char *string, unsigned int prime_number){
 		hash+= (string[i]*(i+1)); 	
 	}
 	hash=hash%prime_number;
-	//printf("hash ");
-	printf("[%s][%x]  ",string,hash );
+	
+	CLI_OUT("[%s][%x]  ",string,hash );
 	return hash;
 }
 
@@ -71,11 +58,11 @@ unsigned char cli_find_char(char *string)
 
 	pch=(char *)memchr(string,' ',strlen(string));
 	
-	if(pch)  return pch-string+1;
+	if (pch)  return pch-string+1;
 	
 	pch =(char *)memchr(string,'\r',strlen(string));
 	
-	if(pch)	return pch-string+1;
+	if (pch)	return pch-string+1;
 	
 
 	return 0;
@@ -91,8 +78,8 @@ unsigned int cli_get_command_id(char * string, unsigned char *index, unsigned in
         
 	*index= cli_find_char(string);
 	
-	if(!(*index)){
-		printf("not found\n");
+	if (!(*index)){
+		CLI_OUT("not found\n");
 		return 0;
 	}
 
@@ -114,20 +101,22 @@ void cli_gpio_handle(unsigned int *command_id){
 
 	}
 }
-void cli_blink(unsigned int *command_id){
+
+
+void cli_blink(unsigned int *command_id)
+{
+	
 	if (command_id[0]  == cmd_sub_off){
 
-		if(command_id[1]==cmd_sub_red) 	nrf_gpio_pin_set(LED_RED);
-		if(command_id[1]==cmd_sub_blue) 	nrf_gpio_pin_set(LED_BLUE);
-		if(command_id[1]==cmd_sub_green) nrf_gpio_pin_set(LED_GREEN);
+		if (command_id[1]==cmd_sub_red) 	 nrf_gpio_pin_set(LED_RED);
+		if (command_id[1]==cmd_sub_blue)  nrf_gpio_pin_set(LED_BLUE);
+		if (command_id[1]==cmd_sub_green) nrf_gpio_pin_set(LED_GREEN);
 	}
 
 	if (command_id[0]==cmd_sub_on){
-		if(command_id[1]== cmd_sub_red)   nrf_gpio_pin_clear(LED_RED);
-		if(command_id[1]== cmd_sub_blue)  nrf_gpio_pin_clear(LED_BLUE);
-		if(command_id[1]== cmd_sub_green) nrf_gpio_pin_clear(LED_GREEN);
-
-
+		if (command_id[1]== cmd_sub_red)   nrf_gpio_pin_clear(LED_RED);
+		if (command_id[1]== cmd_sub_blue)  nrf_gpio_pin_clear(LED_BLUE);
+		if (command_id[1]== cmd_sub_green) nrf_gpio_pin_clear(LED_GREEN);
 	}
 
 }
@@ -138,58 +127,66 @@ void cli_blink(unsigned int *command_id){
 static uint8_t  uncripted_data[40];
 static uint8_t  cripted_data  [40];
 
-
-unsigned char cli_parse(char *string){
+/*command structure command argv1 arg2 argv3 \n*/
+unsigned char cli_parse(char *argv)
+{
+	
 	unsigned char index=0;
 	unsigned int command_id[ COMMAND_LEVELS ];
-	//FUNCTION TO EXTRACT ALL THE ARGV!!!!
-	command_id[0]= cli_get_command_id(string, &index, PRIME_NUMBER);
-	string+=index;
+
+	
+	command_id[0]= cli_get_command_id(argv, &index, PRIME_NUMBER);
+	argv+=index;
+	
 	switch (command_id[0]){
 	
 	case cmd_turn:	
 			
-			command_id[1]=cli_get_command_id(string,&index,PRIME_NUMBER_SUB);
- 			string+=index;
-			command_id[2]=cli_get_command_id(string,&index,PRIME_NUMBER_SUB);
+			command_id[1]=cli_get_command_id(argv,&index,PRIME_NUMBER_SUB);
+ 			argv+=index;
+			command_id[2]=cli_get_command_id(argv,&index,PRIME_NUMBER_SUB);
 			// a look up table could be applied here since the functions are based on ids
 			cli_blink(&command_id[1]);
-	break;		
+			break;		
 	
 	case cmd_gpio : 
-			command_id[1]=cli_get_command_id(string,&index,PRIME_NUMBER_SUB);
- 			string+=index;
- 			command_id[2] =(*string)-'0';
- 			if((!command_id[2]) || (command_id[2]>20)) break;
+			command_id[1]=cli_get_command_id(argv,&index,PRIME_NUMBER_SUB);
+ 			argv+=index;
+ 			command_id[2] =(*argv)-'0';
+ 			if ((!command_id[2]) || (command_id[2]>20)) break;
  			cli_gpio_handle(&command_id[1]);
-	break;
-	case cmd_send:	/*send ble slave_addr package */
-
-
-	break;	
+			break;
+	
 	case cmd_cip:  
 			aes_encrypt_data( AES_SAMPLE_TEXT,
 					 27, cripted_data);
-		break;
+			break;
 	case cmd_dcip: 	aes_decrypt_data(cripted_data,27,uncripted_data);
 
 
-		break;
+			break;
 	case cmd_help:
 			
 			CLI_OUT("\n____________command list____________\n\n ");
 			CLI_OUT("turn\t\tgpio\t\tsend\t\tcip\n");
-		break;
+			break;
 	case cmd_clear:
 			
-			for(index=0;index<28;index++)printf("\n\n");
+			for(index=0;index<28;index++)CLI_OUT("\n\n");
 			break;
-	case cmd_ble:   printf("Sending to ble..'");
-			ble_send (string, strlen(string));
-
+	case cmd_ble:   CLI_OUT("Sending to ble..'");
+			#ifndef SLAVE_MODE
+			ble_send ((uint8_t *)argv, strlen(argv));
+			#endif
 			
 			break; 	
+        case cmd_rgb:	command_id[0]=((*argv)-'0');
+        		argv+=2;
+			CLI_OUT("\nloading paramter\n");
+      		        CLI_OUT("slave [%d] string [%s] len[%d] \n", command_id[0],argv, strlen(argv));
+        		cafe_load_payload(command_id[0], argv, strlen(argv) );
 
+        		break;
 	default:	
 			CLI_OUT("unknow command\n");
 	break;
@@ -204,7 +201,7 @@ unsigned char cli_parse(char *string){
 
 void cli_parse_command(st_uart_string *uart_stream){
 	
-	if(!(uart_stream->pending_parse)) return;
+	if (!(uart_stream->pending_parse)) return;
 	
 	uart_stream->pending_parse=0;
 	

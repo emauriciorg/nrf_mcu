@@ -333,7 +333,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--c99</MiscControls>
-              <Define>S130 NRF51822   BLE_STACK_SUPPORT_REQD S130 BOARD_NRF6310 SOFTDEVICE_PRESENT NRF51 SWI_DISABLE0</Define>
+              <Define>BLE_APP_ENABLED S130 NRF51822   BLE_STACK_SUPPORT_REQD S130 BOARD_NRF6310 SOFTDEVICE_PRESENT NRF51 SWI_DISABLE0</Define>
               <Undefine></Undefine>
               <IncludePath>..\arm5;.\app\source;..\..\..\common;..\..\..\common\inc;.\app\inc</IncludePath>
             </VariousControls>
@@ -423,6 +423,21 @@
               <FileName>ble_app.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\common\src\ble_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\common\src\timer_app.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>BSP</GroupName>
+          <Files>
+            <File>
+              <FileName>bbn_board.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\common\src\bbn_board.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -881,6 +896,21 @@
               <FileName>ble_app.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\common\src\ble_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\common\src\timer_app.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>BSP</GroupName>
+          <Files>
+            <File>
+              <FileName>bbn_board.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\common\src\bbn_board.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1616,6 +1646,12 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
         </targetInfos>
       </component>
+      <component Cclass="nRF_Drivers" Cgroup="nrf_drv_timer" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_drv_timer">
+        <package name="nRF_Drivers" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Drivers/" vendor="NordicSemiconductor" version="3.1.0"/>
+        <targetInfos>
+          <targetInfo name="nrf51822_xxac_s130"/>
+        </targetInfos>
+      </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_drv_uart" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_drv_uart">
         <package name="nRF_Drivers" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Drivers/" vendor="NordicSemiconductor" version="3.1.0"/>
         <targetInfos>
@@ -1662,6 +1698,12 @@
         <package name="nRF_Drivers" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Drivers/" vendor="NordicSemiconductor" version="4.0.0-2.alpha"/>
         <targetInfos>
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
+        </targetInfos>
+      </component>
+      <component Cclass="nRF_Drivers" Cgroup="nrf_timer" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_timer">
+        <package name="nRF_Drivers" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Drivers/" vendor="NordicSemiconductor" version="3.1.0"/>
+        <targetInfos>
+          <targetInfo name="nrf51822_xxac_s130"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_uart" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_uart">
@@ -1728,6 +1770,12 @@
         <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="3.1.0"/>
         <targetInfos>
           <targetInfo name="nrf51822_xxac_s130"/>
+        </targetInfos>
+      </component>
+      <component Cclass="nRF_Libraries" Cgroup="app_fifo" Cvendor="NordicSemiconductor" Cversion="4.0.0-2.alpha" condition="app_fifo">
+        <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="4.0.0-2.alpha"/>
+        <targetInfos>
+          <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Libraries" Cgroup="app_timer" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_timer_default">
@@ -2256,6 +2304,7 @@
         <component Cclass="nRF_Libraries" Cgroup="app_fifo" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_fifo"/>
         <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="3.1.0"/>
         <targetInfos>
+          <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
         </targetInfos>
       </file>
@@ -2264,6 +2313,7 @@
         <component Cclass="nRF_Libraries" Cgroup="app_fifo" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_fifo"/>
         <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="3.1.0"/>
         <targetInfos>
+          <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
         </targetInfos>
       </file>

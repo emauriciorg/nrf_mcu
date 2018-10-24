@@ -14,6 +14,9 @@
 #include "nrf_gpio.h"
 #include "../inc/bbn_board.h"
 
+/**TO DO:  ota keying and bigger block encryption
+ * 
+ */
 
 //#define DEBUG_CLI_AES
 #ifdef DEBUG_CLI_AES
@@ -104,7 +107,7 @@ uint8_t aes_decrypt_data(uint8_t *src_data, uint8_t  length, uint8_t *out_data){
     	while (NRF_CCM->EVENTS_ENDKSGEN == 0);
     	
 
-    	if(NRF_CCM->EVENTS_ERROR) {
+    	if (NRF_CCM->EVENTS_ERROR) {
     		AES_OUT("CCM->EVENTS_ENDKSGEN\n");
 		return false;
 	}
@@ -122,13 +125,13 @@ uint8_t aes_decrypt_data(uint8_t *src_data, uint8_t  length, uint8_t *out_data){
 	while (NRF_CCM->EVENTS_ENDCRYPT == 0);
 
 
-	if(NRF_CCM->EVENTS_ERROR){
+	if (NRF_CCM->EVENTS_ERROR){
 		AES_OUT("\nCCM->EVENT ERROR\n");
 		return false;
 	}
 
 
-	if(NRF_CCM->MICSTATUS == (CCM_MICSTATUS_MICSTATUS_CheckFailed << CCM_MICSTATUS_MICSTATUS_Pos)){
+	if (NRF_CCM->MICSTATUS == (CCM_MICSTATUS_MICSTATUS_CheckFailed << CCM_MICSTATUS_MICSTATUS_Pos)){
 		AES_OUT("\nCCM->MICSTATUS  ERROR\n");
     	 	return false;
     	}
@@ -160,7 +163,7 @@ uint8_t aes_encrypt_data( uint8_t *input_data, uint8_t packet_length, uint8_t *o
 	memset(src_data      , 0 , sizeof(src_data)    );
 	memset(aes_key_holder, 0 , CCM_SCRATCH_ARE_SIZE);
 
-// 	if(!cypher_op->init){
+// 	if (!cypher_op->init){
  		memset(&ccm_data, 0, sizeof(st_ccm_data));
 // 		cypher_op->init=1;
 //	}
@@ -168,7 +171,7 @@ uint8_t aes_encrypt_data( uint8_t *input_data, uint8_t packet_length, uint8_t *o
 	//default key is zero 	
  	//random pre-key generation 	
         ccm_data.counter=0;
-#if 0  //uncomment to generatre random keu
+#if 0  //uncomment to generatre random key, 
  	AES_OUT("\nKEY SEED MODE: ");
 
  	if (cypher_op->random){
@@ -204,7 +207,7 @@ uint8_t aes_encrypt_data( uint8_t *input_data, uint8_t packet_length, uint8_t *o
     	
     	while (NRF_CCM->EVENTS_ENDKSGEN == 0);
     	
-    	if(NRF_CCM->EVENTS_ERROR) {
+    	if (NRF_CCM->EVENTS_ERROR) {
     		AES_OUT("CCM->EVENT ERROR\n");
 		return false;
 	}
@@ -217,7 +220,7 @@ uint8_t aes_encrypt_data( uint8_t *input_data, uint8_t packet_length, uint8_t *o
 	AES_OUT("]\n");	
 	
  		
-	if(packet_length >27){
+	if (packet_length >27){
  		local_packet_length = 27;
 		packet_length=packet_length-27;
 	}
@@ -243,7 +246,7 @@ uint8_t aes_encrypt_data( uint8_t *input_data, uint8_t packet_length, uint8_t *o
 	NRF_CCM->TASKS_CRYPT           = 1;
 				
 	while (NRF_CCM->EVENTS_ENDCRYPT == 0);			
-	if(NRF_CCM->EVENTS_ERROR){
+	if (NRF_CCM->EVENTS_ERROR){
 		AES_OUT("\ncCCM->EVENT ERROR\n");
 		return false;
 	}

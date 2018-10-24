@@ -167,10 +167,12 @@ void gap_params_init(void)
 	gap_conn_params.max_conn_interval = MAX_CONN_INTERVAL;
 	gap_conn_params.slave_latency     = SLAVE_LATENCY;
 	gap_conn_params.conn_sup_timeout  = CONN_SUP_TIMEOUT;
+/*
 	printf("max_conn_interval %x\n",MAX_CONN_INTERVAL);
 	printf("min_conn_interval %x\n",MIN_CONN_INTERVAL);
 	printf("min_conn_interval %x\n",SLAVE_LATENCY);
 	printf("min_conn_interval %x\n",CONN_SUP_TIMEOUT);
+*/	
 	err_code = sd_ble_gap_ppcp_set(&gap_conn_params);
 	APP_ERROR_CHECK(err_code);
 		

@@ -10,8 +10,8 @@
  *
  */
 
-#ifndef __MICRO_CAFE_H
-#define __MICRO_CAFE_H
+#ifndef _CAFE_PROTOCOL_H_
+#define _CAFE_PROTOCOL_H_
 
 #include <stdbool.h>
 #include <stdint.h>
