@@ -5,8 +5,8 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include "nrf.h"
-#include "nrf51.h"
-#include "nrf51_bitfields.h"
+//#include "nrf51.h"
+//#include "nrf51_bitfields.h"
 
 #include "cafe_data_types.h"
 

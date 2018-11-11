@@ -1,236 +1,0 @@
-Dependencies for Project 'ccm_module', Target 'Target 1': (DO NOT MODIFY !)
-F (.\main.c)(0x5BABF15F)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\_Target_1-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Drivers\nRF52832_xxAA-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Libraries\nRF52832_xxAA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\common-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\config-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\delay-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\hal-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\fifo-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\timer-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_Common\2.0.0-2.alpha\softdevice_handler-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S120\2.1.1\headers-D__UVISION_VERSION="522" -D_RTE_ -DNRF52-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
-F (RTE\Device\nRF52832_xxAA\arm_startup_nrf52.s)(0x5B178B88)(--cpu Cortex-M4.fp -g --apcs=interwork -ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\_Target_1-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Drivers\nRF52832_xxAA-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Libraries\nRF52832_xxAA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\common-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\config-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\delay-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\hal-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\fifo-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\timer-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_Common\2.0.0-2.alpha\softdevice_handler-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S120\2.1.1\headers--pd "__UVISION_VERSION SETA 522" --pd "_RTE_ SETA 1" --pd "NRF52 SETA 1"--list .\listings\arm_startup_nrf52.lst --xref -o .\objects\arm_startup_nrf52.o --depend .\objects\arm_startup_nrf52.d)
-F (RTE\Device\nRF52832_xxAA\system_nrf52.c)(0x5B178B7C)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\_Target_1-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Drivers\nRF52832_xxAA-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Libraries\nRF52832_xxAA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\common-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\config-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\delay-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\hal-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\fifo-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\timer-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_Common\2.0.0-2.alpha\softdevice_handler-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S120\2.1.1\headers-D__UVISION_VERSION="522" -D_RTE_ -DNRF52-o .\objects\system_nrf52.o --omf_browse .\objects\system_nrf52.crf --depend .\objects\system_nrf52.d)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52.h)(0x5B178B82)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\core_cm4.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_version.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_compiler.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_armcc.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\mpu_armv7.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\system_nrf52.h)(0x5B178B7C)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52_bitfields.h)(0x5B178B82)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf51_to_nrf52.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52_name_change.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\compiler_abstraction.h)(0x5B178B7E)
-F (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\common\nrf_drv_common.c)(0x567384DA)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\_Target_1-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Drivers\nRF52832_xxAA-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Libraries\nRF52832_xxAA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\common-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\config-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\delay-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\hal-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\fifo-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\timer-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_Common\2.0.0-2.alpha\softdevice_handler-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S120\2.1.1\headers-D__UVISION_VERSION="522" -D_RTE_ -DNRF52-o .\objects\nrf_drv_common.o --omf_browse .\objects\nrf_drv_common.crf --depend .\objects\nrf_drv_common.d)
-I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\common\nrf_drv_common.h)(0x567384DA)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52.h)(0x5B178B82)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\core_cm4.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_version.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_compiler.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_armcc.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\mpu_armv7.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\system_nrf52.h)(0x5B178B7C)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52_bitfields.h)(0x5B178B82)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf51_to_nrf52.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52_name_change.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\compiler_abstraction.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\sdk_errors.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S120\2.1.1\headers\nrf_error.h)(0x56401418)
-I (D:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Drivers\nRF52832_xxAA\nrf_drv_config.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\config\nrf_drv_config_validation.h)(0x567384DA)
-I (D:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Libraries\nRF52832_xxAA\nrf_assert.h)(0x567384DA)
-I (D:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Libraries\nRF52832_xxAA\app_error.h)(0x567384DA)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\nordic_common.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\app_util_platform.h)(0x567384DA)
-F (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\uart\nrf_drv_uart.c)(0x567384DA)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\_Target_1-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Drivers\nRF52832_xxAA-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Libraries\nRF52832_xxAA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\common-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\config-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\delay-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\hal-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\fifo-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\timer-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_Common\2.0.0-2.alpha\softdevice_handler-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S120\2.1.1\headers-D__UVISION_VERSION="522" -D_RTE_ -DNRF52-o .\objects\nrf_drv_uart.o --omf_browse .\objects\nrf_drv_uart.crf --depend .\objects\nrf_drv_uart.d)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\uart\nrf_drv_uart.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\hal\nrf_uart.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52.h)(0x5B178B82)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\core_cm4.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_version.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_compiler.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_armcc.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\mpu_armv7.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\system_nrf52.h)(0x5B178B7C)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52_bitfields.h)(0x5B178B82)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf51_to_nrf52.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52_name_change.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\compiler_abstraction.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\hal\nrf_uarte.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\sdk_errors.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S120\2.1.1\headers\nrf_error.h)(0x56401418)
-I (D:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Drivers\nRF52832_xxAA\nrf_drv_config.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\config\nrf_drv_config_validation.h)(0x567384DA)
-I (D:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Libraries\nRF52832_xxAA\nrf_assert.h)(0x567384DA)
-I (D:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Libraries\nRF52832_xxAA\app_error.h)(0x567384DA)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\nordic_common.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\common\nrf_drv_common.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\hal\nrf_gpio.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\app_util_platform.h)(0x567384DA)
-F (RTE\nRF_Drivers\nRF52832_xxAA\app_uart.h)(0x567384DA)()
-F (RTE\nRF_Drivers\nRF52832_xxAA\app_uart_fifo.c)(0x567384DA)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\_Target_1-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Drivers\nRF52832_xxAA-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Libraries\nRF52832_xxAA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\common-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\config-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\delay-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\hal-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\fifo-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\timer-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_Common\2.0.0-2.alpha\softdevice_handler-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S120\2.1.1\headers-D__UVISION_VERSION="522" -D_RTE_ -DNRF52-o .\objects\app_uart_fifo.o --omf_browse .\objects\app_uart_fifo.crf --depend .\objects\app_uart_fifo.d)
-I (RTE\nRF_Drivers\nRF52832_xxAA\app_uart.h)(0x567384DA)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\app_util_platform.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\compiler_abstraction.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52.h)(0x5B178B82)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\core_cm4.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_version.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_compiler.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_armcc.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\mpu_armv7.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\system_nrf52.h)(0x5B178B7C)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52_bitfields.h)(0x5B178B82)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf51_to_nrf52.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52_name_change.h)(0x5B178B7E)
-I (D:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Libraries\nRF52832_xxAA\app_fifo.h)(0x567384DA)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\uart\nrf_drv_uart.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\hal\nrf_uart.h)(0x567384DA)
-I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\hal\nrf_uarte.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\sdk_errors.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S120\2.1.1\headers\nrf_error.h)(0x56401418)
-I (D:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Drivers\nRF52832_xxAA\nrf_drv_config.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\config\nrf_drv_config_validation.h)(0x567384DA)
-I (D:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Libraries\nRF52832_xxAA\nrf_assert.h)(0x567384DA)
-I (D:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Libraries\nRF52832_xxAA\app_error.h)(0x567384DA)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\nordic_common.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\sdk_common.h)(0x567384DA)
-I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\sdk_os.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\app_util.h)(0x567384DA)
-F (RTE\nRF_Drivers\nRF52832_xxAA\nrf_drv_config.h)(0x567384DA)()
-F (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\delay\nrf_delay.c)(0x567384DA)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\_Target_1-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Drivers\nRF52832_xxAA-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Libraries\nRF52832_xxAA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\common-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\config-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\delay-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\hal-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\fifo-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\timer-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_Common\2.0.0-2.alpha\softdevice_handler-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S120\2.1.1\headers-D__UVISION_VERSION="522" -D_RTE_ -DNRF52-o .\objects\nrf_delay.o --omf_browse .\objects\nrf_delay.crf --depend .\objects\nrf_delay.d)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\compiler_abstraction.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52.h)(0x5B178B82)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\core_cm4.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_version.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_compiler.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_armcc.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\mpu_armv7.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\system_nrf52.h)(0x5B178B7C)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52_bitfields.h)(0x5B178B82)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf51_to_nrf52.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52_name_change.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\delay\nrf_delay.h)(0x567384DA)
-F (RTE\nRF_Libraries\nRF52832_xxAA\app_error.c)(0x567384DA)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\_Target_1-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Drivers\nRF52832_xxAA-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Libraries\nRF52832_xxAA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\common-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\config-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\delay-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\hal-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\fifo-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\timer-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_Common\2.0.0-2.alpha\softdevice_handler-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S120\2.1.1\headers-D__UVISION_VERSION="522" -D_RTE_ -DNRF52-o .\objects\app_error.o --omf_browse .\objects\app_error.crf --depend .\objects\app_error.d)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52.h)(0x5B178B82)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\core_cm4.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_version.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_compiler.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_armcc.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\mpu_armv7.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\system_nrf52.h)(0x5B178B7C)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52_bitfields.h)(0x5B178B82)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf51_to_nrf52.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52_name_change.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\compiler_abstraction.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F6E7B8)
-I (RTE\nRF_Libraries\nRF52832_xxAA\app_error.h)(0x567384DA)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\sdk_errors.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S120\2.1.1\headers\nrf_error.h)(0x56401418)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\nordic_common.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\nrf_log.h)(0x567384DA)
-I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\app_util.h)(0x567384DA)
-F (RTE\nRF_Libraries\nRF52832_xxAA\app_error.h)(0x567384DA)()
-F (RTE\nRF_Libraries\nRF52832_xxAA\app_fifo.c)(0x567384DA)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\_Target_1-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Drivers\nRF52832_xxAA-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Libraries\nRF52832_xxAA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\common-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\config-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\delay-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\hal-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\fifo-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\timer-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_Common\2.0.0-2.alpha\softdevice_handler-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S120\2.1.1\headers-D__UVISION_VERSION="522" -D_RTE_ -DNRF52-o .\objects\app_fifo.o --omf_browse .\objects\app_fifo.crf --depend .\objects\app_fifo.d)
-I (RTE\nRF_Libraries\nRF52832_xxAA\app_fifo.h)(0x567384DA)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\sdk_common.h)(0x567384DA)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\nordic_common.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\compiler_abstraction.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\sdk_os.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\sdk_errors.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S120\2.1.1\headers\nrf_error.h)(0x56401418)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\app_util.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52.h)(0x5B178B82)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\core_cm4.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_version.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_compiler.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_armcc.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\mpu_armv7.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\system_nrf52.h)(0x5B178B7C)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52_bitfields.h)(0x5B178B82)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf51_to_nrf52.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52_name_change.h)(0x5B178B7E)
-F (RTE\nRF_Libraries\nRF52832_xxAA\app_fifo.h)(0x567384DA)()
-F (RTE\nRF_Libraries\nRF52832_xxAA\nrf_assert.c)(0x567384DA)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\_Target_1-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Drivers\nRF52832_xxAA-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Libraries\nRF52832_xxAA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\common-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\config-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\delay-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\hal-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\fifo-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\timer-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_Common\2.0.0-2.alpha\softdevice_handler-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S120\2.1.1\headers-D__UVISION_VERSION="522" -D_RTE_ -DNRF52-o .\objects\nrf_assert.o --omf_browse .\objects\nrf_assert.crf --depend .\objects\nrf_assert.d)
-I (RTE\nRF_Libraries\nRF52832_xxAA\nrf_assert.h)(0x567384DA)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52.h)(0x5B178B82)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\core_cm4.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_version.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_compiler.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_armcc.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\mpu_armv7.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\system_nrf52.h)(0x5B178B7C)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52_bitfields.h)(0x5B178B82)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf51_to_nrf52.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52_name_change.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\compiler_abstraction.h)(0x5B178B7E)
-I (RTE\nRF_Libraries\nRF52832_xxAA\app_error.h)(0x567384DA)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\sdk_errors.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S120\2.1.1\headers\nrf_error.h)(0x56401418)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\nordic_common.h)(0x567384DA)
-F (RTE\nRF_Libraries\nRF52832_xxAA\nrf_assert.h)(0x567384DA)()
-F (RTE\nRF_Libraries\nRF52832_xxAA\app_timer.c)(0x567384DA)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\_Target_1-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Drivers\nRF52832_xxAA-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Libraries\nRF52832_xxAA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\common-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\config-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\delay-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\hal-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\fifo-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\timer-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_Common\2.0.0-2.alpha\softdevice_handler-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S120\2.1.1\headers-D__UVISION_VERSION="522" -D_RTE_ -DNRF52-o .\objects\app_timer.o --omf_browse .\objects\app_timer.crf --depend .\objects\app_timer.d)
-I (RTE\nRF_Libraries\nRF52832_xxAA\app_timer.h)(0x567384DA)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x57F6E7B8)
-I (RTE\nRF_Libraries\nRF52832_xxAA\app_error.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52.h)(0x5B178B82)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\core_cm4.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_version.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_compiler.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_armcc.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\mpu_armv7.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\system_nrf52.h)(0x5B178B7C)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52_bitfields.h)(0x5B178B82)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf51_to_nrf52.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf52_name_change.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\compiler_abstraction.h)(0x5B178B7E)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\sdk_errors.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S120\2.1.1\headers\nrf_error.h)(0x56401418)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\nordic_common.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\app_util.h)(0x567384DA)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S120\2.1.1\headers\nrf_soc.h)(0x56401418)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S120\2.1.1\headers\nrf_svc.h)(0x56401418)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf51.h)(0x5B178B82)
-F (RTE\nRF_Libraries\nRF52832_xxAA\app_timer.h)(0x567384DA)()
-F (RTE\nRF_SoftDevice\nRF52832_xxAA\s120_nrf51_2.1.0_readme.txt)(0x555E8EA6)()
-F (RTE\nRF_SoftDevice\nRF52832_xxAA\softdevice_handler.c)(0x567384DC)(-c --cpu Cortex-M4.fp -g -O0 --apcs=interwork --split_sections-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\_Target_1-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Drivers\nRF52832_xxAA-ID:\TITOMA\nrf_codes\FW\local\TIMESLOT\timeslot_uesb\nrf52\RTE\nRF_Libraries\nRF52832_xxAA-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\common-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\config-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\delay-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\hal-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Drivers\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\fifo-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\timer-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\uart-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_Common\2.0.0-2.alpha\softdevice_handler-IC:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S120\2.1.1\headers-D__UVISION_VERSION="522" -D_RTE_ -DNRF52-o .\objects\softdevice_handler.o --omf_browse .\objects\softdevice_handler.crf --depend .\objects\softdevice_handler.d)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_Common\2.0.0-2.alpha\softdevice_handler\softdevice_handler.h)(0x567384DC)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_Libraries\4.0.0-2.alpha\util\nordic_common.h)(0x567384DA)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S120\2.1.1\headers\nrf_sdm.h)(0x56401418)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_SoftDevice_S120\2.1.1\headers\nrf_svc.h)(0x56401418)
-I (C:\Keil_v5\ARM\PACK\NordicSemiconductor\nRF_DeviceFamilyPack\8.17.0\Device\Include\nrf51.h)(0x5B178B82)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\core_cm0.h)(0x5A0D5BFA)
-I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x57F6E7B8)
-I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.2.0\CMSIS\Include\cmsis_version.h)(0x5A0D5BFA)

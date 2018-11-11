@@ -11,7 +11,6 @@
  */
 
 #include "TX_CAFE.h"
-#include "cafe_error_codes.h"
 #include "nrf_gpio.h"
 #include <string.h>
 #include <stdio.h>

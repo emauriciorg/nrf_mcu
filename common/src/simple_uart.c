@@ -17,6 +17,7 @@
 #include "nrf_delay.h"
 #include "nrf_gpio.h"
 
+
 uint8_t simple_uart_get(void)
 {
     while (NRF_UART0->EVENTS_RXDRDY != 1)

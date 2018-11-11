@@ -2,13 +2,13 @@
 
 #include <string.h>
 
-#include "nrf6310.h"/* depends on board, use mainly to address the macros for the pins */
-
+//#include "nrf6310.h"/* depends on board, use mainly to address the macros for the pins */
+#include "nrf.h"
 #include "../inc/uart_app.h"
 #include "../inc/cli.h"
 #include "app_uart.h"
 #include "../inc/common_structs.h"
-
+#include "app_error.h"
 extern void uart_event_handle(app_uart_evt_t * p_event);
 
 
@@ -30,6 +30,7 @@ void uart_event_handle(app_uart_evt_t * p_event)
 	case APP_UART_DATA_READY:
 		app_uart_get(&local_uart_stream->stream[ (local_uart_stream->index)++ ]);
 		uart_check_stream();
+	
 	break;
 
 	case APP_UART_COMMUNICATION_ERROR:
@@ -64,6 +65,18 @@ void uart_check_stream(void){
 	
 }
 
+#ifdef DEVKIT_BOARD
+#define RX_PIN_NUMBER  8
+#define TX_PIN_NUMBER  6
+#define CTS_PIN_NUMBER 7
+#define RTS_PIN_NUMBER 5
+
+#else
+#define RX_PIN_NUMBER  26
+#define TX_PIN_NUMBER  27
+#define CTS_PIN_NUMBER 7
+#define RTS_PIN_NUMBER 5
+#endif
 void uart_init(void)
 {
     uint32_t                     err_code;
@@ -86,12 +99,3 @@ void uart_init(void)
 		       err_code);
     APP_ERROR_CHECK(err_code);
 }
-
-
-void uart_msg_dbg(const char * message,uint32_t length){
-	for (uint32_t i = 0; i < length; i++)
-	{
-		while(app_uart_put(message[i]) != NRF_SUCCESS);
-	}while(app_uart_put('\n') != NRF_SUCCESS);
-}
-

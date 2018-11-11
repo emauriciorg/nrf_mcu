@@ -5,12 +5,12 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include "nrf.h"
-#include "nrf51.h"
-#include "nrf51_bitfields.h"
+//#include "nrf51.h"
+//#include "nrf51_bitfields.h"
 
 #include "nrf_gpio.h"
 
-#define S3
+#define S1
 
 #ifdef S1
 	#define SLAVE_addr 0xF4 

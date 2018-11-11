@@ -18,7 +18,7 @@
 
 
 #define IS_SRVC_CHANGED_CHARACT_PRESENT  1                                          /**< Include or not the service_changed characteristic. if not enabled, the server's database cannot be changed for the lifetime of the device*/
-#define DEVICE_NAME                      "BLE_TS_CS4"                               /**< Name of device. Will be included in the advertising data. */
+#define DEVICE_NAME                      "BLE_TS_CS1"                               /**< Name of device. Will be included in the advertising data. */
 #define MANUFACTURER_NAME                "NordicSemiconductor"                      /**< Manufacturer. Will be passed to Device Information Service. */
 #define APP_ADV_INTERVAL                 300                                        /**< The advertising interval (in units of 0.625 ms. This value corresponds to 25 ms). */
 #define APP_ADV_TIMEOUT_IN_SECONDS       180                                        /**< The advertising timeout in units of seconds. */
@@ -46,18 +46,39 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 
 	SOFTDEVICE_HANDLER_INIT(NRF_CLOCK_LFCLKSRC_XTAL_20_PPM, NULL);
 
+	
 #if defined(S110) || defined(S130) || defined(S132)
     // Enable BLE stack.
 	ble_enable_params_t ble_enable_params;
 	memset(&ble_enable_params, 0, sizeof(ble_enable_params));
 
+	 err_code = softdevice_enable_get_default_config(0,
+						    1,
+						    &ble_enable_params);
+    APP_ERROR_CHECK(err_code);
+ 
+	 
 #if (defined(S130) || defined(S132))
-	ble_enable_params.gatts_enable_params.attr_tab_size   = BLE_GATTS_ATTR_TAB_SIZE_DEFAULT;
+	ble_enable_params.gatts_enable_params.attr_tab_size   = 0x580 ;//BLE_GATTS_ATTR_TAB_SIZE_DEFAULT;
 #endif
 	
 	ble_enable_params.gatts_enable_params.service_changed = IS_SRVC_CHANGED_CHARACT_PRESENT;
-	err_code = sd_ble_enable(&ble_enable_params);	
-	APP_ERROR_CHECK(err_code);	
+
+#ifndef OLD_SDK_VERSION
+	// APP_RAM_BASE;
+	#ifdef S130 
+		#define RAM_APP_START_AT  0x20002800
+	#else
+		#define RAM_APP_START_AT  0x20001E00
+	
+	#endif	 
+	uint32_t   app_ram_base = RAM_APP_START_AT;
+	
+	 err_code = sd_ble_enable(&ble_enable_params,&app_ram_base);	
+#else
+	 err_code = sd_ble_enable(&ble_enable_params);	
+#endif
+	 APP_ERROR_CHECK(err_code);	
 #endif
 
     // Register with the SoftDevice handler module for BLE events.
@@ -89,24 +110,29 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
  */
  void on_ble_evt(ble_evt_t * p_ble_evt)
 {
+	uint32_t err_code;
 
-	switch (p_ble_evt->header.evt_id)
-	{
-		case BLE_GAP_EVT_CONNECTED:
-		nrf_gpio_pin_set(LED_RED);
-		nrf_gpio_pin_clear(LED_GREEN);
-		m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
-		break;
-
-		case BLE_GAP_EVT_DISCONNECTED:
-		nrf_gpio_pin_set(LED_GREEN);
-		nrf_gpio_pin_clear(LED_RED);
-
-		m_conn_handle = BLE_CONN_HANDLE_INVALID;
+	switch (p_ble_evt->header.evt_id){
+	case BLE_GAP_EVT_CONNECTED:
+			nrf_gpio_pin_set(LED_RED);
+			nrf_gpio_pin_clear(LED_GREEN);
+			m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
+			break;
+	case BLE_GAP_EVT_DISCONNECTED:
+			nrf_gpio_pin_set(LED_GREEN);
+			nrf_gpio_pin_clear(LED_RED);
+			m_conn_handle = BLE_CONN_HANDLE_INVALID;
+			break;
+	case BLE_GATTC_EVT_TIMEOUT:
+	case BLE_GATTS_EVT_TIMEOUT:
+		// Disconnect on GATT Server and Client timeout events.
+		err_code = sd_ble_gap_disconnect(m_conn_handle,
+		BLE_HCI_REMOTE_USER_TERMINATED_CONNECTION);
+		APP_ERROR_CHECK(err_code);
 		break;
 
 		default:
-	    // No implementation needed.
+		// No implementation needed.
 		break;
 	}
 }
@@ -225,7 +251,7 @@ static dm_application_instance_t        m_app_handle;                           
 	uint32_t      err_code;
 	ble_advdata_t advdata;
 
-        
+	
 	memset(&advdata, 0, sizeof(advdata));
 
 	advdata.name_type               = BLE_ADVDATA_FULL_NAME;
@@ -255,7 +281,7 @@ void conn_params_init(void)
 	cp_init.next_conn_params_update_delay  = NEXT_CONN_PARAMS_UPDATE_DELAY;
 	cp_init.max_conn_params_update_count   = MAX_CONN_PARAMS_UPDATE_COUNT;
 	cp_init.start_on_notify_cccd_handle    = BLE_GATT_HANDLE_INVALID;
-	cp_init.disconnect_on_fail             = false;
+	cp_init.disconnect_on_fail             = true;
 	cp_init.evt_handler                    = on_conn_params_evt;
 	cp_init.error_handler                  = conn_params_error_handler;
 
@@ -270,13 +296,28 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 	dm_event_t const  * p_event,
 	ret_code_t        event_result)
 {
-	APP_ERROR_CHECK(event_result);
+//	APP_ERROR_CHECK(event_result);
+	uint32_t err_code;
 
 #ifdef BLE_DFU_APP_SUPPORT
 	if (p_event->event_id == DM_EVT_LINK_SECURED){
 		app_context_load(p_handle);
 	}
 #endif // BLE_DFU_APP_SUPPORT
+
+    switch(p_event->event_id)
+    {
+        case DM_EVT_CONNECTION:
+//            m_conn_handle = p_event->event_param.p_gap_param->conn_handle;
+//            err_code = bsp_indication_set(BSP_INDICATE_CONNECTED);
+  //          APP_ERROR_CHECK(err_code);
+            break;
+
+        case DM_EVT_DISCONNECTION:
+  //          m_conn_handle = BLE_CONN_HANDLE_INVALID;
+            break;
+    }
+
 
 	return NRF_SUCCESS;
 }
