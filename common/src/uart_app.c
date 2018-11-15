@@ -28,7 +28,7 @@ void uart_event_handle(app_uart_evt_t * p_event)
 	switch (p_event->evt_type){
 	
 	case APP_UART_DATA_READY:
-		app_uart_get(&local_uart_stream->stream[ (local_uart_stream->index)++ ]);
+		app_uart_get((uint8_t *)&local_uart_stream->stream[ (local_uart_stream->index)++ ]);
 		uart_check_stream();
 	
 	break;
@@ -66,20 +66,31 @@ void uart_check_stream(void){
 }
 
 #ifdef DEVKIT_BOARD
-#define RX_PIN_NUMBER  8
-#define TX_PIN_NUMBER  6
-#define CTS_PIN_NUMBER 7
-#define RTS_PIN_NUMBER 5
-
-#else
-#define RX_PIN_NUMBER  26
-#define TX_PIN_NUMBER  27
-#define CTS_PIN_NUMBER 7
-#define RTS_PIN_NUMBER 5
+	#define RX_PIN_NUMBER  8
+	#define TX_PIN_NUMBER  6
+	#define CTS_PIN_NUMBER 7
+	#define RTS_PIN_NUMBER 5
 #endif
-void uart_init(void)
+
+#ifdef BBN_BOARD_PINS
+	#define RX_PIN_NUMBER  16
+	#define TX_PIN_NUMBER  15
+	#define CTS_PIN_NUMBER 19
+	#define RTS_PIN_NUMBER 5
+#endif
+
+#ifdef SPARKFUN_BOARD
+	#define RX_PIN_NUMBER  26
+	#define TX_PIN_NUMBER  27
+	#define CTS_PIN_NUMBER 7
+	#define RTS_PIN_NUMBER 5
+#endif
+void uart_init(st_uart_string *external_uart_stream)
 {
     uint32_t                     err_code;
+
+    uart_set_structe (external_uart_stream);
+
     const app_uart_comm_params_t comm_params =
     {
 	RX_PIN_NUMBER,

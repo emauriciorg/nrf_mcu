@@ -16,6 +16,18 @@
 #include "../inc/ble_app.h"
 #include "../inc/cafe.h"
 
+#define TWI_DEBUG_CLI
+#ifdef TWI_DEBUG_CLI
+	#include "../inc/accelerometer_i2c.h"
+	#include "app_twi.h"
+	extern const nrf_drv_twi_t m_twi_global_accelerometer;
+	extern volatile bool m_xfer_done;
+	extern uint8_t regW,regR;
+	extern uint8_t waiting_for_ack_response,waiting_for_reading_response;    
+	extern uint8_t i2c_mode;
+
+	uint8_t err_code;
+#endif
 /* 
 	implementation of a cli like parser 
 	mainly used for debuggin purposes, to tranfers data a simple
@@ -122,6 +134,34 @@ void cli_blink(unsigned int *command_id)
 }
 
 
+
+//010   0A0    ,  16
+uint8_t cli_ascii_charhex_to_hex( char  hex_character){
+	
+	if ( hex_character <= 'F' && hex_character >= 'A') return (hex_character -'A')+10;
+
+	if ( hex_character <= 'f' && hex_character >= 'a') return (hex_character -'f')+10;
+
+	if ( hex_character <= '9' && hex_character >= '0') return (hex_character -'0');
+
+	return 0;
+}
+
+uint16_t cli_ascii_streamhex_to_hex(char *stream_pointer, uint8_t stream_length){
+	uint16_t hex_result=0;
+
+	while(stream_length &&  ( (stream_pointer[stream_length]) != 0) ){
+//		printf("[%x][%x]->[%x]\n\n",stream_pointer+stream_length,stream_length,cli_ascii_charhex_to_hex( *(stream_pointer) ) );	
+		hex_result= ( hex_result * 0x10	) + ( cli_ascii_charhex_to_hex(*stream_pointer));
+		//printf("*%x*",hex_result);
+		stream_pointer++;
+		stream_length--;
+	}
+	return hex_result;
+}
+
+
+
 #define COMMAND_LEVELS  4
 
 static uint8_t  uncripted_data[40];
@@ -133,7 +173,7 @@ unsigned char cli_parse(char *argv)
 	
 	unsigned char index=0;
 	unsigned int command_id[ COMMAND_LEVELS ];
-
+	memset(command_id,0,sizeof(command_id));
 	
 	command_id[0]= cli_get_command_id(argv, &index, PRIME_NUMBER);
 	argv+=index;
@@ -187,8 +227,36 @@ unsigned char cli_parse(char *argv)
         		cafe_load_payload(command_id[0], argv, strlen(argv) );
 
         		break;
+
+		case cmd_write_twi:
+				err_code= nrf_drv_twi_tx(&m_twi_global_accelerometer, 0x1DU, (uint8_t*)&regR, sizeof(regR),true);
+        			printf("[Error %x]\n",err_code);
+        			break;
+        case cmd_read_twi:
+       				err_code= nrf_drv_twi_rx(&m_twi_global_accelerometer, 0x0D, (uint8_t*)&regR, sizeof(regR));
+        			printf(" [Error %x ]\n",err_code);
+
+        			break;
+        case cmd_twi_read_saved_buffer: 
+        			printf("twi [%x]", regR);
+
+        			break;
+        case cmd_twiapp:
+         			accelerometer_load_addr(cli_ascii_streamhex_to_hex(argv, strlen(argv)-1));
+
+        			accelerometer_read_reg();
+
+        			break;
+	case cmd_cmdtest:		printf("argv [%c] argv [%c] argv [%c]\n",argv [0],argv [1],argv [2]);
+				break;
+	case cmd_hex2dec:	printf("result [%x] , \n", cli_ascii_streamhex_to_hex(argv, strlen(argv)-1) );
+				
+				break;
+	case cmd_accinit:	
+				//accelerometer_on_start_configuration();
+				break;
 	default:	
-			CLI_OUT("unknow command\n");
+				CLI_OUT("unknow command\n");
 	break;
 
 
@@ -198,7 +266,6 @@ unsigned char cli_parse(char *argv)
 
 	return 0;
 }
-
 void cli_parse_command(st_uart_string *uart_stream){
 	
 	if (!(uart_stream->pending_parse)) return;

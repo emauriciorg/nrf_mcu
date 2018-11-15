@@ -1,4 +1,6 @@
-#include "../inc/timer_app.h"
+#include "app_timer.h"
+#include "timer_app.h"
+
 #include <stdio.h>
 #include "app_error.h"
 
@@ -8,6 +10,12 @@
 const nrf_drv_timer_t TIMER_1_APP = NRF_DRV_TIMER_INSTANCE(1);
  static uint16_t i;
  static uint16_t *tick_counter;
+
+
+void timer_app_init(void){
+	APP_TIMER_INIT(APP_TIMER_PRESCALER, APP_TIMER_OP_QUEUE_SIZE, false);
+}
+
 
 
 void timer_event_handler(nrf_timer_event_t event_type, void* p_context)

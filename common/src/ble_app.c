@@ -11,9 +11,9 @@
 #include "device_manager.h"
 
 #include "nrf_gpio.h"
-#include "../inc/bbn_board.h"
+#include "bbn_board.h"
 #include <stdio.h>
-
+#include "timer_app.h"
 #include "custom_ble_services.h"
 
 
@@ -297,7 +297,7 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 	ret_code_t        event_result)
 {
 //	APP_ERROR_CHECK(event_result);
-	uint32_t err_code;
+	//uint32_t err_code;
 
 #ifdef BLE_DFU_APP_SUPPORT
 	if (p_event->event_id == DM_EVT_LINK_SECURED){
@@ -323,7 +323,7 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 }
 
 
- void device_manager_init(bool erase_bonds)
+ void ble_device_manager_init(bool erase_bonds)
 {
 	uint32_t               err_code;
 
@@ -356,4 +356,19 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 void ble_send(uint8_t *p_string, uint8_t length){
 
 	ble_nus_string_send(&m_custom_service, p_string, length);
+}
+
+void ble_init_modules(){
+
+	uint32_t               err_code;
+
+	ble_stack_init();
+	ble_device_manager_init(false);
+	gap_params_init(); 
+	services_init();
+	advertising_init();
+	conn_params_init();
+	err_code = ble_advertising_start(BLE_ADV_MODE_FAST);
+	APP_ERROR_CHECK(err_code);
+
 }

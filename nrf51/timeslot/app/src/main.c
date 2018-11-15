@@ -22,7 +22,8 @@
 #include "cli.h"
 
 #include "timer_app.h"
-
+#include "accelerometer_i2c.h"
+#include "app_twi.h"
 #define SOFT_DEVICE_ENABLED
 
 
@@ -40,17 +41,11 @@ void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name){
 	app_error_handler(0xDEADBEEF, line_num, p_file_name); //0xDEADBEEF         /**< Value used as error code on stack dump, can be used to identify stack location on stack unwind. */
 }
 
-static void timers_init(void){
-	APP_TIMER_INIT(APP_TIMER_PRESCALER, APP_TIMER_OP_QUEUE_SIZE, false);
-}
-
-
-
 
 extern uint8_t packet_recieved;
-unsigned char sample_text;
 
-void print_received_data(void)
+
+void print_recieved_radio_data(void)
 {
 	uint8_t len_t;
 	uint8_t temp_buffer[32+10];
@@ -62,47 +57,38 @@ void print_received_data(void)
 	SDBG("]\n");
 }
 
+
+
 int main(void)
-{
-	uint32_t err_code;
-	
+{	
 	st_uart_string uart_stream;
-
+	timer_app_init();
 	board_leds_init();
-	
-	uart_set_structe (&uart_stream);
-	uart_init();
+	uart_init (&uart_stream);
 	SDBG("Start!\n");
-
-	timers_init();
-
-#ifdef SOFT_DEVICE_ENABLED
-	ble_stack_init();
-
-	device_manager_init(false);
-
-	gap_params_init(); 
-	services_init();
-	advertising_init();
 	
+	accelerometer_setup();
+	//timers_init();
 
-	conn_params_init();
-	err_code = ble_advertising_start(BLE_ADV_MODE_FAST);
-	APP_ERROR_CHECK(err_code);
-
+#ifdef SOFT_DEVICE_ENABLED1
+	ble_init_modules();
 #endif
 
+#ifdef TIMESLOT_ENABLE
 	timeslot_sd_init();
-
+#endif
 	for (;;)
 	{	
-				
-	        cli_parse_command(&uart_stream);
+		
+
+		nrf_delay_ms(250);
+		nrf_gpio_pin_toggle(LED_RED);
+		cli_parse_command(&uart_stream);
 		
 #ifdef TRANSCEIVER_MODE
 		if ( packet_recieved ){
 			packet_recieved= 0;
-			print_received_data();
+			print_recieved_radio_data();
 		}
 #endif
 
@@ -117,3 +103,4 @@ void app_error_handler(uint32_t error_code, uint32_t line_num, const uint8_t * p
 	while(1);
 }
 */
+

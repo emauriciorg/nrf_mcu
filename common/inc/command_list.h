@@ -39,4 +39,14 @@
 
 #define cmd_help     0x45   
 #define cmd_clear    0x237
+
+/*TWI DEBUG*/
+#define cmd_write_twi 0x88
+#define cmd_read_twi  0x74
+#define cmd_twi_read_saved_buffer 0x64
+#define cmd_twiapp	0x10f
+
+#define cmd_accinit  0x3da
+#define cmd_cmdtest  0x3d
+#define cmd_hex2dec  0x287
 #endif

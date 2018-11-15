@@ -22,11 +22,15 @@
 #include "cli.h"
 #include "io_expander.h" 
 #include "uart_app.h"
+#include "timer_app.h"
 #include <stdio.h>
+
+#include "adxl345.h"
 
 #define SOFT_DEVICE_ENABLED
 
-
+extern uint8_t packet_recieved;
+unsigned char sample_text;
 extern uint16_t                          m_conn_handle;   /**< Handle of the current connection. */
 //extern st_str  uart_tx;
 
@@ -42,66 +46,60 @@ void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name){
 	app_error_handler(0xDEADBEEF, line_num, p_file_name); //0xDEADBEEF         /**< Value used as error code on stack dump, can be used to identify stack location on stack unwind. */
 }
 
-static void timers_init(void){
-	APP_TIMER_INIT(APP_TIMER_PRESCALER, APP_TIMER_OP_QUEUE_SIZE, false);
-}
-
-
-
-
-extern uint8_t packet_recieved;
-unsigned char sample_text;
-
-void print_received_data(void)
+void print_recieved_radio_data(void)
 {
 	uint8_t temp_buffer[32+10];
-
 	cafe_get_rx_payload(temp_buffer);
-	
-	SDBG("Received[");
-	SDBG((char *)temp_buffer );
-	SDBG("]\n");
+	SDBG("Received[ %s]\n",(char *)temp_buffer );
 }
-st_uart_string uart_stream;
+extern char i2c_state;
+
+
+extern const nrf_drv_twi_t m_twi_global_accelerometer;
+extern volatile bool m_xfer_done;
 
 int main(void)
 {
-	uint32_t err_code;
 
+	st_uart_string uart_stream;
+	timer_app_init();
 	board_leds_init();
 	nrf_gpio_pin_clear(LED_BLUE);
-	uart_set_structe (&uart_stream);
-	uart_init();
+	uart_init (&uart_stream);
 	SDBG("start!\n");
-	timers_init();
-	io_init_io_expander();
+	adxl345_init();
+
 #ifdef SOFT_DEVICE_ENABLED
-	ble_stack_init();
-	device_manager_init(false);
-	gap_params_init(); 
-	services_init();
-	advertising_init();
-	conn_params_init();
-	err_code = ble_advertising_start(BLE_ADV_MODE_FAST);
-	APP_ERROR_CHECK(err_code);
+	ble_init_modules();
 #endif
-	
-	timeslot_sd_init();
+
+    uint8_t reg = 0;
+    ret_code_t err_code;
+
+	//timeslot_sd_init();
 	for (;;){
 
-		nrf_delay_ms(1000);
+		nrf_delay_ms(500);
 		nrf_gpio_pin_toggle(LED_RED);
-		io_read_port();
-		
+	
+//		SDBG("loop\n");
 		cli_parse_command(&uart_stream);
+		adxl345_read();
+ 		do{
+	            __WFE();
+       		 }while(m_xfer_done == false);
+     	 	err_code= nrf_drv_twi_tx(&m_twi_global_accelerometer, ADXL_ADDRESS, &reg, sizeof(reg),true);  
+
+       	 	APP_ERROR_CHECK(err_code);
+    	    	m_xfer_done = false;
+    
 		
 #ifdef TRANSCEIVER_MODE
 		if ( packet_recieved ){
 			packet_recieved= 0;
-			print_received_data();
+			print_recieved_radio_data();
 		}
 #endif
-
 	}
 }
 

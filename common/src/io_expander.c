@@ -63,7 +63,7 @@ void io_init_io_expander(void){
 
 
 
-void io_read_port(){
+ void io_read_port(){
     ret_code_t err_code;
     unsigned char port_lecture=0;
 	

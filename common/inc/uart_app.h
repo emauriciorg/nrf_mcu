@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 #include  "common_structs.h"
-extern void uart_init(void);
+extern void uart_init(st_uart_string *external_uart_stream);
 #define SDBG(...)	printf(__VA_ARGS__);
 			//SDBG(uart_stream.out_stream,uart_stream.out_len);
 
