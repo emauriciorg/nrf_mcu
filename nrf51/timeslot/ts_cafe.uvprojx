@@ -3400,12 +3400,6 @@
           <targetInfo name="nrf51822_xxac_s130"/>
         </targetInfos>
       </component>
-      <component Cclass="nRF_Drivers" Cgroup="nrf_drv_twi" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_drv_twi">
-        <package name="nRF_Drivers" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Drivers/" vendor="NordicSemiconductor" version="3.1.0"/>
-        <targetInfos>
-          <targetInfo name="nrf51822_xxab"/>
-        </targetInfos>
-      </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_drv_twi" Cvendor="NordicSemiconductor" Cversion="4.0.0-2.alpha" condition="nrf_drv_twi">
         <package name="nRF_Drivers" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Drivers/" vendor="NordicSemiconductor" version="4.0.0-2.alpha"/>
         <targetInfos>
@@ -3490,12 +3484,6 @@
         <targetInfos>
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
-        </targetInfos>
-      </component>
-      <component Cclass="nRF_Drivers" Cgroup="nrf_twi" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_twi">
-        <package name="nRF_Drivers" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Drivers/" vendor="NordicSemiconductor" version="3.1.0"/>
-        <targetInfos>
-          <targetInfo name="nrf51822_xxab"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_twi" Cvendor="NordicSemiconductor" Cversion="4.0.0-2.alpha" condition="nrf_twi">
@@ -3600,12 +3588,6 @@
         <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="3.1.0"/>
         <targetInfos>
           <targetInfo name="nrf51822_xxab" versionMatchMode="fixed"/>
-        </targetInfos>
-      </component>
-      <component Cclass="nRF_Libraries" Cgroup="app_twi" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_twi">
-        <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="3.1.0"/>
-        <targetInfos>
-          <targetInfo name="nrf51822_xxab"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Libraries" Cgroup="app_twi" Cvendor="NordicSemiconductor" Cversion="4.0.0-2.alpha" condition="app_twi">
@@ -4277,22 +4259,7 @@
           <targetInfo name="nrf51822_xxab"/>
         </targetInfos>
       </file>
-      <file attr="config" category="source" name="twi\app_twi.c" version="3.1.0">
-        <instance index="0">RTE\nRF_Libraries\nRF51822_xxAB\app_twi.c</instance>
-        <component Cclass="nRF_Libraries" Cgroup="app_twi" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_twi"/>
-        <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="3.1.0"/>
-        <targetInfos>
-          <targetInfo name="nrf51822_xxab"/>
-        </targetInfos>
-      </file>
-      <file attr="config" category="header" name="twi\app_twi.h" version="3.1.0">
-        <instance index="0">RTE\nRF_Libraries\nRF51822_xxAB\app_twi.h</instance>
-        <component Cclass="nRF_Libraries" Cgroup="app_twi" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_twi"/>
-        <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="3.1.0"/>
-        <targetInfos>
-          <targetInfo name="nrf51822_xxab"/>
-        </targetInfos>
-      </file>
+
       <file attr="config" category="source" name="util\nrf_assert.c" version="3.1.0">
         <instance index="0">RTE\nRF_Libraries\nRF51822_xxAB\nrf_assert.c</instance>
         <component Cclass="nRF_Libraries" Cgroup="nrf_assert" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_assert"/>
