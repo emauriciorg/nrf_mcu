@@ -93,8 +93,8 @@ void twi_handler(nrf_drv_twi_evt_t const * p_event, void * p_context)
 void accelerometer_setup(){
 	ret_code_t err_code;
 	const nrf_drv_twi_config_t m_twi_accelerometer = {
-		.scl                = ACCELEROMETER_SDA_PIN,
-		.sda                = ACCELEROMETER_SCL_PIN,
+		.scl                = ACCELEROMETER_SCL_PIN,
+		.sda                = ACCELEROMETER_SDA_PIN,
 		.frequency          = NRF_TWI_FREQ_100K,
 		.interrupt_priority = APP_IRQ_PRIORITY_HIGH
 	};
@@ -114,11 +114,11 @@ void accelerometer_setup(){
 void accelerometer_read_reg_cb(ret_code_t result, void * p_user_data)
 {
     if (result != NRF_SUCCESS){
-	ACC_MSG("accelerometer_read_registers_cb - error: %d\r\n", (int)result);
+	ACC_MSG("accelerometer_read_registers_cb - [error: %d][%x]\r\n", (int)result, m_buffer[0]);
 	return;
     }
 
-    ACC_MSG("accelerometer data: [0x%x]\r\n",m_buffer[0]);
+    ACC_MSG("accelerometer data: [0x%x],[0x%x],[0x%x]\r\n",m_buffer[0],m_buffer[1],m_buffer[2]);
     transaction_pending = false;
 }
 
@@ -152,8 +152,8 @@ void accelerometer_read_reg(){
 }
 
 
-#if 0 
-ndef NO_ACC_CONFIGURATION
+#if 1 
+//ndef NO_ACC_CONFIGURATION
 
 int accelerometer_on_start_configuration(void){
 	
@@ -163,19 +163,19 @@ int accelerometer_on_start_configuration(void){
 
 	
 	uint8_t retValue;
-	accelerometer_read_reg_BLOCKING(WHO_AM_I, retValue); //Read the Who am I
+	accelerometer_read_reg_BLOCKING(MMA8652_WHO_AM_I, retValue); //Read the Who am I
 
 	if (retValue != 0x4A){
 		ACC_MSG("[fsmAccelerometer]:\tNo accelerometer communication available\r\n");
 		return 0;
 	}
-
-	static uint8_t ctrl_reg_init[]        = { CTRL_REG1  , 0x18 };			//Set in standby (CTRL_REG1)
-	static uint8_t const conf_reg_init[]  = { FF_MT_CFG  , 0xF8 };		//Set Configuration register for motion detection with OR in X and Y and latch
-	static uint8_t const thres_reg_init[] = { FF_MT_THS  , 0x18 };		//Set Threshold for >1.5G
-	static uint8_t const deb_reg_init[]   = { FF_MT_COUNT, 0x01 };		//Set Debounce counter to 10
-	static uint8_t const ctrl_reg4_init[] = { CTRL_REG4  , 0x04 };		//Enable Motion/Freefall interrupt function in (CTRL_REG4)
-	static uint8_t const ctrl_reg5_init[] = { CTRL_REG5  , 0x04 };		//Route Motion/Freefall interrupt to INT1 pin (CTRL_REG5)
+	//transaction_pending=1;
+	static uint8_t ctrl_reg_init[]        = { MMA8652_CTRL_REG1  , 0x19 };			//Set in standby (CTRL_REG1)
+	static uint8_t const conf_reg_init[]  = { MMA8652_FF_MT_CFG  , 0x00 };		//Set Configuration register for motion detection with OR in X and Y and latch
+	static uint8_t const thres_reg_init[] = { MMA8652_FF_MT_THS  , 0x00 };		//Set Threshold for >1.5G
+	static uint8_t const deb_reg_init[]   = { MMA8652_FF_MT_COUNT, 0x01 };		//Set Debounce counter to 10
+	static uint8_t const ctrl_reg4_init[] = { MMA8652_CTRL_REG4  , 0x04 };		//Enable Motion/Freefall interrupt function in (CTRL_REG4)
+	static uint8_t const ctrl_reg5_init[] = { MMA8652_CTRL_REG5  , 0x04 };		//Route Motion/Freefall interrupt to INT1 pin (CTRL_REG5)
 
 	app_twi_transfer_t const init_transfers[6] =
 	{
@@ -189,9 +189,10 @@ int accelerometer_on_start_configuration(void){
 	
 	app_twi_perform(&m_app_twi, init_transfers, 6, NULL);
 
+	//while(transaction_pending);
 
 	uint8_t ctrl_reg1;
-	accelerometer_read_reg_BLOCKING(CTRL_REG1, ctrl_reg1); //Read CTRL_REG1
+	accelerometer_read_reg_BLOCKING(MMA8652_CTRL_REG1, ctrl_reg1); //Read CTRL_REG1
 	ctrl_reg1 |= 0x01;							//Device to active mode
 	ctrl_reg_init[1] = ctrl_reg1;
 	app_twi_transfer_t const init_transfer_ctrl_reg1[1] =

@@ -189,7 +189,7 @@ unsigned char cli_parse(char *argv)
 			cli_blink(&command_id[1]);
 			break;		
 	
-	case cmd_gpio : 
+	case cmd_gpio :   
 			command_id[1]=cli_get_command_id(argv,&index,PRIME_NUMBER_SUB);
  			argv+=index;
  			command_id[2] =(*argv)-'0';
@@ -253,7 +253,7 @@ unsigned char cli_parse(char *argv)
 				
 				break;
 	case cmd_accinit:	
-				//accelerometer_on_start_configuration();
+				accelerometer_on_start_configuration();
 				break;
 	default:	
 				CLI_OUT("unknow command\n");
