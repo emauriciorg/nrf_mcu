@@ -8,14 +8,14 @@
 #include <stdio.h>
 #include "../inc/cli.h"
 #include "app_uart.h"
-#include "../inc/common_structs.h"
-#include "../inc/command_list.h"
+#include "common_structs.h"
+#include "command_list.h"
 #include "nrf_gpio.h"
-#include "../inc/bbn_board.h"
-#include "../inc/aes_app.h"
-#include "../inc/ble_app.h"
-#include "../inc/cafe.h"
-
+#include "bbn_board.h"
+#include "aes_app.h"
+#include "ble_app.h"
+#include "cafe.h"
+#include "adc_app.h"
 #define TWI_DEBUG_CLI
 #ifdef TWI_DEBUG_CLI
 	#include "../inc/accelerometer_i2c.h"
@@ -42,7 +42,7 @@
 #endif
 
 #define PRIME_NUMBER 1009//2069
-#define PRIME_NUMBER_SUB 167
+#define PRIME_NUMBER_FOR_SHORT_HASH 167
 #define MAX_COMMAND_SIZE 20//
 
 // to do get hash number of each argv
@@ -179,22 +179,19 @@ unsigned char cli_parse(char *argv)
 	argv+=index;
 	
 	switch (command_id[0]){
-	
-	case cmd_turn:	
-			
-			command_id[1]=cli_get_command_id(argv,&index,PRIME_NUMBER_SUB);
- 			argv+=index;
-			command_id[2]=cli_get_command_id(argv,&index,PRIME_NUMBER_SUB);
-			// a look up table could be applied here since the functions are based on ids
+
+	case cmd_turn:			
+			command_id[1] = cli_get_command_id(argv, &index, PRIME_NUMBER_FOR_SHORT_HASH);
+			argv += index;
+			command_id[2] = cli_get_command_id(argv, &index, PRIME_NUMBER_FOR_SHORT_HASH);
 			cli_blink(&command_id[1]);
 			break;		
-	
-	case cmd_gpio :   
-			command_id[1]=cli_get_command_id(argv,&index,PRIME_NUMBER_SUB);
- 			argv+=index;
- 			command_id[2] =(*argv)-'0';
- 			if ((!command_id[2]) || (command_id[2]>20)) break;
- 			cli_gpio_handle(&command_id[1]);
+	case cmd_gpio :
+			command_id[1]=cli_get_command_id(argv,&index,PRIME_NUMBER_FOR_SHORT_HASH);
+			argv+=index;
+			command_id[2] =(*argv)-'0';
+			if ((!command_id[2]) || (command_id[2]>20)) break;
+			cli_gpio_handle(&command_id[1]);
 			break;
 	
 	case cmd_cip:  
@@ -255,6 +252,19 @@ unsigned char cli_parse(char *argv)
 	case cmd_accinit:	
 				accelerometer_on_start_configuration();
 				break;
+	case  cmd_adc:		adc_app_read();
+
+				break;
+
+	case cmd_fet:	  	
+				if ((*argv)=='1'){
+					nrf_gpio_pin_set(FET_ADC);
+					CLI_OUT ("FET set %c\n",*argv);
+				}else{
+					nrf_gpio_pin_clear(FET_ADC);
+					CLI_OUT ("FET clear %c \n",*argv);
+				}
+			break;
 	default:	
 				CLI_OUT("unknow command\n");
 	break;

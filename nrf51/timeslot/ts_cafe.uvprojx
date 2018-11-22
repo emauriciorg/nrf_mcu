@@ -4259,7 +4259,6 @@
           <targetInfo name="nrf51822_xxab"/>
         </targetInfos>
       </file>
-
       <file attr="config" category="source" name="util\nrf_assert.c" version="3.1.0">
         <instance index="0">RTE\nRF_Libraries\nRF51822_xxAB\nrf_assert.c</instance>
         <component Cclass="nRF_Libraries" Cgroup="nrf_assert" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_assert"/>

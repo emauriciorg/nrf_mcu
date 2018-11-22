@@ -40,7 +40,7 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 	dm_event_t const  * p_event,
 	ret_code_t        event_result);
 
- void ble_stack_init(void)
+ void nrf_ble_stack_init(void)
  {
 	uint32_t err_code;
 
@@ -82,7 +82,7 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 #endif
 
     // Register with the SoftDevice handler module for BLE events.
-	err_code = softdevice_ble_evt_handler_set(ble_evt_dispatch);
+	err_code = softdevice_ble_evt_handler_set(nrf_ble_evt_dispatch);
 	APP_ERROR_CHECK(err_code);
 	
     // Register with the SoftDevice handler module for BLE events.
@@ -90,7 +90,7 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 	APP_ERROR_CHECK(err_code);
 }	
 
- void ble_evt_dispatch( ble_evt_t * p_ble_evt)
+ void nrf_ble_evt_dispatch( ble_evt_t * p_ble_evt)
 {
 	dm_ble_evt_handler(p_ble_evt);
 	ble_conn_params_on_ble_evt(p_ble_evt);
@@ -362,7 +362,7 @@ void ble_init_modules(){
 
 	uint32_t               err_code;
 
-	ble_stack_init();
+	nrf_ble_stack_init();
 	ble_device_manager_init(false);
 	gap_params_init(); 
 	services_init();

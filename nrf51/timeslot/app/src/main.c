@@ -24,10 +24,9 @@
 #include "timer_app.h"
 #include "accelerometer_i2c.h"
 #include "app_twi.h"
-#define SOFT_DEVICE_ENABLED
 
 
-extern uint16_t                          m_conn_handle;   /**< Handle of the current connection. */
+//extern uint16_t                          m_conn_handle;   /**< Handle of the current connection. */
 
 void sys_evt_dispatch(uint32_t sys_evt)
 {
@@ -70,13 +69,13 @@ int main(void)
 	accelerometer_setup();
 	//timers_init();
 
-#ifdef SOFT_DEVICE_ENABLED1
-	ble_init_modules();
-#endif
+	BLE_INIT_INI_MODULES();
 
-#ifdef TIMESLOT_ENABLE
-	timeslot_sd_init();
-#endif
+	adc_app_init();
+
+	TIMESLOT_INIT();
+	
+	APP_ERROR_CHECK(4);
 	for (;;)
 	{	
 		

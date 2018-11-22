@@ -20,12 +20,11 @@
  */
 
 #include "nrf.h"
-#include <stdio.h>
+//#include <stdio.h>
 #include "app_error.h"
 #include "nordic_common.h"
 #include "sdk_errors.h"
 #include "nrf_log.h"
-
 #ifdef DEBUG
 #include "bsp.h"
 #endif
@@ -78,7 +77,8 @@ __WEAK void app_error_fault_handler(uint32_t id, uint32_t pc, uint32_t info)
 {
     // On assert, the system can only recover with a reset.
 #ifndef DEBUG
-    NVIC_SystemReset();
+	printf("[DEBUG]ERROR WAS FOUND NOW SYSTEM WOULD RESET\n");
+ //   NVIC_SystemReset();
 #else
 
 #ifdef BSP_DEFINES_ONLY
@@ -94,7 +94,7 @@ __WEAK void app_error_fault_handler(uint32_t id, uint32_t pc, uint32_t info)
     //                Use with care. Uncomment the line below to use.
     //ble_debug_assert_handler(error_code, line_num, p_file_name);
 #endif // BSP_DEFINES_ONLY
-
+	printf("[NO DEBUG]ERROR WAS FOUND NOW SYSTEM WOULD RESET\n");
     app_error_save_and_stop(id, pc, info);
 
 #endif // DEBUG

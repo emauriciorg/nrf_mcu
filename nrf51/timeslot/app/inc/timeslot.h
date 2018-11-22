@@ -8,7 +8,14 @@
 #include "softdevice_handler.h"
 #include "boards.h"
 
-#define TS_ENABLED
+//#define TIMESLOT_ENABLE
+
+#ifdef TIMESLOT_ENABLE
+	#define TIMESLOT_INIT() timeslot_sd_init()
+#else
+	#define TIMESLOT_INIT() 
+
+#endif
 
 /**@brief Radio event handler
 */
@@ -42,6 +49,8 @@ nrf_radio_signal_callback_return_param_t * radio_callback(uint8_t signal_type);
 /**@brief Function for initializing the timeslot API.
  */
 uint32_t timeslot_sd_init(void);
+
+
 
 
 #endif

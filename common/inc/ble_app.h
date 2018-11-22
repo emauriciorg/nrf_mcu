@@ -10,11 +10,18 @@
 #include "app_timer.h"
 #include "custom_ble_services.h"
 
+//#define SOFT_DEVICE_ENABLED
+
+#ifdef SOFT_DEVICE_ENABLED
+	#define BLE_INIT_INI_MODULES() ble_init_modules();
+#else
+	#define BLE_INIT_INI_MODULES() 
+#endif
 
 
-void ble_stack_init(void);
+void nrf_ble_stack_init(void);
 
-void ble_evt_dispatch( ble_evt_t * p_ble_evt);
+void nrf_ble_evt_dispatch( ble_evt_t * p_ble_evt);
 
 void on_ble_evt(ble_evt_t * p_ble_evt);
 
@@ -36,5 +43,6 @@ void ble_send(uint8_t *p_string, uint8_t length);
 
 
 void ble_init_modules(void);
+
 #endif
 

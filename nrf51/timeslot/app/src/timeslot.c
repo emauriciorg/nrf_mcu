@@ -31,7 +31,6 @@ uint8_t radio_counter=0;
 uint8_t temp_buff[32];
 uint8_t radio_len=0;
 
-//#define TS_ENABLED
 void TIMESLOT_END_IRQHandler(void)
 {
 
@@ -197,7 +196,7 @@ nrf_radio_signal_callback_return_param_t * radio_callback(uint8_t signal_type)
 
 uint32_t timeslot_sd_init(void)
 {
-#ifdef TS_ENABLED
+#ifdef TIMESLOT_ENABLE
 	uint32_t err_code;
 
 	err_code = sd_radio_session_open(radio_callback);
