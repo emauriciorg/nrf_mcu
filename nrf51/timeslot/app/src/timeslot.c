@@ -7,10 +7,10 @@
 #include "app_util.h"
 #include "softdevice_handler.h"
 
-#include "../inc/bbn_board.h"
-#include "../inc/cafe.h"
-#include "../inc/ws_uart.h"
-#include "../inc/timeslot.h"
+#include "bbn_board.h"
+#include "cafe.h"
+#include "ws_uart.h"
+#include "timeslot.h"
 #include <stdio.h>
 
 #define APP_ROUTINE_IRQ  

@@ -9,7 +9,6 @@
 
 #include "cli.h"
 #include "ws_uart.h"
-#include "common_structs.h"
 #include "command_list.h"
 #include "bbn_board.h"
 #include "aes_app.h"
@@ -21,7 +20,7 @@
 #define TWI_DEBUG_CLI
 
 #ifdef TWI_DEBUG_CLI
-	#include "../inc/accelerometer_i2c.h"
+	#include "accelerometer_i2c.h"
 	#include "app_twi.h"
 	extern const nrf_drv_twi_t m_twi_global_accelerometer;
 	extern volatile bool m_xfer_done;
@@ -242,9 +241,9 @@ unsigned char cli_parse_debug_command(char *argv)
 
         			break;
         case cmd_twiapp:
-         			accelerometer_load_addr(cli_ascii_streamhex_to_hex(argv, strlen(argv)-1));
+         			ws_accelerometer_load_addr(cli_ascii_streamhex_to_hex(argv, strlen(argv)-1));
 
-        			accelerometer_read_reg();
+        			ws_accelerometer_read_reg();
 
         			break;
 	case cmd_cmdtest:		printf("argv [%c] argv [%c] argv [%c]\n",argv [0],argv [1],argv [2]);
@@ -253,7 +252,7 @@ unsigned char cli_parse_debug_command(char *argv)
 				
 				break;
 	case cmd_accinit:	
-				accelerometer_on_start_configuration();
+				ws_accelerometer_on_start_configuration();
 				break;
 	case  cmd_adc:		ws_adc_read();
 

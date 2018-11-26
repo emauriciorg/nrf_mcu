@@ -6,7 +6,6 @@
 #include "ws_uart.h"
 #include "cli.h"
 #include "app_uart.h"
-#include "common_structs.h"
 #include "app_error.h"
 
 #define UART_STRING_MAX_SIZE  256

@@ -4,15 +4,14 @@
 * \brief   Encription routines .
 ******************************************************************************
 */
-#include "../inc/aes_app.h"
+#include "aes_app.h"
 
 #include <string.h>
 #include <stdio.h>
 
-#include "../inc/common_structs.h"
-#include "../inc/command_list.h"
+#include "command_list.h"
 #include "nrf_gpio.h"
-#include "../inc/bbn_board.h"
+#include "bbn_board.h"
 
 /**TO DO:  ota keying and bigger block encryption
  * 

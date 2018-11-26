@@ -30,11 +30,11 @@ typedef struct
 } ble_cs_inint_t;
 
 
-void custom_service_init(ble_cs_t * p_custom_service  );
-uint32_t custom_services_add_char_rx(ble_cs_t * p_custom_service);
-uint32_t custom_services_add_char_tx(ble_cs_t * p_custom_service);
+void ws_ble_service_init(ble_cs_t * p_custom_service  );
+uint32_t ws_services_add_char_rx(ble_cs_t * p_custom_service);
+uint32_t ws_services_add_char_tx(ble_cs_t * p_custom_service);
 
-void ble_cs_ws_on_ble_evt(ble_cs_t * p_custom_service, ble_evt_t * p_ble_evt);
-uint32_t ble_nus_string_send(ble_cs_t * p_custom_service, uint8_t * p_string, uint16_t length);
+void ws_ble_service_on_evt(ble_cs_t * p_custom_service, ble_evt_t * p_ble_evt);
+uint32_t ws_ble_nus_string_send(ble_cs_t * p_custom_service, uint8_t * p_string, uint16_t length);
 
 #endif

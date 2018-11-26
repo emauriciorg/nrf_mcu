@@ -8,7 +8,7 @@
 #include "ble_conn_params.h"
 #include "softdevice_handler.h"
 #include "app_timer.h"
-#include "custom_ble_services.h"
+#include "ws_ble_services.h"
 
 //#define SOFT_DEVICE_ENABLED
 

@@ -2,7 +2,6 @@
 #define UART_APP_
 
 #include <stdint.h>
-#include  "common_structs.h"
 #define WS_DBG(...)	printf(__VA_ARGS__);
 
 void ws_uart_init(void);

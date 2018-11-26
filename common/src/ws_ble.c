@@ -1,12 +1,13 @@
-#include "../inc/ws_ble.h"
+#include "ws_ble.h"
 
-#include "../inc/sys_event.h"
 
 #include "ble_conn_params.h"
 #include "ble_hci.h"
 #include "ble_srv_common.h"
 #include "ble_advdata.h"
 #include "ble.h"
+#include "pstorage.h"
+#include "ble_advertising.h"
 
 #include "device_manager.h"
 
@@ -14,7 +15,7 @@
 #include "bbn_board.h"
 #include <stdio.h>
 #include "ws_timer.h"
-#include "custom_ble_services.h"
+#include "ws_ble_services.h"
 
 
 #define IS_SRVC_CHANGED_CHARACT_PRESENT  1                                          /**< Include or not the service_changed characteristic. if not enabled, the server's database cannot be changed for the lifetime of the device*/
@@ -39,6 +40,13 @@ ble_cs_t m_custom_service;
 uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 	dm_event_t const  * p_event,
 	ret_code_t        event_result);
+
+void sys_evt_dispatch(uint32_t sys_evt)
+{
+	pstorage_sys_event_handler(sys_evt);
+	ble_advertising_on_sys_evt(sys_evt);
+	//nrf_evt_signal_handler(sys_evt);
+}
 
  void ws_ble_stack_init(void)
  {
@@ -95,7 +103,7 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 	dm_ble_evt_handler(p_ble_evt);
 	ble_conn_params_on_ble_evt(p_ble_evt);
 
-	ble_cs_ws_on_ble_evt(&m_custom_service, p_ble_evt);
+	ws_ble_service_on_evt(&m_custom_service, p_ble_evt);
 
 	ws_on_ble_evt(p_ble_evt);
 	ble_advertising_on_ble_evt(p_ble_evt);
@@ -212,7 +220,7 @@ void ws_ble_gap_params_init(void)
 
 void ws_ble_services_init(void)
 {
-	custom_service_init (&m_custom_service);
+	ws_ble_service_init (&m_custom_service);
 }
 
 
@@ -355,7 +363,7 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 
 void ws_ble_send(uint8_t *p_string, uint8_t length){
 
-	ble_nus_string_send(&m_custom_service, p_string, length);
+	ws_ble_nus_string_send(&m_custom_service, p_string, length);
 }
 
 void ws_ble_init_modules(){

@@ -1,4 +1,4 @@
-#include "../inc/bbn_board.h"
+#include "bbn_board.h"
 
 #include "nrf_gpio.h"
 void board_leds_init(void){

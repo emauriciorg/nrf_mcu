@@ -10,8 +10,8 @@ void adxl345_read(void);
 void twi_configure(void);
 
 
-void accelerometer_setup(void);
-void accelerometer_read_reg(void);
-void accelerometer_load_addr(uint8_t address_to_load);
-int accelerometer_on_start_configuration(void);
+void ws_accelerometer_setup(void);
+void ws_accelerometer_read_reg(void);
+void ws_accelerometer_load_addr(uint8_t address_to_load);
+int ws_accelerometer_on_start_configuration(void);
 #endif

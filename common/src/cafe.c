@@ -1,8 +1,8 @@
-#include "../inc/cafe.h"
+#include "cafe.h"
 #include "nrf_gpio.h"
 #include <string.h>
 #include <stdio.h>
-#include "../inc/aes_app.h"
+#include "aes_app.h"
 #include "bbn_board.h"
 
                                                                         // Constant parameters
@@ -31,13 +31,12 @@
 #define MAX_SLAVES_AVAILABLE 4
 
 
-int8_t g_rssi  		  =0;                                           //PUT INTO AN STRUCTURE
-
+int8_t g_rssi  		  =0;
 char   packet_recieved  =0;
 unsigned int   slave_RGB_value[5];
 
-static cafe_payload_t                  rx_payload;
-static cafe_payload_t 			tx_payload;
+static cafe_payload_t		rx_payload;
+static cafe_payload_t		tx_payload;
 
 static cafe_event_handler_t     m_event_handler;
 static cafe_config_t            m_config_local;
@@ -378,7 +377,7 @@ void cafe_update_nrf_radio_address(nrf_st_address radio_addr){
 
 
 
-char cafe_get_rx_payload(uint8_t *out_buffer){
+char cafe_get_rx_payload(char *out_buffer){
 	memcpy(  out_buffer,   m_rx_payload_buffer,  CAFE_CORE_MAX_PAYLOAD_LENGTH);
 	return CAFE_CORE_MAX_PAYLOAD_LENGTH;
 }

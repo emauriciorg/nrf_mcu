@@ -1,4 +1,4 @@
-#include "../inc/accelerometer_i2c.h"
+#include "accelerometer_i2c.h"
 
 #include <stdio.h>
 
@@ -30,9 +30,9 @@ static bool transaction_pending;
 			APP_TWI_WRITE(MMA8652_ADDR, p_reg_addr, 1,        APP_TWI_NO_STOP), \
 			APP_TWI_WRITE(MMA8652_ADDR, p_buffer,   byte_cnt, 0)
 
-#define accelerometer_read_reg_BLOCKING(address, value)                         \
+#define ws_accelerometer_read_reg_BLOCKING(address, value)                         \
 				addr = address;				  \
-				accelerometer_read_reg();			  \
+				ws_accelerometer_read_reg();			  \
 				nrf_delay_ms(1);			  \
 				while (transaction_pending == true){	  \
 					ACC_MSG("Wating\r\n");       \
@@ -90,7 +90,7 @@ void twi_handler(nrf_drv_twi_evt_t const * p_event, void * p_context)
 #endif
 
 
-void accelerometer_setup(){
+void ws_accelerometer_setup(){
 	ret_code_t err_code;
 	const nrf_drv_twi_config_t m_twi_accelerometer = {
 		.scl                = ACCELEROMETER_SCL_PIN,
@@ -111,10 +111,10 @@ void accelerometer_setup(){
 }
 
 
-void accelerometer_read_reg_cb(ret_code_t result, void * p_user_data)
+void ws_accelerometer_read_reg_cb(ret_code_t result, void * p_user_data)
 {
     if (result != NRF_SUCCESS){
-	ACC_MSG("accelerometer_read_registers_cb - [error: %d][%x]\r\n", (int)result, m_buffer[0]);
+	ACC_MSG("ws_accelerometer_read_registers_cb - [error: %d][%x]\r\n", (int)result, m_buffer[0]);
 	return;
     }
 
@@ -122,12 +122,12 @@ void accelerometer_read_reg_cb(ret_code_t result, void * p_user_data)
     transaction_pending = false;
 }
 
-void accelerometer_load_addr(uint8_t address_to_load){
+void ws_accelerometer_load_addr(uint8_t address_to_load){
 	addr= address_to_load;
 }
 
 
-void accelerometer_read_reg(){
+void ws_accelerometer_read_reg(){
 
 	//addr=ADXL_WHO_AM_I;
     // [these structures have to be "static" - they cannot be placed on stack
@@ -143,7 +143,7 @@ void accelerometer_read_reg(){
     };
     static app_twi_transaction_t const transaction =
     {
-	.callback            = accelerometer_read_reg_cb,
+	.callback            = ws_accelerometer_read_reg_cb,
 	.p_user_data         = NULL,
 	.p_transfers         = transfers,
 	.number_of_transfers = sizeof(transfers) / sizeof(transfers[0])
@@ -155,15 +155,15 @@ void accelerometer_read_reg(){
 #if 1 
 //ndef NO_ACC_CONFIGURATION
 
-int accelerometer_on_start_configuration(void){
+int ws_accelerometer_on_start_configuration(void){
 	
-	ACC_MSG("[fsmAccelerometer]:\taccelerometer_on_start_configuration\r\n");
+	ACC_MSG("[fsmAccelerometer]:\tws_accelerometer_on_start_configuration\r\n");
 
 ///	fsmAccelerometer_moving = false;
 
 	
 	uint8_t retValue;
-	accelerometer_read_reg_BLOCKING(MMA8652_WHO_AM_I, retValue); //Read the Who am I
+	ws_accelerometer_read_reg_BLOCKING(MMA8652_WHO_AM_I, retValue); //Read the Who am I
 
 	if (retValue != 0x4A){
 		ACC_MSG("[fsmAccelerometer]:\tNo accelerometer communication available\r\n");
@@ -192,7 +192,7 @@ int accelerometer_on_start_configuration(void){
 	//while(transaction_pending);
 
 	uint8_t ctrl_reg1;
-	accelerometer_read_reg_BLOCKING(MMA8652_CTRL_REG1, ctrl_reg1); //Read CTRL_REG1
+	ws_accelerometer_read_reg_BLOCKING(MMA8652_CTRL_REG1, ctrl_reg1); //Read CTRL_REG1
 	ctrl_reg1 |= 0x01;							//Device to active mode
 	ctrl_reg_init[1] = ctrl_reg1;
 	app_twi_transfer_t const init_transfer_ctrl_reg1[1] =

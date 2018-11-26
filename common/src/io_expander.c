@@ -1,4 +1,4 @@
-#include "../inc/io_expander.h"
+#include "io_expander.h"
 #include "app_error.h"
 #include <stdio.h>
 #include "nrf.h"
