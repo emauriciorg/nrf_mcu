@@ -7,7 +7,7 @@
 #include "app_util_platform.h"
 #include "nrf_drv_twi.h"
 #include "app_twi.h"
-
+#include "nrf_delay.h"
 #include "mma8652.h"
 #define ACCELEROMETER_INT_PIN       2
 #define ACCELEROMETER_SCL_PIN       5

@@ -4,9 +4,9 @@
 #include "common_structs.h"
 unsigned int cli_get_hash (char *string, unsigned int prime_number);
 
-unsigned char cli_parse(char *string);
+unsigned char cli_parse_debug_command(char *string);
 
-void cli_parse_command(st_uart_string *stream);
+void cli_execute_debug_command(void);
 
 
 #endif

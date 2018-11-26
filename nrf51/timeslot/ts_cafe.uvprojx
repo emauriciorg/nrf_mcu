@@ -400,9 +400,9 @@
               <FilePath>..\..\common\src\aes_app.c</FilePath>
             </File>
             <File>
-              <FileName>ble_app.c</FileName>
+              <FileName>ws_ble.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\src\ble_app.c</FilePath>
+              <FilePath>..\..\common\src\ws_ble.c</FilePath>
             </File>
             <File>
               <FileName>cafe.c</FileName>
@@ -425,19 +425,24 @@
               <FilePath>..\..\common\src\simple_uart.c</FilePath>
             </File>
             <File>
-              <FileName>timer_app.c</FileName>
+              <FileName>ws_timer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\src\timer_app.c</FilePath>
+              <FilePath>..\..\common\src\ws_timer.c</FilePath>
             </File>
             <File>
-              <FileName>uart_app.c</FileName>
+              <FileName>ws_uart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\src\uart_app.c</FilePath>
+              <FilePath>..\..\common\src\ws_uart.c</FilePath>
             </File>
             <File>
               <FileName>accelerometer_i2c.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\common\src\accelerometer_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>ws_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\common\src\ws_adc.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1223,9 +1228,9 @@
               <FilePath>..\..\common\src\aes_app.c</FilePath>
             </File>
             <File>
-              <FileName>ble_app.c</FileName>
+              <FileName>ws_ble.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\src\ble_app.c</FilePath>
+              <FilePath>..\..\common\src\ws_ble.c</FilePath>
             </File>
             <File>
               <FileName>cafe.c</FileName>
@@ -1248,19 +1253,24 @@
               <FilePath>..\..\common\src\simple_uart.c</FilePath>
             </File>
             <File>
-              <FileName>timer_app.c</FileName>
+              <FileName>ws_timer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\src\timer_app.c</FilePath>
+              <FilePath>..\..\common\src\ws_timer.c</FilePath>
             </File>
             <File>
-              <FileName>uart_app.c</FileName>
+              <FileName>ws_uart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\src\uart_app.c</FilePath>
+              <FilePath>..\..\common\src\ws_uart.c</FilePath>
             </File>
             <File>
               <FileName>accelerometer_i2c.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\common\src\accelerometer_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>ws_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\common\src\ws_adc.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2182,9 +2192,9 @@
               <FilePath>..\..\common\src\aes_app.c</FilePath>
             </File>
             <File>
-              <FileName>ble_app.c</FileName>
+              <FileName>ws_ble.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\src\ble_app.c</FilePath>
+              <FilePath>..\..\common\src\ws_ble.c</FilePath>
             </File>
             <File>
               <FileName>cafe.c</FileName>
@@ -2207,19 +2217,24 @@
               <FilePath>..\..\common\src\simple_uart.c</FilePath>
             </File>
             <File>
-              <FileName>timer_app.c</FileName>
+              <FileName>ws_timer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\src\timer_app.c</FilePath>
+              <FilePath>..\..\common\src\ws_timer.c</FilePath>
             </File>
             <File>
-              <FileName>uart_app.c</FileName>
+              <FileName>ws_uart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\src\uart_app.c</FilePath>
+              <FilePath>..\..\common\src\ws_uart.c</FilePath>
             </File>
             <File>
               <FileName>accelerometer_i2c.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\common\src\accelerometer_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>ws_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\common\src\ws_adc.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2665,9 +2680,9 @@
               <FilePath>..\..\common\src\aes_app.c</FilePath>
             </File>
             <File>
-              <FileName>ble_app.c</FileName>
+              <FileName>ws_ble.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\src\ble_app.c</FilePath>
+              <FilePath>..\..\common\src\ws_ble.c</FilePath>
             </File>
             <File>
               <FileName>cafe.c</FileName>
@@ -2690,19 +2705,24 @@
               <FilePath>..\..\common\src\simple_uart.c</FilePath>
             </File>
             <File>
-              <FileName>timer_app.c</FileName>
+              <FileName>ws_timer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\src\timer_app.c</FilePath>
+              <FilePath>..\..\common\src\ws_timer.c</FilePath>
             </File>
             <File>
-              <FileName>uart_app.c</FileName>
+              <FileName>ws_uart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\common\src\uart_app.c</FilePath>
+              <FilePath>..\..\common\src\ws_uart.c</FilePath>
             </File>
             <File>
               <FileName>accelerometer_i2c.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\common\src\accelerometer_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>ws_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\common\src\ws_adc.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3348,6 +3368,19 @@
           <targetInfo name="nrf51822_xxac_s130"/>
         </targetInfos>
       </component>
+      <component Cclass="nRF_Drivers" Cgroup="nrf_adc" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_adc">
+        <package name="nRF_Drivers" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Drivers/" vendor="NordicSemiconductor" version="3.1.0"/>
+        <targetInfos>
+          <targetInfo name="nrf51822_xxab"/>
+        </targetInfos>
+      </component>
+      <component Cclass="nRF_Drivers" Cgroup="nrf_adc" Cvendor="NordicSemiconductor" Cversion="4.0.0-2.alpha" condition="nrf_adc">
+        <package name="nRF_Drivers" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Drivers/" vendor="NordicSemiconductor" version="4.0.0-2.alpha"/>
+        <targetInfos>
+          <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
+          <targetInfo name="nrf51822_xxac_s130"/>
+        </targetInfos>
+      </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_delay" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_delay">
         <package name="nRF_Drivers" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Drivers/" vendor="NordicSemiconductor" version="3.1.0"/>
         <targetInfos>
@@ -3398,6 +3431,12 @@
         <targetInfos>
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
+        </targetInfos>
+      </component>
+      <component Cclass="nRF_Drivers" Cgroup="nrf_drv_twi" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_drv_twi">
+        <package name="nRF_Drivers" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Drivers/" vendor="NordicSemiconductor" version="3.1.0"/>
+        <targetInfos>
+          <targetInfo name="nrf51822_xxab"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_drv_twi" Cvendor="NordicSemiconductor" Cversion="4.0.0-2.alpha" condition="nrf_drv_twi">
@@ -3459,6 +3498,19 @@
           <targetInfo name="nrf51822_xxac_s130"/>
         </targetInfos>
       </component>
+      <component Cclass="nRF_Drivers" Cgroup="nrf_rng" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_rng">
+        <package name="nRF_Drivers" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Drivers/" vendor="NordicSemiconductor" version="3.1.0"/>
+        <targetInfos>
+          <targetInfo name="nrf51822_xxab"/>
+        </targetInfos>
+      </component>
+      <component Cclass="nRF_Drivers" Cgroup="nrf_rng" Cvendor="NordicSemiconductor" Cversion="4.0.0-2.alpha" condition="nrf_rng">
+        <package name="nRF_Drivers" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Drivers/" vendor="NordicSemiconductor" version="4.0.0-2.alpha"/>
+        <targetInfos>
+          <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
+          <targetInfo name="nrf51822_xxac_s130"/>
+        </targetInfos>
+      </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_soc" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_soc_default">
         <package name="nRF_Drivers" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Drivers/" vendor="NordicSemiconductor" version="3.1.0"/>
         <targetInfos>
@@ -3484,6 +3536,12 @@
         <targetInfos>
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
+        </targetInfos>
+      </component>
+      <component Cclass="nRF_Drivers" Cgroup="nrf_twi" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_twi">
+        <package name="nRF_Drivers" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Drivers/" vendor="NordicSemiconductor" version="3.1.0"/>
+        <targetInfos>
+          <targetInfo name="nrf51822_xxab"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_twi" Cvendor="NordicSemiconductor" Cversion="4.0.0-2.alpha" condition="nrf_twi">
@@ -3588,6 +3646,12 @@
         <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="3.1.0"/>
         <targetInfos>
           <targetInfo name="nrf51822_xxab" versionMatchMode="fixed"/>
+        </targetInfos>
+      </component>
+      <component Cclass="nRF_Libraries" Cgroup="app_twi" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_twi">
+        <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="3.1.0"/>
+        <targetInfos>
+          <targetInfo name="nrf51822_xxab"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Libraries" Cgroup="app_twi" Cvendor="NordicSemiconductor" Cversion="4.0.0-2.alpha" condition="app_twi">
@@ -3942,18 +4006,6 @@
           <targetInfo name="nrf51822_xxac_s130"/>
         </targetInfos>
       </file>
-      <file attr="config" category="source" name="uart\app_uart.c" version="0.0.0">
-        <instance index="0" removed="1">RTE\nRF_Drivers\nRF51422_xxAC\app_uart.c</instance>
-        <component Cclass="nRF_Drivers" Cgroup="app_uart" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="4.0.0-2.alpha" condition="app_uart_default"/>
-        <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="4.0.0-2.alpha"/>
-        <targetInfos/>
-      </file>
-      <file attr="config" category="header" name="uart\app_uart.h" version="0.0.0">
-        <instance index="0" removed="1">RTE\nRF_Drivers\nRF51422_xxAC\app_uart.h</instance>
-        <component Cclass="nRF_Drivers" Cgroup="app_uart" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="4.0.0-2.alpha" condition="app_uart_default"/>
-        <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="4.0.0-2.alpha"/>
-        <targetInfos/>
-      </file>
       <file attr="config" category="header" name="config\nrf_drv_config.h" version="3.1.0">
         <instance index="0">RTE\nRF_Drivers\nRF51422_xxAC\nrf_drv_config.h</instance>
         <component Cclass="nRF_Drivers" Cgroup="nrf_drv_uart" Cvendor="NordicSemiconductor" Cversion="4.0.0-2.alpha" condition="nrf_drv_uart"/>
@@ -3982,7 +4034,19 @@
           <targetInfo excluded="1" name="flash_softdevice"/>
         </targetInfos>
       </file>
-      <file attr="config" category="header" name="uart\app_uart.h" version="3.1.0">
+      <file attr="config" category="source" name="uart\ws_uart.c" version="0.0.0">
+        <instance index="0" removed="1">RTE\nRF_Drivers\nRF51422_xxAC\ws_uart.c</instance>
+        <component Cclass="nRF_Drivers" Cgroup="app_uart" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="4.0.0-2.alpha" condition="app_uart_default"/>
+        <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="4.0.0-2.alpha"/>
+        <targetInfos/>
+      </file>
+      <file attr="config" category="header" name="uart\ws_uart.h" version="0.0.0">
+        <instance index="0" removed="1">RTE\nRF_Drivers\nRF51422_xxAC\ws_uart.h</instance>
+        <component Cclass="nRF_Drivers" Cgroup="app_uart" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="4.0.0-2.alpha" condition="app_uart_default"/>
+        <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="4.0.0-2.alpha"/>
+        <targetInfos/>
+      </file>
+      <file attr="config" category="header" name="uart\app_uart.h" version="0.0.0">
         <instance index="0">RTE\nRF_Drivers\nRF51822_xxAB\app_uart.h</instance>
         <component Cclass="nRF_Drivers" Cgroup="app_uart" Cvariant="Fifo" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_uart_Fifo"/>
         <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="3.1.0"/>
@@ -4014,6 +4078,14 @@
           <targetInfo name="nrf51822_xxab"/>
         </targetInfos>
       </file>
+      <file attr="config" category="header" name="hal\nrf_rng.h" version="3.1.0">
+        <instance index="0">RTE\nRF_Drivers\nRF51822_xxAB\nrf_rng.h</instance>
+        <component Cclass="nRF_Drivers" Cgroup="nrf_rng" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_rng"/>
+        <package name="nRF_Drivers" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Drivers/" vendor="NordicSemiconductor" version="3.1.0"/>
+        <targetInfos>
+          <targetInfo name="nrf51822_xxab"/>
+        </targetInfos>
+      </file>
       <file attr="config" category="source" name="pstorage\pstorage.c" version="3.1.0">
         <instance index="0">RTE\nRF_Drivers\nRF51822_xxAB\pstorage.c</instance>
         <component Cclass="nRF_Drivers" Cgroup="pstorage" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="pstorage_default"/>
@@ -4038,13 +4110,13 @@
           <targetInfo name="nrf51822_xxab"/>
         </targetInfos>
       </file>
-      <file attr="config" category="source" name="uart\app_uart.c" version="3.1.0">
-        <instance index="0" removed="1">RTE\nRF_Drivers\nRF51822_xxAC\app_uart.c</instance>
-        <component Cclass="nRF_Drivers" Cgroup="app_uart" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="4.0.0-2.alpha" condition="app_uart_default"/>
-        <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="4.0.0-2.alpha"/>
+      <file attr="config" category="header" name="uart\ws_uart.h" version="3.1.0">
+        <instance index="0" removed="1">RTE\nRF_Drivers\nRF51822_xxAB\ws_uart.h</instance>
+        <component Cclass="nRF_Drivers" Cgroup="app_uart" Cvariant="Fifo" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_uart_Fifo"/>
+        <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="3.1.0"/>
         <targetInfos/>
       </file>
-      <file attr="config" category="header" name="uart\app_uart.h" version="4.0.0-2.alpha">
+      <file attr="config" category="header" name="uart\app_uart.h" version="0.0.0">
         <instance index="0">RTE\nRF_Drivers\nRF51822_xxAC\app_uart.h</instance>
         <component Cclass="nRF_Drivers" Cgroup="app_uart" Cvariant="Fifo" Cvendor="NordicSemiconductor" Cversion="4.0.0-2.alpha" condition="app_uart_Fifo"/>
         <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="4.0.0-2.alpha"/>
@@ -4074,6 +4146,15 @@
       <file attr="config" category="header" name="config\nrf_drv_config.h" version="4.0.0-2.alpha">
         <instance index="0">RTE\nRF_Drivers\nRF51822_xxAC\nrf_drv_config.h</instance>
         <component Cclass="nRF_Drivers" Cgroup="nrf_drv_uart" Cvendor="NordicSemiconductor" Cversion="4.0.0-2.alpha" condition="nrf_drv_uart"/>
+        <package name="nRF_Drivers" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Drivers/" vendor="NordicSemiconductor" version="4.0.0-2.alpha"/>
+        <targetInfos>
+          <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
+          <targetInfo name="nrf51822_xxac_s130"/>
+        </targetInfos>
+      </file>
+      <file attr="config" category="header" name="hal\nrf_rng.h" version="4.0.0-2.alpha">
+        <instance index="0">RTE\nRF_Drivers\nRF51822_xxAC\nrf_rng.h</instance>
+        <component Cclass="nRF_Drivers" Cgroup="nrf_rng" Cvendor="NordicSemiconductor" Cversion="4.0.0-2.alpha" condition="nrf_rng"/>
         <package name="nRF_Drivers" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Drivers/" vendor="NordicSemiconductor" version="4.0.0-2.alpha"/>
         <targetInfos>
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
@@ -4112,6 +4193,18 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
         </targetInfos>
+      </file>
+      <file attr="config" category="source" name="uart\ws_uart.c" version="3.1.0">
+        <instance index="0" removed="1">RTE\nRF_Drivers\nRF51822_xxAC\ws_uart.c</instance>
+        <component Cclass="nRF_Drivers" Cgroup="app_uart" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="4.0.0-2.alpha" condition="app_uart_default"/>
+        <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="4.0.0-2.alpha"/>
+        <targetInfos/>
+      </file>
+      <file attr="config" category="header" name="uart\ws_uart.h" version="4.0.0-2.alpha">
+        <instance index="0" removed="1">RTE\nRF_Drivers\nRF51822_xxAC\ws_uart.h</instance>
+        <component Cclass="nRF_Drivers" Cgroup="app_uart" Cvariant="Fifo" Cvendor="NordicSemiconductor" Cversion="4.0.0-2.alpha" condition="app_uart_Fifo"/>
+        <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="4.0.0-2.alpha"/>
+        <targetInfos/>
       </file>
       <file attr="config" category="source" name="button\app_button.c" version="0.0.0">
         <instance index="0" removed="1">RTE\nRF_Libraries\nRF51422_xxAC\app_button.c</instance>
@@ -4254,6 +4347,22 @@
       <file attr="config" category="header" name="trace\app_trace.h" version="3.1.0">
         <instance index="0">RTE\nRF_Libraries\nRF51822_xxAB\app_trace.h</instance>
         <component Cclass="nRF_Libraries" Cgroup="app_trace" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_trace_default"/>
+        <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="3.1.0"/>
+        <targetInfos>
+          <targetInfo name="nrf51822_xxab"/>
+        </targetInfos>
+      </file>
+      <file attr="config" category="source" name="twi\app_twi.c" version="0.0.0">
+        <instance index="0">RTE\nRF_Libraries\nRF51822_xxAB\app_twi.c</instance>
+        <component Cclass="nRF_Libraries" Cgroup="app_twi" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_twi"/>
+        <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="3.1.0"/>
+        <targetInfos>
+          <targetInfo name="nrf51822_xxab"/>
+        </targetInfos>
+      </file>
+      <file attr="config" category="header" name="twi\app_twi.h" version="0.0.0">
+        <instance index="0">RTE\nRF_Libraries\nRF51822_xxAB\app_twi.h</instance>
+        <component Cclass="nRF_Libraries" Cgroup="app_twi" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_twi"/>
         <package name="nRF_Libraries" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries/" vendor="NordicSemiconductor" version="3.1.0"/>
         <targetInfos>
           <targetInfo name="nrf51822_xxab"/>

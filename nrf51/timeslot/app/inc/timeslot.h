@@ -11,9 +11,9 @@
 //#define TIMESLOT_ENABLE
 
 #ifdef TIMESLOT_ENABLE
-	#define TIMESLOT_INIT() timeslot_sd_init()
+	#define WS_TIMESLOT_INIT() timeslot_sd_init()
 #else
-	#define TIMESLOT_INIT() 
+	#define WS_TIMESLOT_INIT() 
 
 #endif
 

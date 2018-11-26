@@ -5,7 +5,7 @@
 
 #define FET_ADC 23
 
-void adc_app_init(void);
-int32_t adc_app_read(void);
+void ws_adc_setup(void);
+int32_t ws_adc_read(void);
 
 #endif /* _ADC_APP_H_ */

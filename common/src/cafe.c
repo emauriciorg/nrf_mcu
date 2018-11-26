@@ -33,7 +33,7 @@
 
 int8_t g_rssi  		  =0;                                           //PUT INTO AN STRUCTURE
 
-unsigned int   packet_recieved  =0;
+char   packet_recieved  =0;
 unsigned int   slave_RGB_value[5];
 
 static cafe_payload_t                  rx_payload;
@@ -46,6 +46,15 @@ static  uint8_t                 m_rx_payload_buffer[CAFE_CORE_MAX_PAYLOAD_LENGTH
 static  uint8_t                 m_tx_payload_buffer[CAFE_CORE_MAX_PAYLOAD_LENGTH + 10];
 static volatile uint32_t        m_interrupt_flags       = 0;
 
+
+char cafe_packet_recieved(void){
+	
+	if(packet_recieved){
+		packet_recieved = false;
+		return true	;
+	}
+	return false	;	
+}
 
 void cafe_load_payload(unsigned char slave_id, char *data,unsigned char len){
 

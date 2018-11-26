@@ -6,17 +6,20 @@
 */
 #include <string.h>
 #include <stdio.h>
-#include "../inc/cli.h"
-#include "app_uart.h"
+
+#include "cli.h"
+#include "ws_uart.h"
 #include "common_structs.h"
 #include "command_list.h"
-#include "nrf_gpio.h"
 #include "bbn_board.h"
 #include "aes_app.h"
-#include "ble_app.h"
+#include "ws_ble.h"
 #include "cafe.h"
-#include "adc_app.h"
+#include "ws_adc.h"
+#include "nrf_gpio.h"
+	
 #define TWI_DEBUG_CLI
+
 #ifdef TWI_DEBUG_CLI
 	#include "../inc/accelerometer_i2c.h"
 	#include "app_twi.h"
@@ -36,9 +39,9 @@
 
 #define DEBUG_CLI_AES
 #ifdef DEBUG_CLI_AES
-	#define CLI_OUT(...)  printf(__VA_ARGS__)
+	#define CLI_DBG(...)  printf(__VA_ARGS__)
 #else
-	#define CLI_OUT(...)
+	#define CLI_DBG(...)
 #endif
 
 #define PRIME_NUMBER 1009//2069
@@ -59,7 +62,7 @@ unsigned int cli_get_hash (char *string, unsigned int prime_number){
 	}
 	hash=hash%prime_number;
 	
-	CLI_OUT("[%s][%x]  ",string,hash );
+	CLI_DBG("[%s][%x]  ",string,hash );
 	return hash;
 }
 
@@ -91,7 +94,7 @@ unsigned int cli_get_command_id(char * string, unsigned char *index, unsigned in
 	*index= cli_find_char(string);
 	
 	if (!(*index)){
-		CLI_OUT("not found\n");
+		CLI_DBG("not found\n");
 		return 0;
 	}
 
@@ -168,7 +171,7 @@ static uint8_t  uncripted_data[40];
 static uint8_t  cripted_data  [40];
 
 /*command structure command argv1 arg2 argv3 \n*/
-unsigned char cli_parse(char *argv)
+unsigned char cli_parse_debug_command(char *argv)
 {
 	
 	unsigned char index=0;
@@ -204,23 +207,23 @@ unsigned char cli_parse(char *argv)
 			break;
 	case cmd_help:
 			
-			CLI_OUT("\n____________command list____________\n\n ");
-			CLI_OUT("turn\t\tgpio\t\tsend\t\tcip\n");
+			CLI_DBG("\n____________command list____________\n\n ");
+			CLI_DBG("turn\t\tgpio\t\tsend\t\tcip\n");
 			break;
 	case cmd_clear:
 			
-			for(index=0;index<28;index++)CLI_OUT("\n\n");
+			for(index=0;index<28;index++)CLI_DBG("\n\n");
 			break;
-	case cmd_ble:   CLI_OUT("Sending to ble..'");
+	case cmd_ble:   CLI_DBG("Sending to ble..'");
 			#ifndef SLAVE_MODE
-			ble_send ((uint8_t *)argv, strlen(argv));
+			ws_ble_send ((uint8_t *)argv, strlen(argv));
 			#endif
 			
 			break; 	
         case cmd_rgb:	command_id[0]=((*argv)-'0');
         		argv+=2;
-			CLI_OUT("\nloading paramter\n");
-      		        CLI_OUT("slave [%d] string [%s] len[%d] \n", command_id[0],argv, strlen(argv));
+			CLI_DBG("\nloading paramter\n");
+      		        CLI_DBG("slave [%d] string [%s] len[%d] \n", command_id[0],argv, strlen(argv));
         		cafe_load_payload(command_id[0], argv, strlen(argv) );
 
         		break;
@@ -252,21 +255,21 @@ unsigned char cli_parse(char *argv)
 	case cmd_accinit:	
 				accelerometer_on_start_configuration();
 				break;
-	case  cmd_adc:		adc_app_read();
+	case  cmd_adc:		ws_adc_read();
 
 				break;
 
 	case cmd_fet:	  	
 				if ((*argv)=='1'){
 					nrf_gpio_pin_set(FET_ADC);
-					CLI_OUT ("FET set %c\n",*argv);
+					CLI_DBG ("FET set %c\n",*argv);
 				}else{
 					nrf_gpio_pin_clear(FET_ADC);
-					CLI_OUT ("FET clear %c \n",*argv);
+					CLI_DBG ("FET clear %c \n",*argv);
 				}
 			break;
 	default:	
-				CLI_OUT("unknow command\n");
+				CLI_DBG("unknow command\n");
 	break;
 
 
@@ -276,14 +279,11 @@ unsigned char cli_parse(char *argv)
 
 	return 0;
 }
-void cli_parse_command(st_uart_string *uart_stream){
+void cli_execute_debug_command(void){
 	
-	if (!(uart_stream->pending_parse)) return;
-	
-	uart_stream->pending_parse=0;
-	
-	cli_parse(uart_stream->stream);
+	if (!ws_uart_pending_debug_packet()) return;
 
-	memset(uart_stream->stream,0,sizeof(st_uart_string));
+	cli_parse_debug_command(ws_uart_get_debug_packet());
+	ws_uart_flush_debug_packet();
 }
 

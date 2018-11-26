@@ -9,7 +9,7 @@
 
 #include "../inc/bbn_board.h"
 #include "../inc/cafe.h"
-#include "../inc/uart_app.h"
+#include "../inc/ws_uart.h"
 #include "../inc/timeslot.h"
 #include <stdio.h>
 

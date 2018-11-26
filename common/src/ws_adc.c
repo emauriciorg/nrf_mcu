@@ -1,7 +1,7 @@
-#include "adc_app.h"
+#include "ws_adc.h"
 #include "nrf_adc.h"
 #include "nrf_gpio.h"
-
+#include <stdio.h>
 #ifdef NRF52
 	#include "nrf_saadc.h"
 #endif
@@ -23,12 +23,13 @@
 #define ADC_SCALING             3
 #define ADC_REFERENCE_DIVIDER   3 
 #define VOLTAGE_UNIT            1000
+
 #define CALCULATE_VOLTAGE_FROM_ADC(adc_value)   (VOLTAGE_UNIT*(ADC_SCALING * (adc_value * (SUPPLY_VOLTAGE/ADC_REFERENCE_DIVIDER))/ ADC_RESOLUTION))   
 //	voltage_read_in_volts = scaling* ((adc_read * (VDD/reference)) / resolution);
 
 #define CALCULATE_BATTERY_VOLTAGE(resistor_2_voltage)  (resistor_2_voltage*((RESISTOR_1+RESISTOR_2)/RESISTOR_2))
 
-void adc_app_init(void)
+void ws_adc_setup(void)
 {
 	
 	nrf_adc_config_t  adc_setup_parameters;
@@ -42,7 +43,7 @@ void adc_app_init(void)
 
 }
 
-int32_t adc_app_read(void)
+int32_t ws_adc_read(void)
 {
 
 	nrf_gpio_pin_set(FET_ADC);

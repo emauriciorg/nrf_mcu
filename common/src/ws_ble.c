@@ -1,4 +1,4 @@
-#include "../inc/ble_app.h"
+#include "../inc/ws_ble.h"
 
 #include "../inc/sys_event.h"
 
@@ -13,7 +13,7 @@
 #include "nrf_gpio.h"
 #include "bbn_board.h"
 #include <stdio.h>
-#include "timer_app.h"
+#include "ws_timer.h"
 #include "custom_ble_services.h"
 
 
@@ -40,7 +40,7 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 	dm_event_t const  * p_event,
 	ret_code_t        event_result);
 
- void nrf_ble_stack_init(void)
+ void ws_ble_stack_init(void)
  {
 	uint32_t err_code;
 
@@ -82,7 +82,7 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 #endif
 
     // Register with the SoftDevice handler module for BLE events.
-	err_code = softdevice_ble_evt_handler_set(nrf_ble_evt_dispatch);
+	err_code = softdevice_ble_evt_handler_set(ws_ble_evt_dispatch);
 	APP_ERROR_CHECK(err_code);
 	
     // Register with the SoftDevice handler module for BLE events.
@@ -90,14 +90,14 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 	APP_ERROR_CHECK(err_code);
 }	
 
- void nrf_ble_evt_dispatch( ble_evt_t * p_ble_evt)
+ void ws_ble_evt_dispatch( ble_evt_t * p_ble_evt)
 {
 	dm_ble_evt_handler(p_ble_evt);
 	ble_conn_params_on_ble_evt(p_ble_evt);
 
-	ble_cs_on_ble_evt(&m_custom_service, p_ble_evt);
+	ble_cs_ws_on_ble_evt(&m_custom_service, p_ble_evt);
 
-	on_ble_evt(p_ble_evt);
+	ws_on_ble_evt(p_ble_evt);
 	ble_advertising_on_ble_evt(p_ble_evt);
 
 }
@@ -108,7 +108,7 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
  *
  * @param[in] p_ble_evt  Bluetooth stack event.
  */
- void on_ble_evt(ble_evt_t * p_ble_evt)
+ void ws_on_ble_evt(ble_evt_t * p_ble_evt)
 {
 	uint32_t err_code;
 
@@ -148,7 +148,7 @@ void conn_params_error_handler(uint32_t nrf_error)
  *
  * @param[in] ble_adv_evt  Advertising event.
  */
-void on_adv_evt(ble_adv_evt_t ble_adv_evt)
+void ws_ble_on_adv_evt(ble_adv_evt_t ble_adv_evt)
 {
 
 	switch (ble_adv_evt)
@@ -168,7 +168,7 @@ void on_adv_evt(ble_adv_evt_t ble_adv_evt)
  * @details This function sets up all the necessary GAP (Generic Access Profile) parameters of the
  *          device including the device name, appearance, and the preferred connection parameters.
  */
-void gap_params_init(void)
+void ws_ble_gap_params_init(void)
 {
 	uint32_t                err_code;
 	ble_gap_conn_params_t   gap_conn_params;
@@ -210,13 +210,13 @@ void gap_params_init(void)
 
 
 
-void services_init(void)
+void ws_ble_services_init(void)
 {
 	custom_service_init (&m_custom_service);
 }
 
 
- void on_conn_params_evt(ble_conn_params_evt_t * p_evt)
+ void ws_on_ble_conn_params_evt(ble_conn_params_evt_t * p_evt)
 {
 	uint32_t err_code;
 
@@ -246,7 +246,7 @@ static dm_application_instance_t        m_app_handle;                           
 /**@brief GAP setting and init.
  */
 
- void advertising_init(void)
+ void ws_advertising_init(void)
 {
 	uint32_t      err_code;
 	ble_advdata_t advdata;
@@ -265,11 +265,11 @@ static dm_application_instance_t        m_app_handle;                           
 	options.ble_adv_fast_interval = APP_ADV_INTERVAL;
 	options.ble_adv_fast_timeout  = APP_ADV_TIMEOUT_IN_SECONDS;
 
-	err_code = ble_advertising_init(&advdata, NULL, &options, on_adv_evt, NULL);
+	err_code = ble_advertising_init(&advdata, NULL, &options, ws_ble_on_adv_evt, NULL);
 	APP_ERROR_CHECK(err_code);
 }
 
-void conn_params_init(void)
+void ws_ble_conn_params_init(void)
 {
 	uint32_t               err_code;
 	ble_conn_params_init_t cp_init;
@@ -282,7 +282,7 @@ void conn_params_init(void)
 	cp_init.max_conn_params_update_count   = MAX_CONN_PARAMS_UPDATE_COUNT;
 	cp_init.start_on_notify_cccd_handle    = BLE_GATT_HANDLE_INVALID;
 	cp_init.disconnect_on_fail             = true;
-	cp_init.evt_handler                    = on_conn_params_evt;
+	cp_init.evt_handler                    = ws_on_ble_conn_params_evt;
 	cp_init.error_handler                  = conn_params_error_handler;
 
 	err_code = ble_conn_params_init(&cp_init);
@@ -323,7 +323,7 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 }
 
 
- void ble_device_manager_init(bool erase_bonds)
+ void ws_ble_device_manager_init(bool erase_bonds)
 {
 	uint32_t               err_code;
 
@@ -353,21 +353,21 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 
 
 
-void ble_send(uint8_t *p_string, uint8_t length){
+void ws_ble_send(uint8_t *p_string, uint8_t length){
 
 	ble_nus_string_send(&m_custom_service, p_string, length);
 }
 
-void ble_init_modules(){
+void ws_ble_init_modules(){
 
 	uint32_t               err_code;
 
-	nrf_ble_stack_init();
-	ble_device_manager_init(false);
-	gap_params_init(); 
-	services_init();
-	advertising_init();
-	conn_params_init();
+	ws_ble_stack_init();
+	ws_ble_device_manager_init(false);
+	ws_ble_gap_params_init(); 
+	ws_ble_services_init();
+	ws_advertising_init();
+	ws_ble_conn_params_init();
 	err_code = ble_advertising_start(BLE_ADV_MODE_FAST);
 	APP_ERROR_CHECK(err_code);
 

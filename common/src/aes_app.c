@@ -20,7 +20,7 @@
 
 //#define DEBUG_CLI_AES
 #ifdef DEBUG_CLI_AES
-	#include "app_uart.h"
+	#include "ws_uart.h"
 
 	#define AES_OUT(...)  printf(__VA_ARGS__)
 #else

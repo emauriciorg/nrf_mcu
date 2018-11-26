@@ -84,7 +84,7 @@ static void on_write(ble_cs_t * p_custom_service, ble_evt_t * p_ble_evt)
 
 
 
-void ble_cs_on_ble_evt(ble_cs_t * p_custom_service, ble_evt_t * p_ble_evt)
+void ble_cs_ws_on_ble_evt(ble_cs_t * p_custom_service, ble_evt_t * p_ble_evt)
 {
     if ((p_custom_service == NULL) || (p_ble_evt == NULL))
     {
@@ -287,7 +287,7 @@ uint32_t ble_nus_string_send(ble_cs_t * p_custom_service, uint8_t * p_string, ui
 
 
 
-void ble_nus_on_ble_evt(ble_cs_t * p_custom_service, ble_evt_t * p_ble_evt)
+void ble_nus_ws_on_ble_evt(ble_cs_t * p_custom_service, ble_evt_t * p_ble_evt)
 {
     if ((p_custom_service == NULL) || (p_ble_evt == NULL))
     {
