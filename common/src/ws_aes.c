@@ -1,10 +1,10 @@
 /** 
 ******************************************************************************
-* \file    aes_app.c
+* \file    ws_aes.c
 * \brief   Encription routines .
 ******************************************************************************
 */
-#include "aes_app.h"
+#include "ws_aes.h"
 
 #include <string.h>
 #include <stdio.h>

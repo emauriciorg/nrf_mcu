@@ -11,9 +11,9 @@
 
 //#define DEBUG_BLE_SERVICE
 #ifdef DEBUG_BLE_SERVICE
-	#define BLE_DBG(...)  printf(__VA_ARGS__)
+	#define BLE_SERVICE_DBG(...)  printf(__VA_ARGS__)
 #else
-	#define BLE_DBG(...)  
+	#define BLE_SERVICE_DBG(...)  
 #endif
 
 #define BLE_UUID_OUR_BASE_UUID {{0x55,0xb4,0x3a,0x03,0xbf,0x43,45,0x18,0xbd,0xbb,0xdd,0xaf,0x3e,0xa7,0xad,0xc6}}
@@ -117,18 +117,18 @@ void ws_ble_service_init(ble_cs_t * p_custom_service)
 	APP_ERROR_CHECK(err_code);
 	
 	err_code = ws_services_add_char_rx(p_custom_service);
-	BLE_DBG("rx got error %x\n", err_code);
+	BLE_SERVICE_DBG("rx got error %x\n", err_code);
 	APP_ERROR_CHECK(err_code);
 
 	err_code = ws_services_add_char_tx(p_custom_service);
-	BLE_DBG("tx got error %x\n", err_code);
+	BLE_SERVICE_DBG("tx got error %x\n", err_code);
 	APP_ERROR_CHECK(err_code);
 
 
-	BLE_DBG( "Executing our_service_init().\n");
-	BLE_DBG( "Service UUID: %x\n", service_uuid.uuid);
-	BLE_DBG( "Service UUID type: %x\n", service_uuid.type);
-	BLE_DBG( "Service handle: %x\n", p_custom_service->service_handle);
+	BLE_SERVICE_DBG( "Executing our_service_init().\n");
+	BLE_SERVICE_DBG( "Service UUID: %x\n", service_uuid.uuid);
+	BLE_SERVICE_DBG( "Service UUID type: %x\n", service_uuid.type);
+	BLE_SERVICE_DBG( "Service handle: %x\n", p_custom_service->service_handle);
 
 
 }
@@ -244,12 +244,12 @@ uint32_t ws_ble_nus_string_send(ble_cs_t * p_custom_service, uint8_t * p_string,
 
 	if ((p_custom_service->conn_handle == BLE_CONN_HANDLE_INVALID) ||
 	    (!p_custom_service->is_notification_enabled)){
-		BLE_DBG("INVALID CONN HANDLE/NOTIFICIATION DISABLED\n");
+		BLE_SERVICE_DBG("INVALID CONN HANDLE/NOTIFICIATION DISABLED\n");
 		return NRF_ERROR_INVALID_STATE;
 	}
 
 	if (length > BLE_CUS_MAX_DATA_LEN){
-		BLE_DBG("max lent reached/ data not send\n");
+		BLE_SERVICE_DBG("max lent reached/ data not send\n");
 		return NRF_ERROR_INVALID_PARAM;
 	}
 	memset(&hvx_params, 0, sizeof(hvx_params));

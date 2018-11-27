@@ -1,5 +1,6 @@
 #include "ws_ble.h"
 
+#include <stdio.h>
 
 #include "ble_conn_params.h"
 #include "ble_hci.h"
@@ -8,25 +9,28 @@
 #include "ble.h"
 #include "pstorage.h"
 #include "ble_advertising.h"
-
 #include "device_manager.h"
 
 #include "nrf_gpio.h"
 #include "bbn_board.h"
-#include <stdio.h>
 #include "ws_timer.h"
 #include "ws_ble_services.h"
+#include "ws_softdevice.h"
+#define DEBUG_BLE_CONNECTION
+#ifdef DEBUG_BLE_CONNECTION
+	#define BLE_DBG(...)  printf(__VA_ARGS__)
+#else
+	#define BLE_DBG(...)  
+#endif
 
-
-#define IS_SRVC_CHANGED_CHARACT_PRESENT  1                                          /**< Include or not the service_changed characteristic. if not enabled, the server's database cannot be changed for the lifetime of the device*/
 #define DEVICE_NAME                      "BLE_TS_CS1"                               /**< Name of device. Will be included in the advertising data. */
 #define MANUFACTURER_NAME                "NordicSemiconductor"                      /**< Manufacturer. Will be passed to Device Information Service. */
-#define APP_ADV_INTERVAL                 300                                        /**< The advertising interval (in units of 0.625 ms. This value corresponds to 25 ms). */
+#define APP_ADV_INTERVAL                 64                                        /**< The advertising interval (in units of 0.625 ms. This value corresponds to 25 ms). */
 #define APP_ADV_TIMEOUT_IN_SECONDS       180                                        /**< The advertising timeout in units of seconds. */
 
 
-#define MIN_CONN_INTERVAL                MSEC_TO_UNITS(100, UNIT_1_25_MS)           /**< Minimum acceptable connection interval (0.1 seconds). */
-#define MAX_CONN_INTERVAL                MSEC_TO_UNITS(200, UNIT_1_25_MS)           /**< Maximum acceptable connection interval (0.2 second). */
+#define MIN_CONN_INTERVAL                MSEC_TO_UNITS(20, UNIT_1_25_MS)           /**< Minimum acceptable connection interval (0.1 seconds). */
+#define MAX_CONN_INTERVAL                MSEC_TO_UNITS(75, UNIT_1_25_MS)           /**< Maximum acceptable connection interval (0.2 second). */
 #define SLAVE_LATENCY                    0                                          /**< Slave latency. */
 #define CONN_SUP_TIMEOUT                 MSEC_TO_UNITS(4000, UNIT_10_MS)            /**< Connection supervisory timeout (4 seconds). */
  uint16_t                          m_conn_handle = BLE_CONN_HANDLE_INVALID;   /**< Handle of the current connection. */
@@ -41,69 +45,13 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 	dm_event_t const  * p_event,
 	ret_code_t        event_result);
 
-void sys_evt_dispatch(uint32_t sys_evt)
-{
-	pstorage_sys_event_handler(sys_evt);
-	ble_advertising_on_sys_evt(sys_evt);
-	//nrf_evt_signal_handler(sys_evt);
-}
-
- void ws_ble_stack_init(void)
- {
-	uint32_t err_code;
-
-	SOFTDEVICE_HANDLER_INIT(NRF_CLOCK_LFCLKSRC_XTAL_20_PPM, NULL);
-
-	
-#if defined(S110) || defined(S130) || defined(S132)
-    // Enable BLE stack.
-	ble_enable_params_t ble_enable_params;
-	memset(&ble_enable_params, 0, sizeof(ble_enable_params));
-
-	 err_code = softdevice_enable_get_default_config(0,
-						    1,
-						    &ble_enable_params);
-    APP_ERROR_CHECK(err_code);
- 
-	 
-#if (defined(S130) || defined(S132))
-	ble_enable_params.gatts_enable_params.attr_tab_size   = 0x580 ;//BLE_GATTS_ATTR_TAB_SIZE_DEFAULT;
-#endif
-	
-	ble_enable_params.gatts_enable_params.service_changed = IS_SRVC_CHANGED_CHARACT_PRESENT;
-
-#ifndef OLD_SDK_VERSION
-	// APP_RAM_BASE;
-	#ifdef S130 
-		#define RAM_APP_START_AT  0x20002800
-	#else
-		#define RAM_APP_START_AT  0x20001E00
-	
-	#endif	 
-	uint32_t   app_ram_base = RAM_APP_START_AT;
-	
-	 err_code = sd_ble_enable(&ble_enable_params,&app_ram_base);	
-#else
-	 err_code = sd_ble_enable(&ble_enable_params);	
-#endif
-	 APP_ERROR_CHECK(err_code);	
-#endif
-
-    // Register with the SoftDevice handler module for BLE events.
-	err_code = softdevice_ble_evt_handler_set(ws_ble_evt_dispatch);
-	APP_ERROR_CHECK(err_code);
-	
-    // Register with the SoftDevice handler module for BLE events.
-	err_code = softdevice_sys_evt_handler_set(sys_evt_dispatch);
-	APP_ERROR_CHECK(err_code);
-}	
 
  void ws_ble_evt_dispatch( ble_evt_t * p_ble_evt)
 {
-	dm_ble_evt_handler(p_ble_evt);
+//	dm_ble_evt_handler(p_ble_evt);
 	ble_conn_params_on_ble_evt(p_ble_evt);
 
-	ws_ble_service_on_evt(&m_custom_service, p_ble_evt);
+//	ws_ble_service_on_evt(&m_custom_service, p_ble_evt);
 
 	ws_on_ble_evt(p_ble_evt);
 	ble_advertising_on_ble_evt(p_ble_evt);
@@ -119,19 +67,22 @@ void sys_evt_dispatch(uint32_t sys_evt)
  void ws_on_ble_evt(ble_evt_t * p_ble_evt)
 {
 	uint32_t err_code;
-
+	//BLE_DBG("a%s: device Connected\n",__FUNCTION__);
 	switch (p_ble_evt->header.evt_id){
 	case BLE_GAP_EVT_CONNECTED:
+			
 			nrf_gpio_pin_set(LED_RED);
 			nrf_gpio_pin_clear(LED_GREEN);
 			m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
 			break;
 	case BLE_GAP_EVT_DISCONNECTED:
+	
 			nrf_gpio_pin_set(LED_GREEN);
 			nrf_gpio_pin_clear(LED_RED);
 			m_conn_handle = BLE_CONN_HANDLE_INVALID;
 			break;
 	case BLE_GATTC_EVT_TIMEOUT:
+	
 	case BLE_GATTS_EVT_TIMEOUT:
 		// Disconnect on GATT Server and Client timeout events.
 		err_code = sd_ble_gap_disconnect(m_conn_handle,
@@ -147,6 +98,7 @@ void sys_evt_dispatch(uint32_t sys_evt)
 
 void conn_params_error_handler(uint32_t nrf_error)
 {
+	BLE_DBG("%s: %d \n",__FUNCTION__, nrf_error);
 	APP_ERROR_HANDLER(nrf_error);
 }
 
@@ -191,8 +143,8 @@ void ws_ble_gap_params_init(void)
 	
 	APP_ERROR_CHECK(err_code);
 
-	err_code = sd_ble_gap_appearance_set( 	BLE_APPEARANCE_GENERIC_CLOCK   );
-	APP_ERROR_CHECK(err_code); 
+//	err_code = sd_ble_gap_appearance_set( 	BLE_APPEARANCE_GENERIC_CLOCK   );
+//	APP_ERROR_CHECK(err_code); 
 
 
 	memset(&gap_conn_params, 0, sizeof(gap_conn_params));
@@ -208,14 +160,13 @@ void ws_ble_gap_params_init(void)
 	printf("min_conn_interval %x\n",CONN_SUP_TIMEOUT);
 */	
 	err_code = sd_ble_gap_ppcp_set(&gap_conn_params);
+	BLE_DBG ("%s, %d\n",__FUNCTION__, err_code);
 	APP_ERROR_CHECK(err_code);
 		
 }
   
 /**@brief Function for initializing services that will be used by the application.
  */
-
-
 
 
 void ws_ble_services_init(void)
@@ -274,6 +225,8 @@ static dm_application_instance_t        m_app_handle;                           
 	options.ble_adv_fast_timeout  = APP_ADV_TIMEOUT_IN_SECONDS;
 
 	err_code = ble_advertising_init(&advdata, NULL, &options, ws_ble_on_adv_evt, NULL);
+	BLE_DBG ("%s, %d\n",__FUNCTION__, err_code);
+	
 	APP_ERROR_CHECK(err_code);
 }
 
@@ -294,6 +247,8 @@ void ws_ble_conn_params_init(void)
 	cp_init.error_handler                  = conn_params_error_handler;
 
 	err_code = ble_conn_params_init(&cp_init);
+	BLE_DBG ("%s, %d\n",__FUNCTION__, err_code);
+	
 	APP_ERROR_CHECK(err_code);
 }
 
@@ -304,28 +259,37 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 	dm_event_t const  * p_event,
 	ret_code_t        event_result)
 {
-//	APP_ERROR_CHECK(event_result);
-	//uint32_t err_code;
+	BLE_DBG ("%s, %d\n",__FUNCTION__, event_result);
+	
+	APP_ERROR_CHECK(event_result);
+//uint32_t err_code;
 
 #ifdef BLE_DFU_APP_SUPPORT
 	if (p_event->event_id == DM_EVT_LINK_SECURED){
 		app_context_load(p_handle);
 	}
 #endif // BLE_DFU_APP_SUPPORT
-
+     
     switch(p_event->event_id)
     {
         case DM_EVT_CONNECTION:
-//            m_conn_handle = p_event->event_param.p_gap_param->conn_handle;
+
+            m_conn_handle = p_event->event_param.p_gap_param->conn_handle;
 //            err_code = bsp_indication_set(BSP_INDICATE_CONNECTED);
   //          APP_ERROR_CHECK(err_code);
             break;
 
         case DM_EVT_DISCONNECTION:
+//        	BLE_DBG("2%s: %d \n",__FUNCTION__,p_event->event_id);
+
   //          m_conn_handle = BLE_CONN_HANDLE_INVALID;
             break;
+	default:
+//		 BLE_DBG("3%s: %d \n",__FUNCTION__,p_event->event_id);
+		break;
     }
 
+		BLE_DBG("1%s: %d \n",__FUNCTION__,p_event->event_id);
 
 	return NRF_SUCCESS;
 }
@@ -356,6 +320,8 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 	register_param.service_type           = DM_PROTOCOL_CNTXT_GATT_SRVR_ID;
 
 	err_code = dm_register(&m_app_handle, &register_param);
+	BLE_DBG ("%s, %d\n",__FUNCTION__, err_code);
+	
 	APP_ERROR_CHECK(err_code);
 }
 
@@ -370,13 +336,13 @@ void ws_ble_init_modules(){
 
 	uint32_t               err_code;
 
-	ws_ble_stack_init();
-	ws_ble_device_manager_init(false);
+	//ws_ble_device_manager_init(false);
 	ws_ble_gap_params_init(); 
 	ws_ble_services_init();
 	ws_advertising_init();
 	ws_ble_conn_params_init();
 	err_code = ble_advertising_start(BLE_ADV_MODE_FAST);
+	BLE_DBG("%s,err %x \n",__FUNCTION__, err_code);
 	APP_ERROR_CHECK(err_code);
 
 }

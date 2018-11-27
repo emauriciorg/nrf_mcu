@@ -8,7 +8,7 @@
 	#define LED_BLUE	10
 #endif
 
-#ifdef SPARK_FUN
+#ifdef SPARKFUN_BOARD
 	#define LED_RED		8
 	#define LED_GREEN	10
 	#define LED_BLUE	7

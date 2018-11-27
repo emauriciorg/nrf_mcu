@@ -14,94 +14,81 @@
 
 
 #include "timeslot.h"
-#include "uart_app.h"
-#include "ble_app.h"
+#include "ws_uart.h"
+#include "ws_ble.h"
 #include "sys_event.h"
 #include "bbn_board.h"
 #include "cafe.h"
 #include "cli.h"
 #include "io_expander.h" 
-#include "uart_app.h"
-#include "timer_app.h"
+#include "ws_uart.h"
+#include "ws_timer.h"
 #include <stdio.h>
 
-#include "adxl345.h"
+//#include "adxl345.h"
 
 #define SOFT_DEVICE_ENABLED
 
-extern uint8_t packet_recieved;
+
 unsigned char sample_text;
 extern uint16_t                          m_conn_handle;   /**< Handle of the current connection. */
 //extern st_str  uart_tx;
-
+/*
 void sys_evt_dispatch(uint32_t sys_evt)
 {
 	pstorage_sys_event_handler(sys_evt);
 	ble_advertising_on_sys_evt(sys_evt);
 	nrf_evt_signal_handler(sys_evt);
 }
-
+*/
 
 void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name){
 	app_error_handler(0xDEADBEEF, line_num, p_file_name); //0xDEADBEEF         /**< Value used as error code on stack dump, can be used to identify stack location on stack unwind. */
 }
 
-void print_recieved_radio_data(void)
-{
-	uint8_t temp_buffer[32+10];
-	cafe_get_rx_payload(temp_buffer);
-	SDBG("Received[ %s]\n",(char *)temp_buffer );
-}
 extern char i2c_state;
 
 
 extern const nrf_drv_twi_t m_twi_global_accelerometer;
 extern volatile bool m_xfer_done;
 
-int main(void)
+
+void print_recieved_radio_data(void)
 {
+	uint8_t len_t;
+	char temp_buffer[32+10];
 
-	st_uart_string uart_stream;
-	timer_app_init();
+	len_t=cafe_get_rx_payload(temp_buffer);	
+	WS_DBG("Received[ %s ][%d] /n",temp_buffer,len_t);
+}
+
+int main(void)
+{	
+	ws_timer_init();
 	board_leds_init();
-	nrf_gpio_pin_clear(LED_BLUE);
-	uart_init (&uart_stream);
-	SDBG("start!\n");
-	adxl345_init();
-
-#ifdef SOFT_DEVICE_ENABLED
-	ble_init_modules();
-#endif
-
-    uint8_t reg = 0;
-    ret_code_t err_code;
-
-	//timeslot_sd_init();
-	for (;;){
-
-		nrf_delay_ms(500);
-		nrf_gpio_pin_toggle(LED_RED);
+	//ws_adc_setup();
+	ws_uart_init ();
 	
-//		SDBG("loop\n");
-		cli_parse_command(&uart_stream);
-		adxl345_read();
- 		do{
-	            __WFE();
-       		 }while(m_xfer_done == false);
-     	 	err_code= nrf_drv_twi_tx(&m_twi_global_accelerometer, ADXL_ADDRESS, &reg, sizeof(reg),true);  
-
-       	 	APP_ERROR_CHECK(err_code);
-    	    	m_xfer_done = false;
-    
+	//ws_accelerometer_setup();
+	//ws_timers_init();
+	WS_BLE_INIT();
+//	WS_TIMESLOT_INIT();
+	WS_DBG("M.RIOS \n[BLE MASTER]]\nworkshop start!\n");	
+//	APP_ERROR_CHECK(4);
+	for (;;)
+	{	
+		nrf_delay_ms(250);
+		nrf_gpio_pin_toggle(LED_RED);
+		cli_execute_debug_command();
 		
 #ifdef TRANSCEIVER_MODE
-		if ( packet_recieved ){
-			packet_recieved= 0;
+		if ( cafe_packet_recieved() ){
 			print_recieved_radio_data();
 		}
 #endif
 	}
 }
+
 
 
 #ifdef OWN_ERROR_HANDLER

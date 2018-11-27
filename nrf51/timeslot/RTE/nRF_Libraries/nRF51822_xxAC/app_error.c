@@ -20,13 +20,12 @@
  */
 
 #include "nrf.h"
-//#include <stdio.h>
 #include "app_error.h"
 #include "nordic_common.h"
 #include "sdk_errors.h"
 #include "nrf_log.h"
 #ifdef DEBUG
-#include "bsp.h"
+    #include "bsp.h"
 #endif
 
 
@@ -77,7 +76,7 @@ __WEAK void app_error_fault_handler(uint32_t id, uint32_t pc, uint32_t info)
 {
     // On assert, the system can only recover with a reset.
 #ifndef DEBUG
-	printf("[DEBUG]ERROR WAS FOUND NOW SYSTEM WOULD RESET\n");
+	printf("[DEBUG]ERROR  %d %d %d\n", id,pc,info);
  //   NVIC_SystemReset();
 #else
 

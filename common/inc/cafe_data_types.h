@@ -10,7 +10,7 @@
 
 #include "nrf_gpio.h"
 
-#define S1
+#define S3
 
 #ifdef S1
 	#define SLAVE_addr 0xF4 

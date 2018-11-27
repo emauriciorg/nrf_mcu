@@ -9,6 +9,7 @@
 
 /*turn on leds commands */
 enum{
+ cmd_reset                =   0x27c,
  cmd_turn                 =   0x7b,
  cmd_sub_off              =   0x78,
  cmd_sub_on               =   0xA4,

@@ -16,11 +16,11 @@
  */
 #define CMSIS_device_header "nrf.h"
 
-#define BSP_DEFINES_ONLY
+#define GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS
 #define GPIOTE_ENABLED
   #define GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS
 #define NRF_LOG_USES_UART=1
-#define S130
+#define S132
 #define SOFTDEVICE_PRESENT
 #define SWI_DISABLE0
 #define UART0_ENABLED

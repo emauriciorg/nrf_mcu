@@ -16,7 +16,7 @@
 #include "app_trace.h"
 #include "pstorage.h"
 #include "sdk_common.h"
-
+#include <stdio.h>
 
 #define LOG app_trace_log
 
@@ -259,7 +259,7 @@ uint32_t ble_advertising_start(ble_adv_mode_t advertising_mode)
     adv_params.p_peer_addr = NULL;
     adv_params.fp          = BLE_GAP_ADV_FP_ANY;
     adv_params.p_whitelist = NULL;
-
+   printf("6%s, %d\n",__FUNCTION__,m_adv_mode_current);
     // Set advertising parameters and events according to selected advertising mode.
     switch (m_adv_mode_current)
     {
@@ -349,7 +349,6 @@ uint32_t ble_advertising_start(ble_adv_mode_t advertising_mode)
 void ble_advertising_on_ble_evt(ble_evt_t const * p_ble_evt)
 {
     static uint16_t current_slave_link_conn_handle = BLE_CONN_HANDLE_INVALID;
-
     switch (p_ble_evt->header.evt_id)
     {
         case BLE_GAP_EVT_CONNECTED:
@@ -442,6 +441,8 @@ void ble_advertising_on_ble_evt(ble_evt_t const * p_ble_evt)
 }
 void ble_advertising_on_sys_evt(uint32_t sys_evt)
 {
+ //    printf("8%s, %d\n",__FUNCTION__,sys_evt);
+  
     uint32_t err_code = NRF_SUCCESS;
     switch (sys_evt)
     {

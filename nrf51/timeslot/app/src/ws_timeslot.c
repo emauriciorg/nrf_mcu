@@ -10,7 +10,7 @@
 #include "bbn_board.h"
 #include "cafe.h"
 #include "ws_uart.h"
-#include "timeslot.h"
+#include "ws_timeslot.h"
 #include <stdio.h>
 
 #define APP_ROUTINE_IRQ  
@@ -45,7 +45,7 @@ void TIMESLOT_BEGIN_IRQHandler(void)
 {
 
 	nrf_gpio_pin_toggle(LED_BLUE);			
-	cafe_self_configuration(I_AM_TRANSMITTER);	
+	cafe_start_radio();	
 }
 
 /**Constants for timeslot API

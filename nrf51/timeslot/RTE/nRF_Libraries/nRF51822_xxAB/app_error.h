@@ -42,7 +42,7 @@ void app_error_handler(uint32_t error_code, uint32_t line_num, const uint8_t * p
 #define APP_ERROR_HANDLER(ERR_CODE)                         \
     do                                                      \
     {                                                       \
-        app_error_handler((ERR_CODE), __LINE__, (uint8_t*) __FILE__);  \
+			((ERR_CODE), __LINE__, (uint8_t*) __FILE__);  \
     } while (0)
 #else
 #define APP_ERROR_HANDLER(ERR_CODE)                         \

@@ -1,7 +1,7 @@
 /** 
 ******************************************************************************
-* \file    aes_app.h
-* \brief   aes_app.h Entry point file.  AES registers on the 51822 cant be access while softdevice is running
+* \file    ws_aes.h
+* \brief   ws_aes.h Entry point file.  AES registers on the 51822 cant be access while softdevice is running
 ******************************************************************************
 */
 

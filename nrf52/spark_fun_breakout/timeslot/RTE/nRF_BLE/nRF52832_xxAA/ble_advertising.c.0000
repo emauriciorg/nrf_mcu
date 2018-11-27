@@ -19,7 +19,7 @@
 
 #define DEBUG_ADVERTISING
 #ifdef DEBUG_ADVERTISING
-#include "../inc/uart_app.h"
+#include "../inc/ws_uart.h"
 //extern st_str  uart_tx;
 #endif
 

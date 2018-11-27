@@ -16,7 +16,7 @@
  */
 #define CMSIS_device_header "nrf.h"
 
-#define GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS
+#define BSP_DEFINES_ONLY
 #define GPIOTE_ENABLED
   #define GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS
 #define S130

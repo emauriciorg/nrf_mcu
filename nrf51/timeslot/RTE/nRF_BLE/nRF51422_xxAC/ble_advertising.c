@@ -360,6 +360,8 @@ void ble_advertising_on_ble_evt(ble_evt_t const * p_ble_evt)
 {
     static uint16_t current_slave_link_conn_handle = BLE_CONN_HANDLE_INVALID;
 
+          
+
     switch (p_ble_evt->header.evt_id)
     {
         case BLE_GAP_EVT_CONNECTED:

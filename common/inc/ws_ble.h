@@ -10,16 +10,15 @@
 #include "app_timer.h"
 #include "ws_ble_services.h"
 
-//#define SOFT_DEVICE_ENABLED
+#define WS_BLE_ENABLED
 
-#ifdef SOFT_DEVICE_ENABLED
-	#define WS_ws_ble_init_modules() ws_ble_init_modules();
+#ifdef WS_BLE_ENABLED	
+	#define WS_BLE_INIT() ws_ble_init_modules();
 #else
-	#define WS_ws_ble_init_modules() 
+	#define WS_BLE_INIT() 
 #endif
 
 
-void ws_ble_stack_init(void);
 
 void ws_ble_evt_dispatch( ble_evt_t * p_ble_evt);
 

@@ -11,7 +11,7 @@
 #include "ws_uart.h"
 #include "command_list.h"
 #include "bbn_board.h"
-#include "aes_app.h"
+#include "ws_aes.h"
 #include "ws_ble.h"
 #include "cafe.h"
 #include "ws_adc.h"
@@ -153,9 +153,9 @@ uint16_t cli_ascii_streamhex_to_hex(char *stream_pointer, uint8_t stream_length)
 	uint16_t hex_result=0;
 
 	while(stream_length &&  ( (stream_pointer[stream_length]) != 0) ){
-//		printf("[%x][%x]->[%x]\n\n",stream_pointer+stream_length,stream_length,cli_ascii_charhex_to_hex( *(stream_pointer) ) );	
+//		CLI_DBG("[%x][%x]->[%x]\n\n",stream_pointer+stream_length,stream_length,cli_ascii_charhex_to_hex( *(stream_pointer) ) );	
 		hex_result= ( hex_result * 0x10	) + ( cli_ascii_charhex_to_hex(*stream_pointer));
-		//printf("*%x*",hex_result);
+		//CLI_DBG("*%x*",hex_result);
 		stream_pointer++;
 		stream_length--;
 	}
@@ -182,6 +182,10 @@ unsigned char cli_parse_debug_command(char *argv)
 	
 	switch (command_id[0]){
 
+	case cmd_reset: CLI_DBG("RESET device!\n");
+			//NRF_POWER->RESET = 1;	
+			//NVIC_SystemReset();
+			break;
 	case cmd_turn:			
 			command_id[1] = cli_get_command_id(argv, &index, PRIME_NUMBER_FOR_SHORT_HASH);
 			argv += index;
@@ -229,15 +233,15 @@ unsigned char cli_parse_debug_command(char *argv)
 
 		case cmd_write_twi:
 				err_code= nrf_drv_twi_tx(&m_twi_global_accelerometer, 0x1DU, (uint8_t*)&regR, sizeof(regR),true);
-        			printf("[Error %x]\n",err_code);
+        			CLI_DBG("[Error %x]\n",err_code);
         			break;
         case cmd_read_twi:
        				err_code= nrf_drv_twi_rx(&m_twi_global_accelerometer, 0x0D, (uint8_t*)&regR, sizeof(regR));
-        			printf(" [Error %x ]\n",err_code);
+        			CLI_DBG(" [Error %x ]\n",err_code);
 
         			break;
         case cmd_twi_read_saved_buffer: 
-        			printf("twi [%x]", regR);
+        			CLI_DBG("twi [%x]", regR);
 
         			break;
         case cmd_twiapp:
@@ -246,15 +250,15 @@ unsigned char cli_parse_debug_command(char *argv)
         			ws_accelerometer_read_reg();
 
         			break;
-	case cmd_cmdtest:		printf("argv [%c] argv [%c] argv [%c]\n",argv [0],argv [1],argv [2]);
+	case cmd_cmdtest:		CLI_DBG("argv [%c] argv [%c] argv [%c]\n",argv [0],argv [1],argv [2]);
 				break;
-	case cmd_hex2dec:	printf("result [%x] , \n", cli_ascii_streamhex_to_hex(argv, strlen(argv)-1) );
+	case cmd_hex2dec:	CLI_DBG("result [%x] , \n", cli_ascii_streamhex_to_hex(argv, strlen(argv)-1) );
 				
 				break;
 	case cmd_accinit:	
 				ws_accelerometer_on_start_configuration();
 				break;
-	case  cmd_adc:		ws_adc_read();
+	case  cmd_adc:	//	ws_adc_read();
 
 				break;
 

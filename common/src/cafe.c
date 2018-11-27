@@ -2,28 +2,28 @@
 #include "nrf_gpio.h"
 #include <string.h>
 #include <stdio.h>
-#include "aes_app.h"
+#include "ws_aes.h"
 #include "bbn_board.h"
 
-                                                                        // Constant parameters
-#define                         RX_WAIT_FOR_ACK_TIMEOUT_US_2MBPS   48   // Smallest reliable value - 43
-#define                         RX_WAIT_FOR_ACK_TIMEOUT_US_1MBPS   64   // Smallest reliable value - 59
-#define                         RX_WAIT_FOR_ACK_TIMEOUT_US_250KBPS 250
+// Constant parameters
+#define RX_WAIT_FOR_ACK_TIMEOUT_US_2MBPS   48   // Smallest reliable value - 43
+#define RX_WAIT_FOR_ACK_TIMEOUT_US_1MBPS   64   // Smallest reliable value - 59
+#define RX_WAIT_FOR_ACK_TIMEOUT_US_250KBPS 250
 
                                                                         // Macros
-#define                         DISABLE_RF_IRQ      NVIC_DisableIRQ(RADIO_IRQn)
-#define                         ENABLE_RF_IRQ       NVIC_EnableIRQ(RADIO_IRQn)
+#define DISABLE_RF_IRQ      NVIC_DisableIRQ(RADIO_IRQn)
+#define ENABLE_RF_IRQ       NVIC_EnableIRQ(RADIO_IRQn)
 
                                                                         // Constant parameters
-#define                         RX_WAIT_FOR_ACK_TIMEOUT_US_2MBPS   48   // Smallest reliable value - 43
-#define                         RX_WAIT_FOR_ACK_TIMEOUT_US_1MBPS   64   // Smallest reliable value - 59
-#define                         RX_WAIT_FOR_ACK_TIMEOUT_US_250KBPS 250
+#define RX_WAIT_FOR_ACK_TIMEOUT_US_2MBPS   48   // Smallest reliable value - 43
+#define RX_WAIT_FOR_ACK_TIMEOUT_US_1MBPS   64   // Smallest reliable value - 59
+#define RX_WAIT_FOR_ACK_TIMEOUT_US_250KBPS 250
 
                                                                         // Macros
-#define                         DISABLE_RF_IRQ      NVIC_DisableIRQ(RADIO_IRQn)
-#define                         ENABLE_RF_IRQ       NVIC_EnableIRQ(RADIO_IRQn)
+#define DISABLE_RF_IRQ      NVIC_DisableIRQ(RADIO_IRQn)
+#define ENABLE_RF_IRQ       NVIC_EnableIRQ(RADIO_IRQn)
 
-#define                         RADIO_SHORTS_COMMON ( RADIO_SHORTS_READY_START_Msk\
+#define RADIO_SHORTS_COMMON ( RADIO_SHORTS_READY_START_Msk\
 						    | RADIO_SHORTS_END_DISABLE_Msk  \
 						    | RADIO_SHORTS_ADDRESS_RSSISTART_Msk \
 						    | RADIO_SHORTS_DISABLED_RSSISTOP_Msk )
@@ -231,7 +231,7 @@ uint32_t cafe_disable(void)
 
 
 
-void cafe_start_tx_transcation(void)
+void cafe_start_tx_transaction(void)
 {
 #ifdef NO_CYPHER
 	memcpy( &m_tx_payload_buffer[2], tx_payload.data, tx_payload.length );	
@@ -254,7 +254,6 @@ void cafe_start_tx_transcation(void)
 	NRF_RADIO->FREQUENCY   = m_config_local.rf_channel;             //can be addressed individually
 	
 	NRF_RADIO->PACKETPTR = (uint32_t)&m_tx_payload_buffer[0];//dinamyc index instead
-	
   
 	tx_payload.pending	=0;
 	
@@ -267,14 +266,9 @@ void cafe_start_tx_transcation(void)
 }
 
 
-
-
-
-
 uint32_t cafe_flush_tx(void)
 {
 	DISABLE_RF_IRQ;
-
 	ENABLE_RF_IRQ;
 	return true;
 }
@@ -322,8 +316,8 @@ uint32_t cafe_start_rx(void)
 
 
 
-
-void cafe_self_configuration(uint8_t transeciever_mode){
+	
+void cafe_start_radio(void){
 
 	nrf_st_address user_radio_addr;
 	const char pipe_addr[8]         ={ 0x60, SLAVE_addr, 0xF4, 0xAA, 0x0E,0x0F,0x10,0x11};
@@ -333,9 +327,9 @@ void cafe_self_configuration(uint8_t transeciever_mode){
 	memcpy (user_radio_addr.logic_pipe , pipe_addr  , 8);
 	memcpy( user_radio_addr.base_addr0 , base_addr0 , 5);
 	memcpy( user_radio_addr.base_addr1 , base_addr1 , 5);
-	
-	if (transeciever_mode ==I_AM_TRANSMITTER){
 
+#ifdef RADIO_ONLY_TRANSMITTER
+	
 		//tx_payload.pending=0;
 		cafe_config_t cafe_config  = cafe_DEFAULT_CONFIG_TX;
 		cafe_config.event_handler  = cafe_event_handler;
@@ -343,12 +337,11 @@ void cafe_self_configuration(uint8_t transeciever_mode){
 	    	cafe_update_nrf_radio_address(user_radio_addr);
 	
 	    	if ( tx_payload.pending){
-			cafe_start_tx_transcation();
-			
+			cafe_start_tx_transaction();	
 		}
           return;
-	}
-
+	
+#else
    	
    	cafe_config_t cafe_config       = cafe_DEFAULT_CONFIG_RX;
 	memcpy (user_radio_addr.logic_pipe , pipe_addr  , 8);
@@ -357,13 +350,18 @@ void cafe_self_configuration(uint8_t transeciever_mode){
 	cafe_update_nrf_radio_address(user_radio_addr);	
 	cafe_init( &cafe_config );
 	cafe_start_rx();
-    	
+#endif    	
  }
 
 
+void cafe_start_radio_state_handle(cafe_payload_t *current_payload){
+	if(current_payload->noack){
+		current_payload->pending = true;
+		//update reception address!
+		cafe_start_rx();
+	}
 
-
-
+}
 
 void cafe_update_nrf_radio_address(nrf_st_address radio_addr){
 	
@@ -408,20 +406,12 @@ uint32_t cafe_read_rx_payload(cafe_payload_t *payload)
 }
 
 
-
-
-
-
 uint32_t cafe_set_rf_channel(uint32_t channel)
 {
 	if (channel > 125) return false;
 	m_config_local.rf_channel = channel;
 	return true;
 }
-
-
-
-
 
 void RADIO_IRQHandler()
 {
@@ -446,7 +436,7 @@ void RADIO_IRQHandler()
 			if (m_event_handler != 0) m_event_handler();
 			
 			if ((tx_payload.pending))
-	   			cafe_start_tx_transcation();//not used by timeslot
+	   			cafe_start_tx_transaction();//not used by timeslot
 			return;
 		}
 		

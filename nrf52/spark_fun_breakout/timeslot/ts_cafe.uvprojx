@@ -333,7 +333,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--c99</MiscControls>
-              <Define>DEVKIT_BOARD RETARGET_ENABLED BLE_STACK_SUPPORT_REQD NRF52_PAN_53 NRF52_PAN_15 NRF52_PAN_54 NRF52_PAN_20 NRF52_PAN_55 NRF52_PAN_30 NRF52_PAN_58 NRF52_PAN_31 NRF52_PAN_62 NRF52_PAN_36 NRF52_PAN_63 NRF52_PAN_51 NRF52_PAN_64 CONFIG_GPIO_AS_PINRESET BOARD_PCA10040 NRF52_PAN_12 S132 NRF_LOG_USES_UART=1 NRF52 SOFTDEVICE_PRESENT SWI_DISABLE0</Define>
+              <Define>SPARKFUN_BOARD RETARGET_ENABLED BLE_STACK_SUPPORT_REQD NRF52_PAN_53 NRF52_PAN_15 NRF52_PAN_54 NRF52_PAN_20 NRF52_PAN_55 NRF52_PAN_30 NRF52_PAN_58 NRF52_PAN_31 NRF52_PAN_62 NRF52_PAN_36 NRF52_PAN_63 NRF52_PAN_51 NRF52_PAN_64 CONFIG_GPIO_AS_PINRESET BOARD_PCA10040 NRF52_PAN_12 S132 NRF_LOG_USES_UART=1 NRF52 SOFTDEVICE_PRESENT SWI_DISABLE0</Define>
               <Undefine></Undefine>
               <IncludePath>.\app\source;.\app\inc;..\..\..\common;..\..\..\common\inc</IncludePath>
             </VariousControls>
@@ -400,11 +400,6 @@
               <FilePath>..\..\..\common\src\aes_app.c</FilePath>
             </File>
             <File>
-              <FileName>ble_app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\common\src\ble_app.c</FilePath>
-            </File>
-            <File>
               <FileName>cafe.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\common\src\cafe.c</FilePath>
@@ -415,19 +410,9 @@
               <FilePath>..\..\..\common\src\cli.c</FilePath>
             </File>
             <File>
-              <FileName>custom_ble_services.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\common\src\custom_ble_services.c</FilePath>
-            </File>
-            <File>
               <FileName>simple_uart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\common\src\simple_uart.c</FilePath>
-            </File>
-            <File>
-              <FileName>uart_app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\common\src\uart_app.c</FilePath>
             </File>
             <File>
               <FileName>io_expander.c</FileName>
@@ -435,14 +420,29 @@
               <FilePath>..\..\..\common\src\io_expander.c</FilePath>
             </File>
             <File>
-              <FileName>timer_app.c</FileName>
+              <FileName>accelerometer_i2c.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\common\src\timer_app.c</FilePath>
+              <FilePath>..\..\..\common\src\accelerometer_i2c.c</FilePath>
             </File>
             <File>
-              <FileName>adxl345.c</FileName>
+              <FileName>ws_ble.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\common\src\adxl345.c</FilePath>
+              <FilePath>..\..\..\common\src\ws_ble.c</FilePath>
+            </File>
+            <File>
+              <FileName>ws_ble_services.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\common\src\ws_ble_services.c</FilePath>
+            </File>
+            <File>
+              <FileName>ws_timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\common\src\ws_timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>ws_uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\common\src\ws_uart.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -27,8 +27,8 @@ uint32_t cafe_set_tx_power(uint8_t tx_output_power);
 
 
 void cafe_update_nrf_radio_address(nrf_st_address radio_addr);
-void cafe_self_configuration(uint8_t transeciever_mode);
-void cafe_start_tx_transcation(void);
+void cafe_start_radio(void);
+void cafe_start_tx_transaction(void);
 void cafe_load_payload(unsigned char slave_id, char *data,unsigned char len);
 char cafe_packet_recieved(void);
 void RADIO_IRQHandler(void);
