@@ -31,5 +31,7 @@ void cafe_start_radio(void);
 void cafe_start_tx_transaction(void);
 void cafe_load_payload(unsigned char slave_id, char *data,unsigned char len);
 char cafe_packet_recieved(void);
+void cafe_radio_update_mode(char radio_mode);
+
 void RADIO_IRQHandler(void);
 #endif

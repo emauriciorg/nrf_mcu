@@ -3441,7 +3441,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--c99</MiscControls>
-              <Define>S132 BOARD_NRF6310 RADIO_ONLY_TRANSMITTER BBN_BOARD_PINS BLE_APP_ENABLED NRF51822   BLE_STACK_SUPPORT_REQD  SOFTDEVICE_PRESENT NRF51 SWI_DISABLE0</Define>
+              <Define>WS_BLE_ENABLED TIMESLOT_ENABLE S132 BOARD_NRF6310 RADIO_ONLY_TRANSMITTER BBN_BOARD_PINS BLE_APP_ENABLED NRF51822   BLE_STACK_SUPPORT_REQD  SOFTDEVICE_PRESENT NRF51 SWI_DISABLE0</Define>
               <Undefine></Undefine>
               <IncludePath>..\arm5;.\app\source;..\..\common;..\..\common\inc;.\app\inc;..\..\common\src</IncludePath>
             </VariousControls>
@@ -3942,6 +3942,834 @@
         </Group>
       </Groups>
     </Target>
+    <Target>
+      <TargetName>s312_hex</TargetName>
+      <ToolsetNumber>0x4</ToolsetNumber>
+      <ToolsetName>ARM-ADS</ToolsetName>
+      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <TargetOption>
+        <TargetCommonOption>
+          <Device>nRF51822_xxAC</Device>
+          <Vendor>Nordic Semiconductor</Vendor>
+          <PackID>NordicSemiconductor.nRF_DeviceFamilyPack.8.17.0</PackID>
+          <PackURL>http://developer.nordicsemi.com/nRF5_SDK/pieces/nRF_DeviceFamilyPack/</PackURL>
+          <Cpu>IRAM(0x20000000,0x8000) IROM(0x00000000,0x40000) CPUTYPE("Cortex-M0") CLOCK(12000000) ELITTLE</Cpu>
+          <FlashUtilSpec></FlashUtilSpec>
+          <StartupFile></StartupFile>
+          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC4000 -FN1 -FF0nrf51xxx -FS00 -FL0200000 -FP0($$Device:nRF51822_xxAC$Flash\nrf51xxx.flm))</FlashDriverDll>
+          <DeviceId>0</DeviceId>
+          <RegisterFile>$$Device:nRF51822_xxAC$Device\Include\nrf.h</RegisterFile>
+          <MemoryEnv></MemoryEnv>
+          <Cmp></Cmp>
+          <Asm></Asm>
+          <Linker></Linker>
+          <OHString></OHString>
+          <InfinionOptionDll></InfinionOptionDll>
+          <SLE66CMisc></SLE66CMisc>
+          <SLE66AMisc></SLE66AMisc>
+          <SLE66LinkerMisc></SLE66LinkerMisc>
+          <SFDFile>$$Device:nRF51822_xxAC$SVD\nrf51.svd</SFDFile>
+          <bCustSvd>0</bCustSvd>
+          <UseEnv>0</UseEnv>
+          <BinPath></BinPath>
+          <IncludePath></IncludePath>
+          <LibPath></LibPath>
+          <RegisterFilePath></RegisterFilePath>
+          <DBRegisterFilePath></DBRegisterFilePath>
+          <TargetStatus>
+            <Error>0</Error>
+            <ExitCodeStop>0</ExitCodeStop>
+            <ButtonStop>0</ButtonStop>
+            <NotGenerated>0</NotGenerated>
+            <InvalidFlash>1</InvalidFlash>
+          </TargetStatus>
+          <OutputDirectory>.\_build\</OutputDirectory>
+          <OutputName>nrf51422_xxac_s130</OutputName>
+          <CreateExecutable>1</CreateExecutable>
+          <CreateLib>0</CreateLib>
+          <CreateHexFile>1</CreateHexFile>
+          <DebugInformation>1</DebugInformation>
+          <BrowseInformation>1</BrowseInformation>
+          <ListingPath>.\_build\</ListingPath>
+          <HexFormatSelection>1</HexFormatSelection>
+          <Merge32K>0</Merge32K>
+          <CreateBatchFile>0</CreateBatchFile>
+          <BeforeCompile>
+            <RunUserProg1>0</RunUserProg1>
+            <RunUserProg2>0</RunUserProg2>
+            <UserProg1Name></UserProg1Name>
+            <UserProg2Name></UserProg2Name>
+            <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
+            <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
+            <nStopU1X>0</nStopU1X>
+            <nStopU2X>0</nStopU2X>
+          </BeforeCompile>
+          <BeforeMake>
+            <RunUserProg1>0</RunUserProg1>
+            <RunUserProg2>0</RunUserProg2>
+            <UserProg1Name></UserProg1Name>
+            <UserProg2Name></UserProg2Name>
+            <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
+            <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
+            <nStopB1X>0</nStopB1X>
+            <nStopB2X>0</nStopB2X>
+          </BeforeMake>
+          <AfterMake>
+            <RunUserProg1>0</RunUserProg1>
+            <RunUserProg2>0</RunUserProg2>
+            <UserProg1Name></UserProg1Name>
+            <UserProg2Name></UserProg2Name>
+            <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
+            <UserProg2Dos16Mode>0</UserProg2Dos16Mode>
+            <nStopA1X>0</nStopA1X>
+            <nStopA2X>0</nStopA2X>
+          </AfterMake>
+          <SelectedForBatchBuild>0</SelectedForBatchBuild>
+          <SVCSIdString></SVCSIdString>
+        </TargetCommonOption>
+        <CommonProperty>
+          <UseCPPCompiler>0</UseCPPCompiler>
+          <RVCTCodeConst>0</RVCTCodeConst>
+          <RVCTZI>0</RVCTZI>
+          <RVCTOtherData>0</RVCTOtherData>
+          <ModuleSelection>0</ModuleSelection>
+          <IncludeInBuild>1</IncludeInBuild>
+          <AlwaysBuild>0</AlwaysBuild>
+          <GenerateAssemblyFile>0</GenerateAssemblyFile>
+          <AssembleAssemblyFile>0</AssembleAssemblyFile>
+          <PublicsOnly>0</PublicsOnly>
+          <StopOnExitCode>3</StopOnExitCode>
+          <CustomArgument></CustomArgument>
+          <IncludeLibraryModules></IncludeLibraryModules>
+          <ComprImg>1</ComprImg>
+        </CommonProperty>
+        <DllOption>
+          <SimDllName>SARMCM3.DLL</SimDllName>
+          <SimDllArguments>  </SimDllArguments>
+          <SimDlgDll>DARMCM1.DLL</SimDlgDll>
+          <SimDlgDllArguments>-pCM0</SimDlgDllArguments>
+          <TargetDllName>SARMCM3.DLL</TargetDllName>
+          <TargetDllArguments> </TargetDllArguments>
+          <TargetDlgDll>TARMCM1.DLL</TargetDlgDll>
+          <TargetDlgDllArguments>-pCM0</TargetDlgDllArguments>
+        </DllOption>
+        <DebugOption>
+          <OPTHX>
+            <HexSelection>1</HexSelection>
+            <HexRangeLowAddress>0</HexRangeLowAddress>
+            <HexRangeHighAddress>0</HexRangeHighAddress>
+            <HexOffset>0</HexOffset>
+            <Oh166RecLen>16</Oh166RecLen>
+          </OPTHX>
+        </DebugOption>
+        <Utilities>
+          <Flash1>
+            <UseTargetDll>1</UseTargetDll>
+            <UseExternalTool>0</UseExternalTool>
+            <RunIndependent>0</RunIndependent>
+            <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
+            <Capability>1</Capability>
+            <DriverSelection>4099</DriverSelection>
+          </Flash1>
+          <bUseTDR>1</bUseTDR>
+          <Flash2>BIN\UL2CM3.DLL</Flash2>
+          <Flash3></Flash3>
+          <Flash4></Flash4>
+          <pFcarmOut></pFcarmOut>
+          <pFcarmGrp></pFcarmGrp>
+          <pFcArmRoot></pFcArmRoot>
+          <FcArmLst>0</FcArmLst>
+        </Utilities>
+        <TargetArmAds>
+          <ArmAdsMisc>
+            <GenerateListings>0</GenerateListings>
+            <asHll>1</asHll>
+            <asAsm>1</asAsm>
+            <asMacX>1</asMacX>
+            <asSyms>1</asSyms>
+            <asFals>1</asFals>
+            <asDbgD>1</asDbgD>
+            <asForm>1</asForm>
+            <ldLst>0</ldLst>
+            <ldmm>1</ldmm>
+            <ldXref>1</ldXref>
+            <BigEnd>0</BigEnd>
+            <AdsALst>1</AdsALst>
+            <AdsACrf>1</AdsACrf>
+            <AdsANop>0</AdsANop>
+            <AdsANot>0</AdsANot>
+            <AdsLLst>1</AdsLLst>
+            <AdsLmap>1</AdsLmap>
+            <AdsLcgr>1</AdsLcgr>
+            <AdsLsym>1</AdsLsym>
+            <AdsLszi>1</AdsLszi>
+            <AdsLtoi>1</AdsLtoi>
+            <AdsLsun>1</AdsLsun>
+            <AdsLven>1</AdsLven>
+            <AdsLsxf>1</AdsLsxf>
+            <RvctClst>0</RvctClst>
+            <GenPPlst>0</GenPPlst>
+            <AdsCpuType>"Cortex-M0"</AdsCpuType>
+            <RvctDeviceName></RvctDeviceName>
+            <mOS>0</mOS>
+            <uocRom>0</uocRom>
+            <uocRam>0</uocRam>
+            <hadIROM>1</hadIROM>
+            <hadIRAM>1</hadIRAM>
+            <hadXRAM>0</hadXRAM>
+            <uocXRam>0</uocXRam>
+            <RvdsVP>0</RvdsVP>
+            <hadIRAM2>0</hadIRAM2>
+            <hadIROM2>0</hadIROM2>
+            <StupSel>8</StupSel>
+            <useUlib>1</useUlib>
+            <EndSel>0</EndSel>
+            <uLtcg>0</uLtcg>
+            <nSecure>0</nSecure>
+            <RoSelD>3</RoSelD>
+            <RwSelD>3</RwSelD>
+            <CodeSel>0</CodeSel>
+            <OptFeed>0</OptFeed>
+            <NoZi1>0</NoZi1>
+            <NoZi2>0</NoZi2>
+            <NoZi3>0</NoZi3>
+            <NoZi4>0</NoZi4>
+            <NoZi5>0</NoZi5>
+            <Ro1Chk>0</Ro1Chk>
+            <Ro2Chk>0</Ro2Chk>
+            <Ro3Chk>0</Ro3Chk>
+            <Ir1Chk>1</Ir1Chk>
+            <Ir2Chk>0</Ir2Chk>
+            <Ra1Chk>0</Ra1Chk>
+            <Ra2Chk>0</Ra2Chk>
+            <Ra3Chk>0</Ra3Chk>
+            <Im1Chk>1</Im1Chk>
+            <Im2Chk>0</Im2Chk>
+            <OnChipMemories>
+              <Ocm1>
+                <Type>0</Type>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
+              </Ocm1>
+              <Ocm2>
+                <Type>0</Type>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
+              </Ocm2>
+              <Ocm3>
+                <Type>0</Type>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
+              </Ocm3>
+              <Ocm4>
+                <Type>0</Type>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
+              </Ocm4>
+              <Ocm5>
+                <Type>0</Type>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
+              </Ocm5>
+              <Ocm6>
+                <Type>0</Type>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
+              </Ocm6>
+              <IRAM>
+                <Type>0</Type>
+                <StartAddress>0x20000000</StartAddress>
+                <Size>0x8000</Size>
+              </IRAM>
+              <IROM>
+                <Type>1</Type>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x40000</Size>
+              </IROM>
+              <XRAM>
+                <Type>0</Type>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
+              </XRAM>
+              <OCR_RVCT1>
+                <Type>1</Type>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
+              </OCR_RVCT1>
+              <OCR_RVCT2>
+                <Type>1</Type>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
+              </OCR_RVCT2>
+              <OCR_RVCT3>
+                <Type>1</Type>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
+              </OCR_RVCT3>
+              <OCR_RVCT4>
+                <Type>1</Type>
+                <StartAddress>0x1b000</StartAddress>
+                <Size>0x40000</Size>
+              </OCR_RVCT4>
+              <OCR_RVCT5>
+                <Type>1</Type>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
+              </OCR_RVCT5>
+              <OCR_RVCT6>
+                <Type>0</Type>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
+              </OCR_RVCT6>
+              <OCR_RVCT7>
+                <Type>0</Type>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
+              </OCR_RVCT7>
+              <OCR_RVCT8>
+                <Type>0</Type>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
+              </OCR_RVCT8>
+              <OCR_RVCT9>
+                <Type>0</Type>
+                <StartAddress>0x20001f00</StartAddress>
+                <Size>0x8000</Size>
+              </OCR_RVCT9>
+              <OCR_RVCT10>
+                <Type>0</Type>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
+              </OCR_RVCT10>
+            </OnChipMemories>
+            <RvctStartVector></RvctStartVector>
+          </ArmAdsMisc>
+          <Cads>
+            <interw>1</interw>
+            <Optim>4</Optim>
+            <oTime>0</oTime>
+            <SplitLS>0</SplitLS>
+            <OneElfS>1</OneElfS>
+            <Strict>0</Strict>
+            <EnumInt>0</EnumInt>
+            <PlainCh>0</PlainCh>
+            <Ropi>0</Ropi>
+            <Rwpi>0</Rwpi>
+            <wLevel>0</wLevel>
+            <uThumb>0</uThumb>
+            <uSurpInc>0</uSurpInc>
+            <uC99>0</uC99>
+            <useXO>0</useXO>
+            <v6Lang>1</v6Lang>
+            <v6LangP>1</v6LangP>
+            <vShortEn>1</vShortEn>
+            <vShortWch>1</vShortWch>
+            <v6Lto>0</v6Lto>
+            <v6WtE>0</v6WtE>
+            <v6Rtti>0</v6Rtti>
+            <VariousControls>
+              <MiscControls>--c99</MiscControls>
+              <Define>WS_BLE_ENABLED TIMESLOT_ENABLE S130 BOARD_NRF6310 RADIO_ONLY_TRANSMITTER BBN_BOARD_PINS BLE_APP_ENABLED NRF51822   BLE_STACK_SUPPORT_REQD  SOFTDEVICE_PRESENT NRF51 SWI_DISABLE0</Define>
+              <Undefine></Undefine>
+              <IncludePath>..\arm5;.\app\source;..\..\common;..\..\common\inc;.\app\inc;..\..\common\src</IncludePath>
+            </VariousControls>
+          </Cads>
+          <Aads>
+            <interw>1</interw>
+            <Ropi>0</Ropi>
+            <Rwpi>0</Rwpi>
+            <thumb>0</thumb>
+            <SplitLS>0</SplitLS>
+            <SwStkChk>0</SwStkChk>
+            <NoWarn>0</NoWarn>
+            <uSurpInc>0</uSurpInc>
+            <useXO>0</useXO>
+            <uClangAs>0</uClangAs>
+            <VariousControls>
+              <MiscControls></MiscControls>
+              <Define>BLE_STACK_SUPPORT_REQD S130  SOFTDEVICE_PRESENT NRF51 SWI_DISABLE0</Define>
+              <Undefine></Undefine>
+              <IncludePath></IncludePath>
+            </VariousControls>
+          </Aads>
+          <LDads>
+            <umfTarg>1</umfTarg>
+            <Ropi>0</Ropi>
+            <Rwpi>0</Rwpi>
+            <noStLib>0</noStLib>
+            <RepFail>1</RepFail>
+            <useFile>0</useFile>
+            <TextAddressRange>0x00000000</TextAddressRange>
+            <DataAddressRange>0x00000000</DataAddressRange>
+            <pXoBase></pXoBase>
+            <ScatterFile></ScatterFile>
+            <IncludeLibs></IncludeLibs>
+            <IncludeLibsPath></IncludeLibsPath>
+            <Misc></Misc>
+            <LinkerInputFile></LinkerInputFile>
+            <DisabledWarnings></DisabledWarnings>
+          </LDads>
+        </TargetArmAds>
+      </TargetOption>
+      <Groups>
+        <Group>
+          <GroupName>Application</GroupName>
+          <Files>
+            <File>
+              <FileName>ws_timeslot.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\src\ws_timeslot.c</FilePath>
+            </File>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\app\src\main.c</FilePath>
+            </File>
+            <File>
+              <FileName>ws_aes.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\common\src\ws_aes.c</FilePath>
+            </File>
+            <File>
+              <FileName>ws_ble.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\common\src\ws_ble.c</FilePath>
+            </File>
+            <File>
+              <FileName>cafe.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\common\src\cafe.c</FilePath>
+            </File>
+            <File>
+              <FileName>cli.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\common\src\cli.c</FilePath>
+            </File>
+            <File>
+              <FileName>ws_ble_services.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\common\src\ws_ble_services.c</FilePath>
+            </File>
+            <File>
+              <FileName>simple_uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\common\src\simple_uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>ws_timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\common\src\ws_timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>ws_uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\common\src\ws_uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>accelerometer_i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\common\src\accelerometer_i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>ws_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\common\src\ws_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>ws_softdevice.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\common\src\ws_softdevice.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>BSP</GroupName>
+          <Files>
+            <File>
+              <FileName>bbn_board.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\common\src\bbn_board.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Documentation</GroupName>
+          <Files>
+            <File>
+              <FileName>Abstract.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\Abstract.txt</FilePath>
+            </File>
+            <File>
+              <FileName>license.txt</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\license.txt</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>::Board Support</GroupName>
+          <GroupOption>
+            <CommonProperty>
+              <UseCPPCompiler>0</UseCPPCompiler>
+              <RVCTCodeConst>0</RVCTCodeConst>
+              <RVCTZI>0</RVCTZI>
+              <RVCTOtherData>0</RVCTOtherData>
+              <ModuleSelection>0</ModuleSelection>
+              <IncludeInBuild>1</IncludeInBuild>
+              <AlwaysBuild>2</AlwaysBuild>
+              <GenerateAssemblyFile>2</GenerateAssemblyFile>
+              <AssembleAssemblyFile>2</AssembleAssemblyFile>
+              <PublicsOnly>2</PublicsOnly>
+              <StopOnExitCode>11</StopOnExitCode>
+              <CustomArgument></CustomArgument>
+              <IncludeLibraryModules></IncludeLibraryModules>
+              <ComprImg>1</ComprImg>
+            </CommonProperty>
+            <GroupArmAds>
+              <Cads>
+                <interw>2</interw>
+                <Optim>0</Optim>
+                <oTime>2</oTime>
+                <SplitLS>2</SplitLS>
+                <OneElfS>2</OneElfS>
+                <Strict>2</Strict>
+                <EnumInt>2</EnumInt>
+                <PlainCh>2</PlainCh>
+                <Ropi>2</Ropi>
+                <Rwpi>2</Rwpi>
+                <wLevel>0</wLevel>
+                <uThumb>2</uThumb>
+                <uSurpInc>2</uSurpInc>
+                <uC99>2</uC99>
+                <useXO>2</useXO>
+                <v6Lang>0</v6Lang>
+                <v6LangP>0</v6LangP>
+                <vShortEn>2</vShortEn>
+                <vShortWch>2</vShortWch>
+                <v6Lto>2</v6Lto>
+                <v6WtE>2</v6WtE>
+                <v6Rtti>2</v6Rtti>
+                <VariousControls>
+                  <MiscControls></MiscControls>
+                  <Define></Define>
+                  <Undefine></Undefine>
+                  <IncludePath></IncludePath>
+                </VariousControls>
+              </Cads>
+              <Aads>
+                <interw>2</interw>
+                <Ropi>2</Ropi>
+                <Rwpi>2</Rwpi>
+                <thumb>2</thumb>
+                <SplitLS>2</SplitLS>
+                <SwStkChk>2</SwStkChk>
+                <NoWarn>2</NoWarn>
+                <uSurpInc>2</uSurpInc>
+                <useXO>2</useXO>
+                <uClangAs>2</uClangAs>
+                <VariousControls>
+                  <MiscControls></MiscControls>
+                  <Define></Define>
+                  <Undefine></Undefine>
+                  <IncludePath></IncludePath>
+                </VariousControls>
+              </Aads>
+            </GroupArmAds>
+          </GroupOption>
+        </Group>
+        <Group>
+          <GroupName>::CMSIS</GroupName>
+        </Group>
+        <Group>
+          <GroupName>::Device</GroupName>
+          <GroupOption>
+            <CommonProperty>
+              <UseCPPCompiler>0</UseCPPCompiler>
+              <RVCTCodeConst>0</RVCTCodeConst>
+              <RVCTZI>0</RVCTZI>
+              <RVCTOtherData>0</RVCTOtherData>
+              <ModuleSelection>0</ModuleSelection>
+              <IncludeInBuild>1</IncludeInBuild>
+              <AlwaysBuild>2</AlwaysBuild>
+              <GenerateAssemblyFile>2</GenerateAssemblyFile>
+              <AssembleAssemblyFile>2</AssembleAssemblyFile>
+              <PublicsOnly>2</PublicsOnly>
+              <StopOnExitCode>11</StopOnExitCode>
+              <CustomArgument></CustomArgument>
+              <IncludeLibraryModules></IncludeLibraryModules>
+              <ComprImg>1</ComprImg>
+            </CommonProperty>
+            <GroupArmAds>
+              <Cads>
+                <interw>2</interw>
+                <Optim>0</Optim>
+                <oTime>2</oTime>
+                <SplitLS>2</SplitLS>
+                <OneElfS>2</OneElfS>
+                <Strict>2</Strict>
+                <EnumInt>2</EnumInt>
+                <PlainCh>2</PlainCh>
+                <Ropi>2</Ropi>
+                <Rwpi>2</Rwpi>
+                <wLevel>0</wLevel>
+                <uThumb>2</uThumb>
+                <uSurpInc>2</uSurpInc>
+                <uC99>2</uC99>
+                <useXO>2</useXO>
+                <v6Lang>0</v6Lang>
+                <v6LangP>0</v6LangP>
+                <vShortEn>2</vShortEn>
+                <vShortWch>2</vShortWch>
+                <v6Lto>2</v6Lto>
+                <v6WtE>2</v6WtE>
+                <v6Rtti>2</v6Rtti>
+                <VariousControls>
+                  <MiscControls></MiscControls>
+                  <Define></Define>
+                  <Undefine></Undefine>
+                  <IncludePath></IncludePath>
+                </VariousControls>
+              </Cads>
+              <Aads>
+                <interw>2</interw>
+                <Ropi>2</Ropi>
+                <Rwpi>2</Rwpi>
+                <thumb>2</thumb>
+                <SplitLS>2</SplitLS>
+                <SwStkChk>2</SwStkChk>
+                <NoWarn>2</NoWarn>
+                <uSurpInc>2</uSurpInc>
+                <useXO>2</useXO>
+                <uClangAs>2</uClangAs>
+                <VariousControls>
+                  <MiscControls></MiscControls>
+                  <Define></Define>
+                  <Undefine></Undefine>
+                  <IncludePath></IncludePath>
+                </VariousControls>
+              </Aads>
+            </GroupArmAds>
+          </GroupOption>
+        </Group>
+        <Group>
+          <GroupName>::nRF_BLE</GroupName>
+          <GroupOption>
+            <CommonProperty>
+              <UseCPPCompiler>0</UseCPPCompiler>
+              <RVCTCodeConst>0</RVCTCodeConst>
+              <RVCTZI>0</RVCTZI>
+              <RVCTOtherData>0</RVCTOtherData>
+              <ModuleSelection>0</ModuleSelection>
+              <IncludeInBuild>1</IncludeInBuild>
+              <AlwaysBuild>2</AlwaysBuild>
+              <GenerateAssemblyFile>2</GenerateAssemblyFile>
+              <AssembleAssemblyFile>2</AssembleAssemblyFile>
+              <PublicsOnly>2</PublicsOnly>
+              <StopOnExitCode>11</StopOnExitCode>
+              <CustomArgument></CustomArgument>
+              <IncludeLibraryModules></IncludeLibraryModules>
+              <ComprImg>1</ComprImg>
+            </CommonProperty>
+            <GroupArmAds>
+              <Cads>
+                <interw>2</interw>
+                <Optim>0</Optim>
+                <oTime>2</oTime>
+                <SplitLS>2</SplitLS>
+                <OneElfS>2</OneElfS>
+                <Strict>2</Strict>
+                <EnumInt>2</EnumInt>
+                <PlainCh>2</PlainCh>
+                <Ropi>2</Ropi>
+                <Rwpi>2</Rwpi>
+                <wLevel>0</wLevel>
+                <uThumb>2</uThumb>
+                <uSurpInc>2</uSurpInc>
+                <uC99>2</uC99>
+                <useXO>2</useXO>
+                <v6Lang>0</v6Lang>
+                <v6LangP>0</v6LangP>
+                <vShortEn>2</vShortEn>
+                <vShortWch>2</vShortWch>
+                <v6Lto>2</v6Lto>
+                <v6WtE>2</v6WtE>
+                <v6Rtti>2</v6Rtti>
+                <VariousControls>
+                  <MiscControls></MiscControls>
+                  <Define></Define>
+                  <Undefine></Undefine>
+                  <IncludePath></IncludePath>
+                </VariousControls>
+              </Cads>
+              <Aads>
+                <interw>2</interw>
+                <Ropi>2</Ropi>
+                <Rwpi>2</Rwpi>
+                <thumb>2</thumb>
+                <SplitLS>2</SplitLS>
+                <SwStkChk>2</SwStkChk>
+                <NoWarn>2</NoWarn>
+                <uSurpInc>2</uSurpInc>
+                <useXO>2</useXO>
+                <uClangAs>2</uClangAs>
+                <VariousControls>
+                  <MiscControls></MiscControls>
+                  <Define></Define>
+                  <Undefine></Undefine>
+                  <IncludePath></IncludePath>
+                </VariousControls>
+              </Aads>
+            </GroupArmAds>
+          </GroupOption>
+        </Group>
+        <Group>
+          <GroupName>::nRF_Drivers</GroupName>
+        </Group>
+        <Group>
+          <GroupName>::nRF_Libraries</GroupName>
+          <GroupOption>
+            <CommonProperty>
+              <UseCPPCompiler>0</UseCPPCompiler>
+              <RVCTCodeConst>0</RVCTCodeConst>
+              <RVCTZI>0</RVCTZI>
+              <RVCTOtherData>0</RVCTOtherData>
+              <ModuleSelection>0</ModuleSelection>
+              <IncludeInBuild>1</IncludeInBuild>
+              <AlwaysBuild>2</AlwaysBuild>
+              <GenerateAssemblyFile>2</GenerateAssemblyFile>
+              <AssembleAssemblyFile>2</AssembleAssemblyFile>
+              <PublicsOnly>2</PublicsOnly>
+              <StopOnExitCode>11</StopOnExitCode>
+              <CustomArgument></CustomArgument>
+              <IncludeLibraryModules></IncludeLibraryModules>
+              <ComprImg>1</ComprImg>
+            </CommonProperty>
+            <GroupArmAds>
+              <Cads>
+                <interw>2</interw>
+                <Optim>0</Optim>
+                <oTime>2</oTime>
+                <SplitLS>2</SplitLS>
+                <OneElfS>2</OneElfS>
+                <Strict>2</Strict>
+                <EnumInt>2</EnumInt>
+                <PlainCh>2</PlainCh>
+                <Ropi>2</Ropi>
+                <Rwpi>2</Rwpi>
+                <wLevel>0</wLevel>
+                <uThumb>2</uThumb>
+                <uSurpInc>2</uSurpInc>
+                <uC99>2</uC99>
+                <useXO>2</useXO>
+                <v6Lang>0</v6Lang>
+                <v6LangP>0</v6LangP>
+                <vShortEn>2</vShortEn>
+                <vShortWch>2</vShortWch>
+                <v6Lto>2</v6Lto>
+                <v6WtE>2</v6WtE>
+                <v6Rtti>2</v6Rtti>
+                <VariousControls>
+                  <MiscControls></MiscControls>
+                  <Define></Define>
+                  <Undefine></Undefine>
+                  <IncludePath></IncludePath>
+                </VariousControls>
+              </Cads>
+              <Aads>
+                <interw>2</interw>
+                <Ropi>2</Ropi>
+                <Rwpi>2</Rwpi>
+                <thumb>2</thumb>
+                <SplitLS>2</SplitLS>
+                <SwStkChk>2</SwStkChk>
+                <NoWarn>2</NoWarn>
+                <uSurpInc>2</uSurpInc>
+                <useXO>2</useXO>
+                <uClangAs>2</uClangAs>
+                <VariousControls>
+                  <MiscControls></MiscControls>
+                  <Define></Define>
+                  <Undefine></Undefine>
+                  <IncludePath></IncludePath>
+                </VariousControls>
+              </Aads>
+            </GroupArmAds>
+          </GroupOption>
+        </Group>
+        <Group>
+          <GroupName>::nRF_SoftDevice</GroupName>
+          <GroupOption>
+            <CommonProperty>
+              <UseCPPCompiler>0</UseCPPCompiler>
+              <RVCTCodeConst>0</RVCTCodeConst>
+              <RVCTZI>0</RVCTZI>
+              <RVCTOtherData>0</RVCTOtherData>
+              <ModuleSelection>0</ModuleSelection>
+              <IncludeInBuild>1</IncludeInBuild>
+              <AlwaysBuild>2</AlwaysBuild>
+              <GenerateAssemblyFile>2</GenerateAssemblyFile>
+              <AssembleAssemblyFile>2</AssembleAssemblyFile>
+              <PublicsOnly>2</PublicsOnly>
+              <StopOnExitCode>11</StopOnExitCode>
+              <CustomArgument></CustomArgument>
+              <IncludeLibraryModules></IncludeLibraryModules>
+              <ComprImg>1</ComprImg>
+            </CommonProperty>
+            <GroupArmAds>
+              <Cads>
+                <interw>2</interw>
+                <Optim>0</Optim>
+                <oTime>2</oTime>
+                <SplitLS>2</SplitLS>
+                <OneElfS>2</OneElfS>
+                <Strict>2</Strict>
+                <EnumInt>2</EnumInt>
+                <PlainCh>2</PlainCh>
+                <Ropi>2</Ropi>
+                <Rwpi>2</Rwpi>
+                <wLevel>0</wLevel>
+                <uThumb>2</uThumb>
+                <uSurpInc>2</uSurpInc>
+                <uC99>2</uC99>
+                <useXO>2</useXO>
+                <v6Lang>0</v6Lang>
+                <v6LangP>0</v6LangP>
+                <vShortEn>2</vShortEn>
+                <vShortWch>2</vShortWch>
+                <v6Lto>2</v6Lto>
+                <v6WtE>2</v6WtE>
+                <v6Rtti>2</v6Rtti>
+                <VariousControls>
+                  <MiscControls></MiscControls>
+                  <Define></Define>
+                  <Undefine></Undefine>
+                  <IncludePath></IncludePath>
+                </VariousControls>
+              </Cads>
+              <Aads>
+                <interw>2</interw>
+                <Ropi>2</Ropi>
+                <Rwpi>2</Rwpi>
+                <thumb>2</thumb>
+                <SplitLS>2</SplitLS>
+                <SwStkChk>2</SwStkChk>
+                <NoWarn>2</NoWarn>
+                <uSurpInc>2</uSurpInc>
+                <useXO>2</useXO>
+                <uClangAs>2</uClangAs>
+                <VariousControls>
+                  <MiscControls></MiscControls>
+                  <Define></Define>
+                  <Undefine></Undefine>
+                  <IncludePath></IncludePath>
+                </VariousControls>
+              </Aads>
+            </GroupArmAds>
+          </GroupOption>
+        </Group>
+      </Groups>
+    </Target>
   </Targets>
 
   <RTE>
@@ -3955,6 +4783,7 @@
           <targetInfo name="nrf51822_xxac_s130" versionMatchMode="fixed"/>
           <targetInfo name="nrf51822_xxac_s132" versionMatchMode="fixed"/>
           <targetInfo name="nrf52832" versionMatchMode="fixed"/>
+          <targetInfo name="s312_hex" versionMatchMode="fixed"/>
         </targetInfos>
       </package>
       <package name="nRF_BLE" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_BLE" vendor="NordicSemiconductor" version="3.1.0">
@@ -3967,6 +4796,7 @@
         <targetInfos>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </package>
       <package name="nRF_DeviceFamilyPack" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_DeviceFamilyPack/" vendor="NordicSemiconductor" version="8.2.0">
@@ -3979,6 +4809,7 @@
         <targetInfos>
           <targetInfo name="nrf51822_xxac_s130" versionMatchMode="fixed"/>
           <targetInfo name="nrf51822_xxac_s132" versionMatchMode="fixed"/>
+          <targetInfo name="s312_hex" versionMatchMode="fixed"/>
         </targetInfos>
       </package>
       <package name="nRF_Drivers" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Drivers" vendor="NordicSemiconductor" version="3.1.0">
@@ -3991,12 +4822,14 @@
         <targetInfos>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </package>
       <package name="nRF_Drivers_External" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Drivers_External/" vendor="NordicSemiconductor" version="1.2.1-2.alpha">
         <targetInfos>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </package>
       <package name="nRF_Examples" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Examples" vendor="NordicSemiconductor" version="10.0.0">
@@ -4009,6 +4842,7 @@
         <targetInfos>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </package>
       <package name="nRF_Libraries" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_Libraries" vendor="NordicSemiconductor" version="3.1.0">
@@ -4021,6 +4855,7 @@
         <targetInfos>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </package>
       <package name="nRF_SoftDevice_Common" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_SoftDevice_Common" vendor="NordicSemiconductor" version="1.1.5">
@@ -4033,6 +4868,7 @@
         <targetInfos>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </package>
       <package name="nRF_SoftDevice_S130" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_SoftDevice_S130" vendor="NordicSemiconductor" version="1.0.2">
@@ -4044,12 +4880,13 @@
       <package name="nRF_SoftDevice_S130" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_SoftDevice_S130/" vendor="NordicSemiconductor" version="2.0.0-7.alpha">
         <targetInfos>
           <targetInfo name="nrf51822_xxac_s130"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </package>
       <package name="nRF_SoftDevice_S132" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_SoftDevice_S132/" vendor="NordicSemiconductor" version="2.0.0-7.alpha">
         <targetInfos>
           <targetInfo name="nrf51822_xxac_s130"/>
-          <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="nrf51822_xxac_s132" versionMatchMode="fixed"/>
         </targetInfos>
       </package>
     </packages>
@@ -4068,6 +4905,7 @@
           <targetInfo name="nrf51822_xxac_s130" versionMatchMode="fixed"/>
           <targetInfo name="nrf51822_xxac_s132" versionMatchMode="fixed"/>
           <targetInfo name="nrf52832" versionMatchMode="fixed"/>
+          <targetInfo name="s312_hex" versionMatchMode="fixed"/>
         </targetInfos>
       </component>
       <component Cclass="Board Support" Cgroup="bsp" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="10.0.0" condition="bsp_default">
@@ -4082,6 +4920,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="Board Support" Cgroup="bsp_btn_ble" Cvendor="NordicSemiconductor" Cversion="10.0.0" condition="bsp_btn_ble">
@@ -4101,6 +4940,7 @@
         <targetInfos>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="Device" Cgroup="Startup" Cvendor="NordicSemiconductor" Cversion="8.17.0" condition="nRF51 Series and CMSIS">
@@ -4121,6 +4961,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_BLE" Cgroup="BLE_Modules" Csub="ble_advertising" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="ble_advertising">
@@ -4135,6 +4976,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_BLE" Cgroup="BLE_Modules" Csub="ble_common" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="ble_common">
@@ -4149,6 +4991,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_BLE" Cgroup="BLE_Modules" Csub="ble_conn_params" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="ble_conn_params">
@@ -4163,6 +5006,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_BLE" Cgroup="BLE_Modules" Csub="ble_service_common" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="ble_service_common">
@@ -4177,6 +5021,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_BLE" Cgroup="BLE_Modules" Csub="device_manager" Cvariant="Peripheral" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="device_manager_Peripheral">
@@ -4191,6 +5036,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Drivers" Cgroup="app_uart" Cvariant="Fifo" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_uart_Fifo">
@@ -4205,6 +5051,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Drivers" Cgroup="ble_flash" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="ble_flash">
@@ -4219,6 +5066,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_adc" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_adc">
@@ -4233,6 +5081,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_delay" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_delay">
@@ -4247,6 +5096,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_drv_common" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_drv_common">
@@ -4261,6 +5111,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_drv_gpiote" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_drv_gpiote">
@@ -4275,6 +5126,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_drv_timer" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_drv_timer">
@@ -4289,6 +5141,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_drv_twi" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_drv_twi">
@@ -4303,6 +5156,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_drv_uart" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_drv_uart">
@@ -4317,6 +5171,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_error" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_error_default">
@@ -4331,6 +5186,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_gpio" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_gpio">
@@ -4345,6 +5201,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_gpiote" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_gpiote">
@@ -4359,6 +5216,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_rng" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_rng">
@@ -4373,6 +5231,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_soc" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_soc_default">
@@ -4387,6 +5246,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_timer" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_timer">
@@ -4402,6 +5262,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_twi" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_twi">
@@ -4416,6 +5277,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_uart" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_uart">
@@ -4430,6 +5292,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Drivers" Cgroup="nrf_uarte" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_uarte">
@@ -4444,6 +5307,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Drivers" Cgroup="pstorage" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="pstorage_default">
@@ -4458,6 +5322,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Libraries" Cgroup="app_button" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_button">
@@ -4472,6 +5337,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Libraries" Cgroup="app_error" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_error">
@@ -4486,6 +5352,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Libraries" Cgroup="app_fifo" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_fifo">
@@ -4500,6 +5367,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Libraries" Cgroup="app_timer" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_timer_default">
@@ -4514,6 +5382,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Libraries" Cgroup="app_trace" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_trace_default">
@@ -4528,6 +5397,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Libraries" Cgroup="app_twi" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_twi">
@@ -4542,6 +5412,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Libraries" Cgroup="app_util" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="app_util_default">
@@ -4556,6 +5427,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Libraries" Cgroup="nordic_common" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nordic_common">
@@ -4570,6 +5442,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Libraries" Cgroup="nrf_assert" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_assert">
@@ -4584,6 +5457,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Libraries" Cgroup="nrf_log" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="nrf_log">
@@ -4598,6 +5472,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Libraries" Cgroup="retarget" Cvendor="NordicSemiconductor" Cversion="3.1.0" condition="retarget">
@@ -4612,6 +5487,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_Libraries" Cgroup="segger_rtt" Cvendor="NordicSemiconductor" Cversion="1.2.1-2.alpha" condition="segger_rtt">
@@ -4620,6 +5496,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_SoftDevice" Cgroup="Internal" Csub="sd_common" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="1.1.5" condition="sd_common_default">
@@ -4634,6 +5511,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_SoftDevice" Cgroup="Internal" Csub="softdevice_present" Cvendor="NordicSemiconductor" Cversion="1.1.5" condition="softdevice_present">
@@ -4648,12 +5526,21 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_SoftDevice" Cgroup="s130" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="1.0.2" condition="s130_default">
         <package name="nRF_SoftDevice_S130" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_SoftDevice_S130/" vendor="NordicSemiconductor" version="1.0.2"/>
         <targetInfos>
           <targetInfo name="nrf51822_xxab" versionMatchMode="fixed"/>
+        </targetInfos>
+      </component>
+      <component Cclass="nRF_SoftDevice" Cgroup="s130" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="2.0.0-7.alpha" condition="s130_default">
+        <package name="nRF_SoftDevice_S130" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_SoftDevice_S130/" vendor="NordicSemiconductor" version="2.0.0-7.alpha"/>
+        <targetInfos>
+          <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
+          <targetInfo name="nrf51822_xxac_s130"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </component>
       <component Cclass="nRF_SoftDevice" Cgroup="s130_hex" Cvendor="NordicSemiconductor" Cversion="1.0.2" condition="s130_hex">
@@ -4663,6 +5550,14 @@
         </targetInfos>
       </component>
       <component Cclass="nRF_SoftDevice" Cgroup="s132" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="2.0.0-7.alpha" condition="s132_default">
+        <package name="nRF_SoftDevice_S132" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_SoftDevice_S132/" vendor="NordicSemiconductor" version="2.0.0-7.alpha"/>
+        <targetInfos>
+          <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
+          <targetInfo name="nrf51822_xxac_s130"/>
+          <targetInfo name="nrf51822_xxac_s132"/>
+        </targetInfos>
+      </component>
+      <component Cclass="nRF_SoftDevice" Cgroup="s132_hex" Cvendor="NordicSemiconductor" Cversion="2.0.0-7.alpha" condition="s132_hex">
         <package name="nRF_SoftDevice_S132" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_SoftDevice_S132/" vendor="NordicSemiconductor" version="2.0.0-7.alpha"/>
         <targetInfos>
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
@@ -4708,6 +5603,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="bsp\bsp_btn_ble.c" version="10.0.0">
@@ -4752,6 +5648,7 @@
           <targetInfo excluded="1" name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="Device\Source\system_nrf51.c" version="8.3.1">
@@ -4762,6 +5659,7 @@
           <targetInfo excluded="1" name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="common\ble_advdata.c" version="0.0.0">
@@ -4858,6 +5756,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="common\ble_advdata.h" version="4.0.0-2.alpha">
@@ -4868,6 +5767,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="ble_advertising\ble_advertising.c" version="4.0.0-2.alpha">
@@ -4878,6 +5778,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="common\ble_conn_params.c" version="4.0.0-2.alpha">
@@ -4888,6 +5789,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="common\ble_conn_params.h" version="4.0.0-2.alpha">
@@ -4898,6 +5800,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="device_manager\config\device_manager_cnfg.h" version="4.0.0-2.alpha">
@@ -4908,6 +5811,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="config\nrf_drv_config.h" version="3.1.0">
@@ -5028,6 +5932,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="uart\app_uart_fifo.c" version="4.0.0-2.alpha">
@@ -5038,6 +5943,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="ble_flash\ble_flash.c" version="4.0.0-2.alpha">
@@ -5048,6 +5954,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="config\nrf_drv_config.h" version="4.0.0-2.alpha">
@@ -5058,6 +5965,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="hal\nrf_rng.h" version="4.0.0-2.alpha">
@@ -5068,6 +5976,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="pstorage\pstorage.c" version="4.0.0-2.alpha">
@@ -5078,6 +5987,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="pstorage\pstorage.h" version="4.0.0-2.alpha">
@@ -5088,6 +5998,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="pstorage\pstorage_nosd.c" version="4.0.0-2.alpha">
@@ -5104,6 +6015,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="uart\ws_uart.c" version="3.1.0">
@@ -5328,6 +6240,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="segger_rtt\SEGGER_RTT.h" version="1.2.1-2.alpha">
@@ -5338,6 +6251,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="segger_rtt\SEGGER_RTT_Conf.h" version="1.2.1-2.alpha">
@@ -5348,6 +6262,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="segger_rtt\SEGGER_RTT_printf.c" version="1.2.1-2.alpha">
@@ -5358,6 +6273,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="button\app_button.c" version="4.0.0-2.alpha">
@@ -5368,6 +6284,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="button\app_button.h" version="4.0.0-2.alpha">
@@ -5378,6 +6295,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="util\app_error.c" version="4.0.0-2.alpha">
@@ -5388,6 +6306,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="util\app_error.h" version="4.0.0-2.alpha">
@@ -5398,6 +6317,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="fifo\app_fifo.c" version="4.0.0-2.alpha">
@@ -5408,6 +6328,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="fifo\app_fifo.h" version="4.0.0-2.alpha">
@@ -5418,6 +6339,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="timer\app_timer.c" version="4.0.0-2.alpha">
@@ -5428,6 +6350,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="timer\app_timer.h" version="4.0.0-2.alpha">
@@ -5438,6 +6361,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="timer\app_timer_freertos.c" version="4.0.0-2.alpha">
@@ -5454,6 +6378,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="trace\app_trace.h" version="4.0.0-2.alpha">
@@ -5464,6 +6389,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="twi\app_twi.c" version="4.0.0-2.alpha">
@@ -5474,6 +6400,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="twi\app_twi.h" version="4.0.0-2.alpha">
@@ -5484,6 +6411,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="util\app_util_platform.c" version="4.0.0-2.alpha">
@@ -5500,6 +6428,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="util\nrf_assert.h" version="4.0.0-2.alpha">
@@ -5510,6 +6439,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="util\nrf_log.c" version="4.0.0-2.alpha">
@@ -5520,6 +6450,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="header" name="util\nrf_log.h" version="4.0.0-2.alpha">
@@ -5530,6 +6461,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="uart\retarget.c" version="4.0.0-2.alpha">
@@ -5540,6 +6472,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
       <file attr="config" category="doc" name="doc\s130_nrf51822_1.0.0_licence_agreement.txt" version="0.0.0">
@@ -5609,10 +6542,14 @@
         <targetInfos/>
       </file>
       <file attr="config" category="doc" name="doc\s130_nrf51_2.0.0-7.alpha_licence_agreement.txt" version="2.0.0-7.alpha">
-        <instance index="0" removed="1">RTE\nRF_SoftDevice\nRF51822_xxAC\s130_nrf51_2.0.0-7.alpha_licence_agreement.txt</instance>
+        <instance index="0">RTE\nRF_SoftDevice\nRF51822_xxAC\s130_nrf51_2.0.0-7.alpha_licence_agreement.txt</instance>
         <component Cclass="nRF_SoftDevice" Cgroup="s130" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="2.0.0-7.alpha" condition="s130_default"/>
         <package name="nRF_SoftDevice_S130" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_SoftDevice_S130/" vendor="NordicSemiconductor" version="2.0.0-7.alpha"/>
-        <targetInfos/>
+        <targetInfos>
+          <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
+          <targetInfo name="nrf51822_xxac_s130"/>
+          <targetInfo name="s312_hex"/>
+        </targetInfos>
       </file>
       <file attr="config" category="other" name="hex\s130_nrf51_2.0.0-7.alpha_softdevice.hex" version="2.0.0-7.alpha">
         <instance index="0" removed="1">RTE\nRF_SoftDevice\nRF51822_xxAC\s130_nrf51_2.0.0-7.alpha_softdevice.hex</instance>
@@ -5630,6 +6567,16 @@
           <targetInfo name="nrf51822_xxac_s132"/>
         </targetInfos>
       </file>
+      <file attr="config" category="other" name="hex\s132_nrf52_2.0.0-7.alpha_softdevice.hex" version="2.0.0-7.alpha">
+        <instance index="0">RTE\nRF_SoftDevice\nRF51822_xxAC\s132_nrf52_2.0.0-7.alpha_softdevice.hex</instance>
+        <component Cclass="nRF_SoftDevice" Cgroup="s132_hex" Cvendor="NordicSemiconductor" Cversion="2.0.0-7.alpha" condition="s132_hex"/>
+        <package name="nRF_SoftDevice_S132" schemaVersion="1.2" supportContact="http://www.nordicsemi.com/About-us/Contact-us" url="http://developer.nordicsemi.com/nRF51_SDK/pieces/nRF_SoftDevice_S132/" vendor="NordicSemiconductor" version="2.0.0-7.alpha"/>
+        <targetInfos>
+          <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
+          <targetInfo name="nrf51822_xxac_s130"/>
+          <targetInfo name="nrf51822_xxac_s132"/>
+        </targetInfos>
+      </file>
       <file attr="config" category="source" name="softdevice_handler\softdevice_handler.c" version="2.0.0-2.alpha">
         <instance index="0">RTE\nRF_SoftDevice\nRF51822_xxAC\softdevice_handler.c</instance>
         <component Cclass="nRF_SoftDevice" Cgroup="Internal" Csub="sd_common" Cvariant="default" Cvendor="NordicSemiconductor" Cversion="2.0.0-2.alpha" condition="sd_common_default"/>
@@ -5638,6 +6585,7 @@
           <targetInfo name="flash_s130_nrf51_1.0.0_softdevice"/>
           <targetInfo name="nrf51822_xxac_s130"/>
           <targetInfo name="nrf51822_xxac_s132"/>
+          <targetInfo name="s312_hex"/>
         </targetInfos>
       </file>
     </files>

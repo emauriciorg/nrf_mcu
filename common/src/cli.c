@@ -67,13 +67,11 @@ unsigned int cli_get_hash (char *string, unsigned int prime_number){
 	return hash;
 }
 
-unsigned char cli_find_char(char *string)
-{
-	
-	char *pch;
+unsigned char cli_find_char(char *string){
 
+	char *pch;
 	pch=(char *)memchr(string,' ',strlen(string));
-	
+
 	if (pch)  return pch-string+1;
 	
 	pch =(char *)memchr(string,'\r',strlen(string));
@@ -108,6 +106,7 @@ unsigned int cli_get_command_id(char * string, unsigned char *index, unsigned in
 
 
 void cli_gpio_handle(unsigned int *command_id){
+
 	if (command_id[0]==cmd_gpio_hi){
 		nrf_gpio_pin_clear(command_id[1]);		
 
@@ -184,56 +183,44 @@ unsigned char cli_parse_debug_command(char *argv)
 	
 	switch (command_id[0]){
 
-	case cmd_reset: CLI_DBG("RESET device!\n");
-			//NRF_POWER->RESET = 1;	
-			//NVIC_SystemReset();
-			break;
-	case cmd_turn:			
-			command_id[1] = cli_get_command_id(argv, &index, PRIME_NUMBER_FOR_SHORT_HASH);
-			argv += index;
-			command_id[2] = cli_get_command_id(argv, &index, PRIME_NUMBER_FOR_SHORT_HASH);
-			cli_blink(&command_id[1]);
-			break;		
-	case cmd_gpio :
-			command_id[1]=cli_get_command_id(argv,&index,PRIME_NUMBER_FOR_SHORT_HASH);
-			argv+=index;
-			command_id[2] =(*argv)-'0';
-			if ((!command_id[2]) || (command_id[2]>20)) break;
-			cli_gpio_handle(&command_id[1]);
-			break;
-	
-	case cmd_cip:  
-			aes_encrypt_data( AES_SAMPLE_TEXT,
-					 27, cripted_data);
-			break;
-	case cmd_dcip: 	aes_decrypt_data(cripted_data,27,uncripted_data);
+	case cmd_reset: 	CLI_DBG("RESET device!\n");
+				//NRF_POWER->RESET = 1;	
+				//NVIC_SystemReset();
+				break;
+	case cmd_turn:		command_id[1] = cli_get_command_id(argv, &index, PRIME_NUMBER_FOR_SHORT_HASH);
+				argv += index;
+				command_id[2] = cli_get_command_id(argv, &index, PRIME_NUMBER_FOR_SHORT_HASH);
+				cli_blink(&command_id[1]);
+				break;		
+	case cmd_gpio :		command_id[1]=cli_get_command_id(argv,&index,PRIME_NUMBER_FOR_SHORT_HASH);
+				argv+=index;
+				command_id[2] =(*argv)-'0';
+				if ((!command_id[2]) || (command_id[2]>20)) break;
+				cli_gpio_handle(&command_id[1]);
+				break;
+	case cmd_cip:		aes_encrypt_data( AES_SAMPLE_TEXT,27, cripted_data);
+				break;
+	case cmd_dcip: 		aes_decrypt_data(cripted_data,27,uncripted_data);
+				break;
+	case cmd_help:		CLI_DBG("\n____________command list____________\n\n ");
+				CLI_DBG("turn\t\tgpio\t\tsend\t\tcip\n");
+				break;
+	case cmd_clear:		for(index=0;index<28;index++)CLI_DBG("\n\n");
+				break;
+	case cmd_ble:   	CLI_DBG("Sending to ble..'");
+				#ifndef SLAVE_MODE
+				ws_ble_send ((uint8_t *)argv, strlen(argv));
+				#endif
+				break; 	
+        case cmd_rgb:		command_id[0]=((*argv)-'0');
+        			argv+=2;
+      		        	CLI_DBG("[S%d][%s][%d] \n", command_id[0],argv, strlen(argv));
+        			cafe_load_payload(command_id[0], argv, strlen(argv) );
+        			break;
+        //case cmd_radiosw:	
+//        			break;
 
-
-			break;
-	case cmd_help:
-			
-			CLI_DBG("\n____________command list____________\n\n ");
-			CLI_DBG("turn\t\tgpio\t\tsend\t\tcip\n");
-			break;
-	case cmd_clear:
-			
-			for(index=0;index<28;index++)CLI_DBG("\n\n");
-			break;
-	case cmd_ble:   CLI_DBG("Sending to ble..'");
-			#ifndef SLAVE_MODE
-			ws_ble_send ((uint8_t *)argv, strlen(argv));
-			#endif
-			
-			break; 	
-        case cmd_rgb:	command_id[0]=((*argv)-'0');
-        		argv+=2;
-			CLI_DBG("\nloading paramter\n");
-      		        CLI_DBG("slave [%d] string [%s] len[%d] \n", command_id[0],argv, strlen(argv));
-        		cafe_load_payload(command_id[0], argv, strlen(argv) );
-
-        		break;
-
-		case cmd_write_twi:
+	case cmd_write_twi:
 				err_code= nrf_drv_twi_tx(&m_twi_global_accelerometer, 0x1DU, (uint8_t*)&regR, sizeof(regR),true);
         			CLI_DBG("[Error %x]\n",err_code);
         			break;
@@ -252,9 +239,9 @@ unsigned char cli_parse_debug_command(char *argv)
         			ws_accelerometer_read_reg();
 
         			break;
-	case cmd_cmdtest:		CLI_DBG("argv [%c] argv [%c] argv [%c]\n",argv [0],argv [1],argv [2]);
+	case cmd_cmdtest:	CLI_DBG("argv [%c] argv [%c] argv [%c]\n",argv [0],argv [1],argv [2]);
 				break;
-	case cmd_hex2dec:	CLI_DBG("result [%x] , \n", cli_ascii_streamhex_to_hex(argv, strlen(argv)-1) );
+	case cmd_hex2dec:	CLI_DBG("[%x], \n", cli_ascii_streamhex_to_hex(argv, strlen(argv)-1) );
 				
 				break;
 	case cmd_accinit:	

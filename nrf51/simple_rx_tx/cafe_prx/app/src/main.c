@@ -28,7 +28,6 @@
 #include "ws_aes.h"
 #include "ws_timer.h"
 
-extern uint8_t packet_recieved;
 static uint8_t  uncripted_data[40];
 
 
@@ -59,6 +58,18 @@ void print_received_data(void){
 	if (!memcmp(&uncripted_data[3],"REDOON",strlen("REDOON")))nrf_gpio_pin_clear(LED_RED);
 	if (!memcmp(&uncripted_data[3],"BLUEOFF",strlen("BLUEOFF")))nrf_gpio_pin_set(LED_BLUE);
 	if (!memcmp(&uncripted_data[3],"BLUEON",strlen("BLUEON")))nrf_gpio_pin_clear(LED_BLUE);
+	if (!memcmp(&uncripted_data[3],"BLUEON",strlen("BLUEON")))nrf_gpio_pin_clear(LED_BLUE);
+	
+
+	if (!memcmp(&uncripted_data[3],"TX",strlen("ACK"))){
+		WS_DBG("[Trasmitter mode set]\n");
+		cafe_radio_update_mode(I_AM_TRANSMITTER);
+	}
+	if (!memcmp(&uncripted_data[3],"RX",strlen("ACK"))){
+		WS_DBG("[reciever mode set]\n");
+		cafe_radio_update_mode(I_AM_RECIEVER);
+	}
+	
 }
 
 int main(void)
@@ -74,14 +85,9 @@ int main(void)
 	WS_DBG("M.RIOS \n[BLE SLAVE]\nWorkshop start!\n");	
 	while (true){
 		cli_execute_debug_command();
-		if (!packet_recieved){
-			//if (single_notification &timeout){
-			//printf("Connection loss\n");  
-			//nrf_gpio_pin_set(LED_GREEN);
-			//}
-		}
-		if ( packet_recieved){
-			packet_recieved=0;
+		
+		if ( cafe_packet_recieved()){
+			
 			print_received_data();
 			continue;		
 		}

@@ -141,9 +141,9 @@ uint32_t cafe_init(cafe_config_t *parameters)
 
 	update_radio_parameters();
 	initialize_fifos();	
-	//ppi_init();
+	ppi_init();
 
-//	NVIC_SetPriority(RADIO_IRQn, m_config_local.radio_irq_priority & 0x03);
+	NVIC_SetPriority(RADIO_IRQn, m_config_local.radio_irq_priority & 0x03);
 
 
 	return true;

@@ -136,7 +136,20 @@ typedef struct
     uint8_t                 radio_irq_priority;
 }cafe_config_t;
 
-#define cafe_DEFAULT_CONFIG_RX {.mode                  = I_AM_RECIEVER,                    \
+#define CAFE_DEFAULT_CONFIG {.mode                  = 0,                    \
+                             .event_handler         = 0,              \
+                             .rf_channel            = 5,                                \
+                             .payload_length        = CAFE_CORE_MAX_PAYLOAD_LENGTH,     \
+                             .rf_addr_length        = 5,                                \
+                             .bitrate               = cafe_2MBPS,               \
+                             .crc                   = cafe_CRC_16BIT,                   \
+                             .tx_output_power       = cafe_TX_POWER_0DBM,               \
+                             .tx_mode               = cafe_TXMODE_AUTO,                 \
+                             .radio_irq_priority    = 1}
+
+
+
+#define CAFE_DEFAULT_RX_CONFIG {.mode               = I_AM_RECIEVER,                    \
                              .event_handler         = cafe_start_rx_transaction,              \
                              .rf_channel            = 5,                                \
                              .payload_length        = CAFE_CORE_MAX_PAYLOAD_LENGTH,     \
@@ -148,8 +161,9 @@ typedef struct
                              .radio_irq_priority    = 1}
 
 
+
 // see to nRF24L default parameters 
-#define cafe_DEFAULT_CONFIG_TX {.mode                  = I_AM_TRANSMITTER,                    \
+#define CAFE_DEFAULT_TX_CONFIG {.mode               = I_AM_TRANSMITTER,                    \
                              .event_handler         = cafe_start_tx_transaction,                                \
                              .rf_channel            = 5,                                \
                              .payload_length        = CAFE_CORE_MAX_PAYLOAD_LENGTH,     \
@@ -160,8 +174,6 @@ typedef struct
                              .tx_mode               = cafe_TXMODE_AUTO,                 \
                              .radio_irq_priority    = 1}
 	
-
-
 
 typedef struct
 {

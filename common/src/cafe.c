@@ -5,6 +5,8 @@
 #include "ws_aes.h"
 #include "bbn_board.h"
 
+#define CAFE_DBG(...)	printf(__VA_ARGS__);
+
 // Constant parameters
 #define RX_WAIT_FOR_ACK_TIMEOUT_US_2MBPS   48   // Smallest reliable value - 43
 #define RX_WAIT_FOR_ACK_TIMEOUT_US_1MBPS   64   // Smallest reliable value - 59
@@ -32,14 +34,15 @@
 
 
 int8_t g_rssi  		  =0;
-char   packet_recieved  =0;
+static char   packet_recieved  = 0;
 unsigned int   slave_RGB_value[5];
+
+static cafe_config_t            m_config_local=CAFE_DEFAULT_CONFIG;
 
 static cafe_payload_t		rx_payload;
 static cafe_payload_t		tx_payload;
 
 static cafe_event_handler_t     m_event_handler;
-static cafe_config_t            m_config_local;
 
 static  uint8_t                 m_rx_payload_buffer[CAFE_CORE_MAX_PAYLOAD_LENGTH + 2];
 static  uint8_t                 m_tx_payload_buffer[CAFE_CORE_MAX_PAYLOAD_LENGTH + 10];
@@ -63,8 +66,8 @@ char cafe_packet_recieved(void){
 void cafe_load_payload(unsigned char slave_id, char *data,unsigned char len){
 
 	if (tx_payload.pending) return;
-	tx_payload.length  = len;
 	
+	tx_payload.length  = len;
 
 	if (slave_id>MAX_SLAVES_AVAILABLE)
 		tx_payload.slave_id=0;
@@ -72,9 +75,10 @@ void cafe_load_payload(unsigned char slave_id, char *data,unsigned char len){
 		tx_payload.slave_id = slave_id;
 	memcpy(tx_payload.data,data,len);
 
-	printf("\nloaded\n" );
 	tx_payload.pending =  1;
 
+	cafe_start_tx_transaction();
+	
 }
 
 
@@ -92,9 +96,7 @@ uint32_t cafe_get_clear_interrupts(uint32_t *interrupts){
 void cafe_start_rx_transaction(void){
 
 	static uint32_t rf_interrupts;
-	
-	
-
+	CAFE_DBG("reception!");	
 	NRF_RADIO->SHORTS                = RADIO_SHORTS_COMMON;
 	
 	update_payload_format(m_config_local.payload_length);
@@ -106,14 +108,14 @@ void cafe_start_rx_transaction(void){
 	while(NRF_RADIO->EVENTS_DISABLED == 0);
 	
 	NRF_RADIO->EVENTS_DISABLED       = 0;
-	NRF_RADIO->SHORTS                = RADIO_SHORTS_COMMON | RADIO_SHORTS_DISABLED_TXEN_Msk;
+	NRF_RADIO->SHORTS                = RADIO_SHORTS_COMMON | 
+	RADIO_SHORTS_DISABLED_RXEN_Msk;
 	NRF_RADIO->TASKS_RXEN            = 1;
 	
 	recieved_counter++;
 	rx_fifo_push_rfbuf( NRF_RADIO->RXMATCH );
 	m_interrupt_flags   |= cafe_INT_RX_DR_MSK;
 	
-
 	cafe_get_clear_interrupts(&rf_interrupts);
 
 	
@@ -127,8 +129,9 @@ void cafe_start_rx_transaction(void){
 	}
 #endif
 	if (rf_interrupts & cafe_INT_RX_DR_MSK){
-		cafe_read_rx_payload(&rx_payload);
-		packet_recieved=1;
+	//	cafe_read_rx_payload(&rx_payload);
+		packet_recieved= true;
+	
 	}
 }
 
@@ -162,49 +165,17 @@ static void update_payload_format(uint32_t payload_length)
 }
 
 
-
-
-
-void on_radio_disabled(void)
-{
-        //	if (!NRF_RADIO->CRCSTATUS) return;
-	NRF_RADIO->SHORTS                = RADIO_SHORTS_COMMON;
-	
-	update_payload_format(m_config_local.payload_length);
-	
-	NRF_RADIO->PACKETPTR             = (uint32_t) m_rx_payload_buffer;
-	NRF_RADIO->EVENTS_DISABLED       = 0;
-	NRF_RADIO->TASKS_DISABLE         = 1;
-
-	while(NRF_RADIO->EVENTS_DISABLED == 0);
-	
-	NRF_RADIO->EVENTS_DISABLED       = 0;
-	NRF_RADIO->SHORTS                = RADIO_SHORTS_COMMON | RADIO_SHORTS_DISABLED_TXEN_Msk;
-	NRF_RADIO->TASKS_RXEN            = 1;
-	
-	recieved_counter++;
-	rx_fifo_push_rfbuf( NRF_RADIO->RXMATCH );
-	m_interrupt_flags   |= cafe_INT_RX_DR_MSK;
-	if (m_event_handler != 0) m_event_handler();
-	 
-}
-
-
-
-
-
 static void update_radio_parameters()
 {
 
-	                                                                // TX power
-	NRF_RADIO->TXPOWER       = m_config_local.tx_output_power   << RADIO_TXPOWER_TXPOWER_Pos;
-
-	                                                                // RF bitrate
-	NRF_RADIO->MODE          = m_config_local.bitrate           << RADIO_MODE_MODE_Pos;
-	                                                                // CRC configuration    
-	NRF_RADIO->CRCCNF        = m_config_local.crc               << RADIO_CRCCNF_LEN_Pos;
-	NRF_RADIO->CRCINIT       = 0xFFFFUL;                            // Initial value
-	NRF_RADIO->CRCPOLY       = 0x11021UL;                           // CRC poly: x^16+x^12^x^5+1
+	// TX power
+	NRF_RADIO->TXPOWER = m_config_local.tx_output_power << RADIO_TXPOWER_TXPOWER_Pos;
+	                                                          // RF bitrate
+	NRF_RADIO->MODE    = m_config_local.bitrate         << RADIO_MODE_MODE_Pos;
+	                                                          // CRC configuration    
+	NRF_RADIO->CRCCNF  = m_config_local.crc             << RADIO_CRCCNF_LEN_Pos;
+	NRF_RADIO->CRCINIT = 0xFFFFUL;                            // Initial value
+	NRF_RADIO->CRCPOLY = 0x11021UL;                           // CRC poly: x^16+x^12^x^5+1
 	
 	                                                                // Packet format
 	update_payload_format(m_config_local.payload_length);
@@ -245,18 +216,38 @@ uint32_t cafe_init(cafe_config_t *parameters)
 
 
 
-uint32_t cafe_disable(void)
-{
-	NRF_PPI->CHENCLR = (1 << CAFE_PPI_TIMER_START) | (1 << CAFE_PPI_TIMER_STOP) | (1 << CAFE_PPI_RX_TIMEOUT) | (1 << CAFE_PPI_TX_START);
-	return true;
+
+
+void cafe_tx_setup(void){
+
+
+	
+	NRF_RADIO->SHORTS   = RADIO_SHORTS_COMMON;
+	NRF_RADIO->INTENSET = RADIO_INTENSET_DISABLED_Msk;
+
+	
+	if (tx_payload.slave_id==MAX_SLAVES_AVAILABLE) 	tx_payload.slave_id=1;
+	
+
+	NRF_RADIO->TXADDRESS   = tx_payload.slave_id++;
+	NRF_RADIO->RXADDRESSES = 1 << 0;                                //current_payload->pipe;
+	NRF_RADIO->FREQUENCY   = m_config_local.rf_channel;             //can be addressed individually
+	
+	NRF_RADIO->PACKETPTR = (uint32_t)&m_tx_payload_buffer[0];//dinamyc index instead
+  	
+	NVIC_ClearPendingIRQ(RADIO_IRQn);
+	NVIC_EnableIRQ(RADIO_IRQn);
+
+	NRF_RADIO->EVENTS_ADDRESS = NRF_RADIO->EVENTS_PAYLOAD = NRF_RADIO->EVENTS_DISABLED = 0;
+	
+//	NRF_RADIO->TASKS_TXEN  = 1;
 }
-
-
 
 void cafe_start_tx_transaction(void)
 {
 
-	if(!tx_payload.pending) return;
+
+	if(tx_payload.pending){
 #ifdef NO_CYPHER
 	memcpy( &m_tx_payload_buffer[2], tx_payload.data, tx_payload.length );	
 	
@@ -267,8 +258,8 @@ void cafe_start_tx_transaction(void)
 	m_tx_payload_buffer[1]=1;
 
 	NRF_RADIO->SHORTS   = RADIO_SHORTS_COMMON;
-	NRF_RADIO->INTENSET = RADIO_INTENSET_END_Msk;
-	
+	NRF_RADIO->INTENSET = RADIO_INTENSET_DISABLED_Msk;
+
 	
 	if (tx_payload.slave_id==MAX_SLAVES_AVAILABLE) 	tx_payload.slave_id=1;
 	
@@ -287,6 +278,9 @@ void cafe_start_tx_transaction(void)
 	NRF_RADIO->EVENTS_ADDRESS = NRF_RADIO->EVENTS_PAYLOAD = NRF_RADIO->EVENTS_DISABLED = 0;
 	
 	NRF_RADIO->TASKS_TXEN  = 1;
+	}
+
+	//if()
 }
 
 
@@ -300,8 +294,7 @@ uint32_t cafe_flush_tx(void)
 
 
 
-void cafe_event_handler()
-{
+void cafe_event_handler(){
     static uint32_t rf_interrupts;    
     cafe_get_clear_interrupts(&rf_interrupts);
     
@@ -318,7 +311,6 @@ void cafe_event_handler()
 
 
 
-
 uint32_t cafe_start_rx(void)
 {
 	NRF_RADIO->INTENCLR        = 0xFFFFFFFF;
@@ -326,7 +318,7 @@ uint32_t cafe_start_rx(void)
 	NRF_RADIO->SHORTS          = RADIO_SHORTS_COMMON | RADIO_SHORTS_DISABLED_TXEN_Msk;
 	NRF_RADIO->INTENSET        = RADIO_INTENSET_DISABLED_Msk;
 
-	NRF_RADIO->RXADDRESSES     =  0X02;                             //<--set to dynamic or protocol based address
+	NRF_RADIO->RXADDRESSES     =  0X02; //<--set to dynamic or protocol based address
 	NRF_RADIO->FREQUENCY       =  m_config_local.rf_channel;
 	NRF_RADIO->PACKETPTR       =  (uint32_t) m_rx_payload_buffer;
 
@@ -335,68 +327,83 @@ uint32_t cafe_start_rx(void)
 
 	NRF_RADIO->EVENTS_ADDRESS  = NRF_RADIO->EVENTS_PAYLOAD = NRF_RADIO->EVENTS_DISABLED = 0;
 	NRF_RADIO->TASKS_RXEN      = 1;
+	CAFE_DBG ("cafe start rx!\n");
 	return true;
 }
-
 
 
 	
 void cafe_start_radio(void){
 
 	nrf_st_address user_radio_addr;
-	const char pipe_addr[8]         ={ 0x60, SLAVE_addr, 0xF4, 0xAA, 0x0E,0x0F,0x10,0x11};
-	const char base_addr0[6]        ={ 0x34, 0x56, 0x78, 0x23};
-	const char base_addr1[6]        ={ 0x34, 0x56, 0x78, 0x9A};
-	
-	memcpy (user_radio_addr.logic_pipe , pipe_addr  , 8);
-	memcpy( user_radio_addr.base_addr0 , base_addr0 , 5);
-	memcpy( user_radio_addr.base_addr1 , base_addr1 , 5);
 
-#ifdef RADIO_ONLY_TRANSMITTER
+	const char pipe_addr[8]  = { 0x60, SLAVE_addr, 0xF4, 0xAA, 0x0E,0x0F,0x10,0x11};
+	const char base_addr0[6] = { 0x34, 0x56, 0x78, 0x23};
+	const char base_addr1[6] = { 0x34, 0x56, 0x78, 0x9A};
 	
-		//tx_payload.pending=0;
-		cafe_config_t cafe_config  = cafe_DEFAULT_CONFIG_TX;
-		cafe_config.event_handler  = cafe_event_handler;
-	    	cafe_init(&cafe_config);
-	    	cafe_update_nrf_radio_address(user_radio_addr);
-	
-	    	if ( tx_payload.pending){
-			cafe_start_tx_transaction();	
-		}
-          return;
-	
-#else
-   	
-   	cafe_config_t cafe_config       = cafe_DEFAULT_CONFIG_RX;
 	memcpy (user_radio_addr.logic_pipe , pipe_addr  , 8);
 	memcpy( user_radio_addr.base_addr0 , base_addr0 , 5);
 	memcpy( user_radio_addr.base_addr1 , base_addr1 , 5);
 	cafe_update_nrf_radio_address(user_radio_addr);	
-	cafe_init( &cafe_config );
-	cafe_start_rx();
+	
+#ifdef RADIO_ONLY_TRANSMITTER	
+	cafe_radio_update_mode(I_AM_TRANSMITTER);
+#else
+	cafe_radio_update_mode(I_AM_RECIEVER );
 #endif    	
- }
 
+	
+}
 
-void cafe_start_radio_state_handle(cafe_payload_t *current_payload){
-	if(current_payload->noack){
-		current_payload->pending = true;
-		//update reception address!
-		cafe_start_rx();
+void cafe_radio_update_mode(char radio_mode){
+
+	if(radio_mode == I_AM_RECIEVER){
+		m_config_local.event_handler = cafe_start_rx_transaction,
+		m_config_local.mode          = I_AM_RECIEVER;
+	}
+	else{
+		tx_payload.pending=0;
+		m_config_local.event_handler = cafe_start_tx_transaction,
+		m_config_local.mode          = I_AM_TRANSMITTER;
 	}
 
+
+	cafe_init( &m_config_local );
+	
+	if (m_config_local.mode == I_AM_TRANSMITTER){
+		CAFE_DBG("Transmission mode set!\n");
+
+    		cafe_tx_setup();
+    		//if(tx_payload.pending){
+ 	   		cafe_start_tx_transaction();	
+    			CAFE_DBG("sending Payload!\n");
+    		//}
+	}
+    	else{
+    		cafe_start_rx();
+    	}
 }
 
 void cafe_update_nrf_radio_address(nrf_st_address radio_addr){
 	
-	NRF_RADIO->PREFIX0 = bytewise_bit_swap(   radio_addr.logic_pipe[3]  <<  24  |   radio_addr.logic_pipe[2]  <<  16 |   radio_addr.logic_pipe[1]  << 8   |  radio_addr.logic_pipe[0]);
-	NRF_RADIO->PREFIX1 = bytewise_bit_swap(   radio_addr.logic_pipe[7]  <<  24  |   radio_addr.logic_pipe[6]  <<  16 |   radio_addr.logic_pipe[5]  << 8   |  radio_addr.logic_pipe[4]);
-	NRF_RADIO->BASE0   = bytewise_bit_swap(   radio_addr.base_addr0[0] << 24 |  radio_addr.base_addr0[1] << 16  |  radio_addr.base_addr0[2] << 8 | radio_addr.base_addr0[3]);
-	NRF_RADIO->BASE1   = bytewise_bit_swap(   radio_addr.base_addr1[0] << 24 |  radio_addr.base_addr1[1] << 16  |  radio_addr.base_addr1[2] << 8 | radio_addr.base_addr1[3]);
+	NRF_RADIO->PREFIX0 = bytewise_bit_swap( radio_addr.logic_pipe[3]  << 24 |   
+						radio_addr.logic_pipe[2]  << 16 |
+						radio_addr.logic_pipe[1]  <<  8 |
+						radio_addr.logic_pipe[0]);
+
+	NRF_RADIO->PREFIX1 = bytewise_bit_swap( radio_addr.logic_pipe[7]  << 24 |
+						radio_addr.logic_pipe[6]  << 16 |
+						radio_addr.logic_pipe[5]  <<  8 |  
+						radio_addr.logic_pipe[4]);
+	NRF_RADIO->BASE0   = bytewise_bit_swap( radio_addr.base_addr0[0] << 24 |
+						radio_addr.base_addr0[1] << 16 |
+						radio_addr.base_addr0[2] << 8  |
+						radio_addr.base_addr0[3]);
+	NRF_RADIO->BASE1   = bytewise_bit_swap( radio_addr.base_addr1[0] << 24 |
+						radio_addr.base_addr1[1] << 16 |
+						radio_addr.base_addr1[2] << 8  |
+						radio_addr.base_addr1[3]);
 }
-
-
-
 
 
 char cafe_get_rx_payload(char *out_buffer){
@@ -406,66 +413,57 @@ char cafe_get_rx_payload(char *out_buffer){
 
 
 
-#if 0
-uint32_t cafe_disable(void)
-{
-	NRF_PPI->CHENCLR = (1 << cafe_PPI_TIMER_START) 
-			 | (1 << cafe_PPI_TIMER_STOP) 
-			 | (1 << cafe_PPI_RX_TIMEOUT) 
-			 | (1 << cafe_PPI_TX_START);
+#ifdef DISABLE_CAFE_ON_RUN
+uint32_t cafe_disable(void){
+
+	NRF_PPI->CHENCLR =	(1 << cafe_PPI_TIMER_START)|
+				(1 << cafe_PPI_TIMER_STOP) |
+				(1 << cafe_PPI_RX_TIMEOUT) |
+				(1 << cafe_PPI_TX_START);
 	return true;
 }
 #endif
 
 
-                                                                        //CUSTOM PROTOCOL ASSIGNATION : cpy recieved data to user structure
-	
-
-
-uint32_t cafe_read_rx_payload(cafe_payload_t *payload)
-{
+uint32_t cafe_read_rx_payload(cafe_payload_t *payload){	
 	DISABLE_RF_IRQ;
 	ENABLE_RF_IRQ;
 	return true;
 }
 
 
-uint32_t cafe_set_rf_channel(uint32_t channel)
-{
+uint32_t cafe_set_rf_channel(uint32_t channel){
+
 	if (channel > 125) return false;
 	m_config_local.rf_channel = channel;
 	return true;
 }
 
-void RADIO_IRQHandler()
-{
+void RADIO_IRQHandler(){
+	CAFE_DBG("RADIO IRQ\n");
 	if (NRF_RADIO->EVENTS_READY && (NRF_RADIO->INTENSET & RADIO_INTENSET_READY_Msk)){
-		NRF_RADIO->EVENTS_READY = 0;
 
+		NRF_RADIO->EVENTS_READY = 0;
 	}
 
 	if (NRF_RADIO->EVENTS_END && (NRF_RADIO->INTENSET & RADIO_INTENSET_END_Msk)){
-		NRF_RADIO->EVENTS_END = 0;
 		
+		NRF_RADIO->EVENTS_END = 0;
 	      // Call the correct on_radio_end function, depending on the current protocol state
-	      //	on_radio_end();
+	      // on_radio_end();
 		
 	}
 
-	if (NRF_RADIO->EVENTS_DISABLED && (NRF_RADIO->INTENSET & RADIO_INTENSET_DISABLED_Msk)){
+	if (NRF_RADIO->EVENTS_DISABLED &&(NRF_RADIO->INTENSET & RADIO_INTENSET_DISABLED_Msk)){
+		
 		NRF_RADIO->EVENTS_DISABLED = 0; 
-
-//		if (m_config_local.mode == I_AM_TRANSMITTER){
-			m_interrupt_flags |= 0X01;
-			if (m_event_handler){
-				m_event_handler();			
-			}
-//			return;
-//		}
+		m_interrupt_flags         |= (0X01);
 		
-		//on_radio_disabled();
+		if (m_event_handler){
+			CAFE_DBG("irq sending! ");
+			m_event_handler();			
+		}
 		nrf_gpio_pin_toggle(LED_GREEN);
-		
 	}
 
 
