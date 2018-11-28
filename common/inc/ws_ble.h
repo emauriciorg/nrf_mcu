@@ -10,7 +10,6 @@
 #include "app_timer.h"
 #include "ws_ble_services.h"
 
-#define WS_BLE_ENABLED
 
 #ifdef WS_BLE_ENABLED	
 	#define WS_BLE_INIT() ws_ble_init_modules();

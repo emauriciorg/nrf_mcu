@@ -3,8 +3,8 @@
  * Auto generated Run-Time-Environment Component Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'cafe_prx' 
- * Target:  'nrf51822_xxac_s130' 
+ * Project: 'ts_cafe' 
+ * Target:  's312_hex' 
  */
 
 #ifndef RTE_COMPONENTS_H
@@ -19,7 +19,8 @@
 #define GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS
 #define GPIOTE_ENABLED
   #define GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS
-#define S132
+#define NRF_LOG_USES_UART=1
+#define S130
 #define SOFTDEVICE_PRESENT
 #define SWI_DISABLE0
 #define UART0_ENABLED

@@ -10,18 +10,18 @@
 
 #include "nrf_gpio.h"
 
-#define S3
+#define SLAVE3
 
-#ifdef S1
+#ifdef SLAVE1
 	#define SLAVE_addr 0xF4 
 	#define SLAVE_name "S1"
 #endif
 
-#ifdef S2
+#ifdef SLAVE2
 	#define SLAVE_addr 0xAA
 	#define SLAVE_name "S2"
 #endif
-#ifdef S3
+#ifdef SLAVE3
 	#define SLAVE_addr 0x12
 	#define SLAVE_name "S3"
 #endif

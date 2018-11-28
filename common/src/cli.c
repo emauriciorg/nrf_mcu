@@ -12,7 +12,9 @@
 #include "command_list.h"
 #include "bbn_board.h"
 #include "ws_aes.h"
+#ifdef  WS_BLE_ENABLED
 #include "ws_ble.h"
+#endif
 #include "cafe.h"
 #include "ws_adc.h"
 #include "nrf_gpio.h"

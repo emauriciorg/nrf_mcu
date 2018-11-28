@@ -26,9 +26,9 @@
 
 
 
-
+/**< 0xDEADBEEF Value used as error code on stack dump, can be used to identify stack location on stack unwind. */
 void assert_nrf_callback(uint16_t line_num, const uint8_t * p_file_name){
-	app_error_handler(0xDEADBEEF, line_num, p_file_name); //0xDEADBEEF         /**< Value used as error code on stack dump, can be used to identify stack location on stack unwind. */
+	app_error_handler(0xDEADBEEF, line_num, p_file_name); 
 }
 
 /*TO DO define a function to return the recieved packet*/
@@ -42,22 +42,22 @@ void print_recieved_radio_data(void){
 
 int main(void){	
 	
-	ws_timer_init();
-	board_leds_init();
-	//ws_adc_setup();
+	ws_app_timer_init();
+	ws_leds_init();
 	ws_uart_init ();
+	//ws_adc_setup();
 	//ws_accelerometer_setup();
 
 	ws_ble_stack_init();
 
 	WS_BLE_INIT();
 	WS_TIMESLOT_INIT();
-	WS_DBG("M.RIOS \n[BLE MASTER]]\nworkshop start!\n");	
+	WS_DBG("M.RIOS \n[BLE MASTER]\nWorkshop start!\n");	
 
-	for (;;){	
-		nrf_delay_ms(250);
-		nrf_gpio_pin_toggle(LED_RED);
+	while (true){	
 		cli_execute_debug_command();
+		nrf_delay_ms(250);
+		nrf_gpio_pin_toggle(LED_RED);	
 #ifdef TRANSCEIVER_MODE
 		if ( cafe_packet_recieved() ){
 			print_recieved_radio_data();

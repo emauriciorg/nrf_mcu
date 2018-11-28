@@ -1,6 +1,7 @@
 #include "ws_softdevice.h"
 #include "pstorage.h"
 #include "softdevice_handler.h"
+
 #ifdef TIMESLOT_ENABLE
 #include "ws_timeslot.h"
 #endif
@@ -22,7 +23,10 @@ void sys_evt_dispatch(uint32_t sys_evt)
 {
 	pstorage_sys_event_handler(sys_evt);
 	ble_advertising_on_sys_evt(sys_evt);
+	
+	#ifdef TIMESLOT_ENABLE
 	nrf_evt_signal_handler(sys_evt); // check this funtion!
+	#endif
 }
 
  void ws_ble_stack_init(void)

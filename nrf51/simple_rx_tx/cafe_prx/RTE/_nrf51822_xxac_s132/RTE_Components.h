@@ -4,7 +4,7 @@
  *      *** Do not modify ! ***
  *
  * Project: 'cafe_prx' 
- * Target:  'nrf51822_xxac_s130' 
+ * Target:  'nrf51822_xxac_s132' 
  */
 
 #ifndef RTE_COMPONENTS_H
@@ -19,7 +19,7 @@
 #define GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS
 #define GPIOTE_ENABLED
   #define GPIOTE_CONFIG_NUM_OF_LOW_POWER_EVENTS
-#define S132
+#define S130
 #define SOFTDEVICE_PRESENT
 #define SWI_DISABLE0
 #define UART0_ENABLED

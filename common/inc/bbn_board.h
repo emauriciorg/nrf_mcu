@@ -1,6 +1,11 @@
 #ifndef _BBN_GPIO_H_
 #define _BBN_GPIO_H_
 
+#include <stdint.h>
+
+#define UART_TX
+#define UART_RX
+
 #ifdef BBN_BOARD_PINS
 	#define MOTOR_PIN       0
 	#define LED_RED		8
@@ -20,9 +25,11 @@
 	#define LED_BLUE	19
 #endif
 
-#define UART_TX
-#define UART_RX
-
-void board_leds_init(void);
+void ws_leds_init(void);
+void ws_clock_setup(void);
+void ws_led_off(uint32_t led_id);
+void ws_led_on(uint32_t led_id);
+void ws_led_toggle(uint32_t led_id);
+void ws_lfclk_setup_init(void);	
 
 #endif
