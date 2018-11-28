@@ -33,7 +33,7 @@ static uint8_t  uncripted_data[40];
 
 
 
-#define SHOW_AES_PACKET	
+//#define SHOW_AES_PACKET	
 void print_received_data(void){
 
 	char encripted_message[CAFE_CORE_MAX_PAYLOAD_LENGTH+5];

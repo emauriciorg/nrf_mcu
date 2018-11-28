@@ -10,7 +10,7 @@
 
 #include "nrf_gpio.h"
 
-#define SLAVE3
+
 
 #ifdef SLAVE1
 	#define SLAVE_addr 0xF4 
@@ -137,7 +137,7 @@ typedef struct
 }cafe_config_t;
 
 #define cafe_DEFAULT_CONFIG_RX {.mode                  = I_AM_RECIEVER,                    \
-                             .event_handler         = cafe_event_handler_rx,                                \
+                             .event_handler         = cafe_start_rx_transaction,              \
                              .rf_channel            = 5,                                \
                              .payload_length        = CAFE_CORE_MAX_PAYLOAD_LENGTH,     \
                              .rf_addr_length        = 5,                                \
@@ -150,7 +150,7 @@ typedef struct
 
 // see to nRF24L default parameters 
 #define cafe_DEFAULT_CONFIG_TX {.mode                  = I_AM_TRANSMITTER,                    \
-                             .event_handler         = 0,                                \
+                             .event_handler         = cafe_start_tx_transaction,                                \
                              .rf_channel            = 5,                                \
                              .payload_length        = CAFE_CORE_MAX_PAYLOAD_LENGTH,     \
                              .rf_addr_length        = 5,                                \
