@@ -29,6 +29,11 @@
 
 
 // Hard coded parameters - change if necessary
+#define     USER_PACKET_OVERHEAD    3
+#define     BLE_PACKET_OVERHEAD     2
+
+#define     CAFE_CORE_MAX_OVERHEAD_LENGTH   (BLE_PACKET_OVERHEAD+USER_PACKET_OVERHEAD) 
+
 #define     CAFE_CORE_MAX_PAYLOAD_LENGTH    32
 #define     cafe_CORE_RX_FIFO_SIZE          8
 #define     cafe_CORE_TX_FIFO_SIZE          8
@@ -175,16 +180,31 @@ typedef struct
                              .radio_irq_priority    = 1}
 	
 
-typedef struct
-{
-    uint8_t length;
+
+typedef union{
+	struct{
+		uint8_t length;
+		uint8_t S1;
+		uint8_t ack;
+		uint8_t crc;
+		uint8_t address;
+		uint8_t payload[CAFE_CORE_MAX_PAYLOAD_LENGTH];
+	}formated;
+	char raw[CAFE_CORE_MAX_PAYLOAD_LENGTH +CAFE_CORE_MAX_OVERHEAD_LENGTH];
+}cafe_packet_t;
+
+typedef struct{
     uint8_t pipe;
     int8_t  rssi;
-    uint8_t noack;
     uint8_t pending;
-    uint8_t *pdata[5];
-    uint8_t data[CAFE_CORE_MAX_PAYLOAD_LENGTH];
+    uint8_t nack;
+    cafe_packet_t  data;
 }cafe_payload_t;
+
+/*
+Overhead			Payload		Security Check
+Address	ACK	Seq Number	Command	Arguments	CRC
+*/
 
 
 typedef struct

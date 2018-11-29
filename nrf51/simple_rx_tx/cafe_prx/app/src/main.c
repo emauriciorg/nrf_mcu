@@ -39,9 +39,14 @@ void print_received_data(void){
 	memset(uncripted_data, 0, sizeof(uncripted_data));
 
 	cafe_get_rx_payload(encripted_message);
+//	WS_DBG("[rssi -%d]  ",cafe_get_rssi());
 
-	WS_DBG("Parameters[rssi -%d\n ",cafe_get_rssi());
-	WS_DBG("[Timer %d]\n",ws_get_timer1_ticks());	
+	
+//	WS_DBG("[Timer %d]\n",ws_get_timer1_ticks());	
+	//WS_DBG("[%s]\n",encripted_message);
+
+	return;
+
 
 #ifdef SHOW_AES_PACKET
 	WS_DBG("[");
@@ -51,6 +56,7 @@ void print_received_data(void){
 	WS_DBG("]\n");
 #endif
 
+	
 	aes_decrypt_data( (uint8_t *)&encripted_message[2],encripted_message[2],uncripted_data);
 	WS_DBG("[%s]\n",(&uncripted_data[3]));
 	/*simple parser to reflect packet reception on the board*/
@@ -80,13 +86,13 @@ int main(void)
 
 	//ws_timer1_setup();
 
-	cafe_start_radio();
+	//cafe_start_radio();
 
 	WS_DBG("M.RIOS \n[BLE SLAVE]\nWorkshop start!\n");	
 	while (true){
 		cli_execute_debug_command();
 		
-		if ( cafe_packet_recieved()){
+		if ( cafe_pending()){
 			
 			print_received_data();
 			continue;		

@@ -89,7 +89,7 @@ unsigned int cli_get_command_id(char * string, unsigned char *index, unsigned in
 	
 	char tmp_command[20];
 	memset(tmp_command,0,20);
-        
+	
 	*index= cli_find_char(string);
 	
 	if (!(*index)){
@@ -98,8 +98,8 @@ unsigned int cli_get_command_id(char * string, unsigned char *index, unsigned in
 	}
 
 	memcpy(tmp_command, string, (*index)-1 );
- 	
- 	return  cli_get_hash(tmp_command, prime_number);
+	
+	return  cli_get_hash(tmp_command, prime_number);
 
 }
 
@@ -212,33 +212,37 @@ unsigned char cli_parse_debug_command(char *argv)
 				ws_ble_send ((uint8_t *)argv, strlen(argv));
 				#endif
 				break; 	
-        case cmd_rgb:		command_id[0]=((*argv)-'0');
-        			argv+=2;
-      		        	CLI_DBG("[S%d][%s][%d] \n", command_id[0],argv, strlen(argv));
-        			cafe_load_payload(command_id[0], argv, strlen(argv) );
-        			break;
-        //case cmd_radiosw:	
-//        			break;
+	case cmd_rgb:		command_id[0]=((*argv)-'0');
+				argv+=2;
+//				CLI_DBG("[S%d][%s][%d] \n", command_id[0],argv, strlen(argv));
+				cafe_load_payload(command_id[0], argv, strlen(argv) );
+				break;
+	case cmd_txm:		cafe_radio_update_mode(I_AM_TRANSMITTER);
+
+				break;
+	case cmd_rxm:		cafe_radio_update_mode(I_AM_RECIEVER );
+	
+				break;
 
 	case cmd_write_twi:
 				err_code= nrf_drv_twi_tx(&m_twi_global_accelerometer, 0x1DU, (uint8_t*)&regR, sizeof(regR),true);
-        			CLI_DBG("[Error %x]\n",err_code);
-        			break;
-        case cmd_read_twi:
-       				err_code= nrf_drv_twi_rx(&m_twi_global_accelerometer, 0x0D, (uint8_t*)&regR, sizeof(regR));
-        			CLI_DBG(" [Error %x ]\n",err_code);
+				CLI_DBG("[Error %x]\n",err_code);
+				break;
+	case cmd_read_twi:
+				err_code= nrf_drv_twi_rx(&m_twi_global_accelerometer, 0x0D, (uint8_t*)&regR, sizeof(regR));
+				CLI_DBG(" [Error %x ]\n",err_code);
 
-        			break;
-        case cmd_twi_read_saved_buffer: 
-        			CLI_DBG("twi [%x]", regR);
+				break;
+	case cmd_twi_read_saved_buffer: 
+				CLI_DBG("twi [%x]", regR);
 
-        			break;
-        case cmd_twiapp:
-         			ws_accelerometer_load_addr(cli_ascii_streamhex_to_hex(argv, strlen(argv)-1));
+				break;
+	case cmd_twiapp:
+				ws_accelerometer_load_addr(cli_ascii_streamhex_to_hex(argv, strlen(argv)-1));
 
-        			ws_accelerometer_read_reg();
+				ws_accelerometer_read_reg();
 
-        			break;
+				break;
 	case cmd_cmdtest:	CLI_DBG("argv [%c] argv [%c] argv [%c]\n",argv [0],argv [1],argv [2]);
 				break;
 	case cmd_hex2dec:	CLI_DBG("[%x], \n", cli_ascii_streamhex_to_hex(argv, strlen(argv)-1) );
