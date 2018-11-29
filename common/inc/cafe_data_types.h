@@ -182,7 +182,6 @@ typedef struct
     int8_t  rssi;
     uint8_t noack;
     uint8_t pending;
-    uint8_t slave_id;
     uint8_t *pdata[5];
     uint8_t data[CAFE_CORE_MAX_PAYLOAD_LENGTH];
 }cafe_payload_t;

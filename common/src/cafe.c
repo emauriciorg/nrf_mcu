@@ -42,7 +42,6 @@ static cafe_config_t            m_config_local=CAFE_DEFAULT_CONFIG;
 static cafe_payload_t		rx_payload;
 static cafe_payload_t		tx_payload;
 
-static cafe_event_handler_t     m_event_handler;
 
 static  uint8_t                 m_rx_payload_buffer[CAFE_CORE_MAX_PAYLOAD_LENGTH + 2];
 static  uint8_t                 m_tx_payload_buffer[CAFE_CORE_MAX_PAYLOAD_LENGTH + 10];
@@ -70,9 +69,9 @@ void cafe_load_payload(unsigned char slave_id, char *data,unsigned char len){
 	tx_payload.length  = len;
 
 	if (slave_id>MAX_SLAVES_AVAILABLE)
-		tx_payload.slave_id=0;
+		tx_payload.pipe =0;
 	else
-		tx_payload.slave_id = slave_id;
+		tx_payload.pipe = slave_id;
 	memcpy(tx_payload.data,data,len);
 
 	tx_payload.pending =  1;
@@ -203,7 +202,6 @@ static void update_radio_parameters()
 
 uint32_t cafe_init(cafe_config_t *parameters)
 {
-	m_event_handler = parameters->event_handler;
 	memcpy(&m_config_local, parameters, sizeof(cafe_config_t));
 
 	m_interrupt_flags    = 0;
@@ -225,11 +223,7 @@ void cafe_tx_setup(void){
 	NRF_RADIO->SHORTS   = RADIO_SHORTS_COMMON;
 	NRF_RADIO->INTENSET = RADIO_INTENSET_DISABLED_Msk;
 
-	
-	if (tx_payload.slave_id==MAX_SLAVES_AVAILABLE) 	tx_payload.slave_id=1;
-	
-
-	NRF_RADIO->TXADDRESS   = tx_payload.slave_id++;
+	NRF_RADIO->TXADDRESS   = tx_payload.pipe;
 	NRF_RADIO->RXADDRESSES = 1 << 0;                                //current_payload->pipe;
 	NRF_RADIO->FREQUENCY   = m_config_local.rf_channel;             //can be addressed individually
 	
@@ -261,10 +255,9 @@ void cafe_start_tx_transaction(void)
 	NRF_RADIO->INTENSET = RADIO_INTENSET_DISABLED_Msk;
 
 	
-	if (tx_payload.slave_id==MAX_SLAVES_AVAILABLE) 	tx_payload.slave_id=1;
 	
 
-	NRF_RADIO->TXADDRESS   = tx_payload.slave_id++;
+	NRF_RADIO->TXADDRESS   = tx_payload.pipe++;
 	NRF_RADIO->RXADDRESSES = 1 << 0;                                //current_payload->pipe;
 	NRF_RADIO->FREQUENCY   = m_config_local.rf_channel;             //can be addressed individually
 	
@@ -345,6 +338,8 @@ void cafe_start_radio(void){
 	memcpy( user_radio_addr.base_addr0 , base_addr0 , 5);
 	memcpy( user_radio_addr.base_addr1 , base_addr1 , 5);
 	cafe_update_nrf_radio_address(user_radio_addr);	
+
+//#define RADIO_ONLY_TRANSMITTER	
 	
 #ifdef RADIO_ONLY_TRANSMITTER	
 	cafe_radio_update_mode(I_AM_TRANSMITTER);
@@ -371,13 +366,12 @@ void cafe_radio_update_mode(char radio_mode){
 	cafe_init( &m_config_local );
 	
 	if (m_config_local.mode == I_AM_TRANSMITTER){
-		CAFE_DBG("Transmission mode set!\n");
-
+		
     		cafe_tx_setup();
-    		//if(tx_payload.pending){
- 	   		cafe_start_tx_transaction();	
-    			CAFE_DBG("sending Payload!\n");
-    		//}
+    		if(tx_payload.pending){
+			cafe_start_tx_transaction();	
+ 			CAFE_DBG("sending Payload!\n");
+    		}
 	}
     	else{
     		cafe_start_rx();
@@ -459,9 +453,9 @@ void RADIO_IRQHandler(){
 		NRF_RADIO->EVENTS_DISABLED = 0; 
 		m_interrupt_flags         |= (0X01);
 		
-		if (m_event_handler){
+		if (m_config_local.event_handler){
 			CAFE_DBG("irq sending! ");
-			m_event_handler();			
+			m_config_local.event_handler();			
 		}
 		nrf_gpio_pin_toggle(LED_GREEN);
 	}
