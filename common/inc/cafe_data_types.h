@@ -11,7 +11,7 @@
 #include "nrf_gpio.h"
 
 
-
+#define SLAVE_ADDR_INDEX 0X02
 #ifdef SLAVE1
 	#define SLAVE_addr 0xF4 
 	#define SLAVE_name "S1"
