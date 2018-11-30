@@ -222,33 +222,29 @@ uint32_t cafe_start_rx(void)
 	return true;
 }
 
-void cafe_radio_radio(void){
-	DISABLE_RF_IRQ;
-        NRF_RADIO->SHORTS = 0;
-        NRF_RADIO->INTENCLR = 0xFFFFFFFF;
-        NRF_RADIO->EVENTS_DISABLED = 0;
-        NRF_RADIO->TASKS_DISABLE = 1;
-        while(NRF_RADIO->EVENTS_DISABLED == 0);
-	NRF_RADIO->TASKS_RXEN      = 0;
-	NRF_RADIO->TASKS_TXEN      = 0;
+void cafe_reset_radio(void){
+	NRF_RADIO->INTENCLR = 0xFFFFFFFF;
+    	NRF_RADIO->EVENTS_DISABLED = 0;
+	return;    
 }
 void cafe_radio_update_mode(char radio_mode){
-	cafe_radio_radio();
-	cafe_init_radio_address();
+	cafe_reset_radio();
 	switch (radio_mode ){
 	case I_AM_RECIEVER:
 			m_config_local.event_handler = cafe_start_rx_transaction,
 			m_config_local.mode          = I_AM_RECIEVER;
-			cafe_init( &m_config_local );
 			cafe_start_rx();  		
+			break;
+	case I_AM_TRANSMITTER:
+			NRF_RADIO->TASKS_RXEN      = 0;
+			NRF_RADIO->SHORTS = RADIO_SHORTS_COMMON | RADIO_SHORTS_DISABLED_RXEN_Msk;
+			NRF_RADIO->INTENSET        = RADIO_INTENSET_DISABLED_Msk;
+			m_config_local.event_handler = cafe_start_tx_transaction,
+			m_config_local.mode          = I_AM_TRANSMITTER;
 			if(tx_payload.pending) {
 				cafe_start_tx_transaction();	
 			}	
-			break;
-	case I_AM_TRANSMITTER:
-			m_config_local.event_handler = cafe_start_tx_transaction,
-			m_config_local.mode          = I_AM_TRANSMITTER;
-			cafe_init( &m_config_local );
+			NRF_RADIO->INTENSET    = RADIO_INTENSET_DISABLED_Msk;
 			break;	
 	default :break;
 	}
@@ -283,7 +279,9 @@ char cafe_get_rx_payload(char *out_buffer){
 					rx_payload.data.formated.payload,
 					rx_payload.data.formated.length,
 					rx_payload.data.formated.crc );
-
+	uint32_t recieved_addr= NRF_RADIO->RXMATCH;
+	CAFE_DBG ("[RECIEVED ADDR %x\n]",recieved_addr);
+	
 	return (rx_payload.data.formated.length - USER_PACKET_OVERHEAD);
 }
 
@@ -367,9 +365,8 @@ void cafe_tx_setup(void){
 #define RADIO_ONLY_TRANSMITTER	
 
 void cafe_start_radio(void){
-#ifdef RADIO_ONLY_TRANSMITTER	
+	cafe_init_radio_address();
 	cafe_radio_update_mode(I_AM_TRANSMITTER);
-#else
-	cafe_radio_update_mode(I_AM_RECIEVER );
-#endif	
+	cafe_init( &m_config_local );
+//	cafe_radio_update_mode(I_AM_RECIEVER );
 }

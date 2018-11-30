@@ -86,7 +86,7 @@ int main(void)
 
 	//ws_timer1_setup();
 
-	//cafe_start_radio();
+	cafe_start_radio();
 
 	WS_DBG("M.RIOS \n[BLE SLAVE]\nWorkshop start!\n");	
 	while (true){
