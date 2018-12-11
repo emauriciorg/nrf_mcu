@@ -61,8 +61,8 @@ static void create_timers()
 
 void ws_timer1_setup(void){
 
-	uint32_t time_ticks;
-	uint32_t err_code;
+
+
 #ifdef OLD_TIMER
 	err_code = nrf_drv_timer_init(  &TIMER_1_APP,NULL, ws_timer_event_handler);
 	APP_ERROR_CHECK( err_code );

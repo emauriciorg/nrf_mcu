@@ -385,16 +385,6 @@
               <FilePath>.\app\src\main.c</FilePath>
             </File>
             <File>
-              <FileName>fsm_slave.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\app\src\fsm_slave.c</FilePath>
-            </File>
-            <File>
-              <FileName>cafe.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\common\src\cafe.c</FilePath>
-            </File>
-            <File>
               <FileName>cli.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\common\src\cli.c</FilePath>
@@ -423,6 +413,11 @@
               <FileName>ws_aes.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\common\src\ws_aes.c</FilePath>
+            </File>
+            <File>
+              <FileName>private_radio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\common\src\private_radio.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -974,16 +969,6 @@
               <FilePath>.\app\src\main.c</FilePath>
             </File>
             <File>
-              <FileName>fsm_slave.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\app\src\fsm_slave.c</FilePath>
-            </File>
-            <File>
-              <FileName>cafe.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\common\src\cafe.c</FilePath>
-            </File>
-            <File>
               <FileName>cli.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\common\src\cli.c</FilePath>
@@ -1012,6 +997,11 @@
               <FileName>ws_aes.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\common\src\ws_aes.c</FilePath>
+            </File>
+            <File>
+              <FileName>private_radio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\common\src\private_radio.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1851,7 +1841,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls>--c99</MiscControls>
-              <Define>SLAVE3 BBN_BOARD_PINS SLAVE_MODE  NRF51822 BOARD_NRF6310   BLE_STACK_SUPPORT_REQD S130 SOFTDEVICE_PRESENT NRF51 SWI_DISABLE0</Define>
+              <Define>SLAVE2 BBN_BOARD_PINS SLAVE_MODE  NRF51822 BOARD_NRF6310   BLE_STACK_SUPPORT_REQD S130 SOFTDEVICE_PRESENT NRF51 SWI_DISABLE0</Define>
               <Undefine></Undefine>
               <IncludePath>..\arm5;.\app\source;..\..\..\common;..\..\..\common\inc;.\app\inc;..\..\..\..\common\inc</IncludePath>
             </VariousControls>
@@ -1903,16 +1893,6 @@
               <FilePath>.\app\src\main.c</FilePath>
             </File>
             <File>
-              <FileName>fsm_slave.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\app\src\fsm_slave.c</FilePath>
-            </File>
-            <File>
-              <FileName>cafe.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\common\src\cafe.c</FilePath>
-            </File>
-            <File>
               <FileName>cli.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\common\src\cli.c</FilePath>
@@ -1941,6 +1921,11 @@
               <FileName>ws_aes.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\common\src\ws_aes.c</FilePath>
+            </File>
+            <File>
+              <FileName>private_radio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\common\src\private_radio.c</FilePath>
             </File>
           </Files>
         </Group>

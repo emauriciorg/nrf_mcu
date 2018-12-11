@@ -15,7 +15,7 @@
 #ifdef  WS_BLE_ENABLED
 #include "ws_ble.h"
 #endif
-#include "cafe.h"
+#include "private_radio.h"
 #include "ws_adc.h"
 #include "nrf_gpio.h"
 	
@@ -215,12 +215,12 @@ unsigned char cli_parse_debug_command(char *argv)
 	case cmd_rgb:		command_id[0]=((*argv)-'0');
 				argv+=2;
 //				CLI_DBG("[S%d][%s][%d] \n", command_id[0],argv, strlen(argv));
-				cafe_load_payload(command_id[0], argv, strlen(argv) );
+				radio_load_payload(command_id[0], argv, strlen(argv) );
 				break;
-	case cmd_txm:		cafe_radio_update_mode(I_AM_TRANSMITTER);
+	case cmd_txm:		radio_update_mode(RADIO_TRANSMITTER_MODE);
 
 				break;
-	case cmd_rxm:		cafe_radio_update_mode(I_AM_RECIEVER );
+	case cmd_rxm:		radio_update_mode(RADIO_RECEIVER_MODE );
 	
 				break;
 

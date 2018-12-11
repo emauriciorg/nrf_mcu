@@ -16,7 +16,7 @@
 #include <stdio.h>
 
 #include "nrf.h"
-#include "cafe.h"
+#include "private_radio.h"
 #include "nrf_delay.h"
 #include "nrf_gpio.h"
 #include "bbn_board.h"
@@ -32,50 +32,42 @@ static uint8_t  uncripted_data[40];
 
 
 
-//#define SHOW_AES_PACKET	
-void print_received_data(void){
-
-	char encripted_message[CAFE_CORE_MAX_PAYLOAD_LENGTH+5];
+void print_received_data(void)
+{
+	char encripted_message[RADIO_PACKET_LEN+5];
 	memset(uncripted_data, 0, sizeof(uncripted_data));
+	radioget_rx_payload(encripted_message);
 
-	cafe_get_rx_payload(encripted_message);
-//	WS_DBG("[rssi -%d]  ",cafe_get_rssi());
-
-	
-//	WS_DBG("[Timer %d]\n",ws_get_timer1_ticks());	
-	//WS_DBG("[%s]\n",encripted_message);
-
-	return;
-
-
+#ifndef NO_CYPHER
 #ifdef SHOW_AES_PACKET
 	WS_DBG("[");
-	for (int i=0;i <32; i++){
+	for (int i = 0; i < 32; i++){
  		WS_DBG(" %d",encripted_message[i]); 
 	}
 	WS_DBG("]\n");
 #endif
-
 	
-	aes_decrypt_data( (uint8_t *)&encripted_message[2],encripted_message[2],uncripted_data);
+	aes_decrypt_data( (uint8_t *)&encripted_message[2],
+					encripted_message[2],
+					uncripted_data);
+
 	WS_DBG("[%s]\n",(&uncripted_data[3]));
 	/*simple parser to reflect packet reception on the board*/
-	if (!memcmp(&uncripted_data[3],"REDOFF",strlen("REDOFF")))nrf_gpio_pin_set(LED_RED);
-	if (!memcmp(&uncripted_data[3],"REDOON",strlen("REDOON")))nrf_gpio_pin_clear(LED_RED);
-	if (!memcmp(&uncripted_data[3],"BLUEOFF",strlen("BLUEOFF")))nrf_gpio_pin_set(LED_BLUE);
-	if (!memcmp(&uncripted_data[3],"BLUEON",strlen("BLUEON")))nrf_gpio_pin_clear(LED_BLUE);
-	if (!memcmp(&uncripted_data[3],"BLUEON",strlen("BLUEON")))nrf_gpio_pin_clear(LED_BLUE);
+	if (!memcmp(&uncripted_data[3],"REDOFF",6)) nrf_gpio_pin_set(LED_RED);
+	if (!memcmp(&uncripted_data[3],"REDOON",6)) nrf_gpio_pin_clear(LED_RED);
+	if (!memcmp(&uncripted_data[3],"BLUEOF",6)) nrf_gpio_pin_set(LED_BLUE);
+	if (!memcmp(&uncripted_data[3],"BLUEON",6)) nrf_gpio_pin_clear(LED_BLUE);
+	if (!memcmp(&uncripted_data[3],"BLUEON",6)) nrf_gpio_pin_clear(LED_BLUE);
 	
-
-	if (!memcmp(&uncripted_data[3],"TX",strlen("ACK"))){
+	if (!memcmp(&uncripted_data[3],"TX",2)){
 		WS_DBG("[Trasmitter mode set]\n");
-		cafe_radio_update_mode(I_AM_TRANSMITTER);
+		radio_update_mode(RADIO_TRANSMITTER_MODE);
 	}
-	if (!memcmp(&uncripted_data[3],"RX",strlen("ACK"))){
+	if (!memcmp(&uncripted_data[3],"RX",2)){
 		WS_DBG("[reciever mode set]\n");
-		cafe_radio_update_mode(I_AM_RECIEVER);
+		radio_update_mode(RADIO_RECEIVER_MODE);
 	}
-	
+#endif	
 }
 
 int main(void)
@@ -83,19 +75,16 @@ int main(void)
 	ws_clock_setup();
 	ws_uart_init();
 	ws_leds_init();
-
-	//ws_timer1_setup();
-
-	cafe_start_radio();
+	radio_start();
 
 	WS_DBG("M.RIOS \n[BLE SLAVE]\nWorkshop start!\n");	
+	
 	while (true){
+
 		cli_execute_debug_command();
 		
-		if ( cafe_pending()){
-			
+		if ( radio_rx_packet_available()){		
 			print_received_data();
-			continue;		
 		}
 	}
 }

@@ -3,7 +3,7 @@
  * Auto generated Run-Time-Environment Component Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'cafe_prx' 
+ * Project: 'radioprx' 
  * Target:  'nrf51822_xxac_s130' 
  */
 

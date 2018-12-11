@@ -7,7 +7,7 @@
 #include "ble_types.h"
 
 #include "ws_ble_services.h"
-#include "cafe.h"
+#include "private_radio"
 
 //#define DEBUG_BLE_SERVICE
 #ifdef DEBUG_BLE_SERVICE
@@ -41,7 +41,7 @@ length=sprintf((char *)nus_buffer_rx,"%d",rssi_indicator);
 	printf("Recieve [%s] \n", data);
  
 //    printf("slave [%d] string [%s] len[%d] \n", command_id[0],argv, strlen(argv));
-	cafe_load_payload((unsigned char)(data[0]-'0'),(char *) &data[2], strlen((const char*	)(data+2)) );
+	radio_load_payload((unsigned char)(data[0]-'0'),(char *) &data[2], strlen((const char*	)(data+2)) );
 
 }
 
