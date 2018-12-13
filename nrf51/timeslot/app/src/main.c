@@ -1,7 +1,8 @@
 /** 
 ******************************************************************************
-* \file    main.c
-* \brief    Entry point file.
+* \file   main.c
+* \brief  timeslot workshop
+* \author mauricio.rios@titoma.com
 ******************************************************************************
 */
 #include <stdint.h>
@@ -36,8 +37,8 @@ void print_recieved_radio_data(void){
 	
 	uint8_t len_t;
 	char temp_buffer[32+10];
-	len_t=cafe_get_rx_payload(temp_buffer);	
-	WS_DBG("Received[ %s ][%d] /n",temp_buffer,len_t);
+	len_t = cafe_get_rx_payload(temp_buffer);	
+	WS_DBG("Received[%s][%d] /n",temp_buffer,len_t);
 }
 
 int main(void){	
@@ -52,7 +53,7 @@ int main(void){
 
 	WS_BLE_INIT();
 	WS_TIMESLOT_INIT();
-	WS_DBG("M.RIOS \n[BLE MASTER]\nWorkshop start!\n");	
+	WS_DBG("M.RIOS\n[BLE MASTER]\nWorkshop start!\n");	
 
 	while (true){	
 		cli_execute_debug_command();

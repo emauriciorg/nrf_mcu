@@ -20,13 +20,15 @@ static uint32_t radio_start_rx(void);
 static void radio_start_rx_transaction(void);
 static uint8_t radio_check_pipe_limits(uint8_t pipe_id);
 
-static uint32_t radio_read_rx_payload(radio_packet_t *payload);
 static uint32_t radio_get_clear_interrupts(uint32_t *interrupts);
-static uint32_t radio_set_rf_channel(uint32_t channel);
 static void radio_update_nrf_radio_address(nrf_st_address radio_addr);
 static void radio_start_tx_transaction(void);
 static uint32_t radio_disable(void);
 static void radio_tx_setup(void);
+
+/*******************************************
+           CORE FUNCTION            
+*******************************************/
 
 static uint32_t radio_get_clear_interrupts(uint32_t *interrupts)
 {
@@ -115,12 +117,6 @@ static uint32_t radio_disable(void)
 }
 
 
-static uint32_t radio_set_rf_channel(uint32_t channel)
-{
-	if (channel > 125) return false;
-	m_config_local.rf_channel = channel;
-	return true;
-}
 
 static void radio_update_nrf_radio_address(nrf_st_address radio_addr){	
 	NRF_RADIO->PREFIX0 = bytewise_bit_swap( radio_addr.logic_pipe[3]  << 24 |   
@@ -158,7 +154,13 @@ static void radio_init_addresses(void)
 	radio_update_nrf_radio_address(user_radio_addr);	
 }
 
-
+/********************************************
+ *		USER FUNCTIONS
+********************************************/
+/**
+ * Call this function to set the initial configuration of the
+ * radio, by default radio would start in RADIO_RECEIVER_MODE/RADIO_TRASMITTER MODE
+ */
 void radio_start(void)
 {
 	radio_init_addresses();
@@ -169,6 +171,11 @@ void radio_start(void)
 }
 
 
+/**
+
+ @brief Call this function to switch between the FULL TRANMISTTER to FULL RECEIVER
+
+ */
 
 void radio_update_mode(radio_mode_t radio_mode)
 {
@@ -180,6 +187,7 @@ void radio_update_mode(radio_mode_t radio_mode)
 		radio_start_rx();  		
 		break;
 	case RADIO_TRANSMITTER_MODE:
+		radio_tx_setup();
 		NRF_RADIO->TASKS_RXEN        = 0;
 		NRF_RADIO->SHORTS            = RADIO_SHORTS_COMMON |
 						RADIO_SHORTS_DISABLED_RXEN_Msk;
@@ -196,13 +204,6 @@ void radio_update_mode(radio_mode_t radio_mode)
 	}
 	
 }
-
-/**************************************************** 
- 	
-                  RX ROUTINES
- 
-****************************************************/
-
 char radio_rx_packet_available(void)
 {	
 	if(rx_payload.state.available){
@@ -218,20 +219,43 @@ int8_t radio_get_rssi(void)
 	return rx_payload.rssi;
 }
 
+void radio_load_payload(uint8_t pipe_id, char *data,unsigned char len)
+{
+	if (tx_payload.state.pending) return;
+	tx_payload.data.formated.length  = len+USER_PACKET_OVERHEAD;
+        tx_payload.data.formated.S1      = 'C';
+        tx_payload.data.formated.ack     = 'D';
+        tx_payload.data.formated.crc     = 'B';
+	tx_payload.data.formated.address = 'A'; 
+
+	tx_payload.pipe = radio_check_pipe_limits( pipe_id );	
+	memcpy(tx_payload.data.formated.payload,data,len);
+
+	tx_payload.state.pending =  1;
+	
+	CAFE_DBG("\n\n");
+	CAFE_DBG("[%s %d]\n\r",  "Pipe",tx_payload.pipe);
+	CAFE_DBG("[%s %d]\n\r",	 "Addr",tx_payload.data.formated.address);
+	CAFE_DBG("[%s %d]\n\r",	 "Ack",tx_payload.data.formated.ack);
+	CAFE_DBG("[%s %d]\n\r",	 "Payload",tx_payload.data.formated.payload);
+	CAFE_DBG("[%s %d]\n\r",	 "Len",tx_payload.data.formated.length);
+	CAFE_DBG("[%s %d]\n\n\r","Crc",tx_payload.data.formated.crc );
+
+	radio_start_tx_transaction();	
+}
+
+
+/**************************************************** 
+ 	
+                  RX ROUTINES
+ 
+****************************************************/
 
 static bool rx_fifo_push_rfbuf(uint8_t pipe)
 {
 	rx_payload.rssi  =  NRF_RADIO->RSSISAMPLE;
 	return true;
 }
-
-static uint32_t radio_read_rx_payload(radio_packet_t *payload)
-{	
-	DISABLE_RF_IRQ;
-	ENABLE_RF_IRQ;
-	return true;
-}
-
 
 char radioget_rx_payload(char *out_buffer)
 {
@@ -310,30 +334,6 @@ static void radio_start_rx_transaction(void)
 ****************************************************/
 
 
-void radio_load_payload(uint8_t pipe_id, char *data,unsigned char len)
-{
-	if (tx_payload.state.pending) return;
-	tx_payload.data.formated.length  = len+USER_PACKET_OVERHEAD;
-        tx_payload.data.formated.S1      = 'C';
-        tx_payload.data.formated.ack     = 'D';
-        tx_payload.data.formated.crc     = 'B';
-	tx_payload.data.formated.address = 'A'; 
-
-	tx_payload.pipe = radio_check_pipe_limits( pipe_id );	
-	memcpy(tx_payload.data.formated.payload,data,len);
-
-	tx_payload.state.pending =  1;
-	
-	CAFE_DBG("\n\n");
-	CAFE_DBG("[%s %d]\n\r",  "Pipe",tx_payload.pipe);
-	CAFE_DBG("[%s %d]\n\r",	 "Addr",tx_payload.data.formated.address);
-	CAFE_DBG("[%s %d]\n\r",	 "Ack",tx_payload.data.formated.ack);
-	CAFE_DBG("[%s %d]\n\r",	 "Payload",tx_payload.data.formated.payload);
-	CAFE_DBG("[%s %d]\n\r",	 "Len",tx_payload.data.formated.length);
-	CAFE_DBG("[%s %d]\n\n\r","Crc",tx_payload.data.formated.crc );
-
-	radio_start_tx_transaction();	
-}
 
 static uint8_t radio_check_pipe_limits(uint8_t pipe_id)
 {
