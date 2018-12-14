@@ -39,6 +39,7 @@ void print_received_data(void)
 	radioget_rx_payload(encripted_message);
 
 #ifndef NO_CYPHER
+
 #ifdef SHOW_AES_PACKET
 	WS_DBG("[");
 	for (int i = 0; i < 32; i++){
@@ -74,15 +75,17 @@ int main(void)
 {	
 	ws_clock_setup();
 	ws_uart_init();
+	WS_DBG("M.RIOS \n[BLE SLAVE]\nWorkshop start!\n");	
+
 	ws_leds_init();
 	radio_start();
 
-	WS_DBG("M.RIOS \n[BLE SLAVE]\nWorkshop start!\n");	
 	
 	while (true){
 
 		cli_execute_debug_command();
-		
+			 radio_print_current_state();
+
 		if ( radio_rx_packet_available()){		
 			print_received_data();
 		}

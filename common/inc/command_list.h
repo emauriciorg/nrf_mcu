@@ -44,6 +44,7 @@ enum{
  cmd_adc                  =   0x252,
  cmd_fet                  =   0x28c,
  cmd_txm                  =   0x2ab,
- cmd_rxm                  =   0x2a9
+ cmd_rxm                  =   0x2a9,
+ cmd_radiostart           =   0x3EA,
 };
 #endif
