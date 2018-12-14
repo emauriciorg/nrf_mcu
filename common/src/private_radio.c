@@ -135,8 +135,15 @@ void radio_event_handler(void)
 
 static void radio_reset(void)
 {
+	NVIC_ClearPendingIRQ(RADIO_IRQn);
+	NVIC_EnableIRQ(RADIO_IRQn);
 	NRF_RADIO->INTENCLR = 0xFFFFFFFF;
     	NRF_RADIO->EVENTS_DISABLED = 0;
+    	NRF_RADIO->TASKS_STOP = 1;
+ 	NRF_RADIO->TASKS_DISABLE = 1;
+        while(NRF_RADIO->EVENTS_DISABLED == 0);
+        NRF_RADIO->EVENTS_DISABLED = 0;
+       
 	return;    
 }
 
@@ -201,8 +208,8 @@ static void radio_init_addresses(void)
 void radio_start(void)
 {
 	radio_init_addresses();
-	 radio_update_mode(RADIO_RECEIVER_MODE);
-	//radio_update_mode(RADIO_TRANSMITTER_MODE);
+	 // radio_update_mode(RADIO_RECEIVER_MODE);
+	radio_update_mode(RADIO_TRANSMITTER_MODE);
 
 	radio_update_core_parameters();
 		
@@ -340,9 +347,7 @@ static void radio_rx_setup(void)
 {	
 	NRF_RADIO->TASKS_TXEN      = 0;
 
-	NRF_RADIO->INTENCLR        = 0xFFFFFFFF;
-	NRF_RADIO->EVENTS_DISABLED = 0;
-	NRF_RADIO->SHORTS          = RADIO_SHORTS_COMMON | RADIO_SHORTS_DISABLED_TXEN_Msk;
+	NRF_RADIO->SHORTS          = RADIO_SHORTS_COMMON | RADIO_SHORTS_DISABLED_RXEN_Msk;
 	NRF_RADIO->INTENSET        = RADIO_INTENSET_DISABLED_Msk;
 	NRF_RADIO->RXADDRESSES     = CUSTOM_PIPE_INDEX; //<--set to dynamic or protocol based address
 	NRF_RADIO->FREQUENCY       = m_config_local.rf_channel;
@@ -402,9 +407,7 @@ static void radio_tx_setup(void)
 {
 	NRF_RADIO->TASKS_RXEN        = 0;
 	
-	NRF_RADIO->INTENCLR          = 0xFFFFFFFF;	
-	NRF_RADIO->EVENTS_DISABLED   = 0;
-	NRF_RADIO->SHORTS            = RADIO_SHORTS_COMMON;
+	NRF_RADIO->SHORTS            = RADIO_SHORTS_COMMON ;//| RADIO_SHORTS_DISABLED_TXEN_Msk;
 	NRF_RADIO->INTENSET          = RADIO_INTENSET_DISABLED_Msk;
 	NRF_RADIO->TXADDRESS         = tx_payload.pipe;
 	NRF_RADIO->RXADDRESSES       = CUSTOM_PIPE_INDEX;                         
@@ -444,7 +447,7 @@ static void radio_start_tx_transaction(void)
 
 	tx_payload.data.formated.S1 = 1;
 
-	NRF_RADIO->SHORTS      = RADIO_SHORTS_COMMON;
+	NRF_RADIO->SHORTS      = RADIO_SHORTS_COMMON ;//| RADIO_SHORTS_DISABLED_TXEN_Msk;
 	NRF_RADIO->INTENSET    = RADIO_INTENSET_DISABLED_Msk;
 	NRF_RADIO->TXADDRESS   = tx_payload.pipe++;
 	NRF_RADIO->RXADDRESSES = CUSTOM_PIPE_INDEX;
