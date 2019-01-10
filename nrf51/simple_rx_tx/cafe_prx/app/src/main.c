@@ -84,7 +84,7 @@ int main(void)
 	while (true){
 
 		cli_execute_debug_command();
-			 radio_print_current_state();
+		radio_print_current_state();
 
 		if ( radio_rx_packet_available()){		
 			print_received_data();

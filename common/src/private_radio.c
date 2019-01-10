@@ -224,7 +224,7 @@ void radio_update_mode(radio_mode_t radio_mode)
 {
 	radio_reset();
 	CAFE_DBG("*****RADIO UPDATE MODE *****\n\r")
-	
+	/*TODO : Add transition checker, to ensure a full transicion from the TX for RX */
 	switch (radio_mode ){
 	case RADIO_RECEIVER_MODE:
 
