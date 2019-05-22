@@ -24,7 +24,8 @@ void ws_clear_timer1_ticks(uint32_t tick_trigger){
 }
 
 void ws_app_timer_init(void){
-	APP_TIMER_INIT(APP_TIMER_PRESCALER, APP_TIMER_OP_QUEUE_SIZE, false);
+	#warning "APP_TIMER_ININ IS disabled"
+        //APP_TIMER_INIT(APP_TIMER_PRESCALER, APP_TIMER_OP_QUEUE_SIZE, false);
 }
 
 
@@ -52,10 +53,12 @@ static void create_timers()
     uint32_t err_code;
 
     // Create timers
-     APP_TIMER_DEF(m_led_a_timer_id);
-    err_code = app_timer_create(&m_led_a_timer_id,
+   //  APP_TIMER_DEF(m_led_a_timer_id);
+   /* err_code = app_timer_create(&m_led_a_timer_id,
                                 APP_TIMER_MODE_REPEATED,
                                 timer_a_handler);
+    */
+    #warning "timer create is not enabled"
     APP_ERROR_CHECK(err_code);
 }
 

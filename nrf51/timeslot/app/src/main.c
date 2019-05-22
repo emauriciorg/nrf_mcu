@@ -17,12 +17,12 @@
 #include "ws_uart.h"
 #include "ws_ble.h"
 #include "bbn_board.h"
-#include "cafe.h"
+#include "private_radio.h"
 #include "cli.h"
 #include "ws_adc.h"
 #include "ws_timer.h"
 #include "accelerometer_i2c.h"
-#include "app_twi.h"
+//#include "app_twi.h"
 #include "ws_softdevice.h"
 
 

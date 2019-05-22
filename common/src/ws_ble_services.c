@@ -7,7 +7,7 @@
 #include "ble_types.h"
 
 #include "ws_ble_services.h"
-#include "private_radio"
+#include "private_radio.h"
 
 //#define DEBUG_BLE_SERVICE
 #ifdef DEBUG_BLE_SERVICE

@@ -1,6 +1,6 @@
 #include <stdint.h>
 #include <stdbool.h>
-#include "nrf_soc.h"
+//#include "nrf_soc.h"
 #include "nrf.h"
 #include "app_error.h"
 #include "nrf_gpio.h"
@@ -8,7 +8,7 @@
 #include "softdevice_handler.h"
 
 #include "bbn_board.h"
-#include "cafe.h"
+#include "private_radio.h"
 #include "ws_uart.h"
 #include "ws_timeslot.h"
 #include <stdio.h>

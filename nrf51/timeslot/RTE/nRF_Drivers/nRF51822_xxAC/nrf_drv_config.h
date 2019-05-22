@@ -45,7 +45,7 @@
 #endif
 
 /* TIMER */
-#define TIMER0_ENABLED 0
+#define TIMER0_ENABLED 1
 
 #if (TIMER0_ENABLED == 1)
 #define TIMER0_CONFIG_FREQUENCY    NRF_TIMER_FREQ_16MHz
@@ -427,6 +427,6 @@
 #define I2S_CONFIG_RATIO        NRF_I2S_RATIO_256X
 #endif
 
-#include "nrf_drv_config_validation.h"
+
 
 #endif // NRF_DRV_CONFIG_H

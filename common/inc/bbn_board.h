@@ -5,7 +5,7 @@
 
 #define UART_TX
 #define UART_RX
-
+#define BBN_BOARD_PINS
 #ifdef BBN_BOARD_PINS
 	#define MOTOR_PIN       0
 	#define LED_RED		8

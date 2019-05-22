@@ -1,0 +1,100 @@
+<!DOCTYPE CrossStudio_Project_File>
+<solution Name="ts_cafe" target="8" version="2">
+  <configuration Name="Internal" hidden="Yes" />
+  <configuration
+    Name="nrf51822_xxac_s130"
+    inherited_configurations="Internal" />
+  <configuration
+    Name="flash_s130_nrf51_1.0.0_softdevice"
+    inherited_configurations="Internal" />
+  <configuration Name="nrf51822_xxab" inherited_configurations="Internal" />
+  <configuration Name="nrf52832" inherited_configurations="Internal" />
+  <configuration
+    Name="nrf51822_xxac_s132"
+    inherited_configurations="Internal" />
+  <configuration Name="s312_hex" inherited_configurations="Internal" />
+  <project Name="ses_blink_executable">
+    <configuration
+      Name="Common"
+      Placement="Flash"
+      Target="nRF51822_xxAC"
+      arm_architecture="v6M"
+      arm_core_type="Cortex-M0"
+      arm_endian="Little"
+      arm_fp_abi="None"
+      arm_fpu_type="None"
+      arm_interwork="No"
+      arm_linker_heap_size="256"
+      arm_linker_process_stack_size="0"
+      arm_linker_stack_size="256"
+      arm_simulator_memory_simulation_parameter="ROM;0x00000000;0x00040000;RAM;0x20000000;0x00008000"
+      arm_target_debug_interface_type="ADIv5"
+      arm_target_device_name="nRF51822_xxAC"
+      arm_target_interface_type="SWD"
+      c_preprocessor_definitions="NRF51;__nRF_FAMILY;ARM_MATH_CM0;FLASH_PLACEMENT=1;NO_VTOR_CONFIG"
+      c_user_include_directories="$(ProjectDir)/CMSIS_4/CMSIS/Include;$(ProjectDir)/nRF/CMSIS/Device/Include;../nRF51SDK810/components/drivers_nrf/hal;../nRF51SDK810/components;../nRF51SDK810/components/boards;../nRF51SDK810/components/libraries/atomic;../nRF51SDK810/components/libraries/balloc;../nRF51SDK810/components/libraries/bsp;../nRF51SDK810/components/libraries/delay;../nRF51SDK810/components/libraries/experimental_section_vars;../nRF51SDK810/components/libraries/log;../nRF51SDK810/components/libraries/log/src;../nRF51SDK810/components/libraries/memobj;../nRF51SDK810/components/libraries/ringbuf;../nRF51SDK810/components/libraries/strerror;../nRF51SDK810/components/libraries/util;../nRF51SDK810/components/softdevice/common;../nRF51SDK810/components/softdevice/s130/headers;../nRF51SDK810/components/softdevice/s130/headers/nrf51;../nRF51SDK810/components/toolchain/cmsis/include"
+      debug_additional_load_file="../nRF51SDK810/components/softdevice/s130/hex/s130_softdevice.hex"
+      debug_register_definition_file="$(ProjectDir)/nrf51_Registers.xml"
+      debug_target_connection="J-Link"
+      gcc_entry_point="Reset_Handler"
+      linker_memory_map_file="$(ProjectDir)/nRF51822_xxAC_MemoryMap.xml"
+      linker_section_placement_file="$(ProjectDir)/flash_placement.xml"
+      linker_section_placement_macros="FLASH_START=0x1B000;SRAM_START=0x20001870"
+      macros="DeviceHeaderFile=$(PackagesDir)/nRF/CMSIS/Device/Include/nrf.h;DeviceLibraryIdentifier=M0l;DeviceSystemFile=$(PackagesDir)/nRF/CMSIS/Device/Source/system_nrf51.c;DeviceVectorsFile=$(PackagesDir)/nRF/Source/ses_nrf51_Vectors.s;DeviceFamily=nRF;Target=nRF51822_xxAC;Placement=Flash"
+      project_directory=""
+      project_type="Executable"
+      target_reset_script="Reset();"
+      target_script_file="$(ProjectDir)/nRF_Target.js"
+      target_trace_initialize_script="EnableTrace(&quot;$(TraceInterfaceType)&quot;)" />
+    <folder Name="CMSIS Files">
+      <file file_name="nRF/CMSIS/Device/Include/nrf.h" />
+      <file file_name="nRF/CMSIS/Device/Source/system_nrf51.c">
+        <configuration
+          Name="Common"
+          default_code_section=".init"
+          default_const_section=".init_rodata" />
+      </file>
+    </folder>
+    <folder Name="RTT Files">
+      <file file_name="SEGGER_RTT.c" />
+      <file file_name="SEGGER_RTT.h" />
+      <file file_name="SEGGER_RTT_Conf.h" />
+      <file file_name="SEGGER_RTT_SES.c" />
+    </folder>
+    <folder Name="Script Files">
+      <file file_name="nRF/Scripts/nRF_Target.js">
+        <configuration Name="Common" file_type="Reset Script" />
+      </file>
+    </folder>
+    <folder Name="Source Files">
+      <configuration Name="Common" filter="c;cpp;cxx;cc;h;s;asm;inc" />
+      <file file_name="main.c" />
+      <file file_name="sdk_config.h" />
+    </folder>
+    <folder Name="System Files">
+      <file file_name="thumb_crt0.s" />
+      <file file_name="nRF/Source/ses_nRF_Startup.s" />
+      <file file_name="nRF/Source/ses_nrf51_Vectors.s">
+        <configuration Name="Common" file_type="Assembly" />
+      </file>
+    </folder>
+    <folder Name="Board Definition" />
+    <folder Name="nRF_Libraries" />
+    <folder Name="nRF_softDevice" />
+    <folder Name="nRF_Log" />
+    <folder Name="hal">
+      <file file_name="../nRF51SDK810/components/drivers_nrf/hal/nrf_delay.c" />
+    </folder>
+  </project>
+  <configuration
+    Name="Debug"
+    c_preprocessor_definitions="DEBUG"
+    gcc_debugging_level="Level 3"
+    gcc_optimization_level="None" />
+  <configuration
+    Name="Release"
+    c_preprocessor_definitions="NDEBUG"
+    gcc_debugging_level="None"
+    gcc_omit_frame_pointer="Yes"
+    gcc_optimization_level="Level 1" />
+</solution>
