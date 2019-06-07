@@ -1,0 +1,27 @@
+<!DOCTYPE CrossStudio_Project_File>
+<solution Name="ts_cafe" target="8" version="2">
+  <configuration Name="Internal" hidden="Yes" />
+  <configuration
+    Name="nrf51822_xxac_s130"
+    inherited_configurations="Internal" />
+  <configuration
+    Name="flash_s130_nrf51_1.0.0_softdevice"
+    inherited_configurations="Internal" />
+  <configuration Name="nrf51822_xxab" inherited_configurations="Internal" />
+  <configuration Name="nrf52832" inherited_configurations="Internal" />
+  <configuration
+    Name="nrf51822_xxac_s132"
+    inherited_configurations="Internal" />
+  <configuration Name="s312_hex" inherited_configurations="Internal" />
+  <configuration
+    Name="Debug"
+    c_preprocessor_definitions="DEBUG"
+    gcc_debugging_level="Level 3"
+    gcc_optimization_level="None" />
+  <configuration
+    Name="Release"
+    c_preprocessor_definitions="NDEBUG"
+    gcc_debugging_level="None"
+    gcc_omit_frame_pointer="Yes"
+    gcc_optimization_level="Level 1" />
+</solution>

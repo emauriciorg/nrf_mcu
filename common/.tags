@@ -1,0 +1,633 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ACCELEROMETER_INT_PIN	.\src\accelerometer_i2c.c	12;"	d	file:
+ACCELEROMETER_SCL_PIN	.\src\accelerometer_i2c.c	13;"	d	file:
+ACCELEROMETER_SDA_PIN	.\src\accelerometer_i2c.c	14;"	d	file:
+ACC_MSG	.\src\accelerometer_i2c.c	17;"	d	file:
+ADC_OUT	.\src\ws_adc.c	14;"	d	file:
+ADC_OUT	.\src\ws_adc.c	16;"	d	file:
+ADC_REFERENCE_DIVIDER	.\src\ws_adc.c	24;"	d	file:
+ADC_RESOLUTION	.\src\ws_adc.c	22;"	d	file:
+ADC_SCALING	.\src\ws_adc.c	23;"	d	file:
+ADXL_ADDRESS_OPT1_R	.\inc\accelerometer_i2c.h	5;"	d
+ADXL_ADDRESS_OPT1_W	.\inc\accelerometer_i2c.h	4;"	d
+ADXL_ADDRESS_OPT2_R	.\inc\accelerometer_i2c.h	7;"	d
+ADXL_ADDRESS_OPT2_W	.\inc\accelerometer_i2c.h	6;"	d
+AES_BYTES_LENGHT	.\src\private_radio.c	11;"	d	file:
+AES_OUT	.\src\ws_aes.c	24;"	d	file:
+AES_OUT	.\src\ws_aes.c	26;"	d	file:
+AES_SAMPLE_TEXT	.\inc\ws_aes.h	13;"	d
+APP_ADV_INTERVAL	.\src\ws_ble.c	28;"	d	file:
+APP_ADV_TIMEOUT_IN_SECONDS	.\src\ws_ble.c	29;"	d	file:
+APP_TIMER_OP_QUEUE_SIZE	.\inc\ws_timer.h	7;"	d
+APP_TIMER_PRESCALER	.\inc\ws_timer.h	6;"	d
+BBN_BOARD_PINS	.\inc\bbn_board.h	8;"	d
+BLE_CUS_MAX_DATA_LEN	.\src\ws_ble_services.c	23;"	d	file:
+BLE_DBG	.\src\ws_ble.c	21;"	d	file:
+BLE_DBG	.\src\ws_ble.c	23;"	d	file:
+BLE_DBG	.\src\ws_softdevice.c	12;"	d	file:
+BLE_DBG	.\src\ws_softdevice.c	14;"	d	file:
+BLE_PACKET_OVERHEAD	.\inc\radio_data_types.h	33;"	d
+BLE_SERVICE_DBG	.\src\ws_ble_services.c	14;"	d	file:
+BLE_SERVICE_DBG	.\src\ws_ble_services.c	16;"	d	file:
+BLE_UUID_CS_RX_CHARACTERISTIC	.\src\ws_ble_services.c	22;"	d	file:
+BLE_UUID_CS_TX_CHARACTERISTIC	.\src\ws_ble_services.c	21;"	d	file:
+BLE_UUID_OUR_BASE_UUID	.\src\ws_ble_services.c	19;"	d	file:
+BLE_UUID_OUR_SERVICE	.\src\ws_ble_services.c	20;"	d	file:
+BUFFER_SIZE	.\src\accelerometer_i2c.c	16;"	d	file:
+CAFE_ADDRESS_PIPE0	.\polling\TX_CAFE.h	/^typedef enum {CAFE_ADDRESS_PIPE0, CAFE_ADDRESS_PIPE1, CAFE_ADDRESS_PIPE2, CAFE_ADDRESS_PIPE3, CAFE_ADDRESS_PIPE4, CAFE_ADDRESS_PIPE5, CAFE_ADDRESS_PIPE6, CAFE_ADDRESS_PIPE7} radioaddress_type_t;$/;"	e	enum:__anon22
+CAFE_ADDRESS_PIPE1	.\polling\TX_CAFE.h	/^typedef enum {CAFE_ADDRESS_PIPE0, CAFE_ADDRESS_PIPE1, CAFE_ADDRESS_PIPE2, CAFE_ADDRESS_PIPE3, CAFE_ADDRESS_PIPE4, CAFE_ADDRESS_PIPE5, CAFE_ADDRESS_PIPE6, CAFE_ADDRESS_PIPE7} radioaddress_type_t;$/;"	e	enum:__anon22
+CAFE_ADDRESS_PIPE2	.\polling\TX_CAFE.h	/^typedef enum {CAFE_ADDRESS_PIPE0, CAFE_ADDRESS_PIPE1, CAFE_ADDRESS_PIPE2, CAFE_ADDRESS_PIPE3, CAFE_ADDRESS_PIPE4, CAFE_ADDRESS_PIPE5, CAFE_ADDRESS_PIPE6, CAFE_ADDRESS_PIPE7} radioaddress_type_t;$/;"	e	enum:__anon22
+CAFE_ADDRESS_PIPE3	.\polling\TX_CAFE.h	/^typedef enum {CAFE_ADDRESS_PIPE0, CAFE_ADDRESS_PIPE1, CAFE_ADDRESS_PIPE2, CAFE_ADDRESS_PIPE3, CAFE_ADDRESS_PIPE4, CAFE_ADDRESS_PIPE5, CAFE_ADDRESS_PIPE6, CAFE_ADDRESS_PIPE7} radioaddress_type_t;$/;"	e	enum:__anon22
+CAFE_ADDRESS_PIPE4	.\polling\TX_CAFE.h	/^typedef enum {CAFE_ADDRESS_PIPE0, CAFE_ADDRESS_PIPE1, CAFE_ADDRESS_PIPE2, CAFE_ADDRESS_PIPE3, CAFE_ADDRESS_PIPE4, CAFE_ADDRESS_PIPE5, CAFE_ADDRESS_PIPE6, CAFE_ADDRESS_PIPE7} radioaddress_type_t;$/;"	e	enum:__anon22
+CAFE_ADDRESS_PIPE5	.\polling\TX_CAFE.h	/^typedef enum {CAFE_ADDRESS_PIPE0, CAFE_ADDRESS_PIPE1, CAFE_ADDRESS_PIPE2, CAFE_ADDRESS_PIPE3, CAFE_ADDRESS_PIPE4, CAFE_ADDRESS_PIPE5, CAFE_ADDRESS_PIPE6, CAFE_ADDRESS_PIPE7} radioaddress_type_t;$/;"	e	enum:__anon22
+CAFE_ADDRESS_PIPE6	.\polling\TX_CAFE.h	/^typedef enum {CAFE_ADDRESS_PIPE0, CAFE_ADDRESS_PIPE1, CAFE_ADDRESS_PIPE2, CAFE_ADDRESS_PIPE3, CAFE_ADDRESS_PIPE4, CAFE_ADDRESS_PIPE5, CAFE_ADDRESS_PIPE6, CAFE_ADDRESS_PIPE7} radioaddress_type_t;$/;"	e	enum:__anon22
+CAFE_ADDRESS_PIPE7	.\polling\TX_CAFE.h	/^typedef enum {CAFE_ADDRESS_PIPE0, CAFE_ADDRESS_PIPE1, CAFE_ADDRESS_PIPE2, CAFE_ADDRESS_PIPE3, CAFE_ADDRESS_PIPE4, CAFE_ADDRESS_PIPE5, CAFE_ADDRESS_PIPE6, CAFE_ADDRESS_PIPE7} radioaddress_type_t;$/;"	e	enum:__anon22
+CAFE_BITRATE_1MBPS	.\polling\TX_CAFE.h	/^    CAFE_BITRATE_1MBPS = RADIO_MODE_MODE_Nrf_1Mbit,$/;"	e	enum:__anon17
+CAFE_BITRATE_250KBPS	.\polling\TX_CAFE.h	/^    CAFE_BITRATE_250KBPS = RADIO_MODE_MODE_Nrf_250Kbit$/;"	e	enum:__anon17
+CAFE_BITRATE_2MBPS	.\polling\TX_CAFE.h	/^    CAFE_BITRATE_2MBPS = RADIO_MODE_MODE_Nrf_2Mbit,$/;"	e	enum:__anon17
+CAFE_CRC_16BIT	.\polling\TX_CAFE.h	/^    CAFE_CRC_16BIT = RADIO_CRCCNF_LEN_Two,$/;"	e	enum:__anon18
+CAFE_CRC_8BIT	.\polling\TX_CAFE.h	/^    CAFE_CRC_8BIT  = RADIO_CRCCNF_LEN_One,$/;"	e	enum:__anon18
+CAFE_CRC_OFF	.\polling\TX_CAFE.h	/^    CAFE_CRC_OFF   = RADIO_CRCCNF_LEN_Disabled$/;"	e	enum:__anon18
+CAFE_DBG	.\src\private_radio.c	8;"	d	file:
+CAFE_DEFAULT_CONFIG	.\inc\radio_data_types.h	141;"	d
+CAFE_DEFAULT_CONFIG	.\polling\TX_CAFE.h	134;"	d
+CAFE_DEFAULT_RX_CONFIG	.\inc\radio_data_types.h	154;"	d
+CAFE_DEFAULT_TX_CONFIG	.\inc\radio_data_types.h	168;"	d
+CAFE_EVENT_RX_RECEIVED	.\polling\TX_CAFE.h	/^enum radioevent_type_t  {CAFE_EVENT_TX_SUCCESS, CAFE_EVENT_TX_FAILED, CAFE_EVENT_RX_RECEIVED};$/;"	e	enum:radioevent_type_t
+CAFE_EVENT_TX_FAILED	.\polling\TX_CAFE.h	/^enum radioevent_type_t  {CAFE_EVENT_TX_SUCCESS, CAFE_EVENT_TX_FAILED, CAFE_EVENT_RX_RECEIVED};$/;"	e	enum:radioevent_type_t
+CAFE_EVENT_TX_SUCCESS	.\polling\TX_CAFE.h	/^enum radioevent_type_t  {CAFE_EVENT_TX_SUCCESS, CAFE_EVENT_TX_FAILED, CAFE_EVENT_RX_RECEIVED};$/;"	e	enum:radioevent_type_t
+CAFE_INT_RX_DR_MSK	.\inc\radio_data_types.h	64;"	d
+CAFE_INT_RX_DR_MSK	.\polling\TX_CAFE.h	45;"	d
+CAFE_INT_TX_FAILED_MSK	.\inc\radio_data_types.h	63;"	d
+CAFE_INT_TX_FAILED_MSK	.\polling\TX_CAFE.h	44;"	d
+CAFE_INT_TX_SUCCESS_MSK	.\inc\radio_data_types.h	62;"	d
+CAFE_INT_TX_SUCCESS_MSK	.\polling\TX_CAFE.h	43;"	d
+CAFE_MODE_PRX	.\polling\TX_CAFE.h	/^    CAFE_MODE_PRX           \/\/ Primary receiver$/;"	e	enum:__anon16
+CAFE_MODE_PTX	.\polling\TX_CAFE.h	/^    CAFE_MODE_PTX,          \/\/ Primary transmitter$/;"	e	enum:__anon16
+CAFE_PID_RESET_VALUE	.\inc\radio_data_types.h	66;"	d
+CAFE_PID_RESET_VALUE	.\polling\TX_CAFE.h	47;"	d
+CAFE_PPI_RX_TIMEOUT	.\inc\radio_data_types.h	58;"	d
+CAFE_PPI_RX_TIMEOUT	.\polling\TX_CAFE.h	39;"	d
+CAFE_PPI_TIMER_START	.\inc\radio_data_types.h	56;"	d
+CAFE_PPI_TIMER_START	.\polling\TX_CAFE.h	37;"	d
+CAFE_PPI_TIMER_STOP	.\inc\radio_data_types.h	57;"	d
+CAFE_PPI_TIMER_STOP	.\polling\TX_CAFE.h	38;"	d
+CAFE_PPI_TX_START	.\inc\radio_data_types.h	59;"	d
+CAFE_PPI_TX_START	.\polling\TX_CAFE.h	40;"	d
+CAFE_STATE_IDLE	.\polling\TX_CAFE.h	/^    CAFE_STATE_IDLE,$/;"	e	enum:__anon20
+CAFE_STATE_PRX	.\polling\TX_CAFE.h	/^    CAFE_STATE_PRX,$/;"	e	enum:__anon20
+CAFE_STATE_PRX_SEND_ACK	.\polling\TX_CAFE.h	/^    CAFE_STATE_PRX_SEND_ACK,$/;"	e	enum:__anon20
+CAFE_STATE_PRX_SEND_ACK_PAYLOAD	.\polling\TX_CAFE.h	/^    CAFE_STATE_PRX_SEND_ACK_PAYLOAD$/;"	e	enum:__anon20
+CAFE_STATE_PTX_RX_ACK	.\polling\TX_CAFE.h	/^    CAFE_STATE_PTX_RX_ACK,$/;"	e	enum:__anon20
+CAFE_STATE_PTX_TX	.\polling\TX_CAFE.h	/^    CAFE_STATE_PTX_TX,$/;"	e	enum:__anon20
+CAFE_STATE_PTX_TX_ACK	.\polling\TX_CAFE.h	/^    CAFE_STATE_PTX_TX_ACK,$/;"	e	enum:__anon20
+CAFE_STATE_UNINITIALIZED	.\polling\TX_CAFE.h	/^    CAFE_STATE_UNINITIALIZED,$/;"	e	enum:__anon20
+CAFE_SYS_TIMER	.\inc\radio_data_types.h	53;"	d
+CAFE_SYS_TIMER	.\polling\TX_CAFE.h	34;"	d
+CAFE_SYS_TIMER_IRQ_Handler	.\inc\radio_data_types.h	54;"	d
+CAFE_SYS_TIMER_IRQ_Handler	.\polling\TX_CAFE.h	35;"	d
+CAFE_TXMODE_AUTO	.\polling\TX_CAFE.h	/^    CAFE_TXMODE_AUTO,        \/\/ Automatic TX mode - When the TX fifo is non-empty and the radio is idle packets will be sent automatically.$/;"	e	enum:__anon19
+CAFE_TXMODE_MANUAL	.\polling\TX_CAFE.h	/^    CAFE_TXMODE_MANUAL,      \/\/ Manual TX mode - Packets will not be sent until radio_start_tx() is called. Can be used to ensure consistent packet timing.$/;"	e	enum:__anon19
+CAFE_TXMODE_MANUAL_START	.\polling\TX_CAFE.h	/^    CAFE_TXMODE_MANUAL_START \/\/ Manual start TX mode - Packets will not be sent until radio_start_tx() is called, but transmission will continue automatically until the TX FIFO is empty.$/;"	e	enum:__anon19
+CALCULATE_BATTERY_VOLTAGE	.\src\ws_adc.c	30;"	d	file:
+CALCULATE_VOLTAGE_FROM_ADC	.\src\ws_adc.c	27;"	d	file:
+CCM_IN_HEADER_INDEX	.\src\ws_aes.c	36;"	d	file:
+CCM_IN_LENGTH_INDEX	.\src\ws_aes.c	37;"	d	file:
+CCM_IN_PAYLOAD_INDEX	.\src\ws_aes.c	39;"	d	file:
+CCM_IN_RFU_INDEX	.\src\ws_aes.c	38;"	d	file:
+CCM_IV_SIZE	.\src\ws_aes.c	32;"	d	file:
+CCM_KEY_SIZE	.\src\ws_aes.c	31;"	d	file:
+CCM_MIC_SIZE	.\src\ws_aes.c	33;"	d	file:
+CCM_SCRATCH_ARE_SIZE	.\src\ws_aes.c	34;"	d	file:
+CENTRAL_LINK_COUNT	.\src\ws_softdevice.c	19;"	d	file:
+CLI_DBG	.\src\cli.c	43;"	d	file:
+CLI_DBG	.\src\cli.c	45;"	d	file:
+COMMAND_LEVELS	.\src\cli.c	168;"	d	file:
+COMMAND_LIST	.\inc\command_list.h	8;"	d
+CONN_SUP_TIMEOUT	.\src\ws_ble.c	35;"	d	file:
+CTS_PIN	.\inc\simple_uart.h	24;"	d
+CTS_PIN_NUMBER	.\src\ws_uart.c	28;"	d	file:
+CTS_PIN_NUMBER	.\src\ws_uart.c	35;"	d	file:
+CTS_PIN_NUMBER	.\src\ws_uart.c	42;"	d	file:
+CUSTOM_PIPE	.\inc\radio_data_types.h	16;"	d
+CUSTOM_PIPE	.\inc\radio_data_types.h	21;"	d
+CUSTOM_PIPE	.\inc\radio_data_types.h	25;"	d
+CUSTOM_PIPE_INDEX	.\inc\radio_data_types.h	14;"	d
+DATA_SIZE	.\src\ws_aes.c	35;"	d	file:
+DEBUGPIN1	.\polling\TX_CAFE.h	22;"	d
+DEBUGPIN2	.\polling\TX_CAFE.h	23;"	d
+DEBUGPIN3	.\polling\TX_CAFE.h	24;"	d
+DEBUGPIN4	.\polling\TX_CAFE.h	25;"	d
+DEBUG_ADC	.\src\ws_adc.c	11;"	d	file:
+DEBUG_BLE_CONNECTION	.\src\ws_ble.c	19;"	d	file:
+DEBUG_BLE_CONNECTION	.\src\ws_softdevice.c	10;"	d	file:
+DEBUG_CLI_AES	.\src\cli.c	41;"	d	file:
+DEVICE_NAME	.\src\ws_ble.c	26;"	d	file:
+DISABLE_RF_IRQ	.\polling\TX_CAFE.c	41;"	d	file:
+DISABLE_RF_IRQ	.\src\private_radio.c	17;"	d	file:
+ENABLE_RF_IRQ	.\polling\TX_CAFE.c	42;"	d	file:
+ENABLE_RF_IRQ	.\src\private_radio.c	18;"	d	file:
+FET_ADC	.\inc\ws_adc.h	6;"	d
+FIRST_CONN_PARAMS_UPDATE_DELAY	.\src\ws_ble.c	199;"	d	file:
+INPUT_INTERRUPT_MASK	.\inc\io_expander_addr.h	10;"	d
+INPUT_PORT_REGISTER	.\inc\io_expander_addr.h	9;"	d
+IO_EXPANDER_INT_PIN	.\inc\io_expander_addr.h	5;"	d
+IO_EXPANDER_INT_SCL	.\inc\io_expander_addr.h	6;"	d
+IO_EXPANDER_INT_SDA	.\inc\io_expander_addr.h	7;"	d
+IS_SRVC_CHANGED_CHARACT_PRESENT	.\src\ws_softdevice.c	17;"	d	file:
+LED_BLUE	.\inc\bbn_board.h	13;"	d
+LED_BLUE	.\inc\bbn_board.h	19;"	d
+LED_BLUE	.\inc\bbn_board.h	25;"	d
+LED_GREEN	.\inc\bbn_board.h	12;"	d
+LED_GREEN	.\inc\bbn_board.h	18;"	d
+LED_GREEN	.\inc\bbn_board.h	24;"	d
+LED_RED	.\inc\bbn_board.h	11;"	d
+LED_RED	.\inc\bbn_board.h	17;"	d
+LED_RED	.\inc\bbn_board.h	23;"	d
+MANUFACTURER_NAME	.\src\ws_ble.c	27;"	d	file:
+MAX_COMMAND_SIZE	.\src\cli.c	50;"	d	file:
+MAX_CONN_INTERVAL	.\src\ws_ble.c	33;"	d	file:
+MAX_CONN_PARAMS_UPDATE_COUNT	.\src\ws_ble.c	201;"	d	file:
+MAX_PENDING_TRANSACTIONS	.\src\accelerometer_i2c.c	15;"	d	file:
+MAX_SLAVES_AVAILABLE	.\src\private_radio.c	10;"	d	file:
+MIN_CONN_INTERVAL	.\src\ws_ble.c	32;"	d	file:
+MMA8652_ADDR	.\inc\mma8652.h	5;"	d
+MMA8652_ASLP_COUNT	.\inc\mma8652.h	55;"	d
+MMA8652_CTRL_REG1	.\inc\mma8652.h	57;"	d
+MMA8652_CTRL_REG2	.\inc\mma8652.h	58;"	d
+MMA8652_CTRL_REG3	.\inc\mma8652.h	59;"	d
+MMA8652_CTRL_REG4	.\inc\mma8652.h	60;"	d
+MMA8652_CTRL_REG5	.\inc\mma8652.h	61;"	d
+MMA8652_FF_MT_CFG	.\inc\mma8652.h	36;"	d
+MMA8652_FF_MT_COUNT	.\inc\mma8652.h	39;"	d
+MMA8652_FF_MT_SRC	.\inc\mma8652.h	37;"	d
+MMA8652_FF_MT_THS	.\inc\mma8652.h	38;"	d
+MMA8652_F_SETUP	.\inc\mma8652.h	18;"	d
+MMA8652_F_STATUS	.\inc\mma8652.h	9;"	d
+MMA8652_HP_FILTER_CUTOFF	.\inc\mma8652.h	28;"	d
+MMA8652_INT_SOURCE	.\inc\mma8652.h	22;"	d
+MMA8652_OFF_X	.\inc\mma8652.h	63;"	d
+MMA8652_OFF_Y	.\inc\mma8652.h	64;"	d
+MMA8652_OFF_Z	.\inc\mma8652.h	65;"	d
+MMA8652_OUT_X_LSB	.\inc\mma8652.h	12;"	d
+MMA8652_OUT_X_MSB	.\inc\mma8652.h	11;"	d
+MMA8652_OUT_Y_LSB	.\inc\mma8652.h	14;"	d
+MMA8652_OUT_Y_MSB	.\inc\mma8652.h	13;"	d
+MMA8652_OUT_Z_LSB	.\inc\mma8652.h	16;"	d
+MMA8652_OUT_Z_MSB	.\inc\mma8652.h	15;"	d
+MMA8652_PL_BF_ZCOMP	.\inc\mma8652.h	33;"	d
+MMA8652_PL_CFG	.\inc\mma8652.h	31;"	d
+MMA8652_PL_COUNT	.\inc\mma8652.h	32;"	d
+MMA8652_PL_STATUS	.\inc\mma8652.h	30;"	d
+MMA8652_PULSE_CFG	.\inc\mma8652.h	46;"	d
+MMA8652_PULSE_LTCY	.\inc\mma8652.h	52;"	d
+MMA8652_PULSE_SRC	.\inc\mma8652.h	47;"	d
+MMA8652_PULSE_THSX	.\inc\mma8652.h	48;"	d
+MMA8652_PULSE_THSY	.\inc\mma8652.h	49;"	d
+MMA8652_PULSE_THSZ	.\inc\mma8652.h	50;"	d
+MMA8652_PULSE_TMLT	.\inc\mma8652.h	51;"	d
+MMA8652_PULSE_WIND	.\inc\mma8652.h	53;"	d
+MMA8652_P_L_THS_REG	.\inc\mma8652.h	34;"	d
+MMA8652_READ	.\src\accelerometer_i2c.c	25;"	d	file:
+MMA8652_STATUS	.\inc\mma8652.h	8;"	d
+MMA8652_SYSMOD	.\inc\mma8652.h	20;"	d
+MMA8652_TRANSIENT_CFG	.\inc\mma8652.h	41;"	d
+MMA8652_TRANSIENT_COUNT	.\inc\mma8652.h	44;"	d
+MMA8652_TRANSIENT_SRC	.\inc\mma8652.h	42;"	d
+MMA8652_TRANSIENT_THS	.\inc\mma8652.h	43;"	d
+MMA8652_TRIG_CFG	.\inc\mma8652.h	19;"	d
+MMA8652_WHO_AM_I	.\inc\mma8652.h	24;"	d
+MMA8652_WRITE	.\src\accelerometer_i2c.c	29;"	d	file:
+MMA8652_XYZ_DATA_CFG	.\inc\mma8652.h	26;"	d
+MOTOR_PIN	.\inc\bbn_board.h	10;"	d
+NEXT_CONN_PARAMS_UPDATE_DELAY	.\src\ws_ble.c	200;"	d	file:
+NO_CYPHER	.\inc\private_radio.h	11;"	d
+PERIPHERAL_LINK_COUNT	.\src\ws_softdevice.c	20;"	d	file:
+PRIME_NUMBER	.\src\cli.c	48;"	d	file:
+PRIME_NUMBER_FOR_SHORT_HASH	.\src\cli.c	49;"	d	file:
+RADIO_INVALID_MODE	.\inc\radio_data_types.h	/^    RADIO_INVALID_MODE,$/;"	e	enum:__anon4
+RADIO_IRQHandler	.\polling\TX_CAFE.c	/^void RADIO_IRQHandler()$/;"	f
+RADIO_IRQHandler	.\src\private_radio.c	/^void RADIO_IRQHandler(){$/;"	f
+RADIO_IRQ_STATES	.\src\private_radio.c	/^}RADIO_IRQ_STATES;$/;"	v	typeref:enum:__anon27
+RADIO_PACKET_LEN	.\inc\radio_data_types.h	37;"	d
+RADIO_PACKET_LEN	.\polling\TX_CAFE.h	30;"	d
+RADIO_PACKET_OVERHEAD	.\inc\radio_data_types.h	35;"	d
+RADIO_RECEIVER_MODE	.\inc\radio_data_types.h	/^    RADIO_RECEIVER_MODE           \/\/ Primary receiver$/;"	e	enum:__anon4
+RADIO_RX_FIFO_LEN	.\inc\radio_data_types.h	38;"	d
+RADIO_RX_FIFO_LEN	.\polling\TX_CAFE.h	32;"	d
+RADIO_SHORTS_COMMON	.\src\private_radio.c	21;"	d	file:
+RADIO_TRANSMITTER_MODE	.\inc\radio_data_types.h	/^    RADIO_TRANSMITTER_MODE,          \/\/ Primary transmitter$/;"	e	enum:__anon4
+RADIO_TX_FIFO_LEN	.\inc\radio_data_types.h	39;"	d
+RADIO_TX_FIFO_LEN	.\polling\TX_CAFE.h	31;"	d
+RAM_APP_START_AT	.\src\ws_softdevice.c	65;"	d	file:
+RESISTOR_1	.\src\ws_adc.c	19;"	d	file:
+RESISTOR_2	.\src\ws_adc.c	20;"	d	file:
+RTS_PIN	.\inc\simple_uart.h	22;"	d
+RTS_PIN_NUMBER	.\src\ws_uart.c	29;"	d	file:
+RTS_PIN_NUMBER	.\src\ws_uart.c	36;"	d	file:
+RTS_PIN_NUMBER	.\src\ws_uart.c	43;"	d	file:
+RX_PIN	.\inc\simple_uart.h	25;"	d
+RX_PIN_NUMBER	.\src\ws_uart.c	26;"	d	file:
+RX_PIN_NUMBER	.\src\ws_uart.c	33;"	d	file:
+RX_PIN_NUMBER	.\src\ws_uart.c	40;"	d	file:
+RX_WAIT_FOR_ACK_TIMEOUT_US_1MBPS	.\polling\TX_CAFE.c	37;"	d	file:
+RX_WAIT_FOR_ACK_TIMEOUT_US_1MBPS	.\src\private_radio.c	14;"	d	file:
+RX_WAIT_FOR_ACK_TIMEOUT_US_250KBPS	.\polling\TX_CAFE.c	38;"	d	file:
+RX_WAIT_FOR_ACK_TIMEOUT_US_250KBPS	.\src\private_radio.c	15;"	d	file:
+RX_WAIT_FOR_ACK_TIMEOUT_US_2MBPS	.\polling\TX_CAFE.c	36;"	d	file:
+RX_WAIT_FOR_ACK_TIMEOUT_US_2MBPS	.\src\private_radio.c	13;"	d	file:
+S1	.\inc\radio_data_types.h	/^		uint8_t S1;                       \/*Requiered field by HW*\/$/;"	m	struct:__anon10::__anon11
+SEC_PARAM_BOND	.\src\ws_ble.c	191;"	d	file:
+SEC_PARAM_IO_CAPABILITIES	.\src\ws_ble.c	193;"	d	file:
+SEC_PARAM_MAX_KEY_SIZE	.\src\ws_ble.c	196;"	d	file:
+SEC_PARAM_MIN_KEY_SIZE	.\src\ws_ble.c	195;"	d	file:
+SEC_PARAM_MITM	.\src\ws_ble.c	192;"	d	file:
+SEC_PARAM_OOB	.\src\ws_ble.c	194;"	d	file:
+SIMPLE_UART_H	.\inc\simple_uart.h	14;"	d
+SLAVE_LATENCY	.\src\ws_ble.c	34;"	d	file:
+SLAVE_name	.\inc\radio_data_types.h	17;"	d
+SLAVE_name	.\inc\radio_data_types.h	22;"	d
+SLAVE_name	.\inc\radio_data_types.h	26;"	d
+SUPPLY_VOLTAGE	.\src\ws_adc.c	21;"	d	file:
+S_EVENTS_DISABLED	.\src\private_radio.c	/^	S_EVENTS_DISABLED =0X08,$/;"	e	enum:__anon27	file:
+S_EVENTS_END	.\src\private_radio.c	/^	S_EVENTS_END   =0X02,$/;"	e	enum:__anon27	file:
+S_EVENTS_READY	.\src\private_radio.c	/^	S_EVENTS_READY =0X04,$/;"	e	enum:__anon27	file:
+S_IRQ_HANDLER	.\src\private_radio.c	/^	S_IRQ_HANDLER  =0X01,$/;"	e	enum:__anon27	file:
+TIMER_1_APP	.\src\ws_timer.c	/^const nrf_drv_timer_t TIMER_1_APP = NRF_DRV_TIMER_INSTANCE(1);$/;"	v
+TIMER_DBG	.\src\ws_timer.c	7;"	d	file:
+TIMER_INTERVAL_IN_MS	.\src\ws_timer.c	9;"	d	file:
+TX_PIN	.\inc\simple_uart.h	23;"	d
+TX_PIN_NUMBER	.\src\ws_uart.c	27;"	d	file:
+TX_PIN_NUMBER	.\src\ws_uart.c	34;"	d	file:
+TX_PIN_NUMBER	.\src\ws_uart.c	41;"	d	file:
+UART_APP_	.\inc\ws_uart.h	2;"	d
+UART_RX	.\inc\bbn_board.h	7;"	d
+UART_RX_BUF_SIZE	.\src\ws_uart.c	12;"	d	file:
+UART_STRING_MAX_SIZE	.\src\ws_uart.c	11;"	d	file:
+UART_TX	.\inc\bbn_board.h	6;"	d
+UART_TX_BUF_SIZE	.\src\ws_uart.c	13;"	d	file:
+USER_PACKET_OVERHEAD	.\inc\radio_data_types.h	32;"	d
+VOLTAGE_UNIT	.\src\ws_adc.c	25;"	d	file:
+WS_BLE_INIT	.\inc\ws_ble.h	15;"	d
+WS_BLE_INIT	.\inc\ws_ble.h	17;"	d
+WS_DBG	.\inc\ws_uart.h	5;"	d
+_ADC_APP_H_	.\inc\ws_adc.h	2;"	d
+_BBN_GPIO_H_	.\inc\bbn_board.h	2;"	d
+_BLE_APP_	.\inc\ws_ble.h	2;"	d
+_CAFE_COMMANDS_H_	.\inc\cafe_commands.h	2;"	d
+_CAFE_DATATYPE_H_	.\inc\radio_data_types.h	2;"	d
+_CAFE_PROTOCOL_H_	.\inc\private_radio.h	3;"	d
+_CAFE_PROTOCOL_H_	.\polling\TX_CAFE.h	14;"	d
+_FSM_DEFINITION_H_	.\inc\fsm\fsm_definition.h	2;"	d
+_MICRO_CLI_H__	.\inc\cli.h	2;"	d
+_MMA8652_H__	.\inc\mma8652.h	2;"	d
+_WS_SOFT_DEVICE_H_	.\inc\ws_softdevice.h	2;"	d
+__ACCELOMETER_I2C_H_	.\inc\accelerometer_i2c.h	2;"	d
+__CUSTOM_BLE_SERVICE_H__	.\inc\ws_ble_services.h	2;"	d
+__IO_EXPANDER_ADDR_H_	.\inc\io_expander_addr.h	2;"	d
+__IO_EXPANDER_DV_H__	.\inc\io_expander.h	2;"	d
+__TIMER_APP__H__	.\inc\ws_timer.h	2;"	d
+ack	.\inc\radio_data_types.h	/^		uint8_t ack;                      \/*Response ack requiered*\/$/;"	m	struct:__anon10::__anon11
+addr	.\src\accelerometer_i2c.c	/^static uint8_t addr = 0x00;$/;"	v	file:
+address	.\inc\radio_data_types.h	/^		uint8_t address;                  \/*Logical address that goes into the packet*\/$/;"	m	struct:__anon10::__anon11
+aes_app_H	.\inc\ws_aes.h	9;"	d
+aes_ccm_rng_fill_buffer	.\src\ws_aes.c	/^void aes_ccm_rng_fill_buffer(uint8_t *buf, uint32_t bufsize)$/;"	f
+aes_decrypt_data	.\src\ws_aes.c	/^uint8_t aes_decrypt_data(uint8_t *src_data, uint8_t  length, uint8_t *out_data){$/;"	f
+aes_encrypt_data	.\src\ws_aes.c	/^uint8_t aes_encrypt_data( uint8_t *input_data, uint8_t packet_length, uint8_t *out_data)$/;"	f
+aes_key_holder	.\src\ws_aes.c	/^static uint8_t  aes_key_holder[CCM_SCRATCH_ARE_SIZE];$/;"	v	file:
+available	.\inc\radio_data_types.h	/^        uint8_t available;\/*reception packet pending to read*\/     $/;"	m	union:__anon12::__anon13
+base_addr0	.\inc\radio_data_types.h	/^                 uint8_t   base_addr0 [5]  ;$/;"	m	struct:__anon3
+base_addr0	.\polling\TX_CAFE.h	/^                               uint8_t   base_addr0[5];$/;"	m	struct:__anon15
+base_addr0_tx	.\inc\radio_data_types.h	/^                 uint8_t   base_addr0_tx[5];$/;"	m	struct:__anon3
+base_addr0_tx	.\polling\TX_CAFE.h	/^                               uint8_t   base_addr0_tx[5];$/;"	m	struct:__anon15
+base_addr1	.\inc\radio_data_types.h	/^                 uint8_t   base_addr1 [5]  ;$/;"	m	struct:__anon3
+base_addr1	.\polling\TX_CAFE.h	/^                               uint8_t   base_addr1[5];$/;"	m	struct:__anon15
+bitrate	.\inc\radio_data_types.h	/^    radiobitrate_t          bitrate;$/;"	m	struct:__anon9
+bitrate	.\polling\TX_CAFE.h	/^    radiobitrate_t          bitrate;$/;"	m	struct:__anon21
+ble_cs_inint_t	.\inc\ws_ble_services.h	/^} ble_cs_inint_t;$/;"	t	typeref:struct:__anon14
+ble_cs_s	.\inc\ws_ble_services.h	/^ struct ble_cs_s{  $/;"	s
+ble_cs_t	.\inc\ws_ble_services.h	/^typedef struct ble_cs_s ble_cs_t;$/;"	t	typeref:struct:ble_cs_s
+ble_nus_ws_on_ble_evt	.\src\ws_ble_services.c	/^void ble_nus_ws_on_ble_evt(ble_cs_t * p_custom_service, ble_evt_t * p_ble_evt)$/;"	f
+bytewise_bit_swap	.\polling\TX_CAFE.c	/^static uint32_t bytewise_bit_swap(uint32_t inp)$/;"	f	file:
+bytewise_bit_swap	.\src\private_radio.c	/^static uint32_t bytewise_bit_swap(uint32_t inp)$/;"	f	file:
+ccm_data	.\src\ws_aes.c	/^static st_ccm_data  ccm_data;$/;"	v	file:
+check_radio_flags	.\polling\TX_CAFE.c	/^void check_radio_flags()$/;"	f
+cli_ascii_charhex_to_hex	.\src\cli.c	/^uint8_t cli_ascii_charhex_to_hex( char  hex_character){$/;"	f
+cli_ascii_streamhex_to_hex	.\src\cli.c	/^uint16_t cli_ascii_streamhex_to_hex(char *stream_pointer, uint8_t stream_length){$/;"	f
+cli_blink	.\src\cli.c	/^void cli_blink(unsigned int *command_id)$/;"	f
+cli_execute_debug_command	.\src\cli.c	/^void cli_execute_debug_command(void){$/;"	f
+cli_find_char	.\src\cli.c	/^unsigned char cli_find_char(char *string){$/;"	f
+cli_get_command_id	.\src\cli.c	/^unsigned int cli_get_command_id(char * string, unsigned char *index, unsigned int prime_number){$/;"	f
+cli_get_hash	.\src\cli.c	/^unsigned int cli_get_hash (char *string, unsigned int prime_number){$/;"	f
+cli_gpio_handle	.\src\cli.c	/^void cli_gpio_handle(unsigned int *command_id){$/;"	f
+cli_parse_debug_command	.\src\cli.c	/^unsigned char cli_parse_debug_command(char *argv)$/;"	f
+cmd_accinit	.\inc\command_list.h	/^ cmd_accinit              =   0x3da,$/;"	e	enum:__anon2
+cmd_adc	.\inc\command_list.h	/^ cmd_adc                  =   0x252,$/;"	e	enum:__anon2
+cmd_ble	.\inc\command_list.h	/^ cmd_ble                  =   0x269,$/;"	e	enum:__anon2
+cmd_blueoff	.\inc\cafe_commands.h	/^ cmd_blueoff = 0x3a4,$/;"	e	enum:__anon1
+cmd_blueon	.\inc\cafe_commands.h	/^ cmd_blueon  = 0x10a,$/;"	e	enum:__anon1
+cmd_cip	.\inc\command_list.h	/^ cmd_cip                  =   0x285,$/;"	e	enum:__anon2
+cmd_clear	.\inc\command_list.h	/^ cmd_clear                =   0x237,$/;"	e	enum:__anon2
+cmd_cmdtest	.\inc\command_list.h	/^ cmd_cmdtest              =   0x3d,$/;"	e	enum:__anon2
+cmd_dcip	.\inc\command_list.h	/^ cmd_dcip                 =   0x34,$/;"	e	enum:__anon2
+cmd_fet	.\inc\command_list.h	/^ cmd_fet                  =   0x28c,$/;"	e	enum:__anon2
+cmd_gpio	.\inc\command_list.h	/^ cmd_gpio                 =   0x4d ,$/;"	e	enum:__anon2
+cmd_gpio_hi	.\inc\command_list.h	/^ cmd_gpio_hi              =   0x93,$/;"	e	enum:__anon2
+cmd_gpio_lo	.\inc\command_list.h	/^ cmd_gpio_lo              =   0xA3,$/;"	e	enum:__anon2
+cmd_greenoff	.\inc\cafe_commands.h	/^ cmd_greenoff= 0x2f5,$/;"	e	enum:__anon1
+cmd_greenon	.\inc\cafe_commands.h	/^ cmd_greenon = 0x3ee,$/;"	e	enum:__anon1
+cmd_help	.\inc\command_list.h	/^ cmd_help                 =   0x45 ,$/;"	e	enum:__anon2
+cmd_hex2dec	.\inc\command_list.h	/^ cmd_hex2dec              =   0x287,$/;"	e	enum:__anon2
+cmd_radiostart	.\inc\command_list.h	/^ cmd_radiostart           =   0x3EA,$/;"	e	enum:__anon2
+cmd_read_twi	.\inc\command_list.h	/^ cmd_read_twi             =   0x74,$/;"	e	enum:__anon2
+cmd_redoff	.\inc\cafe_commands.h	/^ cmd_redoff  = 0xa4,$/;"	e	enum:__anon1
+cmd_redon	.\inc\cafe_commands.h	/^ cmd_redon   = 0x259,$/;"	e	enum:__anon1
+cmd_reset	.\inc\command_list.h	/^ cmd_reset                =   0x27c,$/;"	e	enum:__anon2
+cmd_rgb	.\inc\command_list.h	/^ cmd_rgb                  =   0x266,$/;"	e	enum:__anon2
+cmd_rxm	.\inc\command_list.h	/^ cmd_rxm                  =   0x2a9,$/;"	e	enum:__anon2
+cmd_sample	.\inc\command_list.h	/^ cmd_sample               =   0xd4,$/;"	e	enum:__anon2
+cmd_send	.\inc\command_list.h	/^ cmd_send                 =   0x26,$/;"	e	enum:__anon2
+cmd_sub_blue	.\inc\command_list.h	/^ cmd_sub_blue             =   0x43,$/;"	e	enum:__anon2
+cmd_sub_green	.\inc\command_list.h	/^ cmd_sub_green            =   0x55,$/;"	e	enum:__anon2
+cmd_sub_off	.\inc\command_list.h	/^ cmd_sub_off              =   0x78,$/;"	e	enum:__anon2
+cmd_sub_on	.\inc\command_list.h	/^ cmd_sub_on               =   0xA4,$/;"	e	enum:__anon2
+cmd_sub_random_key	.\inc\command_list.h	/^ cmd_sub_random_key       =   0x89,$/;"	e	enum:__anon2
+cmd_sub_red	.\inc\command_list.h	/^ cmd_sub_red              =   0x73,$/;"	e	enum:__anon2
+cmd_turn	.\inc\command_list.h	/^ cmd_turn                 =   0x7b,$/;"	e	enum:__anon2
+cmd_twi_read_saved_buffer	.\inc\command_list.h	/^ cmd_twi_read_saved_buffer=   0x64,$/;"	e	enum:__anon2
+cmd_twiapp	.\inc\command_list.h	/^ cmd_twiapp               =   0x10f,$/;"	e	enum:__anon2
+cmd_txm	.\inc\command_list.h	/^ cmd_txm                  =   0x2ab,$/;"	e	enum:__anon2
+cmd_write_twi	.\inc\command_list.h	/^ cmd_write_twi            =   0x88,$/;"	e	enum:__anon2
+conn_handle	.\inc\ws_ble_services.h	/^    uint16_t                 conn_handle;             \/**< Handle of the current connection (as provided by the SoftDevice). BLE_CONN_HANDLE_INVALID if not in a connection. *\/$/;"	m	struct:ble_cs_s
+conn_params_error_handler	.\src\ws_ble.c	/^void conn_params_error_handler(uint32_t nrf_error)$/;"	f
+count	.\polling\TX_CAFE.h	/^    uint32_t        count;$/;"	m	struct:__anon25
+count	.\polling\TX_CAFE.h	/^    uint32_t        count;$/;"	m	struct:__anon26
+counter	.\src\ws_aes.c	/^    uint64_t counter;$/;"	m	struct:__anon28	file:
+crc	.\inc\radio_data_types.h	/^		uint8_t crc;                      \/*Optional crc *\/$/;"	m	struct:__anon10::__anon11
+crc	.\inc\radio_data_types.h	/^    radiocrc_t              crc;$/;"	m	struct:__anon9
+crc	.\polling\TX_CAFE.h	/^    radiocrc_t              crc;$/;"	m	struct:__anon21
+create_timers	.\src\ws_timer.c	/^static void create_timers()$/;"	f	file:
+cripted_data	.\src\cli.c	/^static uint8_t  cripted_data  [40];$/;"	v	file:
+cs_data_handler	.\inc\ws_ble_services.h	/^typedef void (*cs_data_handler) (ble_cs_t * p_custom_service, uint8_t * p_data, uint16_t length);$/;"	t
+cypher	.\src\ws_aes.c	/^	     cypher      :1,$/;"	m	struct:__anon29	file:
+data	.\inc\radio_data_types.h	/^    radio_payload_t  data; \/*rx,tx payload*\/$/;"	m	struct:__anon12
+data	.\polling\TX_CAFE.h	/^    uint8_t data[RADIO_PACKET_LEN];$/;"	m	struct:__anon24
+data_handler	.\inc\ws_ble_services.h	/^    cs_data_handler   data_handler;            \/**< Event handler to be called for handling received data. *\/$/;"	m	struct:ble_cs_s
+data_handler	.\inc\ws_ble_services.h	/^    cs_data_handler data_handler; \/**< Event handler to be called for handling received data. *\/$/;"	m	struct:__anon14
+device_manager_evt_handler	.\src\ws_ble.c	/^uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,$/;"	f
+direction	.\src\ws_aes.c	/^    uint8_t  direction;$/;"	m	struct:__anon28	file:
+dynamic_ack_enabled	.\polling\TX_CAFE.h	/^    uint8_t                 dynamic_ack_enabled;$/;"	m	struct:__anon21
+dynamic_payload_length_enabled	.\polling\TX_CAFE.h	/^    uint8_t                 dynamic_payload_length_enabled;$/;"	m	struct:__anon21
+entry_point	.\polling\TX_CAFE.h	/^    uint32_t        entry_point;$/;"	m	struct:__anon25
+entry_point	.\polling\TX_CAFE.h	/^    uint32_t        entry_point;$/;"	m	struct:__anon26
+err_code	.\src\cli.c	/^	uint8_t err_code;$/;"	v
+event_handler	.\inc\radio_data_types.h	/^    radio_event_handler_t    event_handler;$/;"	m	struct:__anon9
+event_handler	.\polling\TX_CAFE.h	/^    radio_event_handler_t    event_handler;$/;"	m	struct:__anon21
+exit_point	.\polling\TX_CAFE.h	/^    uint32_t        exit_point;$/;"	m	struct:__anon25
+exit_point	.\polling\TX_CAFE.h	/^    uint32_t        exit_point;$/;"	m	struct:__anon26
+formated	.\inc\radio_data_types.h	/^	} formated;$/;"	m	union:__anon10	typeref:struct:__anon10::__anon11
+generate_key	.\src\ws_aes.c	/^	char generate_key:1,$/;"	m	struct:__anon29	file:
+i	.\src\ws_timer.c	/^static uint16_t i;$/;"	v	file:
+i2c_mode	.\src\accelerometer_i2c.c	/^uint8_t i2c_mode=0;$/;"	v
+init	.\src\ws_aes.c	/^	     init        :1;$/;"	m	struct:__anon29	file:
+initialize_fifos	.\polling\TX_CAFE.c	/^static void initialize_fifos()$/;"	f	file:
+input_stream	.\src\ws_uart.c	/^	char  input_stream[UART_STRING_MAX_SIZE];$/;"	m	struct:__anon30	file:
+io_init_io_expander	.\src\io_expander.c	/^void io_init_io_expander(void){$/;"	f
+io_read_port	.\src\io_expander.c	/^ void io_read_port(){$/;"	f
+is_notification_enabled	.\inc\ws_ble_services.h	/^    bool                     is_notification_enabled; \/**< Variable to indicate if the peer has enabled notification of the RX characteristic.*\/$/;"	m	struct:ble_cs_s
+iv	.\src\ws_aes.c	/^    uint8_t  iv[CCM_IV_SIZE];  $/;"	m	struct:__anon28	file:
+key	.\src\ws_aes.c	/^    uint8_t  key[CCM_KEY_SIZE];$/;"	m	struct:__anon28	file:
+length	.\inc\radio_data_types.h	/^		uint8_t length;                   \/*Packet length*\/$/;"	m	struct:__anon10::__anon11
+length	.\polling\TX_CAFE.h	/^    uint8_t length;$/;"	m	struct:__anon24
+lfclk_calibration_handle	.\src\bbn_board.c	/^static void lfclk_calibration_handle(void)$/;"	f	file:
+lfclk_calibration_start	.\src\bbn_board.c	/^static void lfclk_calibration_start(void){$/;"	f	file:
+local_uart	.\src\ws_uart.c	/^static uart_driver_t local_uart;$/;"	v	file:
+logic_pipe	.\inc\radio_data_types.h	/^                 uint8_t   logic_pipe [8]  ;$/;"	m	struct:__anon3
+logic_pipe	.\polling\TX_CAFE.h	/^                               uint8_t   logic_pipe[8];$/;"	m	struct:__anon15
+m_adv_uuids	.\src\ws_ble.c	/^static ble_uuid_t m_adv_uuids[] = {{BLE_UUID_DEVICE_INFORMATION_SERVICE, BLE_UUID_TYPE_BLE}}; \/**< Universally unique service identifiers. *\/$/;"	v	file:
+m_app_handle	.\src\ws_ble.c	/^static dm_application_instance_t        m_app_handle;                               \/**< Application identifier allocated by device manager *\/$/;"	v	file:
+m_app_twi	.\src\accelerometer_i2c.c	/^static app_twi_t m_app_twi = APP_TWI_INSTANCE(0);$/;"	v	file:
+m_buffer	.\src\accelerometer_i2c.c	/^static uint8_t m_buffer[BUFFER_SIZE];$/;"	v	file:
+m_config_local	.\polling\TX_CAFE.c	/^static radioconfig_t            m_config_local;$/;"	v	file:
+m_config_local	.\src\private_radio.c	/^static radioconfig_t            m_config_local = CAFE_DEFAULT_CONFIG;$/;"	v	file:
+m_conn_handle	.\src\ws_ble.c	/^ uint16_t                          m_conn_handle = BLE_CONN_HANDLE_INVALID;   \/**< Handle of the current connection. *\/$/;"	v
+m_custom_service	.\src\ws_ble.c	/^ble_cs_t m_custom_service;$/;"	v
+m_event_handler	.\polling\TX_CAFE.c	/^static radio_event_handler_t     m_event_handler;$/;"	v	file:
+m_interrupt_flags	.\polling\TX_CAFE.c	/^static volatile uint32_t        m_interrupt_flags       = 0;$/;"	v	file:
+m_last_rx_packet_crc	.\polling\TX_CAFE.c	/^static volatile uint32_t        m_last_rx_packet_crc = 0xFFFFFFFF;$/;"	v	file:
+m_set_mode_done	.\src\accelerometer_i2c.c	/^static volatile bool m_set_mode_done = false;$/;"	v	file:
+m_twi_global_accelerometer	.\src\accelerometer_i2c.c	/^const nrf_drv_twi_t m_twi_global_accelerometer = NRF_DRV_TWI_INSTANCE(0);$/;"	v
+m_twi_io_expander	.\src\io_expander.c	/^static const nrf_drv_twi_t m_twi_io_expander = NRF_DRV_TWI_INSTANCE(0);$/;"	v	file:
+m_tx_fifo	.\polling\TX_CAFE.c	/^static radio_packet_tx_fifo_t   m_tx_fifo;$/;"	v	file:
+m_tx_fifo_payload	.\polling\TX_CAFE.c	/^static radio_packet_t           m_tx_fifo_payload[RADIO_TX_FIFO_LEN];$/;"	v	file:
+m_tx_payload_buffer	.\polling\TX_CAFE.c	/^static  uint8_t                 m_tx_payload_buffer[RADIO_PACKET_LEN + 2];$/;"	v	file:
+m_xfer_done	.\src\io_expander.c	/^static volatile bool m_xfer_done = true;$/;"	v	file:
+mode	.\inc\radio_data_types.h	/^    radio_mode_t             mode;$/;"	m	struct:__anon9
+noack	.\polling\TX_CAFE.h	/^    uint8_t noack;$/;"	m	struct:__anon24
+nrf_st_address	.\inc\radio_data_types.h	/^}nrf_st_address;$/;"	t	typeref:struct:__anon3
+nrf_st_address	.\polling\TX_CAFE.h	/^}nrf_st_address;$/;"	t	typeref:struct:__anon15
+on_radio_disabled_esb_dpl_tx_noack	.\polling\TX_CAFE.c	/^void on_radio_disabled_esb_dpl_tx_noack()$/;"	f
+on_write	.\src\ws_ble_services.c	/^static void on_write(ble_cs_t * p_custom_service, ble_evt_t * p_ble_evt)$/;"	f	file:
+out_len	.\src\ws_uart.c	/^	char  out_len;$/;"	m	struct:__anon30	file:
+payload	.\inc\radio_data_types.h	/^		uint8_t payload[RADIO_PACKET_LEN];\/*Aplicaction arguments \/data*\/$/;"	m	struct:__anon10::__anon11
+payload_length	.\inc\radio_data_types.h	/^    uint8_t                 payload_length;$/;"	m	struct:__anon9
+payload_length	.\polling\TX_CAFE.h	/^    uint8_t                 payload_length;$/;"	m	struct:__anon21
+payload_ptr	.\polling\TX_CAFE.h	/^    radio_packet_t *payload_ptr[RADIO_RX_FIFO_LEN];$/;"	m	struct:__anon26
+payload_ptr	.\polling\TX_CAFE.h	/^    radio_packet_t *payload_ptr[RADIO_TX_FIFO_LEN];$/;"	m	struct:__anon25
+pending	.\inc\radio_data_types.h	/^        uint8_t pending;  \/*transmission packet pending to sent*\/$/;"	m	union:__anon12::__anon13
+pending_parse	.\src\ws_uart.c	/^	char  pending_parse;$/;"	m	struct:__anon30	file:
+pipe	.\inc\radio_data_types.h	/^    uint8_t pipe; \/*HW radio address*\/$/;"	m	struct:__anon12
+pipe	.\polling\TX_CAFE.h	/^    uint8_t pipe;$/;"	m	struct:__anon24
+ppi_init	.\polling\TX_CAFE.c	/^static void ppi_init()$/;"	f	file:
+ptr_stream	.\src\ws_uart.c	/^	char *ptr_stream;$/;"	m	struct:__anon30	file:
+radio1MBPS	.\inc\radio_data_types.h	/^    radio1MBPS   = RADIO_MODE_MODE_Nrf_1Mbit,$/;"	e	enum:__anon5
+radio250KBPS	.\inc\radio_data_types.h	/^    radio250KBPS = RADIO_MODE_MODE_Nrf_250Kbit$/;"	e	enum:__anon5
+radio2MBPS	.\inc\radio_data_types.h	/^    radio2MBPS   = RADIO_MODE_MODE_Nrf_2Mbit,$/;"	e	enum:__anon5
+radioCRC_16BIT	.\inc\radio_data_types.h	/^    radioCRC_16BIT = RADIO_CRCCNF_LEN_Two,$/;"	e	enum:__anon6
+radioCRC_8BIT	.\inc\radio_data_types.h	/^    radioCRC_8BIT  = RADIO_CRCCNF_LEN_One,$/;"	e	enum:__anon6
+radioCRC_OFF	.\inc\radio_data_types.h	/^    radioCRC_OFF   = RADIO_CRCCNF_LEN_Disabled$/;"	e	enum:__anon6
+radioTXMODE_AUTO	.\inc\radio_data_types.h	/^    radioTXMODE_AUTO,        \/\/ Automatic TX mode - When the TX fifo is non-empty and the radio is idle packets will be sent automatically.$/;"	e	enum:__anon8
+radioTXMODE_MANUAL	.\inc\radio_data_types.h	/^    radioTXMODE_MANUAL,      \/\/ Manual TX mode - Packets will not be sent until radio_start_tx() is called. Can be used to ensure consistent packet timing.$/;"	e	enum:__anon8
+radioTXMODE_MANUAL_START	.\inc\radio_data_types.h	/^    radioTXMODE_MANUAL_START \/\/ Manual start TX mode - Packets will not be sent until radio_start_tx() is called, but transmission will continue automatically until the TX FIFO is empty.$/;"	e	enum:__anon8
+radioTX_POWER_0DBM	.\inc\radio_data_types.h	/^    radioTX_POWER_0DBM     = RADIO_TXPOWER_TXPOWER_0dBm,$/;"	e	enum:__anon7
+radioTX_POWER_4DBM	.\inc\radio_data_types.h	/^    radioTX_POWER_4DBM     = RADIO_TXPOWER_TXPOWER_Pos4dBm,$/;"	e	enum:__anon7
+radioTX_POWER_NEG12DBM	.\inc\radio_data_types.h	/^    radioTX_POWER_NEG12DBM = RADIO_TXPOWER_TXPOWER_Neg12dBm,$/;"	e	enum:__anon7
+radioTX_POWER_NEG16DBM	.\inc\radio_data_types.h	/^    radioTX_POWER_NEG16DBM = RADIO_TXPOWER_TXPOWER_Neg16dBm,$/;"	e	enum:__anon7
+radioTX_POWER_NEG20DBM	.\inc\radio_data_types.h	/^    radioTX_POWER_NEG20DBM = RADIO_TXPOWER_TXPOWER_Neg20dBm,$/;"	e	enum:__anon7
+radioTX_POWER_NEG30DBM	.\inc\radio_data_types.h	/^    radioTX_POWER_NEG30DBM = RADIO_TXPOWER_TXPOWER_Neg30dBm$/;"	e	enum:__anon7
+radioTX_POWER_NEG4DBM	.\inc\radio_data_types.h	/^    radioTX_POWER_NEG4DBM  = RADIO_TXPOWER_TXPOWER_Neg4dBm,$/;"	e	enum:__anon7
+radioTX_POWER_NEG8DBM	.\inc\radio_data_types.h	/^    radioTX_POWER_NEG8DBM  = RADIO_TXPOWER_TXPOWER_Neg8dBm,$/;"	e	enum:__anon7
+radio_addresses	.\inc\radio_data_types.h	/^    nrf_st_address          radio_addresses;$/;"	m	struct:__anon9
+radio_check_pipe_limits	.\src\private_radio.c	/^static uint8_t radio_check_pipe_limits(uint8_t pipe_id)$/;"	f	file:
+radio_disable	.\polling\TX_CAFE.c	/^uint32_t radio_disable(void)$/;"	f
+radio_disable	.\src\private_radio.c	/^static uint32_t radio_disable(void)$/;"	f	file:
+radio_event_handler	.\src\private_radio.c	/^void radio_event_handler(void)$/;"	f
+radio_event_handler_t	.\inc\radio_data_types.h	/^typedef void (*radio_event_handler_t)(void);$/;"	t
+radio_event_handler_t	.\polling\TX_CAFE.h	/^typedef void (*radio_event_handler_t)(void);$/;"	t
+radio_get_clear_interrupts	.\polling\TX_CAFE.c	/^uint32_t radio_get_clear_interrupts(uint32_t *interrupts)$/;"	f
+radio_get_clear_interrupts	.\src\private_radio.c	/^static uint32_t radio_get_clear_interrupts(uint32_t *interrupts)$/;"	f	file:
+radio_get_rssi	.\src\private_radio.c	/^int8_t radio_get_rssi(void)$/;"	f
+radio_init	.\polling\TX_CAFE.c	/^uint32_t radio_init(radioconfig_t *parameters)$/;"	f
+radio_init_addresses	.\src\private_radio.c	/^static void radio_init_addresses(void)$/;"	f	file:
+radio_irq_priority	.\inc\radio_data_types.h	/^    uint8_t                 radio_irq_priority;$/;"	m	struct:__anon9
+radio_irq_priority	.\polling\TX_CAFE.h	/^    uint8_t                 radio_irq_priority;$/;"	m	struct:__anon21
+radio_irq_state	.\src\private_radio.c	/^static char radio_irq_state = 0 ;$/;"	v	file:
+radio_load_payload	.\src\private_radio.c	/^void radio_load_payload(uint8_t pipe_id, char *data,unsigned char len)$/;"	f
+radio_mode_t	.\inc\radio_data_types.h	/^} radio_mode_t;$/;"	t	typeref:enum:__anon4
+radio_mode_t_t	.\polling\TX_CAFE.h	/^} radio_mode_t_t;$/;"	t	typeref:enum:__anon16
+radio_packet_t	.\inc\radio_data_types.h	/^} radio_packet_t;$/;"	t	typeref:struct:__anon12
+radio_packet_t	.\polling\TX_CAFE.h	/^}radio_packet_t;$/;"	t	typeref:struct:__anon24
+radio_packet_tx_fifo_t	.\polling\TX_CAFE.h	/^}radio_packet_tx_fifo_t;$/;"	t	typeref:struct:__anon25
+radio_payload_t	.\inc\radio_data_types.h	/^} radio_payload_t;$/;"	t	typeref:union:__anon10
+radio_ppi_init	.\src\private_radio.c	/^static void radio_ppi_init(void)$/;"	f	file:
+radio_print_current_state	.\src\private_radio.c	/^void radio_print_current_state(void)$/;"	f
+radio_reset	.\src\private_radio.c	/^static void radio_reset(void)$/;"	f	file:
+radio_rx_packet_available	.\src\private_radio.c	/^char radio_rx_packet_available(void)$/;"	f
+radio_rx_setup	.\src\private_radio.c	/^static void radio_rx_setup(void)$/;"	f	file:
+radio_start	.\src\private_radio.c	/^void radio_start(void)$/;"	f
+radio_start_rx_transaction	.\src\private_radio.c	/^static void radio_start_rx_transaction(void)$/;"	f	file:
+radio_start_task	.\src\private_radio.c	/^void radio_start_task(void){$/;"	f
+radio_start_tx_transaction	.\src\private_radio.c	/^static void radio_start_tx_transaction(void)$/;"	f	file:
+radio_status	.\src\private_radio.c	/^uint32_t radio_status=0;$/;"	v
+radio_tx_setup	.\src\private_radio.c	/^static void radio_tx_setup(void)$/;"	f	file:
+radio_update_core_parameters	.\polling\TX_CAFE.c	/^static void radio_update_core_parameters()$/;"	f	file:
+radio_update_core_parameters	.\src\private_radio.c	/^static void radio_update_core_parameters(void)$/;"	f	file:
+radio_update_mode	.\src\private_radio.c	/^void radio_update_mode(radio_mode_t radio_mode)$/;"	f
+radio_update_nrf_radio_address	.\src\private_radio.c	/^static void radio_update_nrf_radio_address(nrf_st_address radio_addr){	$/;"	f	file:
+radio_update_payload_format	.\src\private_radio.c	/^static void radio_update_payload_format(uint32_t payload_length)$/;"	f	file:
+radio_write_tx_payload	.\polling\TX_CAFE.c	/^uint32_t radio_write_tx_payload(radio_packet_t *payload)$/;"	f
+radioaddress_type_t	.\polling\TX_CAFE.h	/^typedef enum {CAFE_ADDRESS_PIPE0, CAFE_ADDRESS_PIPE1, CAFE_ADDRESS_PIPE2, CAFE_ADDRESS_PIPE3, CAFE_ADDRESS_PIPE4, CAFE_ADDRESS_PIPE5, CAFE_ADDRESS_PIPE6, CAFE_ADDRESS_PIPE7} radioaddress_type_t;$/;"	t	typeref:enum:__anon22
+radiobitrate_t	.\inc\radio_data_types.h	/^} radiobitrate_t;$/;"	t	typeref:enum:__anon5
+radiobitrate_t	.\polling\TX_CAFE.h	/^} radiobitrate_t;$/;"	t	typeref:enum:__anon17
+radioconfig_t	.\inc\radio_data_types.h	/^}radioconfig_t;$/;"	t	typeref:struct:__anon9
+radioconfig_t	.\polling\TX_CAFE.h	/^}radioconfig_t;$/;"	t	typeref:struct:__anon21
+radiocrc_t	.\inc\radio_data_types.h	/^} radiocrc_t;$/;"	t	typeref:enum:__anon6
+radiocrc_t	.\polling\TX_CAFE.h	/^} radiocrc_t;$/;"	t	typeref:enum:__anon18
+radioevent_t	.\polling\TX_CAFE.h	/^}radioevent_t;$/;"	t	typeref:struct:__anon23
+radioevent_type_t	.\polling\TX_CAFE.h	/^enum radioevent_type_t  {CAFE_EVENT_TX_SUCCESS, CAFE_EVENT_TX_FAILED, CAFE_EVENT_RX_RECEIVED};$/;"	g
+radioflush_tx	.\polling\TX_CAFE.c	/^uint32_t radioflush_tx(void)$/;"	f
+radioget_rx_payload	.\src\private_radio.c	/^char radioget_rx_payload(char *out_buffer)$/;"	f
+radiomainstate_t	.\polling\TX_CAFE.h	/^} radiomainstate_t;$/;"	t	typeref:enum:__anon20
+radiopayload_rx_fifo_t	.\polling\TX_CAFE.h	/^}radiopayload_rx_fifo_t;$/;"	t	typeref:struct:__anon26
+radiotx_mode_t	.\inc\radio_data_types.h	/^} radiotx_mode_t;$/;"	t	typeref:enum:__anon8
+radiotx_mode_t	.\polling\TX_CAFE.h	/^} radiotx_mode_t;$/;"	t	typeref:enum:__anon19
+radiotx_power_t	.\inc\radio_data_types.h	/^} radiotx_power_t;$/;"	t	typeref:enum:__anon7
+random	.\src\ws_aes.c	/^	     random      :1,$/;"	m	struct:__anon29	file:
+raw	.\inc\radio_data_types.h	/^	char raw[ RADIO_PACKET_LEN + RADIO_PACKET_OVERHEAD ];$/;"	m	union:__anon10
+regR	.\src\accelerometer_i2c.c	/^uint8_t regW,regR = 0;$/;"	v
+regW	.\src\accelerometer_i2c.c	/^uint8_t regW,regR = 0;$/;"	v
+retransmit_count	.\polling\TX_CAFE.h	/^    uint16_t                retransmit_count;$/;"	m	struct:__anon21
+retransmit_delay	.\polling\TX_CAFE.h	/^    uint16_t                retransmit_delay;$/;"	m	struct:__anon21
+rf_addr_length	.\inc\radio_data_types.h	/^    uint8_t                 rf_addr_length;$/;"	m	struct:__anon9
+rf_addr_length	.\polling\TX_CAFE.h	/^    uint8_t                 rf_addr_length;$/;"	m	struct:__anon21
+rf_channel	.\inc\radio_data_types.h	/^    uint8_t                 rf_channel;$/;"	m	struct:__anon9
+rf_channel	.\polling\TX_CAFE.h	/^    uint8_t                 rf_channel;$/;"	m	struct:__anon21
+rssi	.\inc\radio_data_types.h	/^    int8_t  rssi; \/*Received Signal Strength Indicato*\/$/;"	m	struct:__anon12
+rssi	.\polling\TX_CAFE.h	/^    int8_t  rssi;$/;"	m	struct:__anon24
+rx_address_p0	.\polling\TX_CAFE.h	/^    uint8_t                 rx_address_p0[5];$/;"	m	struct:__anon21
+rx_address_p1	.\polling\TX_CAFE.h	/^    uint8_t                 rx_address_p1[5];$/;"	m	struct:__anon21
+rx_address_p2	.\polling\TX_CAFE.h	/^    uint8_t                 rx_address_p2;$/;"	m	struct:__anon21
+rx_address_p3	.\polling\TX_CAFE.h	/^    uint8_t                 rx_address_p3;$/;"	m	struct:__anon21
+rx_address_p4	.\polling\TX_CAFE.h	/^    uint8_t                 rx_address_p4;$/;"	m	struct:__anon21
+rx_address_p5	.\polling\TX_CAFE.h	/^    uint8_t                 rx_address_p5;$/;"	m	struct:__anon21
+rx_address_p6	.\polling\TX_CAFE.h	/^    uint8_t                 rx_address_p6;$/;"	m	struct:__anon21
+rx_address_p7	.\polling\TX_CAFE.h	/^    uint8_t                 rx_address_p7;$/;"	m	struct:__anon21
+rx_fifo_push_rfbuf	.\src\private_radio.c	/^static bool rx_fifo_push_rfbuf(uint8_t pipe)$/;"	f	file:
+rx_handles	.\inc\ws_ble_services.h	/^    ble_gatts_char_handles_t rx_handles;              \/**< Handles related to the RX characteristic (as provided by the SoftDevice). *\/$/;"	m	struct:ble_cs_s
+rx_payload	.\src\private_radio.c	/^static radio_packet_t		rx_payload;$/;"	v	file:
+rx_pipes_enabled	.\polling\TX_CAFE.h	/^    uint8_t                 rx_pipes_enabled;$/;"	m	struct:__anon21
+service_handle	.\inc\ws_ble_services.h	/^    uint16_t                 service_handle;          \/**< Handle of Nordic UART Service (as provided by the SoftDevice). *\/$/;"	m	struct:ble_cs_s
+simple_uart_config	.\src\simple_uart.c	/^void simple_uart_config(uint8_t rts_pin_number,$/;"	f
+simple_uart_get	.\src\simple_uart.c	/^uint8_t simple_uart_get(void)$/;"	f
+simple_uart_get_with_timeout	.\src\simple_uart.c	/^bool simple_uart_get_with_timeout(int32_t timeout_ms, uint8_t * rx_data)$/;"	f
+simple_uart_put	.\src\simple_uart.c	/^void simple_uart_put(uint8_t cr)$/;"	f
+simple_uart_putstring	.\src\simple_uart.c	/^void simple_uart_putstring(const uint8_t * str)$/;"	f
+sm_declare_events	.\inc\fsm\fsm_definition.h	14;"	d
+sm_declare_handler	.\inc\fsm\fsm_definition.h	22;"	d
+sm_declare_look_up_table	.\inc\fsm\fsm_definition.h	28;"	d
+sm_declare_next_event_var	.\inc\fsm\fsm_definition.h	35;"	d
+sm_declare_parser	.\inc\fsm\fsm_definition.h	54;"	d
+sm_declare_state_vars	.\inc\fsm\fsm_definition.h	40;"	d
+sm_declare_states	.\inc\fsm\fsm_definition.h	5;"	d
+sm_declare_update_events	.\inc\fsm\fsm_definition.h	58;"	d
+sm_define_parser	.\inc\fsm\fsm_definition.h	64;"	d
+sm_run	.\inc\fsm\fsm_definition.h	48;"	d
+st_ccm_data	.\src\ws_aes.c	/^}st_ccm_data;$/;"	t	typeref:struct:__anon28	file:
+st_cypher_op	.\src\ws_aes.c	/^}st_cypher_op;$/;"	t	typeref:struct:__anon29	file:
+start_tx_transaction	.\polling\TX_CAFE.c	/^static void start_tx_transaction()$/;"	f	file:
+state	.\inc\radio_data_types.h	/^    } state;$/;"	m	struct:__anon12	typeref:union:__anon12::__anon13
+sw_radio_flag	.\polling\TX_CAFE.c	/^uint8_t	 sw_radio_flag=0;$/;"	v
+sys_evt_dispatch	.\src\ws_softdevice.c	/^void sys_evt_dispatch(uint32_t sys_evt)$/;"	f
+tail	.\src\ws_uart.c	/^	char  tail;$/;"	m	struct:__anon30	file:
+tick_counter	.\src\ws_timer.c	/^static uint32_t tick_counter = 0;$/;"	v	file:
+timer_a_handler	.\src\ws_timer.c	/^static void timer_a_handler(void * p_context){$/;"	f	file:
+transaction_pending	.\src\accelerometer_i2c.c	/^static bool transaction_pending;$/;"	v	file:
+twi_handler	.\src\accelerometer_i2c.c	/^void twi_handler(nrf_drv_twi_evt_t const * p_event, void * p_context)$/;"	f
+twi_handler	.\src\io_expander.c	/^void twi_handler(nrf_drv_twi_evt_t const * p_event, void * p_context)$/;"	f
+tx_address	.\polling\TX_CAFE.h	/^    uint8_t                 tx_address[5];$/;"	m	struct:__anon21
+tx_fifo_remove_last	.\polling\TX_CAFE.c	/^static void tx_fifo_remove_last()$/;"	f	file:
+tx_handles	.\inc\ws_ble_services.h	/^    ble_gatts_char_handles_t tx_handles;              \/**< Handles related to the TX characteristic (as provided by the SoftDevice). *\/$/;"	m	struct:ble_cs_s
+tx_mode	.\inc\radio_data_types.h	/^    radiotx_mode_t          tx_mode;$/;"	m	struct:__anon9
+tx_mode	.\polling\TX_CAFE.h	/^    radiotx_mode_t          tx_mode;$/;"	m	struct:__anon21
+tx_output_power	.\inc\radio_data_types.h	/^    radiotx_power_t         tx_output_power;$/;"	m	struct:__anon9
+tx_output_power	.\polling\TX_CAFE.h	/^    uint8_t       	    tx_output_power;$/;"	m	struct:__anon21
+tx_payload	.\src\private_radio.c	/^static radio_packet_t		tx_payload;$/;"	v	file:
+type	.\polling\TX_CAFE.h	/^    enum radioevent_type_t  type;$/;"	m	struct:__anon23	typeref:enum:__anon23::radioevent_type_t
+uart_driver_t	.\src\ws_uart.c	/^}uart_driver_t; $/;"	t	typeref:struct:__anon30	file:
+uncripted_data	.\src\cli.c	/^static uint8_t  uncripted_data[40];$/;"	v	file:
+update_nrf_radio_address	.\polling\TX_CAFE.c	/^void update_nrf_radio_address(nrf_st_address radio_addr){$/;"	f
+update_rf_payload_format	.\polling\TX_CAFE.c	/^static void (*update_rf_payload_format)(uint32_t payload_length) = 0;$/;"	v	file:
+update_rf_payload_format_esb_dpl	.\polling\TX_CAFE.c	/^static void update_rf_payload_format_esb_dpl(uint32_t payload_length)$/;"	f	file:
+uuid_type	.\inc\ws_ble_services.h	/^    uint8_t                  uuid_type;               \/**< UUID type for Nordic UART Service Base UUID. *\/$/;"	m	struct:ble_cs_s
+waiting_for_ack_response	.\src\accelerometer_i2c.c	/^uint8_t waiting_for_ack_response=0,waiting_for_reading_response=0;    $/;"	v
+waiting_for_reading_response	.\src\accelerometer_i2c.c	/^uint8_t waiting_for_ack_response=0,waiting_for_reading_response=0;    $/;"	v
+write_tx_payload	.\polling\TX_CAFE.c	/^static uint32_t write_tx_payload(radio_packet_t *payload) \/\/ ~50us @ 61 bytes SB$/;"	f	file:
+ws_accelerometer_load_addr	.\src\accelerometer_i2c.c	/^void ws_accelerometer_load_addr(uint8_t address_to_load){$/;"	f
+ws_accelerometer_on_start_configuration	.\src\accelerometer_i2c.c	/^int ws_accelerometer_on_start_configuration(void){$/;"	f
+ws_accelerometer_read_reg	.\src\accelerometer_i2c.c	/^void ws_accelerometer_read_reg(){$/;"	f
+ws_accelerometer_read_reg_BLOCKING	.\src\accelerometer_i2c.c	33;"	d	file:
+ws_accelerometer_read_reg_cb	.\src\accelerometer_i2c.c	/^void ws_accelerometer_read_reg_cb(ret_code_t result, void * p_user_data)$/;"	f
+ws_accelerometer_setup	.\src\accelerometer_i2c.c	/^void ws_accelerometer_setup(){$/;"	f
+ws_adc_read	.\src\ws_adc.c	/^int32_t ws_adc_read(void)$/;"	f
+ws_adc_setup	.\src\ws_adc.c	/^void ws_adc_setup(void)$/;"	f
+ws_advertising_init	.\src\ws_ble.c	/^ void ws_advertising_init(void)$/;"	f
+ws_app_timer_init	.\src\ws_timer.c	/^void ws_app_timer_init(void){$/;"	f
+ws_ble_conn_params_init	.\src\ws_ble.c	/^void ws_ble_conn_params_init(void)$/;"	f
+ws_ble_device_manager_init	.\src\ws_ble.c	/^ void ws_ble_device_manager_init(bool erase_bonds)$/;"	f
+ws_ble_evt_dispatch	.\src\ws_ble.c	/^ void ws_ble_evt_dispatch( ble_evt_t * p_ble_evt)$/;"	f
+ws_ble_gap_params_init	.\src\ws_ble.c	/^void ws_ble_gap_params_init(void)$/;"	f
+ws_ble_init_modules	.\src\ws_ble.c	/^void ws_ble_init_modules(){$/;"	f
+ws_ble_nus_string_send	.\src\ws_ble_services.c	/^uint32_t ws_ble_nus_string_send(ble_cs_t * p_custom_service, uint8_t * p_string, uint16_t length)$/;"	f
+ws_ble_on_adv_evt	.\src\ws_ble.c	/^void ws_ble_on_adv_evt(ble_adv_evt_t ble_adv_evt)$/;"	f
+ws_ble_send	.\src\ws_ble.c	/^void ws_ble_send(uint8_t *p_string, uint8_t length){$/;"	f
+ws_ble_service_data_handler	.\src\ws_ble_services.c	/^void ws_ble_service_data_handler(ble_cs_t * p_custom_service, uint8_t * p_data, uint16_t length)$/;"	f
+ws_ble_service_init	.\src\ws_ble_services.c	/^void ws_ble_service_init(ble_cs_t * p_custom_service)$/;"	f
+ws_ble_service_on_evt	.\src\ws_ble_services.c	/^void ws_ble_service_on_evt(ble_cs_t * p_custom_service, ble_evt_t * p_ble_evt)$/;"	f
+ws_ble_services_init	.\src\ws_ble.c	/^void ws_ble_services_init(void)$/;"	f
+ws_ble_stack_init	.\src\ws_softdevice.c	/^ void ws_ble_stack_init(void)$/;"	f
+ws_clear_timer1_ticks	.\src\ws_timer.c	/^void ws_clear_timer1_ticks(uint32_t tick_trigger){$/;"	f
+ws_clock_setup	.\src\bbn_board.c	/^void ws_clock_setup(void){$/;"	f
+ws_get_timer1_ticks	.\src\ws_timer.c	/^uint32_t ws_get_timer1_ticks(void){$/;"	f
+ws_hfclk_setup_init	.\src\bbn_board.c	/^void ws_hfclk_setup_init(void){$/;"	f
+ws_led_off	.\src\bbn_board.c	/^void ws_led_off(uint32_t led_id){$/;"	f
+ws_led_on	.\src\bbn_board.c	/^void ws_led_on(uint32_t led_id){$/;"	f
+ws_led_toggle	.\src\bbn_board.c	/^void ws_led_toggle(uint32_t led_id){$/;"	f
+ws_leds_init	.\src\bbn_board.c	/^void ws_leds_init(void){$/;"	f
+ws_lfclk_setup_init	.\src\bbn_board.c	/^void ws_lfclk_setup_init(void){$/;"	f
+ws_on_ble_conn_params_evt	.\src\ws_ble.c	/^ void ws_on_ble_conn_params_evt(ble_conn_params_evt_t * p_evt)$/;"	f
+ws_on_ble_evt	.\src\ws_ble.c	/^ void ws_on_ble_evt(ble_evt_t * p_ble_evt)$/;"	f
+ws_services_add_char_rx	.\src\ws_ble_services.c	/^ uint32_t ws_services_add_char_rx(ble_cs_t * p_custom_service)$/;"	f
+ws_services_add_char_tx	.\src\ws_ble_services.c	/^uint32_t ws_services_add_char_tx(ble_cs_t * p_custom_service){$/;"	f
+ws_timer1_setup	.\src\ws_timer.c	/^void ws_timer1_setup(void){$/;"	f
+ws_timer_event_handler	.\src\ws_timer.c	/^void ws_timer_event_handler(nrf_timer_event_t event_type, void* p_context){   $/;"	f
+ws_uart_check_stream	.\src\ws_uart.c	/^void ws_uart_check_stream(void){$/;"	f
+ws_uart_event_handle	.\src\ws_uart.c	/^void ws_uart_event_handle(app_uart_evt_t * p_event){$/;"	f
+ws_uart_flush_debug_packet	.\src\ws_uart.c	/^void ws_uart_flush_debug_packet(void){$/;"	f
+ws_uart_get_debug_packet	.\src\ws_uart.c	/^char   *ws_uart_get_debug_packet(void){$/;"	f
+ws_uart_init	.\src\ws_uart.c	/^void ws_uart_init(void){$/;"	f
+ws_uart_pending_debug_packet	.\src\ws_uart.c	/^char ws_uart_pending_debug_packet(void){$/;"	f

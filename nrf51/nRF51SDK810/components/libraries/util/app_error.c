@@ -23,6 +23,7 @@
 #include "app_error.h"
 #include "compiler_abstraction.h"
 #include "nordic_common.h"
+#undef DEBUG
 #ifdef DEBUG
 #include "bsp.h"
 
