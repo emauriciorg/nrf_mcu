@@ -16,14 +16,14 @@
 #include "ws_timer.h"
 #include "ws_ble_services.h"
 #include "ws_softdevice.h"
-#define DEBUG_BLE_CONNECTION
+//#define DEBUG_BLE_CONNECTION
 #ifdef DEBUG_BLE_CONNECTION
 	#define BLE_DBG(...)  printf(__VA_ARGS__)
 #else
-	#define BLE_DBG(...)  
+	#define BLE_DBG(...)
 #endif
 
-#define DEVICE_NAME                      "BLE_TS_CS1"                               /**< Name of device. Will be included in the advertising data. */
+#define DEVICE_NAME                      "VIRUS_BLE"                               /**< Name of device. Will be included in the advertising data. */
 #define MANUFACTURER_NAME                "NordicSemiconductor"                      /**< Manufacturer. Will be passed to Device Information Service. */
 #define APP_ADV_INTERVAL                 64                                        /**< The advertising interval (in units of 0.625 ms. This value corresponds to 25 ms). */
 #define APP_ADV_TIMEOUT_IN_SECONDS       180                                        /**< The advertising timeout in units of seconds. */
@@ -48,7 +48,7 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 
  void ws_ble_evt_dispatch( ble_evt_t * p_ble_evt)
 {
-//	dm_ble_evt_handler(p_ble_evt);
+	//dm_ble_evt_handler(p_ble_evt);
 	ble_conn_params_on_ble_evt(p_ble_evt);
 
 //	ws_ble_service_on_evt(&m_custom_service, p_ble_evt);
@@ -70,19 +70,19 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 	//BLE_DBG("a%s: device Connected\n",__FUNCTION__);
 	switch (p_ble_evt->header.evt_id){
 	case BLE_GAP_EVT_CONNECTED:
-			
+
 			nrf_gpio_pin_set(LED_RED);
 			nrf_gpio_pin_clear(LED_GREEN);
 			m_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
 			break;
 	case BLE_GAP_EVT_DISCONNECTED:
-	
+
 			nrf_gpio_pin_set(LED_GREEN);
 			nrf_gpio_pin_clear(LED_RED);
 			m_conn_handle = BLE_CONN_HANDLE_INVALID;
 			break;
 	case BLE_GATTC_EVT_TIMEOUT:
-	
+
 	case BLE_GATTS_EVT_TIMEOUT:
 		// Disconnect on GATT Server and Client timeout events.
 		err_code = sd_ble_gap_disconnect(m_conn_handle,
@@ -140,11 +140,11 @@ void ws_ble_gap_params_init(void)
 		    &sec_mode
 		   ,(const uint8_t *) DEVICE_NAME
 		   ,strlen(DEVICE_NAME));
-	
+
 	APP_ERROR_CHECK(err_code);
 
 //	err_code = sd_ble_gap_appearance_set( 	BLE_APPEARANCE_GENERIC_CLOCK   );
-//	APP_ERROR_CHECK(err_code); 
+//	APP_ERROR_CHECK(err_code);
 
 
 	memset(&gap_conn_params, 0, sizeof(gap_conn_params));
@@ -158,13 +158,13 @@ void ws_ble_gap_params_init(void)
 	printf("min_conn_interval %x\n",MIN_CONN_INTERVAL);
 	printf("min_conn_interval %x\n",SLAVE_LATENCY);
 	printf("min_conn_interval %x\n",CONN_SUP_TIMEOUT);
-*/	
+*/
 	err_code = sd_ble_gap_ppcp_set(&gap_conn_params);
 	BLE_DBG ("%s, %d\n",__FUNCTION__, err_code);
 	APP_ERROR_CHECK(err_code);
-		
+
 }
-  
+
 /**@brief Function for initializing services that will be used by the application.
  */
 
@@ -210,7 +210,7 @@ static dm_application_instance_t        m_app_handle;                           
 	uint32_t      err_code;
 	ble_advdata_t advdata;
 
-	
+
 	memset(&advdata, 0, sizeof(advdata));
 
 	advdata.name_type               = BLE_ADVDATA_FULL_NAME;
@@ -226,7 +226,7 @@ static dm_application_instance_t        m_app_handle;                           
 
 	err_code = ble_advertising_init(&advdata, NULL, &options, ws_ble_on_adv_evt, NULL);
 	BLE_DBG ("%s, %d\n",__FUNCTION__, err_code);
-	
+
 	APP_ERROR_CHECK(err_code);
 }
 
@@ -248,7 +248,7 @@ void ws_ble_conn_params_init(void)
 
 	err_code = ble_conn_params_init(&cp_init);
 	BLE_DBG ("%s, %d\n",__FUNCTION__, err_code);
-	
+
 	APP_ERROR_CHECK(err_code);
 }
 
@@ -260,7 +260,7 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 	ret_code_t        event_result)
 {
 	BLE_DBG ("%s, %d\n",__FUNCTION__, event_result);
-	
+
 	APP_ERROR_CHECK(event_result);
 //uint32_t err_code;
 
@@ -269,7 +269,7 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 		app_context_load(p_handle);
 	}
 #endif // BLE_DFU_APP_SUPPORT
-     
+
     switch(p_event->event_id)
     {
         case DM_EVT_CONNECTION:
@@ -321,7 +321,7 @@ uint32_t device_manager_evt_handler(dm_handle_t const * p_handle,
 
 	err_code = dm_register(&m_app_handle, &register_param);
 	BLE_DBG ("%s, %d\n",__FUNCTION__, err_code);
-	
+
 	APP_ERROR_CHECK(err_code);
 }
 
@@ -337,7 +337,7 @@ void ws_ble_init_modules(){
 	uint32_t               err_code;
 
 	//ws_ble_device_manager_init(false);
-	ws_ble_gap_params_init(); 
+	ws_ble_gap_params_init();
 	ws_ble_services_init();
 	ws_advertising_init();
 	ws_ble_conn_params_init();

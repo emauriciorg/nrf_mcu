@@ -2,7 +2,9 @@
 #define UART_APP_
 
 #include <stdint.h>
-#define WS_DBG(...)	printf(__VA_ARGS__);
+
+#define WS_DBG(...)
+//printf(__VA_ARGS__);
 
 void ws_uart_init(void);
 void ws_uart_check_stream(void);

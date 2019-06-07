@@ -13,12 +13,13 @@
 #include "ble_advdata.h"
 #include "ble_advertising.h"
 #include "nrf_soc.h"
-#include "app_trace.h"
+//#include "app_trace.h"
 #include "nordic_common.h"
 #include "pstorage.h"
 
 
-#define LOG app_trace_log
+//#define LOG app_trace_log
+#define LOG(...)
 
 static bool                            m_advertising_start_pending = false; /**< Flag to keep track of ongoing operations on persistent memory. */
 
