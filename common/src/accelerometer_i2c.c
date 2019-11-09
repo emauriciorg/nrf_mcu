@@ -9,11 +9,14 @@
 #include "app_twi.h"
 #include "nrf_delay.h"
 #include "mma8652.h"
+
+
 #define ACCELEROMETER_INT_PIN       2
 #define ACCELEROMETER_SCL_PIN       5
 #define ACCELEROMETER_SDA_PIN       4
 #define MAX_PENDING_TRANSACTIONS    8
 #define BUFFER_SIZE                 24
+
 #define ACC_MSG(...) printf(__VA_ARGS__);
 
 static app_twi_t m_app_twi = APP_TWI_INSTANCE(0);
@@ -50,17 +53,18 @@ static volatile bool m_set_mode_done = false;
 
 
 uint8_t regW,regR = 0;
-uint8_t waiting_for_ack_response=0,waiting_for_reading_response=0;    
-uint8_t i2c_mode=0;
+uint8_t waiting_for_ack_response=0;
+uint8_t waiting_for_reading_response=0;
+uint8_t i2c_mode = 0;
 
 
 #ifdef ALTERNATIVE_TWI_CONFIG
 
 void twi_handler(nrf_drv_twi_evt_t const * p_event, void * p_context)
-{   
-    ret_code_t err_code;
-    static sample_t m_sample;
-    
+{
+	ret_code_t err_code;
+	static sample_t m_sample;
+
     switch(p_event->type)
     {
 	case NRF_DRV_TWI_EVT_DONE:
@@ -84,8 +88,8 @@ void twi_handler(nrf_drv_twi_evt_t const * p_event, void * p_context)
 	    }
 	    break;
 	default:
-	    break;        
-    }   
+	    break;
+    }
 }
 #endif
 
@@ -152,16 +156,16 @@ void ws_accelerometer_read_reg(){
 }
 
 
-#if 1 
+#if 1
 //ndef NO_ACC_CONFIGURATION
 
 int ws_accelerometer_on_start_configuration(void){
-	
+
 	ACC_MSG("[fsmAccelerometer]:\tws_accelerometer_on_start_configuration\r\n");
 
 ///	fsmAccelerometer_moving = false;
 
-	
+
 	uint8_t retValue;
 	ws_accelerometer_read_reg_BLOCKING(MMA8652_WHO_AM_I, retValue); //Read the Who am I
 
@@ -186,7 +190,7 @@ int ws_accelerometer_on_start_configuration(void){
 		APP_TWI_WRITE(MMA8652_ADDR, ctrl_reg4_init, sizeof(ctrl_reg4_init), 0),
 		APP_TWI_WRITE(MMA8652_ADDR, ctrl_reg5_init, sizeof(ctrl_reg5_init), 0)
 	};
-	
+
 	app_twi_perform(&m_app_twi, init_transfers, 6, NULL);
 
 	//while(transaction_pending);
