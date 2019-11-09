@@ -24,7 +24,25 @@ Purpose : Generic application start
 // #include "cli.h"
 #include "ws_softdevice.h"
 
-#define LED_PIN 8
+#define GATE_WAY_BOARD
+
+//#define END_DEVICE_BOARD
+#ifdef END_DEVICE_BOARD
+#define TEST_POINT_1 7
+#define TEST_POINT_2 8
+#define TEST_POINT_3 9
+#define TEST_POINT_4 10
+#endif
+
+
+#ifdef GATE_WAY_BOARD
+#define TEST_POINT_1 12
+#define TEST_POINT_2 13
+#define TEST_POINT_3 14
+#define TEST_POINT_4 15
+
+
+#endif
 
 /*---------------------------uart configuratio===-----------------------------*/
 
@@ -120,25 +138,44 @@ void clock_setup(void){
 
 void main(void) {
 
+#define BLE_ENABLE_IT
+	NRF_POWER->DCDCEN = 0;
 
-	//clock_setup();
+#ifndef BLE_ENABLE_IT
+	clock_setup();
+#endif
+
+#ifdef BLE_ENABLE_IT
 
 	ws_app_timer_init();
-	uart_setup();
-	nrf_gpio_cfg_output(LED_PIN);
-
-	ws_ble_stack_init();
+//        sd_ble_gap_tx_power_set(4);
+	 sd_ble_gap_tx_power_set(4);
+      
+        ws_ble_stack_init();
 	WS_BLE_INIT();
+	 sd_ble_gap_tx_power_set(4);
+      
+#endif
+        NRF_POWER->DCDCEN = 0;
+	// uart_setup();
+	nrf_gpio_cfg_output(TEST_POINT_1);
+	nrf_gpio_cfg_output(TEST_POINT_2);
+	nrf_gpio_cfg_output(TEST_POINT_3);
+	nrf_gpio_cfg_output(TEST_POINT_4);
 
 
-	float foo =3.124;
-	uart0_printf(" Program start!\r\n");
+	
+	//uart0_printf(" Program start!\r\n");
 
 	while (1){
 
-		nrf_delay_ms(1000);
-		nrf_gpio_pin_toggle(LED_PIN);
-		uart0_printf("looping \r\n");
+		nrf_delay_ms(100);
+
+		nrf_gpio_pin_toggle(TEST_POINT_1);
+		nrf_gpio_pin_toggle(TEST_POINT_2);
+		nrf_gpio_pin_toggle(TEST_POINT_3);
+		nrf_gpio_pin_toggle(TEST_POINT_4);
+		//uart0_printf("looping \r\n");
 
 	}
 }

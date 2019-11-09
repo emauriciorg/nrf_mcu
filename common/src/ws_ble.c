@@ -23,10 +23,10 @@
 	#define BLE_DBG(...)
 #endif
 
-#define DEVICE_NAME                      "VIRUS_BLE"                               /**< Name of device. Will be included in the advertising data. */
+#define DEVICE_NAME                      "TAG #1 s"                               /**< Name of device. Will be included in the advertising data. */
 #define MANUFACTURER_NAME                "NordicSemiconductor"                      /**< Manufacturer. Will be passed to Device Information Service. */
-#define APP_ADV_INTERVAL                 64                                        /**< The advertising interval (in units of 0.625 ms. This value corresponds to 25 ms). */
-#define APP_ADV_TIMEOUT_IN_SECONDS       180                                        /**< The advertising timeout in units of seconds. */
+#define APP_ADV_INTERVAL                 161                                        /**< The advertising interval (in units of 0.625 ms. This value corresponds to 25 ms). */
+#define APP_ADV_TIMEOUT_IN_SECONDS       300                                        /**< The advertising timeout in units of seconds. */
 
 
 #define MIN_CONN_INTERVAL                MSEC_TO_UNITS(20, UNIT_1_25_MS)           /**< Minimum acceptable connection interval (0.1 seconds). */
@@ -219,6 +219,7 @@ static dm_application_instance_t        m_app_handle;                           
 	advdata.uuids_complete.uuid_cnt = sizeof(m_adv_uuids) / sizeof(m_adv_uuids[0]);
 	advdata.uuids_complete.p_uuids  = m_adv_uuids;
 
+      //  advdata.p_tx_power_level
 	ble_adv_modes_config_t options = {0};
 	options.ble_adv_fast_enabled  = BLE_ADV_FAST_ENABLED;
 	options.ble_adv_fast_interval = APP_ADV_INTERVAL;
@@ -338,7 +339,7 @@ void ws_ble_init_modules(){
 
 	//ws_ble_device_manager_init(false);
 	ws_ble_gap_params_init();
-	ws_ble_services_init();
+	//ws_ble_services_init();
 	ws_advertising_init();
 	ws_ble_conn_params_init();
 	err_code = ble_advertising_start(BLE_ADV_MODE_FAST);

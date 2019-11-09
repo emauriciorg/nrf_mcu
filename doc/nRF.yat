@@ -5,7 +5,7 @@
   <ProductVersion>2.0.0</ProductVersion>
   <Warning>Modifying this file may cause undefined behavior!</Warning>
   <Saved>
-    <TimeStamp>2019-06-07T14:18:15.7138261-05:00</TimeStamp>
+    <TimeStamp>2019-06-10T02:07:31.5502893-05:00</TimeStamp>
     <UserName>Asus</UserName>
   </Saved>
   <AutoSaved>false</AutoSaved>
@@ -326,8 +326,8 @@
     <TerminalIsStarted>true</TerminalIsStarted>
     <SendText>
       <Command>
-        <IsDefined>false</IsDefined>
-        <Description />
+        <IsDefined>true</IsDefined>
+        <Description>[empty]</Description>
         <DefaultRadix>String</DefaultRadix>
         <CommandLines />
         <IsFilePath>false</IsFilePath>

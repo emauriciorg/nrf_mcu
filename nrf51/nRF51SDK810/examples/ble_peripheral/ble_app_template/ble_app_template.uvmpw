@@ -6,12 +6,14 @@
   <Header>### uVision Project, (C) Keil Software</Header>
 
   <WorkspaceName>WorkSpace</WorkspaceName>
- 
-   <project>
-    <PathAndName>pca10028\s130\arm4\ble_app_template_s130_pca10028.uvproj</PathAndName>
+
+  <project>
+    <PathAndName>.\pca10028\s130\arm4\ble_app_template_s130_pca10028.uvproj</PathAndName>
+    <NodeIsActive>1</NodeIsActive>
   </project>
-   <project>
-    <PathAndName>pca10028\s110\arm4\ble_app_template_s110_pca10028.uvproj</PathAndName>
+
+  <project>
+    <PathAndName>.\pca10028\s110\arm4\ble_app_template_s110_pca10028.uvproj</PathAndName>
   </project>
 
 </ProjectWorkspace>

@@ -1217,6 +1217,7 @@
 // <e> POWER_ENABLED - nrf_drv_power - POWER peripheral driver
 //==========================================================
 #ifndef POWER_ENABLED
+//one for chirs board
 #define POWER_ENABLED 0
 #endif
 #if  POWER_ENABLED
@@ -1239,6 +1240,7 @@
 // <i> This settings means only that components for DCDC regulator are installed and it can be enabled.
 
 #ifndef POWER_CONFIG_DEFAULT_DCDCEN
+//1 FOR CRISH BOARD
 #define POWER_CONFIG_DEFAULT_DCDCEN 0
 #endif
 

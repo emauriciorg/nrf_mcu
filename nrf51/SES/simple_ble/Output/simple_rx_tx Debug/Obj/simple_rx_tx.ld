@@ -18,8 +18,8 @@ SECTIONS
   __STACKSIZE_PROCESS__ = 0;
   __STACKSIZE__ = 256;
 
-  __vectors_ram_load_start__ = 0x20002800 ;
-  .vectors_ram 0x20002800  (NOLOAD) : AT(0x20002800 )
+  __vectors_ram_load_start__ = 0x200013C8 ;
+  .vectors_ram 0x200013C8  (NOLOAD) : AT(0x200013C8 )
   {
     __vectors_ram_start__ = .;
     *(.vectors_ram .vectors_ram.*)
@@ -30,8 +30,8 @@ SECTIONS
 
   . = ASSERT(__vectors_ram_start__ == __vectors_ram_end__ || (__vectors_ram_end__ >= __RAM_segment_start__ && __vectors_ram_end__ <= __RAM_segment_end__) , "error: .vectors_ram is too large to fit in RAM memory segment");
 
-  __vectors_load_start__ = 0x1C000;
-  .vectors 0x1C000 : AT(0x1C000)
+  __vectors_load_start__ = 0x18000;
+  .vectors 0x18000 : AT(0x18000)
   {
     __vectors_start__ = .;
     *(.vectors .vectors.*)

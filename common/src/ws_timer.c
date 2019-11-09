@@ -26,7 +26,9 @@ void ws_clear_timer1_ticks(uint32_t tick_trigger){
 
 void ws_app_timer_init(void){
 	//#warning "APP_TIMER_ININ IS disabled"
-	APP_TIMER_INIT(APP_TIMER_PRESCALER, 5, APP_TIMER_OP_QUEUE_SIZE, NULL);
+	//APP_TIMER_INIT(APP_TIMER_PRESCALER, 5, APP_TIMER_OP_QUEUE_SIZE, NULL);
+        APP_TIMER_INIT(APP_TIMER_PRESCALER, 3, APP_TIMER_OP_QUEUE_SIZE, false);
+
 }
 
 

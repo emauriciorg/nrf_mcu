@@ -27,7 +27,7 @@ void ws_advertising_init(void);
 
 void ws_on_ble_conn_params_evt(ble_conn_params_evt_t * p_evt);
 
-void ws_ble_services_init(void);;
+void ws_ble_services_init(void);
 
 void ws_ble_on_adv_evt(ble_adv_evt_t  ble_adv_evt);
 
